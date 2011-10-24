@@ -24,7 +24,9 @@ import junit.framework.TestCase;
 import org.apache.wicket.util.tester.WicketTester;
 import org.jabox.application.DummyWicketApplication;
 import org.jabox.webapp.pages.tabs.CisPage;
+import org.junit.Ignore;
 
+@Ignore
 public class CisPageTest extends TestCase {
 
 	private WicketTester _tester;
