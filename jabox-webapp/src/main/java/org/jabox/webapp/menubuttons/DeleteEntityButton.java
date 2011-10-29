@@ -23,12 +23,14 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
+import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.apis.IBaseEntity;
 import org.jabox.model.Container;
+import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.model.User;
 import org.slf4j.Logger;
@@ -36,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	private static final Logger LOGGER = LoggerFactory
-		.getLogger(DeleteEntityButton.class);
+			.getLogger(DeleteEntityButton.class);
 
 	private static final ResourceReference DELETE_IMG = new SharedResourceReference(
 			DeleteEntityButton.class, "edit-delete.png");
@@ -68,8 +70,9 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 			ContainerXstreamDao.deleteContainer((Container) _item);
 		} else if (Server.class.isInstance(_item)) {
 			ServerXstreamDao.deleteServer((Server) _item);
+		} else if (Project.class.isInstance(_item)) {
+			ProjectXstreamDao.deleteProject((Project) _item);
 		}
-
 
 		setResponsePage(_responsePage);
 	}
