@@ -64,7 +64,7 @@ public class Container extends BaseEntity implements Serializable {
 	private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
 	private static String[] DEFAULT_WEBAPPS = {
 			"org.jabox.cis.hudson.HudsonServer",
-			"org.jabox.mrm.artifactory.ArtifactoryServer",
+			"org.jabox.mrm.nexus.NexusServer",
 			"org.jabox.sas.sonar.SonarServer" };
 
 	private List<String> webapps = Arrays.asList(DEFAULT_WEBAPPS);
