@@ -40,7 +40,7 @@ public class MavenConfigureCiManagement {
 	}
 
 	/**
-	 * Injects the &lt;cis&gt; configuration to the pom file.
+	 * Injects the &lt;cis&gt; configuration to the pom file. If passed CIS is null it returns without any change.
 	 * 
 	 * @param pomFile
 	 *            the pom file that will be injected with the cis configuration.
@@ -52,6 +52,10 @@ public class MavenConfigureCiManagement {
 	public static void injectCIS(final File pomFile,
 			final CISConnectorConfig cis, Project project) throws IOException,
 			XmlPullParserException {
+		if (cis==null) {
+			return;
+		}
+		
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 

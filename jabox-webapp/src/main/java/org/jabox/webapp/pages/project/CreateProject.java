@@ -78,10 +78,11 @@ public class CreateProject extends BasePage {
 		add(form);
 
 		// Name
-		FormComponent<Project> name = new RequiredTextField<Project>("name");
+		FormComponent<String> name = new RequiredTextField<String>("name");
 		form.add(new FeedbackPanel("nameFeedback",
 				new ComponentFeedbackMessageFilter(name)));
 		form.add(name);
+		name.add(new CreateProjectValidator());
 
 		// Description
 		RequiredTextField<Project> description = new RequiredTextField<Project>(

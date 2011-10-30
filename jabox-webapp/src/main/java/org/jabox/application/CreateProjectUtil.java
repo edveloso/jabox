@@ -38,39 +38,48 @@ import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
 import org.jabox.webapp.application.WicketApplication;
+import org.jabox.webapp.menubuttons.DeleteEntityButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
 import com.google.inject.Inject;
 
 public class CreateProjectUtil implements ICreateProjectUtil {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(CreateProjectUtil.class);
 
 	@Inject
 	protected IManager _manager;
 
 	public CreateProjectUtil() {
-		 ((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
-		 .getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
-		 .injectMembers(this);
+		((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
+				.getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
+				.injectMembers(this);
 		// // InjectorHolder.getInjector().inject(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.jabox.application.ICreateProjectUtil#createProject(org.jabox.model.Project)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.jabox.application.ICreateProjectUtil#createProject(org.jabox.model
+	 * .Project)
 	 */
 	public void createProject(final Project project) {
 		try {
 			createProjectMethod(project);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error("IOException", e);
 		} catch (InvalidRepositoryException e) {
-			e.printStackTrace();
+			LOGGER.error("Invalid Repository Exception", e);
 		} catch (MavenExecutionException e) {
-			e.printStackTrace();
+			LOGGER.error("Maven Execution Exception", e);
 		} catch (SAXException e) {
-			e.printStackTrace();
+			LOGGER.error("SAX Exception", e);
 		} catch (SCMException e) {
-			e.printStackTrace();
+			LOGGER.error("SCM Exception", e);
 		}
 
 	}
@@ -142,17 +151,11 @@ public class CreateProjectUtil implements ICreateProjectUtil {
 		ITSConnector<ITSConnectorConfig> its = _manager
 				.getItsConnectorInstance(config);
 		if (its != null) {
-			// its
-			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
-			// its.login("", "");
-
-			// its.setUrl("http://localhost/redmine");
 			its.login(config);
 			its.addProject(project, config);
 			its.addModule(project, config, project.getName(), "initial module",
 					"myemail@gmail.com");
 			its.addVersion(project, config, "0.0.1");
-
 			its.addRepository(project, config, scmc, scmc.getUsername(), scmc
 					.getPassword());
 		}
