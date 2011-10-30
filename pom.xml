@@ -18,6 +18,7 @@
 		<module>bts-bugzilla</module>
 		<module>bts-jtrac</module>
 		<module>cis-hudson</module>
+		<module>cis-jenkins</module>
 		<module>mrm-nexus</module>
 		<module>sas-sonar</module>
 		<module>eclipse-startup</module>

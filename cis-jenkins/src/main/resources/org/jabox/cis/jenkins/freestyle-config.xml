@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description />
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.redmine.RedmineProjectProperty>
+      <redmineWebsite>${project.issueURL}</redmineWebsite>
+      <projectName>${project.name}</projectName>
+      <redmineVersion>true</redmineVersion>
+    </hudson.plugins.redmine.RedmineProjectProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>${project.scmURL}</remote>
+        <local>.</local>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <useUpdate>true</useUpdate>
+    <doRevert>false</doRevert>
+   	<browser class="hudson.plugins.redmine.RedmineRepositoryBrowser" />
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers class="vector">
+		<hudson.triggers.SCMTrigger>
+			<spec>* * * * *</spec>
+		</hudson.triggers.SCMTrigger>
+	</triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Maven>
+      <targets>${goals}</targets>
+      <mavenName>Maven 3.0</mavenName>
+      <usePrivateRepository>false</usePrivateRepository>
+    </hudson.tasks.Maven>
+  </builders>
+  <publishers>
+      <hudson.plugins.pmd.PmdPublisher>
+      <healthy/>
+      <unHealthy/>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[PMD] </pluginName>
+      <defaultEncoding/>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds>
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <pattern/>
+    </hudson.plugins.pmd.PmdPublisher>
+    <hudson.plugins.checkstyle.CheckStylePublisher>
+      <healthy/>
+      <unHealthy/>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[CHECKSTYLE] </pluginName>
+      <defaultEncoding/>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds>
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <pattern/>
+    </hudson.plugins.checkstyle.CheckStylePublisher>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>target/surefire-reports/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.dry.DryPublisher>
+      <threshold/>
+      <newThreshold/>
+      <failureThreshold/>
+      <newFailureThreshold/>
+      <thresholdEnabled>false</thresholdEnabled>
+      <minimumAnnotations>0</minimumAnnotations>
+      <healthy/>
+      <unHealthy/>
+      <healthyAnnotations>0</healthyAnnotations>
+      <unHealthyAnnotations>0</unHealthyAnnotations>
+      <healthyReportEnabled>false</healthyReportEnabled>
+      <height/>
+      <pluginName>[DRY] </pluginName>
+      <thresholdLimit>low</thresholdLimit>
+      <defaultEncoding/>
+      <pattern/>
+    </hudson.plugins.dry.DryPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
