@@ -49,8 +49,8 @@ public class DeployerPluginSelector extends Panel {
 		super(id);
 		add(new WebMarkupContainer("editor"));
 		String pluginId = article.getObject().deployerConfig != null ? article
-				.getObject().deployerConfig.pluginId : "-1";
-		if (article.getObject().deployerConfig != null) {
+				.getObject().deployerConfig.pluginId : _manager.getIds(connectorClass).get(0);
+		if (pluginId != null) {
 			Connector plugin = _manager.getEntry(pluginId);
 			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
 					new PropertyModel<Server>(article, "deployerConfig")));
