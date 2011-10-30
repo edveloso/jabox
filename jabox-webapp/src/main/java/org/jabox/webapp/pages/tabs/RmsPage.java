@@ -24,14 +24,14 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.TabPage;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
 /**
  * {@link RmsPage} is showing the current R.M.S. inside an <code>iframe</code>.
  * TopMenu is visible in order to navigate from one server to another easily.
  */
-public class RmsPage extends BasePage {
+public class RmsPage extends TabPage {
 
 	public RmsPage() {
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
