@@ -49,15 +49,14 @@ public class DeployerPluginSelector extends Panel {
 		super(id);
 		add(new WebMarkupContainer("editor"));
 		String pluginId = article.getObject().deployerConfig != null ? article
-				.getObject().deployerConfig.pluginId : _manager.getIds(connectorClass).get(0);
-		if (pluginId != null) {
+				.getObject().deployerConfig.pluginId : "-1";
+		if (article.getObject().deployerConfig != null) {
 			Connector plugin = _manager.getEntry(pluginId);
 			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
 					new PropertyModel<Server>(article, "deployerConfig")));
-
 		}
 
-		add(new PluginPicker("picker", new CompoundPropertyModel(pluginId),
+		PluginPicker pluginPicker = new PluginPicker("picker", new CompoundPropertyModel(pluginId),
 				connectorClass) {
 			private static final long serialVersionUID = -5528219523437017579L;
 
@@ -71,8 +70,9 @@ public class DeployerPluginSelector extends Panel {
 				DeployerPluginSelector.this.replace(plugin.newEditor("editor",
 						new PropertyModel(article, "deployerConfig")));
 			}
-		});
-
+		};
+		pluginPicker.updateModel();
+		add(pluginPicker);
 	}
 
 	private static abstract class PluginPicker<T> extends DropDownChoice<T> {
