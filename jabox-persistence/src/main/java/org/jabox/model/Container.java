@@ -63,7 +63,7 @@ public class Container extends BaseEntity implements Serializable {
 	private String ajpPort;
 	private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
 	private static String[] DEFAULT_WEBAPPS = {
-			"org.jabox.cis.hudson.HudsonServer",
+			"org.jabox.cis.jenkins.JenkinsServer",
 			"org.jabox.mrm.nexus.NexusServer",
 			"org.jabox.sas.sonar.SonarServer" };
 

@@ -53,19 +53,19 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 	}
 
 	public static void injectPlugins() {
-		injectPlugin("org.jvnet.jenkins.plugins", "analysis-core", "1.14");
-		injectPlugin("org.jvnet.jenkins.plugins", "dry", "1.5");
-		injectPlugin("org.jvnet.jenkins.plugins", "pmd", "3.10");
-		injectPlugin("org.jvnet.jenkins.plugins", "findbugs", "4.14");
-		injectPlugin("org.jvnet.jenkins.plugins", "checkstyle", "3.10");
-		injectPlugin("org.jvnet.jenkins.plugins.m2release", "m2release", "0.6.1");
-		injectPlugin("org.jvnet.jenkins.plugins", "redmine", "0.9");
-		injectPlugin("org.jvnet.jenkins.plugins", "git", "1.1.3");
-		injectPlugin("org.jvnet.jenkins.plugins", "claim", "1.7");
-		injectPlugin("org.jvnet.jenkins.plugins", "ci-game", "1.17");
-		injectPlugin("org.jvnet.jenkins.plugins", "sonar", "1.6.1");
-		injectConfiguration("jenkins.tasks.Maven.xml");
-		injectConfiguration("jenkins.plugins.sonar.SonarPublisher.xml");
+		injectPlugin("org.jvnet.hudson.plugins", "analysis-core", "1.14");
+		injectPlugin("org.jvnet.hudson.plugins", "dry", "1.5");
+		injectPlugin("org.jvnet.hudson.plugins", "pmd", "3.10");
+		injectPlugin("org.jvnet.hudson.plugins", "findbugs", "4.14");
+		injectPlugin("org.jvnet.hudson.plugins", "checkstyle", "3.10");
+		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
+		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.9");
+		injectPlugin("org.jvnet.hudson.plugins", "git", "1.1.3");
+		injectPlugin("org.jvnet.hudson.plugins", "claim", "1.7");
+		injectPlugin("org.jvnet.hudson.plugins", "ci-game", "1.17");
+		injectPlugin("org.jvnet.hudson.plugins", "sonar", "1.6.1");
+		injectConfiguration("hudson.tasks.Maven.xml");
+		injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
 	}
 
 	private static void injectConfiguration(String resource) {
