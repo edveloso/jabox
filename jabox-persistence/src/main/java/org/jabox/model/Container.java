@@ -27,8 +27,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Map.Entry;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.codehaus.cargo.container.ContainerType;
@@ -138,17 +136,18 @@ public class Container extends BaseEntity implements Serializable {
 		configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
 		configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
 
+		passSystemProperties(container);
 		// Pass the system properties to the container
-		Map<String, String> props = new HashMap<String, String>();
-		Properties properties = System.getProperties();
-		properties.entrySet();
-		for (Entry<Object, Object> entry : properties.entrySet()) {
-			entry.getKey();
-			LOGGER.debug("Adding key: " + entry.getKey() + ":"
-					+ entry.getValue());
-			props.put((String) entry.getKey(), (String) entry.getValue());
-		}
-		container.setSystemProperties(props);
+		// Map<String, String> props = new HashMap<String, String>();
+		// Properties properties = System.getProperties();
+		// properties.entrySet();
+		// for (Entry<Object, Object> entry : properties.entrySet()) {
+		// entry.getKey();
+		// LOGGER.debug("Adding key: " + entry.getKey() + ":"
+		// + entry.getValue());
+		// props.put((String) entry.getKey(), (String) entry.getValue());
+		// }
+		// container.setSystemProperties(props);
 
 		MavenSettingsManager.writeCustomSettings();
 		try {
@@ -166,6 +165,24 @@ public class Container extends BaseEntity implements Serializable {
 			e.printStackTrace();
 			System.exit(100);
 		}
+	}
+
+	private void passSystemProperties(InstalledLocalContainer container) {
+		Map<String, String> props = new HashMap<String, String>();
+
+		// Hudson
+		props.put(Environment.HUDSON_PROPERTY, System
+				.getProperty(Environment.HUDSON_PROPERTY));
+
+		// Artifactory
+		props.put(Environment.ARTIFACTORY_PROPERTY, System
+				.getProperty(Environment.ARTIFACTORY_PROPERTY));
+
+		// Nexus
+		props.put(Environment.NEXUS_PROPERTY, System
+				.getProperty(Environment.NEXUS_PROPERTY));
+
+		container.setSystemProperties(props);
 	}
 
 	/**

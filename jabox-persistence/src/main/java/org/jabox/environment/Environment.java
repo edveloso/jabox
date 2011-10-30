@@ -22,14 +22,25 @@ package org.jabox.environment;
 import java.io.File;
 
 public class Environment {
+
+
+
 	// Used to identify the windows platform.
 	private static final String WIN_ID = "Windows";
 
 	private static final String JABOX_ENV = "JABOX_HOME";
 	private static final String JABOX_PROPERTY = "JABOX_HOME";
-	private static final String HUDSON_ENV = "HUDSON_HOME";
-	private static final String HUDSON_PROPERTY = "HUDSON_HOME";
+
+	public static final String ARTIFACTORY_ENV = "ARTIFACTORY_HOME";
+	public static final String ARTIFACTORY_PROPERTY = "artifactory.home";
+
+	public static final String NEXUS_ENV = "NEXUS_HOME";
+	public static final String NEXUS_PROPERTY = "plexus.nexus-work";
+
+	public static final String HUDSON_ENV = "HUDSON_HOME";
+	public static final String HUDSON_PROPERTY = "HUDSON_HOME";
 	private static final String HUDSON_DIR = ".hudson";
+	
 	private static final String CUSTOM_MAVEN_DIR = ".m2";
 
 	public static File getCustomMavenHomeDir() {
@@ -80,8 +91,8 @@ public class Environment {
 
 	public static void configureEnvironmentVariables() {
 		configBaseDir(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
-		configBaseDir("ARTIFACTORY_HOME", "artifactory.home", ".artifactory/");
-		configBaseDir("NEXUS_HOME", "plexus.nexus-work", ".nexus/");
+		configBaseDir(ARTIFACTORY_ENV, ARTIFACTORY_PROPERTY, ".artifactory/");
+		configBaseDir(NEXUS_ENV, NEXUS_PROPERTY, ".nexus/");
 	}
 
 	private static void configBaseDir(final String env, final String property,
@@ -127,7 +138,7 @@ public class Environment {
 	public static File getDownloadsDir() {
 		return createAndReturnDir(new File(getBaseDirFile(), "downloads"));
 	}
-	
+
 	public static File getDataDir() {
 		return createAndReturnDir(new File(getBaseDirFile(), "data"));
 	}
