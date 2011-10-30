@@ -23,18 +23,15 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.jabox.apis.Manager;
 import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.TabPage;
 import org.jabox.webapp.panels.HeaderLinksPanel;
-
-import com.google.inject.Inject;
 
 /**
  * {@link CisPage} is showing the current C.I.S. inside an <code>iframe</code>.
  * TopMenu is visible in order to navigate from one server to another easily.
  */
-public class CisPage extends BasePage {
+public class CisPage extends TabPage {
 
 	public CisPage() {
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();

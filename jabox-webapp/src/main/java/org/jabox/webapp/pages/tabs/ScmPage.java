@@ -24,14 +24,14 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.TabPage;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
 /**
  * {@link ScmPage} is showing the current S.C.M. inside an <code>iframe</code>.
  * TopMenu is visible in order to navigate from one server to another easily.
  */
-public class ScmPage extends BasePage {
+public class ScmPage extends TabPage {
 
 	public ScmPage() {
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();

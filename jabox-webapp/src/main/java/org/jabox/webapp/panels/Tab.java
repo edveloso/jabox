@@ -21,25 +21,26 @@ package org.jabox.webapp.panels;
 
 import java.io.Serializable;
 
-import org.jabox.webapp.pages.BasePage;
+import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.WebPage;
 
 public class Tab implements Serializable {
 	private static final long serialVersionUID = 4781646077887785325L;
 
 	private String _title;
-	private Class<? extends BasePage> _pageClass;
+	private Class<? extends WebPage> _pageClass;
 	private String _tooltip;
 
 	private boolean _selected;
 
-	public Tab(final String title, final Class<? extends BasePage> pageClass,
+	public Tab(final String title, final Class<? extends WebPage> pageClass,
 			final boolean selected) {
 		_title = title;
 		_pageClass = pageClass;
 		setSelected(selected);
 	}
 
-	public Tab(final String title, final Class<? extends BasePage> pageClass,
+	public Tab(final String title, final Class<? extends WebPage> pageClass,
 			final String tooltip, final boolean selected) {
 		_title = title;
 		_pageClass = pageClass;
@@ -71,7 +72,7 @@ public class Tab implements Serializable {
 		return _tooltip;
 	}
 
-	public Class<? extends BasePage> getPageClass() {
+	public Class<? extends WebPage> getPageClass() {
 		return _pageClass;
 	}
 }
