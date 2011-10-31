@@ -82,19 +82,13 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 
 	private static void injectPlugin(String groupId, String artifactId,
 			String version) {
-		File plugin = MavenDownloader.downloadArtifact(groupId, artifactId,
-				version, "hpi");
-		try {
-			FileUtils.copyFile(plugin, new File(getJenkinsPluginDir(),
-					stripVersion(plugin.getName())));
-		} catch (IOException e) {
-			e.printStackTrace();
+		File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
+		if (!dest.exists()) {
+			DownloadHelper.downloadFile(
+					"http://updates.jenkins-ci.org/download/plugins/"
+							+ artifactId + "/" + version + "/" + artifactId
+							+ ".hpi", dest);
 		}
-	}
-
-	protected static String stripVersion(String name) {
-		String replaceAll = name.replaceAll("-[^-]*.hpi", ".hpi");
-		return replaceAll;
 	}
 
 	private static File getJenkinsPluginDir() {
