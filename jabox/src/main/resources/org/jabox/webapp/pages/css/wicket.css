@@ -1,0 +1,582 @@
+.tooltip {
+	background-color: #000;
+	border: 1px solid #fff;
+	padding: 10px 15px;
+	display: none;
+	color: #fff;
+	text-align: left;
+	font-size: 12px;
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow: 0 0 10px #000;
+	-webkit-box-shadow: 0 0 10px #000;
+}
+
+.tooltip a {
+	color: #ad4;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/*     NEW PART     */ /* TAB PANEL STYLES */
+div.tabpanel div.tab-row {
+	float: left;
+	width: 100%;
+	background: #DAE0D2 url("tabs/bg.gif") repeat-x bottom;
+	line-height: normal;
+}
+
+h1,h2,h3,h4 {
+	font-family: helvetica neue, helvetica, "microsoft sans serif", arial,
+		sans-serif;
+}
+
+h2,h3,h4,.wiki h1,.wiki h2,.wiki h3 {
+	border-bottom: 0px;
+}
+
+h2 {
+	background-color: #EFEFEF;
+	margin: 2px 0px 10px;
+	padding: 10px .7em;
+	font-size: 24px;
+	font-weight: normal;
+	font-family: baskerville, Times, Times New Roman, serif;
+	color: #275190;
+	border: 1px #DFDFDF solid;
+}
+
+.feedback {
+	min-height: 30px;
+	margin: 2px 0px 10px;
+}
+
+li.feedbackPanelINFO {
+	margin: 2px 0px 10px;
+	padding: 3px 3em;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: baskerville, Times, Times New Roman, serif;
+	color: #455138;
+	border: 1px #adde6b solid;
+	background: url("images/ok.png") no-repeat 8px 50% #cde9a7;
+	-moz-border-radius-topleft: 6px;
+	-webkit-border-top-left-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+}
+
+li.feedbackPanelERROR {
+	background-color: #;
+	margin: 2px 0px 10px;
+	padding: 3px 3em;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: baskerville, Times, Times New Roman, serif;
+	color: #A6750C;
+	border: 1px #FDBF3B solid;
+	background: url("images/error.png") no-repeat 8px 50% #FFEBC1;
+	-moz-border-radius-topleft: 6px;
+	-webkit-border-top-left-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+}
+
+div.tabpanel div.tab-row ul {
+	margin: 0;
+	padding: 10px 10px 0;
+	list-style: none;
+}
+
+div.tabpanel div.tab-row li {
+	float: left;
+	background: url("tabs/left.gif") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 9px;
+}
+
+div.tabpanel div.tab-row a {
+	display: block;
+	background: url("tabs/right.gif") no-repeat right top;
+	padding: 5px 15px 4px 6px;
+	text-decoration: none;
+	font-weight: bold;
+	white-space: nowrap;
+	color: #eee;
+}
+
+div.tab-panel {
+	clear: left;
+}
+
+div.tabpanel div.tab-row a:hover {
+	color: #fff;
+}
+
+div.tabpanel div.tab-row li.selected {
+	background-image: url("tabs/left_on.gif");
+}
+
+div.tabpanel div.tab-row li.selected a {
+	background-image: url("tabs/right_on.gif");
+	color: #333;
+	padding-bottom: 5px;
+}
+
+/* VARIATION 1 TAB PANEL STYLES */
+div.tabpanel1 div.tab-row {
+	float: left;
+	width: 100%;
+	background: #DAE0D2 url("tabs1/bg.gif") repeat-x bottom;
+	line-height: normal;
+}
+
+div.tabpanel1 div.tab-row ul {
+	margin: 0;
+	padding: 10px 10px 0;
+	list-style: none;
+}
+
+div.tabpanel1 div.tab-row li {
+	float: left;
+	background: url("tabs1/left.gif") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 9px;
+}
+
+div.tabpanel1 div.tab-row a {
+	display: block;
+	background: url("tabs1/right.gif") no-repeat right top;
+	padding: 5px 15px 4px 6px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #765;
+	white-space: nowrap;
+}
+
+div.tabpanel1 div.tab-row a:hover {
+	color: #333;
+}
+
+div.tabpanel1 div.tab-row li.selected {
+	background-image: url("tabs1/left_on.gif");
+}
+
+div.tabpanel1 div.tab-row li.selected a {
+	background-image: url("tabs1/right_on.gif");
+	color: #333;
+	padding-bottom: 5px;
+}
+
+/* TABBED PANEL VARIATION 2 */
+div.tabpanel2 div.tab-row {
+	float: left;
+	width: 100%;
+	background: #369 url("tabs2/bg.gif") repeat-x bottom;
+	font-size: 85%;
+	line-height: normal;
+}
+
+div.tabpanel2 div.tab-row ul {
+	margin: 0;
+	padding: 10px 10px 0;
+	list-style: none;
+}
+
+div.tabpanel2 div.tab-row li {
+	float: left;
+	background: url("tabs2/right.gif") no-repeat right top;
+	margin: 0;
+	padding: 0 5px 0 0;
+}
+
+div.tabpanel2 div.tab-row a {
+	float: left;
+	display: block;
+	background: url("tabs2/left.gif") no-repeat left top;
+	padding: 5px 7px 4px 20px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #9cf;
+	white-space: nowrap;
+}
+
+/* Commented Backslash Hack
+   hides rule from IE5-Mac \*/
+div.tabpanel2 div.tab-row a {
+	float: none;
+}
+
+/* End IE5-Mac hack */
+div.tabpanel2 div.tab-row a:hover {
+	color: #fff;
+}
+
+div.tabpanel2 div.tab-row li.selected {
+	background-image: url("tabs2/right_on.gif");
+}
+
+div.tabpanel2 div.tab-row li.selected a {
+	background-image: url("tabs2/left_on.gif");
+	color: #333;
+	padding-bottom: 5px;
+}
+
+/* TABBED PANEL VARIATION 3 */
+div.tabpanel3 div.tab-row {
+	float: left;
+	width: 100%;
+	background: #eee url("tabs3/bg.jpg") repeat-x top;
+	line-height: normal;
+}
+
+div.tabpanel3 div.tab-row ul {
+	margin: 0;
+	padding: 10px 10px 0;
+	list-style: none;
+}
+
+div.tabpanel3 div.tab-row li {
+	float: left;
+	background: url("tabs3/left.gif") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 28px;
+}
+
+div.tabpanel3 div.tab-row a {
+	float: left;
+	display: block;
+	background: url("tabs3/right.gif") no-repeat right top;
+	padding: 9px 28px 4px 0px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #92A2AC;
+}
+
+/* Commented Backslash Hack
+   hides rule from IE5-Mac \*/
+div.tabpanel3 div.tab-row a {
+	float: none;
+}
+
+/* End IE5-Mac hack */
+div.tabpanel3 div.tab-row a:hover {
+	color: #A56060;
+}
+
+div.tabpanel3 div.tab-row li.selected {
+	background-image: url("tabs3/left_on.gif");
+}
+
+div.tabpanel3 div.tab-row li.selected a {
+	background-image: url("tabs3/right_on.gif");
+	color: #A56060;
+}
+
+div.tabpanel4 div.tab-row ul {
+	height: 20px;
+	margin: 0;
+	padding-left: 10px;
+	background: url( tabs4/tab_bottom.gif ) repeat-x bottom;
+}
+
+div.tabpanel4 div.tab-row li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	list-style-type: none;
+}
+
+div.tabpanel4 div.tab-row a:link,div.tabpanel4 div.tab-row a:visited {
+	float: left;
+	background: #f3f3f3;
+	font-size: 12px;
+	line-height: 14px;
+	font-weight: bold;
+	padding: 2px 10px 2px 10px;
+	margin-right: 4px;
+	border: 1px solid #ccc;
+	text-decoration: none;
+	color: #666;
+}
+
+div.tabpanel4 div.tab-row li.selected a:link,div.tabpanel4 div.tab-row a:visited.active
+	{
+	border-bottom: 1px solid #fff;
+	background: #fff;
+	color: #000;
+}
+
+div.tabpanel4 div.tab-row a:hover {
+	background: #fff;
+}
+
+.contentbody {
+	padding-top: 15px;
+	padding-left: 280px;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #415fa1;
+	background: #f8f8f2 url(images/body_bg.jpg) repeat-x top left;
+	margin: 0px;
+	padding: 0px;
+	line-height: 135%;
+	height: 100%;
+}
+
+.header {
+	color: #ffffff;
+	padding-top: 0px;
+	padding-left: 15px;
+}
+
+.button:hover,.button:focus {
+	color: #FFC100;
+}
+
+.inputbox {
+	background: #FFFFFF;
+}
+
+.inputbox:hover,.inputbox:focus {
+	background: #FFFFFF;
+}
+
+#border {
+	padding-left: 8px;
+	padding-top: 25px;
+	padding-right: 8px;
+	min-height: 560px;
+}
+
+#col-left {
+	float: left;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+/* CSS global reset for all browsers  */
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+a:hover {
+	color: #ca3200;
+	text-decoration: none;
+}
+
+a.image,a.image:hover,a img {
+	border: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+/*  Global Formatting */
+h1 {
+	font-family: "Trebuchet MS", Verdana, sans-serif; #
+	font: normal 24px Georgia, "Times New Roman", Times, serif;
+	letter-spacing: -1px;
+	line-height: 30px;
+}
+
+h2 {
+	font: bold 24px Georgia, "Times New Roman", Times, serif;
+	letter-spacing: -1px;
+	text-transform: none;
+	line-height: 26px;
+}
+
+h3 {
+	font: normal 18px Georgia, "Times New Roman", Times, serif;
+	letter-spacing: 0px;
+	line-height: 24px;
+	text-transform: none;
+}
+
+h4 {
+	font: bold 14px Georgia, "Times New Roman", Times, serif;
+	line-height: 19px;
+	text-transform: none;
+}
+
+h5 {
+	font: bold 12px Georgia, "Times New Roman", Times, serif;
+	line-height: 18px;
+	text-transform: none;
+}
+
+h6 {
+	font: bold 11px Georgia, "Times New Roman", Times, serif;
+	line-height: 17px;
+	text-transform: none;
+}
+
+a {
+	color: #1d3a7b;
+	text-decoration: underline;
+}
+
+input,select,label {
+	vertical-align: middle;
+}
+
+.formInput {
+	min-width: 300px;
+}
+
+.formTD {
+	padding: 5px;
+}
+
+p {
+	padding: 5px 0px;
+}
+
+.img-left {
+	float: left;
+	margin-right: 7px;
+}
+
+.img-right {
+	float: right;
+	margin-left: 7px;
+}
+
+#col-left {
+	width: 248px;
+}
+
+#footer {
+	border-spacing: 20px 0px;
+	border-color: gray;
+	border-collapse: separate;
+	display: table;
+	clear: both;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	font-size: 8pt;
+	border-top: 1px solid #bbb;
+}
+
+ul.menu li a,ul.menu li em,ul#mainlevel li a {
+	color: #5a75b0;
+	font: normal 11px Arial, Helvetica, sans-serif;
+	line-height: 12px;
+	text-transform: none;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	margin: 0px;
+	padding: 6px 0px 7px 10px;
+	border-bottom: 1px solid #a9bae0;
+}
+
+ul.menu li em {
+	font: bold 12px Arial, Helvetica, sans-serif;
+}
+
+#col-left div.moduletable,#col-left div.moduletable_menu,#col-left div.moduletable_text
+	{
+	text-align: left;
+	padding: 10px;
+	background: transparent url(images/module_bg.png) no-repeat top left;
+	height: 100%;
+	margin-bottom: 10px;
+}
+
+#col-left h4 {
+	color: #ffffff;
+}
+
+#col-left .button {
+	background: transparent url(images/button_bg.gif) no-repeat 0 0;
+	width: 75px;
+	height: 23px;
+}
+
+#mod_login_username,#mod_login_password {
+	font: normal 12px Arial, Helvetica, sans-serif !important;
+	height: 14px;
+	padding: 4px 4px 3px 4px;
+	margin: 3px 0px;
+	width: 152px;
+	border: none;
+	color: #3a5899;
+	border: 1px solid #5a74ad;
+	background: #f5f7fc url(images/input_bg.gif) repeat-x top left;
+}
+
+#mod_login_remember {
+	background: transparent;
+	border: none;
+	height: 15px;
+	width: 15px;
+	vertical-align: middle;
+	padding: 0px;
+	margin: 3px;
+}
+
+div.moduletable fieldset {
+	width: 260px;
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	clear: both;
+}
+
+/* Submit Button */
+.button {
+	color: #ffffff;
+	font: bold 12px Arial, Helvetica, sans-serif;
+	background: #415fa1;
+	vertical-align: middle;
+	border: none;
+	height: 23px;
+	line-height: 23px;
+	display: block;
+	padding: 0px 10px 0px 10px;
+	margin: 3px 0px;
+}
+
+th.dataviewTh,table.dataviewTable th.dataviewTh {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ccc;
+	padding: 5px;
+	background-color: #f0f0f0;
+	text-align: left;
+	vertical-align: top;
+}
+
+td.dataviewTd,table.dataviewTable td.dataviewTd {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ccc;
+	padding: 5px;
+	vertical-align: top;
+}
+
+.wiki-content td.dataviewTd {
+	padding-right: 10px;
+}
+
+.wiki-content td.dataviewTd,.wiki-content th.dataviewTh {
+	margin: 0;
+	padding: 0;
+}
