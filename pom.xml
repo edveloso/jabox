@@ -3,14 +3,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jabox</groupId>
-	<artifactId>jabox</artifactId>
+	<artifactId>jabox-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.1.1-SNAPSHOT</version>
-	<name>Jabox</name>
+	<name>Jabox Parent</name>
 	<description />
 
 	<modules>
-		<module>jabox-webapp</module>
+		<module>jabox</module>
 		<module>jabox-persistence</module>
 		<module>jabox-site</module>
 		<module>scm-subversion</module>

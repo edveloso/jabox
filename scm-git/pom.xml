@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jabox</groupId>
-		<artifactId>jabox</artifactId>
+		<artifactId>jabox-parent</artifactId>
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>scm-git</artifactId>
-	<name>scm-git</name>
+	<name>SCM Git</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

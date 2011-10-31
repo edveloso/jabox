@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jabox</groupId>
-		<artifactId>jabox</artifactId>
+		<artifactId>jabox-parent</artifactId>
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>scm-subversion</artifactId>
-	<name>scm-subversion</name>
+	<name>SCM Subversion</name>
 	<build>
 		<plugins>
 			<plugin>

@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jabox</groupId>
-		<artifactId>jabox</artifactId>
+		<artifactId>jabox-parent</artifactId>
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>ide-eclipse</artifactId>
-	<name>ide-eclipse</name>
+	<name>IDE Eclipse</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.jabox</groupId>
