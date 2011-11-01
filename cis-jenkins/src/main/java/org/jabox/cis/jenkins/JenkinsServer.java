@@ -31,6 +31,8 @@ import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
+    private static final long serialVersionUID = 6774781526963880878L;
+
     private final String version = "1.436";
 
     public static void main(final String[] args) throws Exception {

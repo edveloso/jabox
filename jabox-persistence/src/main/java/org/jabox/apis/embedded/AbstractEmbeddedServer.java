@@ -20,6 +20,7 @@
 package org.jabox.apis.embedded;
 
 import java.io.File;
+import java.io.Serializable;
 
 import org.jabox.environment.Environment;
 import org.mortbay.jetty.Connector;
@@ -27,69 +28,70 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.webapp.WebAppContext;
 
-public abstract class AbstractEmbeddedServer implements EmbeddedServer {
-	private Server _server;
+public abstract class AbstractEmbeddedServer implements EmbeddedServer,
+        Serializable {
+    private static final long serialVersionUID = -2261539278522327712L;
 
-	public void startServerAndWait() {
-		startServer();
-		try {
-			while (System.in.available() == 0) {
-				Thread.sleep(5000);
-			}
-			_server.stop();
-			_server.join();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(100);
-		}
-	}
+    private Server _server;
 
+    public void startServerAndWait() {
+        startServer();
+        try {
+            while (System.in.available() == 0) {
+                Thread.sleep(5000);
+            }
+            _server.stop();
+            _server.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(100);
+        }
+    }
 
-	private void addWebAppContext(final Server server) {
-		WebAppContext wac = new WebAppContext();
-		wac.setServer(_server);
-		wac.setContextPath("/" + getServerName());
-		wac.setWar(getWarPath());
-		wac.setParentLoaderPriority(getParentLoaderPriority());
-		File tempDir = new File(Environment.getBaseDirFile(), "server-"
-				+ getServerName());
-		tempDir.mkdirs();
-		wac.setTempDirectory(tempDir);
-		server.addHandler(wac);
-	}
+    private void addWebAppContext(final Server server) {
+        WebAppContext wac = new WebAppContext();
+        wac.setServer(_server);
+        wac.setContextPath("/" + getServerName());
+        wac.setWar(getWarPath());
+        wac.setParentLoaderPriority(getParentLoaderPriority());
+        File tempDir =
+            new File(Environment.getBaseDirFile(), "server-"
+                + getServerName());
+        tempDir.mkdirs();
+        wac.setTempDirectory(tempDir);
+        server.addHandler(wac);
+    }
 
-	/**
-	 * 
-	 * @return true if parentLoaderPriority should be enabled.
-	 */
-	protected boolean getParentLoaderPriority() {
-		return false;
-	}
+    /**
+     * @return true if parentLoaderPriority should be enabled.
+     */
+    protected boolean getParentLoaderPriority() {
+        return false;
+    }
 
-	/**
-	 * 
-	 * @return the absolute path of the war file.
-	 */
-	public abstract String getWarPath();
+    /**
+     * @return the absolute path of the war file.
+     */
+    public abstract String getWarPath();
 
-	public void startServer() {
-		_server = new Server();
-		SocketConnector connector = new SocketConnector();
-		// Set some timeout options to make debugging easier.
-		connector.setMaxIdleTime(1000 * 60 * 60);
-		connector.setSoLingerTime(-1);
-		connector.setPort(9092);
-		_server.setConnectors(new Connector[] { connector });
+    public void startServer() {
+        _server = new Server();
+        SocketConnector connector = new SocketConnector();
+        // Set some timeout options to make debugging easier.
+        connector.setMaxIdleTime(1000 * 60 * 60);
+        connector.setSoLingerTime(-1);
+        connector.setPort(9092);
+        _server.setConnectors(new Connector[] {connector });
 
-		addWebAppContext(_server);
-		try {
-			System.out
-					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
-			_server.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(100);
-		}
+        addWebAppContext(_server);
+        try {
+            System.out
+                .println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
+            _server.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(100);
+        }
 
-	}
+    }
 }

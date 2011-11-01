@@ -46,6 +46,8 @@ import org.slf4j.LoggerFactory;
  * Sonar Server.
  */
 public class SonarServer extends AbstractEmbeddedServer {
+    private static final long serialVersionUID = 7700819637077613916L;
+
     private static final Logger LOGGER = LoggerFactory
         .getLogger(SonarServer.class);
 
