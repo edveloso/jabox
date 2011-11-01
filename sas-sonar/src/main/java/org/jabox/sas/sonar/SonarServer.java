@@ -124,12 +124,27 @@ public class SonarServer extends AbstractEmbeddedServer {
      * @return
      */
     private List<String> getDefaultPlugins() {
-        List<String> plugins = new ArrayList<String>();
+        List<String> pl = new ArrayList<String>();
         // "http://repo1.maven.org/maven2/org/codehaus/sonar-plugins/scm-activity/sonar-scm-activity-plugin/1.3/sonar-scm-activity-plugin-1.3.jar";
-        plugins
-            .add("org.codehaus.sonar-plugins.scm-activity:sonar-scm-activity-plugin:1.3");
+        pl.add("org.codehaus.sonar-plugins.scm-activity:sonar-scm-activity-plugin:1.3");
+        pl.add("org.codehaus.sonar-plugins:sonar-quality-index-plugin:1.1.3");
+        pl.add("org.codehaus.sonar-plugins:sonar-fb-contrib-plugin:1.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-technicaldebt-plugin:1.2.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-switch-off-violations-plugin:1.0");
+        pl.add("org.codehaus.sonar-plugins:sonar-radiator-plugin:1.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-taglist-plugin:1.0");
+        pl.add("org.codehaus.sonar-plugins:sonar-timeline-plugin:1.2");
+        pl.add("org.codehaus.sonar-plugins:sonar-security-rules-plugin:0.3.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-motion-chart-plugin:1.3");
+        pl.add("org.codehaus.sonar-plugins:sonar-violationdensity-plugin:1.0");
+        pl.add("org.codehaus.sonar-plugins:sonar-total-quality-plugin:1.0.2");
+        pl.add("org.codehaus.sonar-plugins:sonar-cutoff-plugin:0.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-artifact-size-plugin:0.3");
+        pl.add("org.codehaus.sonar-plugins:sonar-build-breaker-plugin:1.0");
+        pl.add("org.codehaus.sonar-plugins:sonar-jacoco-plugin:0.6");
+        pl.add("org.codehaus.sonar-plugins:sonar-useless-code-tracker-plugin:0.4");
 
-        return plugins;
+        return pl;
     }
 
     /**
