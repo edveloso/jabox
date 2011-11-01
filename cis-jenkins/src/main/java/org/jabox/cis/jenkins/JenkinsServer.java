@@ -22,13 +22,13 @@ package org.jabox.cis.jenkins;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
+import org.jabox.model.Plugin;
 import org.jabox.utils.DownloadHelper;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
@@ -62,32 +62,32 @@ public class JenkinsServer extends AbstractEmbeddedServer {
         injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
     }
 
-    public Map<String, String> plugins = getDefaultPlugins();
+    public List<Plugin> plugins = getDefaultPlugins();
 
     public void injectPlugins() {
-        for (Entry<String, String> entry : plugins.entrySet()) {
-            injectPlugin(entry.getKey(), entry.getValue());
+        for (Plugin plugin : plugins) {
+            injectPlugin(plugin.getName(), plugin.getVersion());
         }
     }
 
     /**
      * @return
      */
-    private Map<String, String> getDefaultPlugins() {
-        HashMap<String, String> defaultPlugins =
-            new HashMap<String, String>();
+    private List<Plugin> getDefaultPlugins() {
+        List<Plugin> defaultPlugins =
+            new ArrayList<Plugin>();
 
-        defaultPlugins.put("analysis-core", "1.14");
-        defaultPlugins.put("dry", "1.5");
-        defaultPlugins.put("pmd", "3.10");
-        defaultPlugins.put("findbugs", "4.14");
-        defaultPlugins.put("checkstyle", "3.10");
-        defaultPlugins.put("m2release", "0.6.1");
-        defaultPlugins.put("redmine", "0.9");
-        defaultPlugins.put("git", "1.1.3");
-        defaultPlugins.put("claim", "1.7");
-        defaultPlugins.put("ci-game", "1.17");
-        defaultPlugins.put("sonar", "1.6.1");
+        defaultPlugins.add(new Plugin("analysis-core", "1.14"));
+        defaultPlugins.add(new Plugin("dry", "1.5"));
+        defaultPlugins.add(new Plugin("pmd", "3.10"));
+        defaultPlugins.add(new Plugin("findbugs", "4.14"));
+        defaultPlugins.add(new Plugin("checkstyle", "3.10"));
+        defaultPlugins.add(new Plugin("m2release", "0.6.1"));
+        defaultPlugins.add(new Plugin("redmine", "0.9"));
+        defaultPlugins.add(new Plugin("git", "1.1.3"));
+        defaultPlugins.add(new Plugin("claim", "1.7"));
+        defaultPlugins.add(new Plugin("ci-game", "1.17"));
+        defaultPlugins.add(new Plugin("sonar", "1.6.1"));
 
         return defaultPlugins;
     }

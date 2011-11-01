@@ -10,68 +10,73 @@ import java.util.List;
 
 import org.jabox.environment.Environment;
 import org.jabox.model.Container;
+import org.jabox.model.Plugin;
 
 import com.thoughtworks.xstream.XStream;
 
 public class ContainerXstreamDao {
 
-	private static XStream getXStream() {
-		XStream xstream = new XStream();
-		xstream.alias("container", Container.class);
-		return xstream;
-	}
+    private static XStream getXStream() {
+        XStream xstream = new XStream();
+        xstream.alias("container", Container.class);
+        xstream.alias("plugin", Plugin.class);
+        return xstream;
+    }
 
-	public static void persist(Container container) {
-		XStream xstream = getXStream();
-		String xml = xstream.toXML(container);
-		try {
-			File containerDir = Environment.getContainersDir();
-			File file = new File(containerDir, container.getName() + ".xml");
-			FileWriter writer = new FileWriter(file);
-			writer.write(xml);
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void persist(final Container container) {
+        XStream xstream = getXStream();
+        String xml = xstream.toXML(container);
+        try {
+            File containerDir = Environment.getContainersDir();
+            File file =
+                new File(containerDir, container.getName() + ".xml");
+            FileWriter writer = new FileWriter(file);
+            writer.write(xml);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static List<Container> getContainers() {
-		ArrayList<Container> containers = new ArrayList<Container>();
-		File containersDir = Environment.getContainersDir();
+    public static List<Container> getContainers() {
+        ArrayList<Container> containers = new ArrayList<Container>();
+        File containersDir = Environment.getContainersDir();
 
-		String[] children = containersDir.list();
-		if (children == null) {
-			// Either dir does not exist or is not a directory
-		} else {
-			for (int i = 0; i < children.length; i++) {
-				// Get filename of file or directory
-				String filename = children[i];
-				String name = filename.replaceAll(".xml$", "");
-				containers.add(getContainer(name));
-			}
-		}
+        String[] children = containersDir.list();
+        if (children == null) {
+            // Either dir does not exist or is not a directory
+        } else {
+            for (int i = 0; i < children.length; i++) {
+                // Get filename of file or directory
+                String filename = children[i];
+                String name = filename.replaceAll(".xml$", "");
+                containers.add(getContainer(name));
+            }
+        }
 
-		return containers;
-	}
+        return containers;
+    }
 
-	public static Container getContainer(String name) {
-		XStream xstream = getXStream();
+    public static Container getContainer(final String name) {
+        XStream xstream = getXStream();
 
-		File containersDir = Environment.getContainersDir();
-		File file = new File(containersDir, name + ".xml");
+        File containersDir = Environment.getContainersDir();
+        File file = new File(containersDir, name + ".xml");
 
-		try {
-			FileInputStream is = new FileInputStream(file);
-			Container container = (Container) xstream.fromXML(is);
-			return container;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+        try {
+            FileInputStream is = new FileInputStream(file);
+            Container container = (Container) xstream.fromXML(is);
+            return container;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public static void deleteContainer(Container container) {
-		File file = new File(Environment.getContainersDir(), container.getName() + ".xml");
-		file.delete();
-	}
+    public static void deleteContainer(final Container container) {
+        File file =
+            new File(Environment.getContainersDir(), container.getName()
+                + ".xml");
+        file.delete();
+    }
 }
