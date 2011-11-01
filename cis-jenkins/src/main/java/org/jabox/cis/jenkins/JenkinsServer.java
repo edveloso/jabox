@@ -28,7 +28,6 @@ import java.util.List;
 import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
-import org.jabox.model.Plugin;
 import org.jabox.utils.DownloadHelper;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
@@ -52,7 +51,8 @@ public class JenkinsServer extends AbstractEmbeddedServer {
         File war = new File(downloadsDir, "jenkins.war");
         if (!war.exists()) {
             String url =
-                "http://mirrors.jenkins-ci.org/war/" + version + "/jenkins.war";
+                "http://mirrors.jenkins-ci.org/war/" + version
+                    + "/jenkins.war";
             DownloadHelper.downloadFile(url, war);
         }
         return war.getAbsolutePath();
@@ -63,31 +63,31 @@ public class JenkinsServer extends AbstractEmbeddedServer {
         injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
     }
 
-    public List<Plugin> plugins = getDefaultPlugins();
+    public List<String> plugins = getDefaultPlugins();
 
     public void injectPlugins() {
-        for (Plugin plugin : plugins) {
-            injectPlugin(plugin.getName(), plugin.getVersion());
+        for (String plugin : plugins) {
+            injectPlugin(plugin);
         }
     }
 
     /**
      * @return
      */
-    private List<Plugin> getDefaultPlugins() {
-        List<Plugin> defaultPlugins = new ArrayList<Plugin>();
+    private List<String> getDefaultPlugins() {
+        List<String> defaultPlugins = new ArrayList<String>();
 
-        defaultPlugins.add(new Plugin("analysis-core", "1.14"));
-        defaultPlugins.add(new Plugin("dry", "1.5"));
-        defaultPlugins.add(new Plugin("pmd", "3.10"));
-        defaultPlugins.add(new Plugin("findbugs", "4.14"));
-        defaultPlugins.add(new Plugin("checkstyle", "3.10"));
-        defaultPlugins.add(new Plugin("m2release", "0.6.1"));
-        defaultPlugins.add(new Plugin("redmine", "0.9"));
-        defaultPlugins.add(new Plugin("git", "1.1.3"));
-        defaultPlugins.add(new Plugin("claim", "1.7"));
-        defaultPlugins.add(new Plugin("ci-game", "1.17"));
-        defaultPlugins.add(new Plugin("sonar", "1.6.1"));
+        defaultPlugins.add("analysis-core:1.14");
+        defaultPlugins.add("dry:1.5");
+        defaultPlugins.add("pmd:3.10");
+        defaultPlugins.add("findbugs:4.14");
+        defaultPlugins.add("checkstyle:3.10");
+        defaultPlugins.add("m2release:0.6.1");
+        defaultPlugins.add("redmine:0.9");
+        defaultPlugins.add("git:1.1.3");
+        defaultPlugins.add("claim:1.7");
+        defaultPlugins.add("ci-game:1.17");
+        defaultPlugins.add("sonar:1.6.1");
 
         return defaultPlugins;
     }
@@ -104,8 +104,9 @@ public class JenkinsServer extends AbstractEmbeddedServer {
         }
     }
 
-    private static void injectPlugin(final String artifactId,
-            final String version) {
+    private static void injectPlugin(final String plugin) {
+        String artifactId = plugin.replaceAll(":.*", "");
+        String version = plugin.replaceAll(".*:", "");
         File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
         if (!dest.exists()) {
             DownloadHelper.downloadFile(
