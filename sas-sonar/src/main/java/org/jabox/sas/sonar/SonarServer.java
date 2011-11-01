@@ -34,164 +34,227 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
+import org.jabox.maven.helper.MavenDownloader;
 import org.jabox.utils.DownloadHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sonar Server.
  */
 public class SonarServer extends AbstractEmbeddedServer {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(SonarServer.class);
+
     private final String version = "2.10";
 
-	public static void main(final String[] args) throws Exception {
-		new SonarServer().startServerAndWait();
-	}
+    public static void main(final String[] args) throws Exception {
+        new SonarServer().injectPlugins();
+    }
 
-	@Override
-	public String getServerName() {
-		return "sonar";
-	}
+    @Override
+    public String getServerName() {
+        return "sonar";
+    }
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the sonar.zip
-		File zipFile = new File(downloadsDir, "sonar.zip");
-		if (!zipFile.exists()) {
-		    String url = "http://dist.sonar.codehaus.org/sonar-" + version + ".zip";
-			DownloadHelper.downloadFile(url, zipFile);
-		}
-		File sonarBaseDir = new File(downloadsDir, "sonar-2.10");
+        // Download the sonar.zip
+        File zipFile = new File(downloadsDir, "sonar.zip");
+        if (!zipFile.exists()) {
+            String url =
+                "http://dist.sonar.codehaus.org/sonar-" + version + ".zip";
+            DownloadHelper.downloadFile(url, zipFile);
+        }
+        File sonarBaseDir = getSonarBaseDir();
 
-		if (!sonarBaseDir.exists()) {
-			try {
-				Unzip.unzip(zipFile.getAbsolutePath(), downloadsDir
-						.getAbsolutePath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		File sonarWar = execBuildWar(sonarBaseDir);
-		return sonarWar.getAbsolutePath();
-	}
+        if (!sonarBaseDir.exists()) {
+            try {
+                Unzip.unzip(zipFile.getAbsolutePath(),
+                    downloadsDir.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File sonarWar = execBuildWar(sonarBaseDir);
+        injectPlugins();
+        return sonarWar.getAbsolutePath();
+    }
 
-	/**
-	 * Executes the Build War script.
-	 */
-	private File execBuildWar(File sonarBaseDir) {
-		File sonarWar = new File(sonarBaseDir, "war/sonar.war");
-		if (sonarWar.exists()) {
-			return sonarWar;
-		}
-		
-		File script = getBuildSonarScript(sonarBaseDir);
-		new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant")
-				.setExecutable(true);
-		new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant.bat")
-				.setExecutable(true);
-		try {
-			Process p = Runtime.getRuntime().exec(script.getAbsolutePath(),
-					null, new File(sonarBaseDir, "war"));
-			InputStream is = p.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-			String line;
+    /**
+     * @param downloadsDir
+     * @return
+     */
+    private File getSonarBaseDir() {
+        File downloadsDir = Environment.getDownloadsDir();
+        return new File(downloadsDir, "sonar-2.10");
+    }
 
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-			}
+    public List<String> plugins = getDefaultPlugins();
 
-			p.waitFor();
-			System.out.println(p.exitValue());
+    private void injectPlugins() {
+        for (String plugin : plugins) {
+            injectPlugin(plugin);
+        }
+    }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		return sonarWar;
-	}
+    private void injectPlugin(final String plugin) {
+        String groupId = plugin.split(":")[0];
+        String artifactId = plugin.split(":")[1];
+        String version = plugin.split(":")[2];
+        File file =
+            MavenDownloader.downloadArtifact(groupId, artifactId, version,
+                "jar");
+        try {
+            FileUtils.copyFile(file,
+                new File(getSonarPluginDir(), file.getName()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private File getBuildSonarScript(File sonarBaseDir) {
-		if (Environment.isWindowsPlatform()) {
-			return new File(sonarBaseDir, "war/build-war.bat");
-		}
-		File file = new File(sonarBaseDir, "war/build-war.sh");
-		file.setExecutable(true);
-		return file;
-	}
+    /**
+     * @return
+     */
+    private List<String> getDefaultPlugins() {
+        List<String> plugins = new ArrayList<String>();
+        // "http://repo1.maven.org/maven2/org/codehaus/sonar-plugins/scm-activity/sonar-scm-activity-plugin/1.3/sonar-scm-activity-plugin-1.3.jar";
+        plugins
+            .add("org.codehaus.sonar-plugins.scm-activity:sonar-scm-activity-plugin:1.3");
 
-	public static void doUnzip(String inputZip, String destinationDirectory)
-			throws IOException {
-		int BUFFER = 2048;
-		List<String> zipFiles = new ArrayList<String>();
-		File sourceZipFile = new File(inputZip);
-		File unzipDestinationDirectory = new File(destinationDirectory);
-		unzipDestinationDirectory.mkdir();
+        return plugins;
+    }
 
-		ZipFile zipFile;
-		// Open Zip file for reading
-		zipFile = new ZipFile(sourceZipFile, ZipFile.OPEN_READ);
+    /**
+     * Executes the Build War script.
+     */
+    private File execBuildWar(final File sonarBaseDir) {
+        File sonarWar = new File(sonarBaseDir, "war/sonar.war");
+        if (sonarWar.exists()) {
+            return sonarWar;
+        }
 
-		// Create an enumeration of the entries in the zip file
-		Enumeration<? extends ZipEntry> zipFileEntries = zipFile.entries();
+        File script = getBuildSonarScript(sonarBaseDir);
+        new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant")
+            .setExecutable(true);
+        new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant.bat")
+            .setExecutable(true);
+        try {
+            Process p =
+                Runtime.getRuntime().exec(script.getAbsolutePath(), null,
+                    new File(sonarBaseDir, "war"));
+            InputStream is = p.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
 
-		// Process each entry
-		while (zipFileEntries.hasMoreElements()) {
-			// grab a zip file entry
-			ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
 
-			String currentEntry = entry.getName();
+            p.waitFor();
+            System.out.println(p.exitValue());
 
-			File destFile = new File(unzipDestinationDirectory, currentEntry);
-			destFile = new File(unzipDestinationDirectory, destFile.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-			if (currentEntry.endsWith(".zip")) {
-				zipFiles.add(destFile.getAbsolutePath());
-			}
+        return sonarWar;
+    }
 
-			// grab file's parent directory structure
-			File destinationParent = destFile.getParentFile();
+    private File getBuildSonarScript(final File sonarBaseDir) {
+        if (Environment.isWindowsPlatform()) {
+            return new File(sonarBaseDir, "war/build-war.bat");
+        }
+        File file = new File(sonarBaseDir, "war/build-war.sh");
+        file.setExecutable(true);
+        return file;
+    }
 
-			// create the parent directory structure if needed
-			destinationParent.mkdirs();
+    public static void doUnzip(final String inputZip,
+            final String destinationDirectory) throws IOException {
+        int BUFFER = 2048;
+        List<String> zipFiles = new ArrayList<String>();
+        File sourceZipFile = new File(inputZip);
+        File unzipDestinationDirectory = new File(destinationDirectory);
+        unzipDestinationDirectory.mkdir();
 
-			try {
-				// extract file if not a directory
-				if (!entry.isDirectory()) {
-					BufferedInputStream is = new BufferedInputStream(zipFile
-							.getInputStream(entry));
-					int currentByte;
-					// establish buffer for writing file
-					byte data[] = new byte[BUFFER];
+        ZipFile zipFile;
+        // Open Zip file for reading
+        zipFile = new ZipFile(sourceZipFile, ZipFile.OPEN_READ);
 
-					// write the current file to disk
-					FileOutputStream fos = new FileOutputStream(destFile);
-					BufferedOutputStream dest = new BufferedOutputStream(fos,
-							BUFFER);
+        // Create an enumeration of the entries in the zip file
+        Enumeration<? extends ZipEntry> zipFileEntries = zipFile.entries();
 
-					// read and write until last byte is encountered
-					while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
-						dest.write(data, 0, currentByte);
-					}
-					dest.flush();
-					dest.close();
-					is.close();
-				}
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-			destFile.setExecutable(true);
+        // Process each entry
+        while (zipFileEntries.hasMoreElements()) {
+            // grab a zip file entry
+            ZipEntry entry = zipFileEntries.nextElement();
 
-			for (Iterator<String> iter = zipFiles.iterator(); iter.hasNext();) {
-				String zipName = iter.next();
-				doUnzip(zipName, destinationDirectory + File.separatorChar
-						+ zipName.substring(0, zipName.lastIndexOf(".zip")));
-			}
+            String currentEntry = entry.getName();
 
-		}
-	}
+            File destFile =
+                new File(unzipDestinationDirectory, currentEntry);
+            destFile =
+                new File(unzipDestinationDirectory, destFile.getName());
+
+            if (currentEntry.endsWith(".zip")) {
+                zipFiles.add(destFile.getAbsolutePath());
+            }
+
+            // grab file's parent directory structure
+            File destinationParent = destFile.getParentFile();
+
+            // create the parent directory structure if needed
+            destinationParent.mkdirs();
+
+            try {
+                // extract file if not a directory
+                if (!entry.isDirectory()) {
+                    BufferedInputStream is =
+                        new BufferedInputStream(
+                            zipFile.getInputStream(entry));
+                    int currentByte;
+                    // establish buffer for writing file
+                    byte data[] = new byte[BUFFER];
+
+                    // write the current file to disk
+                    FileOutputStream fos = new FileOutputStream(destFile);
+                    BufferedOutputStream dest =
+                        new BufferedOutputStream(fos, BUFFER);
+
+                    // read and write until last byte is encountered
+                    while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
+                        dest.write(data, 0, currentByte);
+                    }
+                    dest.flush();
+                    dest.close();
+                    is.close();
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            destFile.setExecutable(true);
+
+            for (Iterator<String> iter = zipFiles.iterator(); iter
+                .hasNext();) {
+                String zipName = iter.next();
+                doUnzip(zipName, destinationDirectory + File.separatorChar
+                    + zipName.substring(0, zipName.lastIndexOf(".zip")));
+            }
+
+        }
+    }
+
+    private File getSonarPluginDir() {
+        return new File(getSonarBaseDir(), "extensions/downloads/");
+    }
+
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.jabox.environment.Environment;
 import org.jabox.model.Container;
-import org.jabox.model.Plugin;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -19,7 +18,6 @@ public class ContainerXstreamDao {
     private static XStream getXStream() {
         XStream xstream = new XStream();
         xstream.alias("container", Container.class);
-        xstream.alias("plugin", Plugin.class);
         return xstream;
     }
 
