@@ -29,7 +29,7 @@ import org.jabox.utils.DownloadHelper;
  * 
  */
 public class NexusServer extends AbstractEmbeddedServer {
-	final String URL = "http://nexus.sonatype.org/downloads/all/nexus-webapp-1.9.2.3.war";
+    private final String version = "1.9.2.3";
 
 	public static void main(final String[] args) throws Exception {
 		new NexusServer().startServerAndWait();
@@ -47,7 +47,8 @@ public class NexusServer extends AbstractEmbeddedServer {
 		// Download the nexus.war
 		File zipFile = new File(downloadsDir, "nexus.war");
 		if (!zipFile.exists()) {
-			DownloadHelper.downloadFile(URL, zipFile);
+		    String url = "http://nexus.sonatype.org/downloads/all/nexus-webapp-" + version + ".war";
+			DownloadHelper.downloadFile(url, zipFile);
 		}
 		return zipFile.getAbsolutePath();
 	}

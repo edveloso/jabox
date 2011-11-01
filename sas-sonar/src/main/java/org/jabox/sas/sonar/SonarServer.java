@@ -39,11 +39,10 @@ import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 
 /**
- * Hello world!
- * 
+ * Sonar Server.
  */
 public class SonarServer extends AbstractEmbeddedServer {
-	private static final String URL = "http://dist.sonar.codehaus.org/sonar-2.10.zip";
+    private final String version = "2.10";
 
 	public static void main(final String[] args) throws Exception {
 		new SonarServer().startServerAndWait();
@@ -61,7 +60,8 @@ public class SonarServer extends AbstractEmbeddedServer {
 		// Download the sonar.zip
 		File zipFile = new File(downloadsDir, "sonar.zip");
 		if (!zipFile.exists()) {
-			DownloadHelper.downloadFile(URL, zipFile);
+		    String url = "http://dist.sonar.codehaus.org/sonar-" + version + ".zip";
+			DownloadHelper.downloadFile(url, zipFile);
 		}
 		File sonarBaseDir = new File(downloadsDir, "sonar-2.10");
 

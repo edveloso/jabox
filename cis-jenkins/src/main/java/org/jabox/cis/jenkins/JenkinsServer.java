@@ -32,8 +32,7 @@ import org.jabox.model.Plugin;
 import org.jabox.utils.DownloadHelper;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
-    final String URL =
-        "http://mirrors.jenkins-ci.org/war/1.436/jenkins.war";
+    private final String version = "1.436";
 
     public static void main(final String[] args) throws Exception {
         new JenkinsServer().startServerAndWait();
@@ -52,7 +51,9 @@ public class JenkinsServer extends AbstractEmbeddedServer {
         // Download the jenkins.war
         File war = new File(downloadsDir, "jenkins.war");
         if (!war.exists()) {
-            DownloadHelper.downloadFile(URL, war);
+            String url =
+                "http://mirrors.jenkins-ci.org/war/" + version + "/jenkins.war";
+            DownloadHelper.downloadFile(url, war);
         }
         return war.getAbsolutePath();
     }
@@ -74,8 +75,7 @@ public class JenkinsServer extends AbstractEmbeddedServer {
      * @return
      */
     private List<Plugin> getDefaultPlugins() {
-        List<Plugin> defaultPlugins =
-            new ArrayList<Plugin>();
+        List<Plugin> defaultPlugins = new ArrayList<Plugin>();
 
         defaultPlugins.add(new Plugin("analysis-core", "1.14"));
         defaultPlugins.add(new Plugin("dry", "1.5"));
