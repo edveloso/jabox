@@ -22,76 +22,100 @@ package org.jabox.cis.jenkins;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
-import org.jabox.maven.helper.MavenDownloader;
 import org.jabox.utils.DownloadHelper;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
-	final String URL = "http://mirrors.jenkins-ci.org/war/1.436/jenkins.war";
+    final String URL =
+        "http://mirrors.jenkins-ci.org/war/1.436/jenkins.war";
 
-	public static void main(final String[] args) throws Exception {
-		new JenkinsServer().startServerAndWait();
-	}
+    public static void main(final String[] args) throws Exception {
+        new JenkinsServer().startServerAndWait();
+    }
 
-	public String getServerName() {
-		return "jenkins";
-	}
+    public String getServerName() {
+        return "jenkins";
+    }
 
-	public String getWarPath() {
-		injectPlugins();
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        injectPlugins();
+        injectConfigurations();
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the jenkins.war
-		File war = new File(downloadsDir, "jenkins.war");
-		if (!war.exists()) {
-			DownloadHelper.downloadFile(URL, war);
-		}
-		return war.getAbsolutePath();
-	}
+        // Download the jenkins.war
+        File war = new File(downloadsDir, "jenkins.war");
+        if (!war.exists()) {
+            DownloadHelper.downloadFile(URL, war);
+        }
+        return war.getAbsolutePath();
+    }
 
-	public static void injectPlugins() {
-		injectPlugin("org.jvnet.hudson.plugins", "analysis-core", "1.14");
-		injectPlugin("org.jvnet.hudson.plugins", "dry", "1.5");
-		injectPlugin("org.jvnet.hudson.plugins", "pmd", "3.10");
-		injectPlugin("org.jvnet.hudson.plugins", "findbugs", "4.14");
-		injectPlugin("org.jvnet.hudson.plugins", "checkstyle", "3.10");
-		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
-		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.9");
-		injectPlugin("org.jvnet.hudson.plugins", "git", "1.1.3");
-		injectPlugin("org.jvnet.hudson.plugins", "claim", "1.7");
-		injectPlugin("org.jvnet.hudson.plugins", "ci-game", "1.17");
-		injectPlugin("org.jvnet.hudson.plugins", "sonar", "1.6.1");
-		injectConfiguration("hudson.tasks.Maven.xml");
-		injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
-	}
+    private void injectConfigurations() {
+        injectConfiguration("hudson.tasks.Maven.xml");
+        injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
+    }
 
-	private static void injectConfiguration(String resource) {
-		URL res = JenkinsServer.class.getResource(resource);
-		File dest = new File(Environment.getHudsonHomeDir(), resource);
-		if (!dest.exists()) {
-			try {
-				FileUtils.copyURLToFile(res, dest);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    public Map<String, String> plugins = getDefaultPlugins();
 
-	private static void injectPlugin(String groupId, String artifactId,
-			String version) {
-		File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
-		if (!dest.exists()) {
-			DownloadHelper.downloadFile(
-					"http://updates.jenkins-ci.org/download/plugins/"
-							+ artifactId + "/" + version + "/" + artifactId
-							+ ".hpi", dest);
-		}
-	}
+    public void injectPlugins() {
+        for (Entry<String, String> entry : plugins.entrySet()) {
+            injectPlugin(entry.getKey(), entry.getValue());
+        }
+    }
 
-	private static File getJenkinsPluginDir() {
-		return new File(Environment.getHudsonHomeDir(), "plugins");
-	}
+    /**
+     * @return
+     */
+    private Map<String, String> getDefaultPlugins() {
+        HashMap<String, String> defaultPlugins =
+            new HashMap<String, String>();
+
+        defaultPlugins.put("analysis-core", "1.14");
+        defaultPlugins.put("dry", "1.5");
+        defaultPlugins.put("pmd", "3.10");
+        defaultPlugins.put("findbugs", "4.14");
+        defaultPlugins.put("checkstyle", "3.10");
+        defaultPlugins.put("m2release", "0.6.1");
+        defaultPlugins.put("redmine", "0.9");
+        defaultPlugins.put("git", "1.1.3");
+        defaultPlugins.put("claim", "1.7");
+        defaultPlugins.put("ci-game", "1.17");
+        defaultPlugins.put("sonar", "1.6.1");
+
+        return defaultPlugins;
+    }
+
+    private static void injectConfiguration(final String resource) {
+        URL res = JenkinsServer.class.getResource(resource);
+        File dest = new File(Environment.getHudsonHomeDir(), resource);
+        if (!dest.exists()) {
+            try {
+                FileUtils.copyURLToFile(res, dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void injectPlugin(final String artifactId,
+            final String version) {
+        File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
+        if (!dest.exists()) {
+            DownloadHelper.downloadFile(
+                "http://updates.jenkins-ci.org/download/plugins/"
+                    + artifactId + "/" + version + "/" + artifactId
+                    + ".hpi", dest);
+        }
+    }
+
+    private static File getJenkinsPluginDir() {
+        return new File(Environment.getHudsonHomeDir(), "plugins");
+    }
 }
