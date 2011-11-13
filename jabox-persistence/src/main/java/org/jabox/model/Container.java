@@ -69,6 +69,10 @@ public class Container extends BaseEntity implements Serializable {
 
     private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
 
+    private String type = "tomcat6x";
+
+    private String version ="6.0.33";
+
     private static String[] DEFAULT_WEBAPPS = {
             "org.jabox.cis.jenkins.JenkinsServer",
             "org.jabox.mrm.nexus.NexusServer",
@@ -114,9 +118,7 @@ public class Container extends BaseEntity implements Serializable {
         Installer installer;
         try {
             installer =
-                new ZipURLInstaller(new URL(
-                    "http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/"
-                        + getTomcatFilename()), Environment
+                new ZipURLInstaller(getUrl(), Environment
                     .getDownloadsDir().getAbsolutePath());
         } catch (MalformedURLException e1) {
             // TODO Auto-generated catch block
@@ -129,13 +131,13 @@ public class Container extends BaseEntity implements Serializable {
         // container
         LocalConfiguration configuration =
             (LocalConfiguration) new DefaultConfigurationFactory()
-                .createConfiguration("tomcat6x", ContainerType.INSTALLED,
+                .createConfiguration(type, ContainerType.INSTALLED,
                     ConfigurationType.STANDALONE,
                     new File(Environment.getBaseDir(), "cargo/"
                         + getName()).getAbsolutePath());
         InstalledLocalContainer container =
             (InstalledLocalContainer) new DefaultContainerFactory()
-                .createContainer("tomcat6x", ContainerType.INSTALLED,
+                .createContainer(type, ContainerType.INSTALLED,
                     configuration);
         container.setHome(installer.getHome());
         container.setOutput(new File(Environment.getBaseDir(), "cargo/"
@@ -176,6 +178,16 @@ public class Container extends BaseEntity implements Serializable {
         }
     }
 
+	private URL getUrl() throws MalformedURLException {
+		String url = null;
+		if ("tomcat6x".equals(type)){
+		url = "http://archive.apache.org/dist/tomcat/tomcat-6/v" + version + "/bin/"
+		    + getTomcatFilename();
+		}
+		
+		return new URL(url);
+	}
+
     private void passSystemProperties(
             final InstalledLocalContainer container) {
         Map<String, String> props = new HashMap<String, String>();
@@ -198,11 +210,11 @@ public class Container extends BaseEntity implements Serializable {
     /**
      * @return the filename of apache tomcat. Depends on the OS.
      */
-    private static String getTomcatFilename() {
+    private String getTomcatFilename() {
         if (Environment.isWindowsPlatform()) {
-            return "apache-tomcat-6.0.32.zip";
+            return "apache-tomcat-" + version + ".zip";
         }
-        return "apache-tomcat-6.0.32.tar.gz";
+        return "apache-tomcat-" + version + ".tar.gz";
     }
 
     /**
