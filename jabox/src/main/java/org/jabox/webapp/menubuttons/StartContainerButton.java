@@ -51,13 +51,17 @@ public final class StartContainerButton extends ImageButton {
 		this(id, item.getModelObject(), responsePage);
 	}
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
+
 	@Override
 	public void onSubmit() {
-                LOGGER.info("Starting container: " + _item.getName());
+        LOGGER.info("Starting container: " + _item.getName());
 		_item.start();
+		getSession().info("Container \"" + _item.getName() + "\" Started.");
 		setResponsePage(_responsePage);
+	}
+
+	@Override
+	public void onError() {
+		// TODO Auto-generated method stub
 	}
 }

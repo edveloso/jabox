@@ -22,7 +22,9 @@ package org.jabox.webapp.pages.container;
 import java.util.List;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.jabox.model.Container;
@@ -39,10 +41,21 @@ public class ManageContainers extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	public ManageContainers() {
+
 		final List<Container> containers = ContainerXstreamDao.getContainers();
 		add(new InfoImage("containerIcon", ""));
 
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+
+		// Add a FeedbackPanel for displaying form messages
+        // create feedback panel to show errors
+        final FeedbackPanel feedback = new FeedbackPanel("feedback");
+        feedback.setOutputMarkupId(true);
+        add(feedback);
+//        
+//		add(new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter(
+//				form)));
+
 		form.add(new ContainerList("containers", containers));
 		form.add(new CreateContainerLink("createContainer"));
 		add(form);
