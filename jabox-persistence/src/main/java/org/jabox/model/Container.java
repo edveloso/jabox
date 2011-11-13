@@ -115,40 +115,13 @@ public class Container extends BaseEntity implements Serializable {
 
         // (1) Optional step to install the container from a URL pointing to its
         // distribution
-        Installer installer;
-        try {
-            installer =
-                new ZipURLInstaller(getUrl(), Environment
-                    .getDownloadsDir().getAbsolutePath());
-        } catch (MalformedURLException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-            return;
-        }
-        installer.install();
+        Installer installer = getInstaller();
 
         // (2) Create the Cargo Container instance wrapping our physical
         // container
-        LocalConfiguration configuration =
-            (LocalConfiguration) new DefaultConfigurationFactory()
-                .createConfiguration(type, ContainerType.INSTALLED,
-                    ConfigurationType.STANDALONE,
-                    new File(Environment.getBaseDir(), "cargo/"
-                        + getName()).getAbsolutePath());
-        InstalledLocalContainer container =
-            (InstalledLocalContainer) new DefaultContainerFactory()
-                .createContainer(type, ContainerType.INSTALLED,
-                    configuration);
-        container.setHome(installer.getHome());
-        container.setOutput(new File(Environment.getBaseDir(), "cargo/"
-            + getName() + ".log").getAbsolutePath());
+        LocalConfiguration configuration = getConfiguration();
+        InstalledLocalContainer container = getContainer(installer, configuration);
 
-        configuration.setProperty(ServletPropertySet.PORT, port);
-        configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
-        configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
-        configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
-
-        passSystemProperties(container);
         // Pass the system properties to the container
         // Map<String, String> props = new HashMap<String, String>();
         // Properties properties = System.getProperties();
@@ -173,16 +146,63 @@ public class Container extends BaseEntity implements Serializable {
             LOGGER.info("Servlet Container Started");
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(100);
+            LOGGER.error("Servlet Container Error!", e);
         }
     }
+
+	private Installer getInstaller() {
+		Installer installer;
+        try {
+            installer =
+                new ZipURLInstaller(getUrl(),Environment
+                    .getDownloadsDir().getAbsolutePath(), Environment
+                    .getDownloadsDir().getAbsolutePath());
+        } catch (MalformedURLException e1) {
+            LOGGER.error("MalformedURLException", e1);
+            return null;
+        }
+        installer.install();
+		return installer;
+	}
+
+	private InstalledLocalContainer getContainer(Installer installer,
+			LocalConfiguration configuration) {
+		InstalledLocalContainer container =
+            (InstalledLocalContainer) new DefaultContainerFactory()
+                .createContainer(type, ContainerType.INSTALLED,
+                    configuration);
+        container.setHome(installer.getHome());
+        container.setOutput(new File(Environment.getBaseDir(), "cargo/"
+            + getName() + ".log").getAbsolutePath());
+        
+        passSystemProperties(container);
+
+		return container;
+	}
+
+	private LocalConfiguration getConfiguration() {
+		LocalConfiguration configuration =
+            (LocalConfiguration) new DefaultConfigurationFactory()
+                .createConfiguration(type, ContainerType.INSTALLED,
+                    ConfigurationType.STANDALONE,
+                    new File(Environment.getBaseDir(), "cargo/"
+                        + getName()).getAbsolutePath());
+
+		configuration.setProperty(ServletPropertySet.PORT, port);
+        configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
+        configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
+        configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
+
+		return configuration;
+	}
 
 	private URL getUrl() throws MalformedURLException {
 		String url = null;
 		if ("tomcat6x".equals(type)){
 		url = "http://archive.apache.org/dist/tomcat/tomcat-6/v" + version + "/bin/"
 		    + getTomcatFilename();
+		} else if ("glassfish3x".equals(type)) {
+			url = "http://dlc.sun.com.edgesuite.net/glassfish/3.1.1/release/glassfish-3.1.1-ml.zip";
 		}
 		
 		return new URL(url);
@@ -262,13 +282,21 @@ public class Container extends BaseEntity implements Serializable {
                     (EmbeddedServer) Class.forName(server).newInstance();
                 servers.add(es);
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                LOGGER.error("InstantiationException", e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                LOGGER.error("IllegalAccessException", e);
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                LOGGER.error("ClassNotFoundException", e);
             }
         }
         return servers;
     }
+
+	public void stop() {
+        Installer installer = getInstaller();
+        LocalConfiguration configuration = getConfiguration();
+        InstalledLocalContainer container = getContainer(installer, configuration);
+
+        container.stop();
+	}
 }

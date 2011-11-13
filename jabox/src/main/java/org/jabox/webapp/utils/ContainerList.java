@@ -28,7 +28,7 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.StartContainerButton;
-import org.jabox.webapp.pages.EditEntityButton;
+import org.jabox.webapp.menubuttons.StopContainerButton;
 import org.jabox.webapp.pages.container.ManageContainers;
 
 public class ContainerList extends PropertyListView<Container> {
@@ -48,6 +48,8 @@ public class ContainerList extends PropertyListView<Container> {
 				"class", true, new EvenOddRow<Container>(listItem));
 		listItem.add(attributeModifier);
 		listItem.add(new StartContainerButton("start", listItem,
+				ManageContainers.class));
+		listItem.add(new StopContainerButton("stop", listItem,
 				ManageContainers.class));
 		listItem.add(new DeleteEntityButton<Container>("delete", listItem,
 				ManageContainers.class));
