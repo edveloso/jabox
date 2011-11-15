@@ -44,6 +44,7 @@ public class CreateContainerLink extends Link<Void> {
 
 			protected void onSave(final Container container) {
 				ContainerXstreamDao.persist(container);
+				getSession().info("Container \"" + container.getName() + "\" Created.");
 				setResponsePage(ManageContainers.class);
 			}
 		});

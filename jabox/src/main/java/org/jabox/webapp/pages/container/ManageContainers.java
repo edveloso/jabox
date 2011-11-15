@@ -52,7 +52,7 @@ public class ManageContainers extends BasePage {
         final FeedbackPanel feedback = new FeedbackPanel("feedback");
         feedback.setOutputMarkupId(true);
         add(feedback);
-//        
+        
 //		add(new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter(
 //				form)));
 

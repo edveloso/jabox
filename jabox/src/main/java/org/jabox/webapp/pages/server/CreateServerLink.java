@@ -56,17 +56,17 @@ public class CreateServerLink extends Link<Void> {
 			}
 
 			@Override
-			protected void onSave(final Server article) {
-				ServerXstreamDao.persist(article.getDeployerConfig());
+			protected void onSave(final Server server) {
+				ServerXstreamDao.persist(server.getDeployerConfig());
 
 				// If this is the first Service of the kind, set it as default
 				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-				DeployerConfig config = article.getDeployerConfig();
+				DeployerConfig config = server.getDeployerConfig();
 				if (dc.getDefault(config) == null) {
 					dc.switchDefault(config);
 				}
 				ConfigXstreamDao.persist(dc);
-
+				getSession().info("Server \"" + server.getName() + "\" Created.");
 				setResponsePage(ManageServers.class);
 			}
 		});

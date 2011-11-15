@@ -43,6 +43,7 @@ public class CreateUserLink extends Link<Void> {
 
 			protected void onSave(final User user) {
 				UserXstreamDao.persist(user);
+				getSession().info("User \"" + user.getLogin() + "\" Created.");
 				setResponsePage(ManageUsers.class);
 			}
 		});

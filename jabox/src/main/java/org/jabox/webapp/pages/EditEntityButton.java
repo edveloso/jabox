@@ -73,8 +73,9 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 
 			@Override
 			protected void onSave(final User user) {
-				LOGGER.info("Edited User: " + user.getLogin());
+				LOGGER.info("Updated User: " + user.getLogin());
 				UserXstreamDao.persist(user);
+				getSession().info("User \"" + user.getLogin() + "\" Updated.");
 				setResponsePage(ManageUsers.class);
 			}
 		});

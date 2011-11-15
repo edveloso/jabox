@@ -79,6 +79,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 			@Override
 			protected void onSave(final Server server) {
 				ServerXstreamDao.persist(server.getDeployerConfig());
+				getSession().info("Server \"" + server.getName() + "\" Updated.");
 				setResponsePage(ManageServers.class);
 			}
 		});

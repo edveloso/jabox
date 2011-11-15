@@ -21,6 +21,7 @@ package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.jabox.apis.ConnectorConfig;
@@ -47,6 +48,12 @@ public class ManageServers extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	public ManageServers() {
+		// Add a FeedbackPanel for displaying form messages
+        // create feedback panel to show errors
+        final FeedbackPanel feedback = new FeedbackPanel("feedback");
+        feedback.setOutputMarkupId(true);
+        add(feedback);
+
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
 		form.add(createList("SCMs", SCMConnectorConfig.class));
