@@ -51,13 +51,11 @@ public final class StartContainerButton extends ImageButton {
 		this(id, item.getModelObject(), responsePage);
 	}
 
-
 	@Override
 	public void onSubmit() {
         LOGGER.info("Starting container: " + _item.getName());
 		_item.start();
-		getSession().info("Container \"" + _item.getName() + "\" Started.");
-		setResponsePage(_responsePage);
+		info("Container \"" + _item.getName() + "\" Started.");
 	}
 
 	@Override

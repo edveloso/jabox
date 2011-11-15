@@ -28,6 +28,7 @@ import org.jabox.model.User;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.pages.EditEntityButton;
 import org.jabox.webapp.pages.project.ManageProjects;
+import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +57,6 @@ public class UserList extends PropertyListView<User> {
 		listItem.add(new EditEntityButton<User>("edit", listItem
 				.getModelObject()));
 		listItem.add(new DeleteEntityButton<User>("delete", listItem,
-				ManageProjects.class));
+				ManageUsers.class));
 	}
 }

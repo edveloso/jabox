@@ -58,6 +58,6 @@ public final class StopContainerButton extends ImageButton {
 	public void onSubmit() {
         LOGGER.info("Stopping container: " + _item.getName());
 		_item.stop();
-		setResponsePage(_responsePage);
+		info("Container \"" + _item.getName() + "\" Stopped.");
 	}
 }
