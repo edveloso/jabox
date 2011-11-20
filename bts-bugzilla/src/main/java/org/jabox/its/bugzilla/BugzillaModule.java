@@ -9,7 +9,7 @@ import com.google.inject.multibindings.Multibinder;
 public class BugzillaModule implements Module {
 
 	@Override
-	public void configure(Binder binder) {
+	  public void configure(Binder binder) {
 		// binder.bind(ITSConnector.class).to(BugzillaRepository.class);
 		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
 				ITSConnector.class);

@@ -47,7 +47,9 @@ public class ManageProjects extends BasePage {
 
 		final List<Project> projects = ProjectXstreamDao.getProjects();
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+
 		form.add(new ProjectList("projects", projects));
+		form.add(new CreateProjectLink("createProject"));
 		add(form);
 	}
 }
