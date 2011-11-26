@@ -3,37 +3,36 @@
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
 	<profiles>
 		<profile>
-			<id>nexus</id>
+			<id>default</id>
 			<repositories>
 				<repository>
 					<id>central</id>
 					<name>Central Repository</name>
-					<url>http://localhost:8080/nexus/content/groups/public/</url>
+					<url>${repo.url}</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
 					<id>central</id>
 					<name>Central Repository</name>
-					<url>http://localhost:8080/nexus/content/groups/public/</url>
+					<url>${repo.url}</url>
 				</pluginRepository>
 			</pluginRepositories>
-
 		</profile>
 	</profiles>
 	<activeProfiles>
-		<activeProfile>nexus</activeProfile>
+		<activeProfile>default</activeProfile>
 	</activeProfiles>
 	<servers>
 		<server>
 			<id>snapshots</id>
-			<username>admin</username>
-			<password>admin123</password>
+			<username>${repo.username}</username>
+			<password>${repo.password}</password>
 		</server>
 		<server>
 			<id>releases</id>
-			<username>admin</username>
-			<password>admin123</password>
+			<username>${repo.username}</username>
+			<password>${repo.password}</password>
 		</server>
 	</servers>
 </settings>

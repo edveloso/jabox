@@ -19,6 +19,7 @@
  */
 package org.jabox.mrm.nexus;
 
+import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -32,6 +33,8 @@ public class NexusConnectorEditor extends Panel {
 	public NexusConnectorEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<Server>(model));
 		add(new TextField<String>("server.url").add(new UrlValidator()));
+		add(new TextField<String>("username").setRequired(true));
+		add(new PasswordTextField("password").setRequired(true));
 	}
 
 }

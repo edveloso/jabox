@@ -17,28 +17,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.mrm.nexus;
+package org.jabox.webapp.pages.project;
 
-import org.jabox.apis.rms.RMSConnectorConfig;
-import org.jabox.model.DeployerConfig;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
+import org.jabox.apis.Connector;
+import org.jabox.model.Server;
 
-public class NexusConnectorConfig extends DeployerConfig implements
-		RMSConnectorConfig {
-	private static final long serialVersionUID = 7792258345940117969L;
+public class CreateProjectLink extends Link<Void> {
+	private static final long serialVersionUID = -6076134805074401259L;
 
-	public String username;
+	private Class<? extends Connector> _class1;
 
-	public String password;
-
-	public NexusConnectorConfig() {
-		pluginId = NexusConnector.ID;
+	public CreateProjectLink(final String id) {
+		super(id);
+		_class1 = Connector.class;
 	}
 
-	public String getReleaseRepositoryURL() {
-		return getServer().getUrl() + "content/repositories/releases/";
+	public CreateProjectLink(final String id,
+			final Class<? extends Connector> class1) {
+		this(id);
+		_class1 = class1;
 	}
 
-	public String getSnapshotsRepositoryURL() {
-		return getServer().getUrl() + "content/repositories/snapshots/";
+	@Override
+	public void onClick() {
+		IModel<Server> model = new Model<Server>(new Server());
+		setResponsePage(new CreateProject());
 	}
 }
