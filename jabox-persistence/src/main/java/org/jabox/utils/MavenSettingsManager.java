@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.jabox.environment.Environment;
 import org.jabox.model.DefaultConfiguration;
 
@@ -29,13 +28,12 @@ public class MavenSettingsManager {
 
 	private static void writeCustomSettings(final File file) throws IOException {
 		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		
-		InputStream is = MavenSettingsManager.class.getResourceAsStream("settings.xml");
 
+		InputStream is = MavenSettingsManager.class.getResourceAsStream("settings.xml");
 		Map<String, String> values = new HashMap<String, String>();
-		values.put("${repo.url}", "http://localhost:8080/nexus/content/groups/public/");
-		values.put("${repo.username}", "admin");
-		values.put("${repo.password}", "admin123");
+		values.put("${repo.url}", dc.getRms().getRepositoryURL());
+		values.put("${repo.username}", dc.getRms().getUsername());
+		values.put("${repo.password}", dc.getRms().getPassword());
 		
 		String data = SettingsModifier.parseInputStream(is, values);
 		

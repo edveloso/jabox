@@ -26,9 +26,9 @@ public class NexusConnectorConfig extends DeployerConfig implements
 		RMSConnectorConfig {
 	private static final long serialVersionUID = 7792258345940117969L;
 
-	public String username;
+	private String username;
 
-	public String password;
+	private String password;
 
 	public NexusConnectorConfig() {
 		pluginId = NexusConnector.ID;
@@ -40,5 +40,20 @@ public class NexusConnectorConfig extends DeployerConfig implements
 
 	public String getSnapshotsRepositoryURL() {
 		return getServer().getUrl() + "content/repositories/snapshots/";
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getRepositoryURL() {
+		return getServer().getUrl() + "nexus/content/groups/public/";
 	}
 }

@@ -36,5 +36,4 @@ public class NexusConnectorEditor extends Panel {
 		add(new TextField<String>("username").setRequired(true));
 		add(new PasswordTextField("password").setRequired(true));
 	}
-
 }

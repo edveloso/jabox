@@ -26,6 +26,12 @@ public class ScpConnectorConfig extends DeployerConfig implements
 		RMSConnectorConfig {
 	private static final long serialVersionUID = -891223857972401214L;
 
+	private String username;
+
+	private String password;
+
+	private String repositoryURL;
+
 	private String absoluteReleaseRepositoryPath;
 
 	private String absoluteSnapshotRepositoryPath;
@@ -34,6 +40,15 @@ public class ScpConnectorConfig extends DeployerConfig implements
 		pluginId = ScpConnector.ID;
 	}
 
+	@Override
+	public String getRepositoryURL() {
+		return repositoryURL;
+	}
+
+	public void setRepositoryURL(String repositoryURL) {
+		this.repositoryURL = repositoryURL;
+	}
+	
 	public String getReleaseRepositoryURL() {
 		return "scp://" + getServer().getUrl()
 				+ getAbsoluteReleaseRepositoryPath();
@@ -61,4 +76,23 @@ public class ScpConnectorConfig extends DeployerConfig implements
 	public String getAbsoluteSnapshotRepositoryPath() {
 		return absoluteSnapshotRepositoryPath;
 	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

@@ -23,8 +23,14 @@ import org.jabox.apis.ConnectorConfig;
 
 public interface RMSConnectorConfig extends ConnectorConfig {
 
+	String getRepositoryURL();
+
 	String getReleaseRepositoryURL();
 
 	String getSnapshotsRepositoryURL();
+
+	String getUsername();
+
+	String getPassword();
 
 }
