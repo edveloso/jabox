@@ -21,14 +21,24 @@ package org.jabox.cis.hudson;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.codehaus.plexus.util.FileUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.maven.helper.MavenDownloader;
+import org.jabox.model.DefaultConfiguration;
+import org.jabox.utils.SettingsModifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HudsonServer extends AbstractEmbeddedServer {
+	private static final long serialVersionUID = 6348183433480294734L;
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(HudsonServer.class);
 
 	private static final String GROUP_ID = "org.jvnet.hudson.main";
 	private static final String ARTIFACT_ID = "hudson-war";
@@ -66,13 +76,20 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	}
 
 	private static void injectConfiguration(String resource) {
-		URL res = HudsonServer.class.getResource(resource);
 		File dest = new File(Environment.getHudsonHomeDir(), resource);
+
 		if (!dest.exists()) {
+			DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+			InputStream is = HudsonServer.class.getResourceAsStream(resource);
+
+			Map<String, String> values = new HashMap<String, String>();
+			values.put("${sonar.host.url}", dc.getCqm().getServer().getUrl());
+
 			try {
-				FileUtils.copyURLToFile(res, dest);
+				String data = SettingsModifier.parseInputStream(is, values);
+				FileUtils.writeStringToFile(dest, data);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.error("Error writting: " + dest.getAbsolutePath(), e);
 			}
 		}
 	}

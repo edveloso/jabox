@@ -4,7 +4,7 @@
     <hudson.plugins.sonar.SonarInstallation>
       <name>Sonar</name>
       <disabled>false</disabled>
-      <serverUrl>http://localhost:8080/sonar/</serverUrl>
+      <serverUrl>${sonar.host.url}</serverUrl>
       <serverPublicUrl></serverPublicUrl>
       <mojoVersion></mojoVersion>
       <databaseUrl></databaseUrl>
