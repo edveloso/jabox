@@ -35,6 +35,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
+import org.apache.wicket.validation.validator.PatternValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
@@ -83,7 +85,9 @@ public class CreateProject extends BasePage {
 				new ComponentFeedbackMessageFilter(name)));
 		form.add(name);
 		name.add(new CreateProjectValidator());
-
+		name.add(new PatternValidator("[a-z0-9-]*"));
+		name.add(new StringValidator.MaximumLengthValidator(24));
+		
 		// Description
 		RequiredTextField<Project> description = new RequiredTextField<Project>(
 				"description");
