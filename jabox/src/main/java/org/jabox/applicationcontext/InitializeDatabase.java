@@ -57,6 +57,8 @@ public class InitializeDatabase {
 		NexusConnectorConfig config = new NexusConnectorConfig();
 		config.setServer(new Server());
 		config.getServer().setName("Nexus");
+		config.setUsername("admin");
+		config.setPassword("admin123");
 		config.getServer().setDeployerConfig(config);
 		config.getServer().setUrl(
 				"http://" + LocalHostName.getLocalHostname() + ":9080/nexus/");

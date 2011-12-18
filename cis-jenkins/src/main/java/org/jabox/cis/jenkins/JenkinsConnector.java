@@ -21,7 +21,8 @@ package org.jabox.cis.jenkins;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
@@ -29,13 +30,13 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.environment.Environment;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.jabox.utils.SettingsModifier;
 import org.xml.sax.SAXException;
 
 /**
@@ -64,7 +65,8 @@ public class JenkinsConnector implements CISConnector {
 
 	/**
 	 * Implementation inspired by groovy code here:
-	 * http://wiki.jenkins-ci.org/display/JENKINS/Authenticating+scripted+clients
+	 * http://wiki.jenkins-ci.org/display
+	 * /JENKINS/Authenticating+scripted+clients
 	 * 
 	 */
 	public boolean addProject(final Project project, final CISConnectorConfig dc)
@@ -129,19 +131,17 @@ public class JenkinsConnector implements CISConnector {
 
 	private String parseInputStream(final InputStream is, final Project project)
 			throws IOException {
-		StringWriter writer = new StringWriter();
-		IOUtils.copy(is, writer);
-		String theString = writer.toString();
+		Map<String, String> values = new HashMap<String, String>();
 
-		String replace = theString.replace("${project.scmURL}", project
-				.getScmUrl());
-		replace = replace.replace("${project.issueURL}",
-				"http://localhost/redmine/");
-		replace = replace.replace("${goals}",
+		values.put("${project.scmURL}", project.getScmUrl());
+		values.put("${project.issueURL}", "http://localhost/redmine/");
+		values.put("${goals}",
 				"clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
 						+ passCustomSettingsXml());
-		replace = replace.replace("${project.name}", project.getName());
-		return replace;
+		values.put("${customSettingsXml}", passCustomSettingsXml());
+		values.put("${project.name}", project.getName());
+
+		return SettingsModifier.parseInputStream(is, values);
 	}
 
 	private String passCustomSettingsXml() {

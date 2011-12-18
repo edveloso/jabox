@@ -109,14 +109,15 @@ public class CreateProjectUtil implements ICreateProjectUtil {
 		File trunkDir = scm.createProjectDirectories(project, scmc);
 
 		// Create Project from template.
-		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
-				.getAbsolutePath());
+		MavenCreateProject.createProjectWithMavenCore(project,
+				trunkDir.getAbsolutePath());
 
 		RMSConnector rms = _manager.getRmsConnectorInstance(dc.getRms());
 
 		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 
 		// Set ScmUrl
+		project.setScmMavenPrefix(scmc.getScmMavenPrefix());
 		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
 				+ "/trunk/" + project.getName());
 
@@ -124,8 +125,8 @@ public class CreateProjectUtil implements ICreateProjectUtil {
 		try {
 			MavenConfigureSCM.injectScm(pomXml, dc.getScm(), project);
 			MavenConfigureCiManagement.injectCIS(pomXml, dc.getCis(), project);
-			MavenConfigureIssueManagement.injectIssueManagement(pomXml, dc
-					.getIts(), project);
+			MavenConfigureIssueManagement.injectIssueManagement(pomXml,
+					dc.getIts(), project);
 			MavenConfigureSourceEncoding.injectSourceEncoding(pomXml, project);
 			MavenConfigureSignArtifacts.injectSignArtifact(pomXml, project);
 
@@ -155,8 +156,8 @@ public class CreateProjectUtil implements ICreateProjectUtil {
 			its.addModule(project, config, project.getName(), "initial module",
 					"myemail@gmail.com");
 			its.addVersion(project, config, "0.0.1");
-			its.addRepository(project, config, scmc, scmc.getUsername(), scmc
-					.getPassword());
+			its.addRepository(project, config, scmc, scmc.getUsername(),
+					scmc.getPassword());
 		}
 
 		CISConnector cis = _manager.getCisConnectorInstance(dc.getCis());

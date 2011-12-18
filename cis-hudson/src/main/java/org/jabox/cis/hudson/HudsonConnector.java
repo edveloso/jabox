@@ -139,6 +139,7 @@ public class HudsonConnector implements CISConnector {
 		values.put("${goals}",
 				"clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
 						+ passCustomSettingsXml());
+		values.put("${customSettingsXml}", passCustomSettingsXml());
 		values.put("${project.name}", project.getName());
 
 		return SettingsModifier.parseInputStream(is, values);

@@ -56,4 +56,12 @@ public class NexusConnectorConfig extends DeployerConfig implements
 	public String getRepositoryURL() {
 		return getServer().getUrl() + "nexus/content/groups/public/";
 	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
