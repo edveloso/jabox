@@ -53,7 +53,7 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 		}
 
 		String name = item.getServer().getName();
-		if (_its != null && name.equals(_its.getId())) {
+		if (_its != null && name.equals(_its.getServer().getName())) {
 			return TRUE;
 		} else if (_cis != null && name.equals(_cis.getServer().getName())) {
 			return TRUE;
