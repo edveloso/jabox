@@ -44,7 +44,7 @@ public class EHudsonConnectorConfig extends HudsonConnectorConfig {
         super.setServer(server);
         if (server != null) {
             server.setUrl("http://" + LocalHostName.getLocalHostname()
-                + ":8080/hudson/");
+                + ":9080/hudson/");
         }
     }
 

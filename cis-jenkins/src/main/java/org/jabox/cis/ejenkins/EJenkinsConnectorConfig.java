@@ -44,7 +44,7 @@ public class EJenkinsConnectorConfig extends JenkinsConnectorConfig {
         super.setServer(server);
         if (server != null) {
             server.setUrl("http://" + LocalHostName.getLocalHostname()
-                + ":8080/jenkins/");
+                + ":9080/jenkins/");
         }
     }
 

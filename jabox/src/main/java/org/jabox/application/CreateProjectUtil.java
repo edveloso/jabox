@@ -38,7 +38,6 @@ import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
 import org.jabox.webapp.application.WicketApplication;
-import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNException;

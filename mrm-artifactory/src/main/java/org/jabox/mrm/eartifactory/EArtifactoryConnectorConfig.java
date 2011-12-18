@@ -48,7 +48,7 @@ public class EArtifactoryConnectorConfig extends DeployerConfig implements
         if (server != null) {
             // XXX make url dynamic for remote connections.
             server.setUrl("http://" + LocalHostName.getLocalHostname()
-                + ":8080/artifactory/");
+                + ":9080/artifactory/");
         }
     }
 

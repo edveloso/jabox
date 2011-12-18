@@ -191,7 +191,7 @@ public class Container extends BaseEntity implements Serializable {
 		configuration.setProperty(ServletPropertySet.PORT, port);
         configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
         configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
-        configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
+        configuration.setProperty(GeneralPropertySet.RMI_PORT, getRmiPort());
 
 		return configuration;
 	}
@@ -298,5 +298,13 @@ public class Container extends BaseEntity implements Serializable {
         InstalledLocalContainer container = getContainer(installer, configuration);
 
         container.stop();
+	}
+
+	public String getRmiPort() {
+		return rmiPort;
+	}
+
+	public void setRmiPort(String rmiPort) {
+		this.rmiPort = rmiPort;
 	}
 }
