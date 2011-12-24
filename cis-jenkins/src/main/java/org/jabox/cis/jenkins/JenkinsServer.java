@@ -98,6 +98,7 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 		defaultPlugins.add("claim:1.7");
 		defaultPlugins.add("ci-game:1.17");
 		defaultPlugins.add("sonar:1.6.1");
+		defaultPlugins.add("android-emulator:1.18");
 
 		return defaultPlugins;
 	}

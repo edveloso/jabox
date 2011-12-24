@@ -127,5 +127,12 @@ public class CreateProject extends BasePage {
 				"maven-archetype-site-simple", "1.1"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
 				"maven-archetype-webapp", "1.0"));
+		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
+				"android-quickstart", "1.0.6"));
+		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
+				"android-with-test", "1.0.6"));
+		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
+				"android-release", "1.0.6"));
+
 	}
 }
