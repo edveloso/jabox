@@ -27,11 +27,11 @@ public class TooltipModifier extends AttributeModifier {
 	private static final String TITLE = "title";
 
 	public TooltipModifier(final String tooltip) {
-		super(TITLE, true, new Model<String>(tooltip));
+		super(TITLE, new Model<String>(tooltip));
 	}
 
 	public TooltipModifier(final Model<String> tooltipModel) {
-		super(TITLE, true, tooltipModel);
+		super(TITLE, tooltipModel);
 	}
 
 	/**
