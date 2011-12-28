@@ -503,11 +503,10 @@ ul.menu li em {
 	color: #ffffff;
 }
 
-.button {
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	
+#col-left .button {
+	background: transparent url(images/button_bg.gif) no-repeat 0 0;
+	width: 75px;
+	height: 23px;
 }
 
 #mod_login_username,#mod_login_password {
@@ -602,7 +601,7 @@ dl.form dt {
 	background-color:#000;
 	border:1px solid #fff;
 	padding:10px 15px;
-	width:200px;
+	max-width:400px;
 	display:none;
 	color:#fff;
 	text-align:left;
