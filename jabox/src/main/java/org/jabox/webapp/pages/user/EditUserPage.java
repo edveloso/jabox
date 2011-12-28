@@ -52,15 +52,6 @@ public abstract class EditUserPage extends BasePage {
 		form.add(new RequiredTextField<Project>("firstName"));
 		form.add(new RequiredTextField<Project>("lastName"));
 		form.add(new PasswordTextField("password"));
-
-		form.add(new Link<Void>("cancel") {
-			private static final long serialVersionUID = -6975617962156076540L;
-
-			@Override
-			public void onClick() {
-				onCancel();
-			}
-		});
 	}
 
 	protected abstract void onSave(User article);

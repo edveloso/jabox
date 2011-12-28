@@ -49,15 +49,6 @@ public abstract class EditContainerPage extends BasePage {
 		form.add(new RequiredTextField<Container>("rmiPort"));
 		form.add(new RequiredTextField<Container>("ajpPort"));
 		form.add(new RequiredTextField<Container>("jvmArgs"));
-
-		form.add(new Link<Void>("cancel") {
-			private static final long serialVersionUID = -6975617962156076540L;
-
-			@Override
-			public void onClick() {
-				onCancel();
-			}
-		});
 	}
 
 	protected abstract void onSave(Container container);
