@@ -12,7 +12,7 @@ $("#myform :input").tooltip({
 	offset: [-2, 10],
 
 	// use the built-in fadeIn/fadeOut effect
-	effect: "toggle",
+	effect: "fade",
 
 	// custom opacity setting
 	opacity: 0.7

@@ -8,36 +8,46 @@
 	<div class="feedback" wicket:id="feedback">feedbackmessages will
 	be put here</div>
 
-	<form wicket:id="form">
+	<form id="myform" wicket:id="form">
 
-	<table>
-		<tr class="deployer">
-			<td><label for="login"><wicket:message key="login">login</wicket:message>:
-			</label></td>
-			<td><input wicket:id="login" type="text" size="10" /></td>
-		</tr>
-		<tr class="deployer">
-			<td><label for="firstName"><wicket:message
-				key="firstName">firstName</wicket:message>: </label></td>
-			<td><input wicket:id="firstName" type="text" size="10" /></td>
-		</tr>
-		<tr class="deployer">
-			<td><label for="lastName"><wicket:message key="lastName">lastName</wicket:message>:
-			</label></td>
-			<td><input wicket:id="lastName" type="text" size="10" /></td>
-		</tr>
-		<tr class="deployer">
-			<td><label for="password"><wicket:message key="password">Password</wicket:message>:
-			</label></td>
-			<td><input wicket:id="password" type="password" size="10" /></td>
-		</tr>
-
-		<tr>
-			<td><input type="submit" class="button" value="submit" /></td>
-			<td><input type="submit" class="button" value="cancel"
-				wicket:id="cancel" /></td>
-		</tr>
-	</table>
+	<div class="fields">
+		<dl class="form">
+			<dt>
+				<label><wicket:message key="login">login</wicket:message></label>
+			</dt>
+			<dd>
+				<input wicket:id="login" type="text" size="10" />
+			</dd>
+		</dl>
+		<dl class="form">
+			<dt>
+				<label><wicket:message key="firstName">firstName</wicket:message></label>
+			</dt>
+			<dd>
+				<input wicket:id="firstName" type="text" size="10" />
+			</dd>
+		</dl>
+		<dl class="form">
+			<dt>
+				<label><wicket:message key="lastName">lastName</wicket:message></label>
+			</dt>
+			<dd>
+				<input wicket:id="lastName" type="text" size="10" />
+			</dd>
+		</dl>
+		<dl class="form">
+			<dt>
+				<label><wicket:message key="password">Password</wicket:message></label>
+			</dt>
+			<dd>
+				<input wicket:id="password" type="password" size="10" />
+			</dd>
+		</dl>
+		<div class="rule"></div>
+		<div class="form-actions">
+			<button type="submit" class="button"><span>Update Information</span></button>
+		</div>
+	</div>
 	</form>
 </span>
 </body>

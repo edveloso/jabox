@@ -33,7 +33,7 @@ public abstract class BasePage extends WebPage {
 
 	public void renderHead(IHeaderResponse response) {
 		response.renderJavaScriptReference(new JavaScriptResourceReference(
-				BasePage.class, "js/jquery-1.2.6.min.js"));
+				BasePage.class, "js/jquery.tools.min.js"));
 		response.renderJavaScriptReference(new JavaScriptResourceReference(
 				BasePage.class, "js/tooltips.js"));
 		response.renderCSSReference(new PackageResourceReference(
