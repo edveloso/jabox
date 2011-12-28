@@ -8,23 +8,30 @@
 	<div class="feedback" wicket:id="feedback">feedbackmessages will
 	be put here</div>
 
-	<form wicket:id="form">
+	<form id="myform" wicket:id="form">
 
+	<div class="fields">
+		<dl class="form">
+			<dt>
+				<label>Server Name</label>
+			</dt>
+			<dd>
+				<input class="formInput" type="text" wicket:id="name" />
+			</dd>
+		</dl>
+	
 	<table>
-		<tr>
-			<td>Server Name:</td>
-			<td class="formTD"><input class="formInput" type="text"
-				wicket:id="name" /></td>
-		</tr>
 		<wicket:container wicket:id="configuration"></wicket:container>
-
-		<tr>
-			<td><input type="submit" class="button" value="submit" /></td>
-			<td><input type="submit" class="button" value="cancel"
-				wicket:id="cancel" /></td>
-		</tr>
-
 	</table>
+
+		<div class="rule"></div>
+		<div class="form-actions">
+			<button type="submit" class="button">
+				<span>Submit</span>
+			</button>
+		</div>
+	
+	</div>
 
 	</form>
 	<p />

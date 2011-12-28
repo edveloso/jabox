@@ -3,13 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
-<wicket:panel>
-	<tr>
-		<td><label for="picker">deployer</label></td>
-		<td><select id="deployer" wicket:id="picker"></select></td>
-	</tr>
+<div class="fields">
+	<wicket:panel>
+
+		<dl class="form">
+			<dt>
+				<label>Plugin</label>
+				<select id="deployer" wicket:id="picker"></select>
+			</dt>
+		</dl>
+
 	<wicket:container wicket:id="editor"></wicket:container>
 
-</wicket:panel>
+	</wicket:panel>
+</div>
 </body>
 </html>

@@ -76,15 +76,6 @@ public abstract class EditServerPage extends BasePage {
 		// "mavenArchetype"), connectors,
 		// new ChoiceRenderer<Connector>("toString", "toString"));
 		// form.add(ddc);
-
-		form.add(new Link<Void>("cancel") {
-			private static final long serialVersionUID = -6975617962156076540L;
-
-			@Override
-			public void onClick() {
-				onCancel();
-			}
-		});
 	}
 
 	protected abstract void onSave(Server article);
