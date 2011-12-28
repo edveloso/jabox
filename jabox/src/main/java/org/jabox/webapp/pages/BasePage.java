@@ -24,6 +24,7 @@ import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.border.Border;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.jabox.webapp.borders.JaboxBorder;
 
@@ -31,6 +32,10 @@ public abstract class BasePage extends WebPage {
 	private static final long serialVersionUID = 8165952253551263784L;
 
 	public void renderHead(IHeaderResponse response) {
+		response.renderJavaScriptReference(new JavaScriptResourceReference(
+				BasePage.class, "js/jquery-1.2.6.min.js"));
+		response.renderJavaScriptReference(new JavaScriptResourceReference(
+				BasePage.class, "js/tooltips.js"));
 		response.renderCSSReference(new PackageResourceReference(
 				BasePage.class, "css/wicket.css"));
 	}

@@ -22,18 +22,25 @@ package org.jabox.webapp.pages.project;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation;
+import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation.Alignment;
+import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation.Unit;
+import org.apache.wicket.extensions.markup.html.tree.table.IColumn;
+import org.apache.wicket.extensions.markup.html.tree.table.PropertyTreeColumn;
+import org.apache.wicket.extensions.markup.html.tree.table.TreeTable;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -51,6 +58,8 @@ public class CreateProject extends BasePage {
 	@Inject
 	private ICreateProjectUtil _createProjectUtil;
 
+	private TreeTable _tree;
+
 	public CreateProject() {
 		final Project _project = new Project();
 		MavenArchetype ma = new MavenArchetype("org.apache.wicket",
@@ -63,6 +72,14 @@ public class CreateProject extends BasePage {
 
 			@Override
 			protected void onSubmit() {
+				if (_tree.getTreeState().getSelectedNodes().size() == 0) {
+					error("Select an archetype first.");
+					return;
+				}
+				// Pass the MavenArchetype from TreeMap to Project
+				_project.setMavenArchetype((MavenArchetype)((DefaultMutableTreeNode) _tree
+						.getTreeState().getSelectedNodes().toArray()[0]).getUserObject());
+				
 				// We need to persist twice because the id is necessary for the
 				// creation of the project.
 				ProjectXstreamDao.persist(_project);
@@ -87,7 +104,7 @@ public class CreateProject extends BasePage {
 		name.add(new CreateProjectValidator());
 		name.add(new PatternValidator("[a-z0-9-]*"));
 		name.add(new StringValidator.MaximumLengthValidator(24));
-		
+
 		// Description
 		RequiredTextField<Project> description = new RequiredTextField<Project>(
 				"description");
@@ -97,26 +114,33 @@ public class CreateProject extends BasePage {
 
 		List<MavenArchetype> connectors = new ArrayList<MavenArchetype>();
 		connectors.add(ma);
-		fillArchetypes(connectors);
+		connectors = fillArchetypes(connectors);
 		System.out.println("connectors: " + ":" + connectors);
 
-		DropDownChoice<MavenArchetype> ddc = new DropDownChoice<MavenArchetype>(
-				"archetype", new PropertyModel<MavenArchetype>(_project,
-						"mavenArchetype"), connectors,
-				new ChoiceRenderer<MavenArchetype>("toString", "toString"));
 		form.add(new TextField<Project>("sourceEncoding"));
 		form.add(new CheckBox("signArtifactReleases"));
-		form.add(ddc);
 
-		// Tooltips
-		form.add(new InfoImage("name.tooltip", ""));
-		form.add(new InfoImage("description.tooltip", ""));
-		form.add(new InfoImage("sourceEncoding.tooltip", ""));
-		form.add(new InfoImage("archetype.tooltip", ""));
-		form.add(new InfoImage("signArtifactReleases.tooltip", ""));
+		IColumn columns[] = new IColumn[] {
+				new PropertyTreeColumn<String>(new ColumnLocation(
+						Alignment.LEFT, 20, Unit.EM), "groupId",
+						"userObject.archetypeGroupId"),
+				new PropertyTreeColumn<String>(new ColumnLocation(
+						Alignment.LEFT, 20, Unit.EM), "artifactId",
+						"userObject.archetypeArtifactId"),
+				new PropertyTreeColumn<String>(new ColumnLocation(
+						Alignment.LEFT, 20, Unit.EM), "version",
+						"userObject.archetypeVersion"), };
+
+		_tree = new TreeTable("treeTable",
+				convertToTreeModel(connectors), columns);
+		_tree.getTreeState().setAllowSelectMultiple(false);
+		_tree.setRootLess(true);
+		form.add(_tree);
+		_tree.getTreeState().expandAll();
 	}
 
-	private void fillArchetypes(final List<MavenArchetype> connectors) {
+	private List<MavenArchetype> fillArchetypes(
+			final List<MavenArchetype> connectors) {
 		connectors.add(new MavenArchetype("org.apache.wicket",
 				"wicket-archetype-quickstart", "1.4.12"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
@@ -133,6 +157,21 @@ public class CreateProject extends BasePage {
 				"android-with-test", "1.0.6"));
 		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
 				"android-release", "1.0.6"));
+		return connectors;
+	}
+	
+	
+	public static TreeModel convertToTreeModel(List<MavenArchetype> connectors) {
+		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
+		addToTreeModel(rootNode, connectors);
+		TreeModel model = new DefaultTreeModel(rootNode);
+		return model;
+	}
 
+	private static void addToTreeModel(DefaultMutableTreeNode parent,
+			List<MavenArchetype> connectors) {
+		for (MavenArchetype obj : connectors) {
+			parent.add(new DefaultMutableTreeNode(obj));
+		}
 	}
 }

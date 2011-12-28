@@ -503,10 +503,11 @@ ul.menu li em {
 	color: #ffffff;
 }
 
-#col-left .button {
-	background: transparent url(images/button_bg.gif) no-repeat 0 0;
-	width: 75px;
-	height: 23px;
+.button {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	
 }
 
 #mod_login_username,#mod_login_password {
@@ -580,3 +581,35 @@ td.dataviewTd,table.dataviewTable td.dataviewTd {
 	margin: 0;
 	padding: 0;
 }
+
+
+/*     Tree table     */ 
+div.wicket-tree-table div.header {
+		color: #000000;
+}
+
+/* Form Fields */
+
+dl.form dt {
+	font-size: 14px;
+		padding: 10px 0px 2px 0px;
+	
+	font-weight: bold;
+}
+
+
+.tooltip {
+	background-color:#000;
+	border:1px solid #fff;
+	padding:10px 15px;
+	width:200px;
+	display:none;
+	color:#fff;
+	text-align:left;
+	font-size:12px;
+
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+}
+
