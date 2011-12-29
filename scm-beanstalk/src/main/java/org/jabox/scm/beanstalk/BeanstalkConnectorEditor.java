@@ -40,8 +40,6 @@ public class BeanstalkConnectorEditor extends Panel {
 		TextField<String> projectName = new TextField<String>("projectName");
 		PasswordTextField password = new PasswordTextField("password");
 
-		add(new InfoImage("server.url.tooltip", ""));
-		add(new InfoImage("projectName.tooltip", ""));
 		add(username.setRequired(true));
 		add(projectName.setRequired(true));
 		add(password.setRequired(true));
