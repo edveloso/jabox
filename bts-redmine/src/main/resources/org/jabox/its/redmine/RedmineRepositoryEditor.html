@@ -4,8 +4,16 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <div class="fields">
-	<wicket:panel>
+<wicket:panel>
 
+
+	<div class="info-box">
+		<p>Integration with <a href="http://www.redmine.org/">Redmine</a></p>
+		<p>The URL should point to your Redmine instance (e.g. <code>http://myserver/redmine/</code> )</p>
+		<p>Provide the credentials that Jabox will use to create new projects.</p>
+		<p>When generating a new project, Jabox will add the project to redmine, add the initial version, and optionally add repository configuration.</p>
+		<p><small><a href="https://github.com/jabox/jabox/wiki/Redmine-plugin/">more details</a></small>
+	</div>
 		<dl class="form">
 			<dt>
 				<label><wicket:message key="server.url">URL</wicket:message></label>
