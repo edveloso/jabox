@@ -3,23 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
+<div class="fields">
+
 <wicket:panel>
-	<tr class="deployer">
-		<td><label for="server.url">Host Name: </label></td>
-		<td><input wicket:id="server.url" type="text" size="30" /></td>
-	</tr>
-	<tr class="deployer">
-		<td><label for="absoluteReleaseRepositoryPath">Absolute
-		Release Repository Path: </label></td>
-		<td><input wicket:id="absoluteReleaseRepositoryPath" type="text"
-			size="30" /></td>
-	</tr>
-	<tr class="deployer">
-		<td><label for="absoluteSnapshotRepositoryPath">Absolute
-		Snasphot Repository Path: </label></td>
-		<td><input wicket:id="absoluteSnapshotRepositoryPath" type="text"
-			size="30" /></td>
-	</tr>
+	<dl class="form">
+		<dt>
+			<label>Host Name</label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="server.url" type="text"/>
+		</dd>
+	</dl>
+	<dl class="form">
+		<dt>
+			<label>Absolute Release Repository Path</label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="absoluteReleaseRepositoryPath" type="text"/>
+		</dd>
+	</dl>
+	<dl class="form">
+		<dt>
+			<label>Absolute Snasphot Repository Path</label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="absoluteSnapshotRepositoryPath" type="text"/>
+		</dd>
+	</dl>
 </wicket:panel>
+
+</div>
 </body>
 </html>

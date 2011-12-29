@@ -3,11 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
+<div class="fields">
+
 <wicket:panel>
-	<tr class="deployer">
-		<td><label for="server.url">URL: </label></td>
-		<td><input wicket:id="server.url" type="text" size="30" /></td>
-	</tr>
+
+	<dl class="form">
+		<dt>
+			<label>URL</label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="server.url" type="text"/>
+		</dd>
+	</dl>
+
 </wicket:panel>
+</div>
 </body>
 </html>

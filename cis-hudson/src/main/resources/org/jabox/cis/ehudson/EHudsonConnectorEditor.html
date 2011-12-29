@@ -3,15 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
+<div class="fields">
+
 <wicket:panel>
-	<tr class="deployer">
-		<td><label for="username"><wicket:message key="username">Username</wicket:message>: </label></td>
-		<td><input wicket:id="username" type="text" size="10" /></td>
-	</tr>
-	<tr class="deployer">
-		<td><label for="password"><wicket:message key="password">Password</wicket:message>: </label></td>
-		<td><input wicket:id="password" type="password" size="10" /></td>
-	</tr>
+	<dl class="form">
+		<dt>
+			<label><wicket:message key="username">Username</wicket:message></label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="username" type="text"/>
+		</dd>
+	</dl>
+	<dl class="form">
+		<dt>
+			<label><wicket:message key="password">Password</wicket:message></label>
+		</dt>
+		<dd>
+			<input class="formInput" wicket:id="password" type="password"/>
+		</dd>
+	</dl>
 </wicket:panel>
+
+</div>
 </body>
 </html>
