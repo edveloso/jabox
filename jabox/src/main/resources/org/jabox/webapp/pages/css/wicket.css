@@ -611,3 +611,24 @@ dl.form dt {
 	-webkit-box-shadow:0 0 10px #000;
 }
 
+.info-box {
+margin-top:40px;
+border:1px dashed #9dbfd4;
+border-radius:3px;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+color:#10486d;
+padding:15px 20px 20px 35px;
+}
+
+.info-box h5 {
+color:#10486d;
+margin:0 0 15px;
+}
+
+.info-box p {
+font-size:16px;
+line-height:22px;
+color:#10486d;
+margin-bottom:0;
+}

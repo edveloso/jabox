@@ -6,6 +6,13 @@
 <div class="fields">
 
 <wicket:panel>
+	<div class="info-box">
+		<p>Integration with <a href="http://subversion.tigris.org/">Subversion</a></p>
+		<p>The URL should point to your SVN repository (e.g. <code>http://myserver/svn/</code>, <code>svn://myserver/</code>, <code>file:///mysubversion/repodir/</code> )</p>
+		<p>Provide the credentials that Jabox will use to do the initial commit of the new projects.</p>
+		<p>The same credentials are also delegated to other services (Continuous Integration for releases, Issue Tracker for repository viewing etc.)</p>
+		<p><small><a href="https://github.com/jabox/jabox/wiki/Subversion-plugin/">more details</a></small>
+	</div>
 	<dl class="form">
 		<dt>
 			<label><wicket:message key="server.url">URL</wicket:message></label>
