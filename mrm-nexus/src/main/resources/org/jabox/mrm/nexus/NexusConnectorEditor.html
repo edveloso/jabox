@@ -9,9 +9,9 @@
 	<div class="info-box">
 		<p>Integration with <a href="http://nexus.sonatype.org/">Nexus</a></p>
 		<p>The URL should point to your Nexus instance (e.g. <code>http://myserver/nexus/</code> )</p>
-		<p>Provide the credentials that Jabox will use to authenticate.</p>
-		<p>When generating a new project, Jabox will add the project to redmine, add the initial version, and optionally add repository configuration.</p>
-		<p><small><a href="https://github.com/jabox/jabox/wiki/Redmine-plugin/">more details</a></small>
+		<p>Provide the credentials that Jabox will use to setup release process (a maven settings.xml under <code>$HOME/.jabox/.m2/settings.xml</code>)</p>
+		<p>When generating a new project, Jabox will configure project distribution management (releases & snapshots) to upload binaries to this repository.</p>
+		<p>Continuous Integration will be configured by Jabox to use the specific settings.xml during build/release processes.
 	</div>
 
 	<dl class="form">

@@ -4,7 +4,15 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <div class="fields">
+
 <wicket:panel>
+	<div class="info-box">
+		<p>Integration with <a href="https://github.com/">GitHub</a></p>
+		<p>Make sure you have Git installed and a user configured properly.</p>
+		<p>A Git repository is generated automatically for each new project.</p>
+		<p>Provide the credentials that Jabox will use to do the repository generation and the initial commit of the new projects.</p>
+		<p>The same credentials are also delegated to other services (Continuous Integration for releases, Issue Tracker for repository viewing etc.)</p>
+	</div>
 	<dl class="form">
 		<dt>
 			<label><wicket:message key="username">Username</wicket:message></label>
@@ -21,12 +29,8 @@
 			<input class="formInput" wicket:id="password" type="password"/>
 		</dd>
 	</dl>
-
-	<tr class="deployer">
-		<td><label for="password">: </label></td>
-		<td></td>
-	</tr>
 </wicket:panel>
+
 </div>
 </body>
 </html>
