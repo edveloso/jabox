@@ -19,17 +19,12 @@
  */
 package org.jabox.webapp.pages.user;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormValidatingBehavior;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.util.time.Duration;
 import org.jabox.model.Project;
 import org.jabox.model.User;
 import org.jabox.webapp.pages.BasePage;
@@ -39,7 +34,7 @@ import org.jabox.webapp.validation.ShinyForm;
 public abstract class EditUserPage extends BasePage {
 
 	public EditUserPage(final IModel<User> user) {
-		Form<User> form = new ShinyForm("form",
+		Form<User> form = new ShinyForm<User>("form",
 				new CompoundPropertyModel<User>(user.getObject())) {
 			private static final long serialVersionUID = -8262391690702864764L;
 
@@ -48,7 +43,6 @@ public abstract class EditUserPage extends BasePage {
 				onSave(getModelObject());
 			}
 		};
-		form.setOutputMarkupId(true);
 
 		add(form);
 

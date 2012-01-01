@@ -594,8 +594,11 @@ div.wicket-tree-table div.header {
 dl.form dt {
 	font-size: 14px;
 		padding: 10px 0px 2px 0px;
-	
 	font-weight: bold;
+}
+
+dl.form dd {
+	min-height: 38px;
 }
 
 

@@ -5,7 +5,7 @@
 <body>
 <span wicket:id="border">
 	<h2>Edit User</h2>
-	<form wicket:id="form">
+	<form id="myform" wicket:id="form">
 
 	<div class="fields">
 		<dl class="form">
@@ -13,7 +13,7 @@
 				<label><wicket:message key="login">login</wicket:message></label>
 			</dt>
 			<dd>
-				<input class="formInput" wicket:id="login"/>
+				<input class="formInput" wicket:id="login" wicket:message="title:login.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -21,7 +21,7 @@
 				<label><wicket:message key="firstName">firstName</wicket:message></label>
 			</dt>
 			<dd>
-				<input class="formInput" wicket:id="firstName"/>
+				<input class="formInput" wicket:id="firstName" wicket:message="title:firstName.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -29,7 +29,7 @@
 				<label><wicket:message key="lastName">lastName</wicket:message></label>
 			</dt>
 			<dd>
-				<input class="formInput" wicket:id="lastName"/>
+				<input class="formInput" wicket:id="lastName" wicket:message="title:lastName.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -37,7 +37,7 @@
 				<label><wicket:message key="password">Password</wicket:message></label>
 			</dt>
 			<dd>
-				<input class="formInput" wicket:id="password" type="password"/>
+				<input class="formInput" wicket:id="password" type="password" wicket:message="title:password.tooltip"/>
 			</dd>
 		</dl>
 		<div class="rule"></div>

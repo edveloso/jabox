@@ -21,7 +21,6 @@ package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.Connector;
@@ -29,14 +28,14 @@ import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.pages.DeployerPluginSelector;
+import org.jabox.webapp.validation.ShinyForm;
 
 public abstract class EditServerPage extends BasePage {
 	private static final long serialVersionUID = -5076249191943115296L;
 
 	public EditServerPage(final IModel<Server> server,
 			final Class<? extends Connector> connectorClass) {
-		add(new FeedbackPanel("feedback"));
-		Form<Server> form = new Form<Server>("form",
+		Form<Server> form = new ShinyForm<Server>("form",
 				new CompoundPropertyModel<Server>(server.getObject())) {
 			private static final long serialVersionUID = -8262391690705860769L;
 

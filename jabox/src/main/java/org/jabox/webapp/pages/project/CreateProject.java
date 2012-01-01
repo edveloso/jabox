@@ -52,6 +52,7 @@ import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.validation.ShinyForm;
 
 import com.google.inject.Inject;
 
@@ -71,7 +72,7 @@ public class CreateProject extends BasePage {
 		_project.setMavenArchetype(ma);
 
 		// Add a form with an onSumbit implementation that sets a message
-		Form<Project> form = new Form<Project>("form") {
+		Form<Project> form = new ShinyForm<Project>("form") {
 			private static final long serialVersionUID = -662744155604166387L;
 
 			@Override
@@ -94,17 +95,15 @@ public class CreateProject extends BasePage {
 			}
 		};
 
+		form.setModel(new CompoundPropertyModel<Project>(_project));
+		add(form);
+
 		// Add a FeedbackPanel for displaying form messages
 		add(new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter(
 				form)));
 
-		form.setModel(new CompoundPropertyModel<Project>(_project));
-		add(form);
-
 		// Name
 		FormComponent<String> name = new RequiredTextField<String>("name");
-		form.add(new FeedbackPanel("nameFeedback",
-				new ComponentFeedbackMessageFilter(name)));
 		form.add(name);
 		name.add(new CreateProjectValidator());
 		name.add(new PatternValidator("[a-z0-9-]*"));
@@ -113,8 +112,6 @@ public class CreateProject extends BasePage {
 		// Description
 		RequiredTextField<Project> description = new RequiredTextField<Project>(
 				"description");
-		form.add(new FeedbackPanel("descriptionFeedback",
-				new ComponentFeedbackMessageFilter(description)));
 		form.add(description);
 
 		List<MavenArchetype> connectors = new ArrayList<MavenArchetype>();

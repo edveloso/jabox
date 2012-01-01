@@ -7,9 +7,11 @@ import org.apache.wicket.markup.html.form.FormComponent;
 
 public class ErrorHighlightBehavior extends AbstractBehavior {
 	public void onComponentTag(Component c, ComponentTag tag) {
-		FormComponent fc = (FormComponent) c;
-		if (!fc.isValid()) {
-			tag.append("class", " ", " error");
+		if (FormComponent.class.isInstance(c)) {
+			FormComponent fc = (FormComponent) c;
+			if (!fc.isValid()) {
+				tag.append("class", " ", " error");
+			}
 		}
 	}
 }

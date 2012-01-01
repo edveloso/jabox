@@ -21,18 +21,17 @@ package org.jabox.webapp.pages.container;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Container;
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.validation.ShinyForm;
 
 public abstract class EditContainerPage extends BasePage {
 
 	public EditContainerPage(final IModel<Container> user) {
-		add(new FeedbackPanel("feedback"));
-		Form<Container> form = new Form<Container>("form",
+		Form<Container> form = new ShinyForm<Container>("form",
 				new CompoundPropertyModel<Container>(user.getObject())) {
 			private static final long serialVersionUID = -8262391690702864764L;
 
