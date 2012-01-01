@@ -66,8 +66,8 @@ public class CreateProject extends BasePage {
 
 	public CreateProject() {
 		final Project _project = new Project();
-		MavenArchetype ma = new MavenArchetype("org.apache.wicket",
-				"wicket-archetype-quickstart", "1.3.3");
+		MavenArchetype ma = new MavenArchetype("org.apache.maven.archetypes",
+				"maven-archetype-webapp", "LATEST");
 		_project.setMavenArchetype(ma);
 
 		// Add a form with an onSumbit implementation that sets a message
@@ -127,10 +127,10 @@ public class CreateProject extends BasePage {
 
 		IColumn columns[] = new IColumn[] {
 				new PropertyTreeColumn<String>(new ColumnLocation(
-						Alignment.LEFT, 20, Unit.EM), "groupId",
+						Alignment.LEFT, 30, Unit.EM), "groupId",
 						"userObject.archetypeGroupId"),
 				new PropertyTreeColumn<String>(new ColumnLocation(
-						Alignment.LEFT, 20, Unit.EM), "artifactId",
+						Alignment.LEFT, 30, Unit.EM), "artifactId",
 						"userObject.archetypeArtifactId"),
 				new PropertyTreeColumn<String>(new ColumnLocation(
 						Alignment.LEFT, 20, Unit.EM), "version",
