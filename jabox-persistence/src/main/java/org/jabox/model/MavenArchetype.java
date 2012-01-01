@@ -40,6 +40,24 @@ public class MavenArchetype extends BaseEntity implements Serializable {
 		_version = version;
 	}
 
+	/**
+	 * Construct a maven archetype with the following format:
+	 * 
+	 * groupId:artifactId:version
+	 * 
+	 * @param line
+	 */
+	public MavenArchetype(String line) {
+		String[] str = line.split(":");
+		if (str.length != 3) {
+			throw new NullPointerException();
+		}
+
+		_groupId = str[0];
+		_artifactId = str[1];
+		_version = str[2];
+	}
+
 	public String getArchetypeGroupId() {
 		return _groupId;
 	}

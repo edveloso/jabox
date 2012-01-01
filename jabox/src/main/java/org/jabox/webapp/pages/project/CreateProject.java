@@ -19,6 +19,10 @@
  */
 package org.jabox.webapp.pages.project;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,13 +51,13 @@ import org.apache.wicket.validation.validator.StringValidator;
 import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
-import org.jabox.webapp.menubuttons.InfoImage;
 import org.jabox.webapp.pages.BasePage;
 
 import com.google.inject.Inject;
 
 @AuthorizeInstantiation("ADMIN")
 public class CreateProject extends BasePage {
+	private static final long serialVersionUID = -6051173629887691918L;
 
 	@Inject
 	private ICreateProjectUtil _createProjectUtil;
@@ -77,9 +81,10 @@ public class CreateProject extends BasePage {
 					return;
 				}
 				// Pass the MavenArchetype from TreeMap to Project
-				_project.setMavenArchetype((MavenArchetype)((DefaultMutableTreeNode) _tree
-						.getTreeState().getSelectedNodes().toArray()[0]).getUserObject());
-				
+				_project.setMavenArchetype((MavenArchetype) ((DefaultMutableTreeNode) _tree
+						.getTreeState().getSelectedNodes().toArray()[0])
+						.getUserObject());
+
 				// We need to persist twice because the id is necessary for the
 				// creation of the project.
 				ProjectXstreamDao.persist(_project);
@@ -131,8 +136,8 @@ public class CreateProject extends BasePage {
 						Alignment.LEFT, 20, Unit.EM), "version",
 						"userObject.archetypeVersion"), };
 
-		_tree = new TreeTable("treeTable",
-				convertToTreeModel(connectors), columns);
+		_tree = new TreeTable("treeTable", convertToTreeModel(connectors),
+				columns);
 		_tree.getTreeState().setAllowSelectMultiple(false);
 		_tree.setRootLess(true);
 		form.add(_tree);
@@ -141,26 +146,21 @@ public class CreateProject extends BasePage {
 
 	private List<MavenArchetype> fillArchetypes(
 			final List<MavenArchetype> connectors) {
-		connectors.add(new MavenArchetype("org.apache.wicket",
-				"wicket-archetype-quickstart", "1.4.12"));
-		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-quickstart", "1.1"));
-		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-site", "1.1"));
-		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-site-simple", "1.1"));
-		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-webapp", "1.0"));
-		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
-				"android-quickstart", "1.0.6"));
-		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
-				"android-with-test", "1.0.6"));
-		connectors.add(new MavenArchetype("de.akquinet.android.archetypes",
-				"android-release", "1.0.6"));
+		InputStream is = CreateProject.class
+				.getResourceAsStream("archetypes.csv");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		String thisLine;
+		try {
+			while ((thisLine = reader.readLine()) != null) {
+				connectors.add(new MavenArchetype(thisLine));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return connectors;
 	}
-	
-	
+
 	public static TreeModel convertToTreeModel(List<MavenArchetype> connectors) {
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
 		addToTreeModel(rootNode, connectors);

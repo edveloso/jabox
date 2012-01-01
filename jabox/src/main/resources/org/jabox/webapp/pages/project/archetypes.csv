@@ -1,0 +1,8 @@
+org.apache.wicket:wicket-archetype-quickstart:1.4.12
+org.apache.maven.archetypes:maven-archetype-quickstart:1.1
+org.apache.maven.archetypes:maven-archetype-site:1.1
+org.apache.maven.archetypes:maven-archetype-site-simple:1.1
+org.apache.maven.archetypes:maven-archetype-webapp:1.0
+de.akquinet.android.archetypes:android-quickstart:1.0.6
+de.akquinet.android.archetypes:android-with-test:1.0.6
+de.akquinet.android.archetypes:android-release:1.0.6
