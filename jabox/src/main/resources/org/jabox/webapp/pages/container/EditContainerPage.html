@@ -9,6 +9,13 @@
 
 	<form id="myform" wicket:id="form">
 
+	<div class="info-box">
+		<p>The Container is a cargo installation orchestrated by Jabox.
+		It downloads automatically the Application Server (Tomcat by default), and then consequently downloads and installs Jenkins with some predefined plugins, Nexus and Sonar with some predefined plugins.</p>
+		<p>The configuration of the Containers is located at <code>$HOME/.jabox/config/containers/</code> where the specific versions of the applications and their plugins can be updated.</p>
+		<p>Once the Container is started the deployment is taking place at <code>$HOME/.jabox/cargo/CONTAINER_NAME/</code></p>
+		<p>The logs of the container are located at <code>$HOME/.jabox/cargo/CONTAINER_NAME.log</code></p>
+	</div>
 	<div class="fields">
 		<dl class="form">
 			<dt>
