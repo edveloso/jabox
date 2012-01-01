@@ -352,6 +352,9 @@ body {
 	background: #FFFFFF;
 }
 
+.validationMsg {
+ color: red;
+}
 #border {
 	padding-left: 8px;
 	padding-top: 25px;
