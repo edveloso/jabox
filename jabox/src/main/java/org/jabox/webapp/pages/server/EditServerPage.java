@@ -21,7 +21,6 @@ package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -32,6 +31,7 @@ import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.pages.DeployerPluginSelector;
 
 public abstract class EditServerPage extends BasePage {
+	private static final long serialVersionUID = -5076249191943115296L;
 
 	public EditServerPage(final IModel<Server> server,
 			final Class<? extends Connector> connectorClass) {
@@ -48,34 +48,14 @@ public abstract class EditServerPage extends BasePage {
 
 		add(form);
 
-		// form.add(new TextField<String>("title"));
-		// form.add(new TextArea<String>("content"));
-		// form.add(new DeployerPluginSelector("deployer", server));
-		// XXX
-		// server.setDeployerConfig(DeployernewConfig);
-
 		CompoundPropertyModel<Server> model = new CompoundPropertyModel<Server>(
 				server);
-		// form.setModel(model);
-		// add(form);
 
 		form.add(new RequiredTextField<Project>("name"));
 
 		DeployerPluginSelector child = new DeployerPluginSelector(
 				"configuration", model, connectorClass);
 		form.add(child);
-
-		// Connector plugin = registry.getEntries().get(0);
-		// server.getObject().setDeployerConfig(plugin.newConfig());
-
-		// child.replace(plugin.newEditor("editor", new PropertyModel(
-		// server, "deployerConfig")));
-
-		// DropDownChoice<Connector> ddc = new DropDownChoice<Connector>(
-		// "connectorType", new PropertyModel<Connector>(server,
-		// "mavenArchetype"), connectors,
-		// new ChoiceRenderer<Connector>("toString", "toString"));
-		// form.add(ddc);
 	}
 
 	protected abstract void onSave(Server article);
