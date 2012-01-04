@@ -23,8 +23,10 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.webapp.pages.TabPage;
+import org.jabox.webapp.panels.HeaderLinksPage;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
 /**
@@ -34,12 +36,20 @@ import org.jabox.webapp.panels.HeaderLinksPanel;
 public class ScmPage extends TabPage {
 
 	public ScmPage() {
+		// Configure Header URL
+		PageParameters params = new PageParameters();
+		params.add("selected", HeaderLinksPanel.SCM);
+		CharSequence header = urlFor(HeaderLinksPage.class, params);
+		WebMarkupContainer wmc2 = new WebMarkupContainer("header");
+		wmc2.add(new AttributeModifier("src", new Model<String>(header
+				.toString())));
+		add(wmc2);
+
+		// Configure Main body URL
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 		String url = dc.getScm().getServer().getUrl();
-		WebMarkupContainer wmc = new WebMarkupContainer("iframe");
+		WebMarkupContainer wmc = new WebMarkupContainer("frame");
 		wmc.add(new AttributeModifier("src", new Model<String>(url)));
 		add(wmc);
-
-		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.SCM));
 	}
 }

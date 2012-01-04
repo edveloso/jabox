@@ -31,7 +31,7 @@ import org.apache.wicket.model.Model;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 public class TabsList extends PropertyListView<Tab> {
-
+	String _target;
 	/**
 	 * 
 	 */
@@ -41,19 +41,34 @@ public class TabsList extends PropertyListView<Tab> {
 		super(id, projects);
 	}
 
+	public TabsList(final String id, final List<Tab> projects,
+			final String target) {
+		super(id, projects);
+		_target = target;
+	}
+
 	@Override
 	public void populateItem(final ListItem<Tab> listItem) {
 		final Tab tab = listItem.getModelObject();
 
+		// Select the link
 		if (tab.isSelected()) {
 			listItem.add(new AttributeModifier("class", new Model<String>(
 					"selected")));
 		}
+		
+		
 		listItem.add(new TooltipModifier(tab.getTooltip()));
 
 		BookmarkablePageLink<WebPage> externalLink = new BookmarkablePageLink<WebPage>(
 				"url", tab.getPageClass());
 		externalLink.add(new Label("title", tab.getTitle()));
+
+		// Add target to the link
+		if (_target != null) {
+			externalLink.add(new AttributeModifier("target", new Model<String>(
+					_target)));
+		}
 
 		listItem.add(externalLink);
 	}

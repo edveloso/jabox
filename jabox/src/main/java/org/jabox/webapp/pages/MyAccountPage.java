@@ -23,8 +23,6 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -32,14 +30,14 @@ import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.Project;
 import org.jabox.model.User;
 import org.jabox.webapp.pages.user.ManageUsers;
+import org.jabox.webapp.validation.ShinyForm;
 
 @AuthorizeInstantiation("ADMIN")
 public class MyAccountPage extends BasePage {
 
 	public MyAccountPage() {
 		IModel<User> user = getUser();
-		add(new FeedbackPanel("feedback"));
-		Form<User> form = new Form<User>("form",
+		Form<User> form = new ShinyForm<User>("form",
 				new CompoundPropertyModel<User>(user.getObject())) {
 			private static final long serialVersionUID = -8262391690702864764L;
 

@@ -36,6 +36,7 @@ import org.jabox.webapp.pages.server.EditServerPage;
 import org.jabox.webapp.pages.server.ManageServers;
 import org.jabox.webapp.pages.user.EditUserPage;
 import org.jabox.webapp.pages.user.ManageUsers;
+import org.jabox.webapp.panels.HeaderLinksPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +61,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	@Override
 	public void init() {
 		super.init();
+		mountPage("/tabs/", HeaderLinksPage.class);
 		mountPage("/users/", ManageUsers.class);
 		mountPage("/users/me", MyAccountPage.class);
 		mountPage("/users/edit", EditUserPage.class);

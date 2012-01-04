@@ -5,8 +5,6 @@
 <body>
 <span wicket:id="border">
 	<h2>My Account</h2>
-	<div class="feedback" wicket:id="feedback">feedbackmessages will
-	be put here</div>
 
 	<form id="myform" wicket:id="form">
 
@@ -16,7 +14,7 @@
 				<label><wicket:message key="login">login</wicket:message></label>
 			</dt>
 			<dd>
-				<input wicket:id="login" type="text" size="10" />
+				<input class="formInput" wicket:id="login" wicket:message="title:login.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -24,7 +22,7 @@
 				<label><wicket:message key="firstName">firstName</wicket:message></label>
 			</dt>
 			<dd>
-				<input wicket:id="firstName" type="text" size="10" />
+				<input class="formInput" wicket:id="firstName" wicket:message="title:firstName.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -32,7 +30,7 @@
 				<label><wicket:message key="lastName">lastName</wicket:message></label>
 			</dt>
 			<dd>
-				<input wicket:id="lastName" type="text" size="10" />
+				<input class="formInput" wicket:id="lastName" wicket:message="title:lastName.tooltip"/>
 			</dd>
 		</dl>
 		<dl class="form">
@@ -40,7 +38,7 @@
 				<label><wicket:message key="password">Password</wicket:message></label>
 			</dt>
 			<dd>
-				<input wicket:id="password" type="password" size="10" />
+				<input class="formInput" wicket:id="password" type="password" wicket:message="title:password.tooltip"/>
 			</dd>
 		</dl>
 		<div class="rule"></div>
