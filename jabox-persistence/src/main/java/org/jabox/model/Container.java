@@ -71,7 +71,7 @@ public class Container extends BaseEntity implements Serializable {
 
 	private String type = "tomcat6x";
 
-	private String version = "6.0.33";
+	private String version = "6.0.35";
 
 	private static String[] DEFAULT_WEBAPPS = {
 			"org.jabox.cis.jenkins.JenkinsServer",
