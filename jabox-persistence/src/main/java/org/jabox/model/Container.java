@@ -180,13 +180,17 @@ public class Container extends BaseEntity implements Serializable {
 	}
 
 	private LocalConfiguration getConfiguration() {
+		File path = new File(Environment.getBaseDir(), "cargo/" + getName());
+
+		ConfigurationType configurationType = ConfigurationType.STANDALONE;
+		if (path.exists()) {
+			// If the WARs are already deployed don't redeploy
+			configurationType = ConfigurationType.EXISTING;
+		}
+
 		LocalConfiguration configuration = (LocalConfiguration) new DefaultConfigurationFactory()
-				.createConfiguration(
-						type,
-						ContainerType.INSTALLED,
-						ConfigurationType.STANDALONE,
-						new File(Environment.getBaseDir(), "cargo/" + getName())
-								.getAbsolutePath());
+				.createConfiguration(type, ContainerType.INSTALLED,
+						configurationType, path.getAbsolutePath());
 
 		configuration.setProperty(ServletPropertySet.PORT, port);
 		configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
