@@ -67,11 +67,11 @@ public class Container extends BaseEntity implements Serializable {
 
 	private String ajpPort;
 
-	private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
+	private String jvmArgs = "-Xms256m -Xmx1024m -XX:PermSize=256m";
 
 	private String type = "tomcat6x";
 
-	private String version = "6.0.33";
+	private String version = "6.0.35";
 
 	private static String[] DEFAULT_WEBAPPS = {
 			"org.jabox.cis.jenkins.JenkinsServer",
