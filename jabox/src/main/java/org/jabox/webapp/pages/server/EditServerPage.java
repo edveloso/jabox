@@ -52,9 +52,8 @@ public abstract class EditServerPage extends BasePage {
 
 		form.add(new RequiredTextField<Project>("name"));
 
-		DeployerPluginSelector child = new DeployerPluginSelector(
-				"configuration", model, connectorClass);
-		form.add(child);
+		form.add(new DeployerPluginSelector("configuration", model,
+				connectorClass));
 	}
 
 	protected abstract void onSave(Server article);
