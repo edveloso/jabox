@@ -19,11 +19,12 @@
  */
 package org.jabox.webapp.pages.container;
 
+import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.model.Container;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.validation.ShinyForm;
@@ -48,6 +49,9 @@ public abstract class EditContainerPage extends BasePage {
 		form.add(new RequiredTextField<Container>("rmiPort"));
 		form.add(new RequiredTextField<Container>("ajpPort"));
 		form.add(new RequiredTextField<Container>("jvmArgs"));
+
+		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", user
+				.getObject().getServers()));
 	}
 
 	protected abstract void onSave(Container container);

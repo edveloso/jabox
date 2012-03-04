@@ -277,7 +277,7 @@ public class Container extends BaseEntity implements Serializable {
 		return webapps;
 	}
 
-	public List<EmbeddedServer> getDefaultServers() {
+	public static List<EmbeddedServer> getDefaultServers() {
 		List<EmbeddedServer> servers = new ArrayList<EmbeddedServer>();
 		for (String server : Arrays.asList(DEFAULT_WEBAPPS)) {
 			try {

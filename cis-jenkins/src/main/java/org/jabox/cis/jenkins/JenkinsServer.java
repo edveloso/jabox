@@ -137,4 +137,9 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 	private static File getJenkinsPluginDir() {
 		return new File(Environment.getHudsonHomeDir(), "plugins");
 	}
+
+	@Override
+	public String toString() {
+		return getServerName();
+	}
 }
