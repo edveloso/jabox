@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox-parent</artifactId>
-		<version>0.2.1-SNAPSHOT</version>
+		<version>0.3.0</version>
 	</parent>
 	<artifactId>eclipse-webapp</artifactId>
 	<name>Eclipse Webapp</name>
