@@ -19,13 +19,19 @@
  */
 package org.jabox.webapp.pages.container;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.embedded.EmbeddedServer;
+import org.jabox.cis.hudson.HudsonServer;
+import org.jabox.its.jtrac.JtracServer;
 import org.jabox.model.Container;
+import org.jabox.mrm.artifactory.ArtifactoryServer;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.validation.ShinyForm;
 
@@ -50,8 +56,12 @@ public abstract class EditContainerPage extends BasePage {
 		form.add(new RequiredTextField<Container>("ajpPort"));
 		form.add(new RequiredTextField<Container>("jvmArgs"));
 
-		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", user
-				.getObject().getServers()));
+		List<EmbeddedServer> webapps = new ArrayList<EmbeddedServer>();
+		webapps.addAll(user.getObject().getServers());
+		webapps.add(new ArtifactoryServer());
+		webapps.add(new HudsonServer());
+		webapps.add(new JtracServer());
+		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", webapps));
 	}
 
 	protected abstract void onSave(Container container);
