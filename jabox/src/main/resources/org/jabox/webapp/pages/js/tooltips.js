@@ -3,7 +3,7 @@ $(function() {
 
 
 // select all desired input fields and attach tooltips to them
-$("#myform :input").tooltip({
+$(".formInput").tooltip({
 
 	// place tooltip on the right edge
 	position: "center right",

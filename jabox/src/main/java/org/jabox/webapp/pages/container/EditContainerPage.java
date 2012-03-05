@@ -32,6 +32,7 @@ import org.jabox.cis.hudson.HudsonServer;
 import org.jabox.its.jtrac.JtracServer;
 import org.jabox.model.Container;
 import org.jabox.mrm.artifactory.ArtifactoryServer;
+import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.validation.ShinyForm;
 
