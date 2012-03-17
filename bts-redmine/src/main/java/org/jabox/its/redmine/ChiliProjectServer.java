@@ -25,17 +25,17 @@ import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 
-public class RedmineServer extends AbstractEmbeddedServer {
+public class ChiliProjectServer extends AbstractEmbeddedServer {
 	private static final long serialVersionUID = 9207781259797681188L;
-	private final String version = "1.3.0";
+	private final String version = "3.0.0";
 
 	public static void main(final String[] args) throws Exception {
-		new RedmineServer().startServerAndWait();
+		new ChiliProjectServer().startServerAndWait();
 	}
 
 	@Override
 	public String getServerName() {
-		return "redmine";
+		return "chiliproject";
 	}
 
 	@Override
@@ -43,10 +43,10 @@ public class RedmineServer extends AbstractEmbeddedServer {
 		File downloadsDir = Environment.getDownloadsDir();
 
 		// Download the nexus.war
-		File war = new File(downloadsDir, "redmine.war");
+		File war = new File(downloadsDir, "chiliproject.war");
 		if (!war.exists()) {
-			String url = "http://www.jabox.org/repository/releases/org/redmine/redmine/"
-					+ version + "/redmine-" + version + ".war";
+			String url = "http://www.jabox.org/repository/releases/org/chiliproject/chiliproject/"
+					+ version + "/chiliproject-" + version + ".war";
 			DownloadHelper.downloadFile(url, war);
 		}
 		return war.getAbsolutePath();

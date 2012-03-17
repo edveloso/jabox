@@ -30,6 +30,7 @@ import org.apache.wicket.model.IModel;
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.cis.hudson.HudsonServer;
 import org.jabox.its.jtrac.JtracServer;
+import org.jabox.its.redmine.ChiliProjectServer;
 import org.jabox.model.Container;
 import org.jabox.mrm.artifactory.ArtifactoryServer;
 import org.jabox.webapp.modifiers.TooltipModifier;
@@ -62,6 +63,7 @@ public abstract class EditContainerPage extends BasePage {
 		webapps.add(new ArtifactoryServer());
 		webapps.add(new HudsonServer());
 		webapps.add(new JtracServer());
+		webapps.add(new ChiliProjectServer());
 		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", webapps));
 	}
 
