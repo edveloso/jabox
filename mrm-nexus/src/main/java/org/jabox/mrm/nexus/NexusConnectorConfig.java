@@ -54,7 +54,7 @@ public class NexusConnectorConfig extends DeployerConfig implements
 
 	@Override
 	public String getRepositoryURL() {
-		return getServer().getUrl() + "nexus/content/groups/public/";
+		return getServer().getUrl() + "content/groups/public/";
 	}
 
 	public void setPassword(String password) {
