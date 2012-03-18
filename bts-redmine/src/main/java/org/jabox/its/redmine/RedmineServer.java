@@ -20,14 +20,49 @@
 package org.jabox.its.redmine;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
+import org.jabox.utils.Unzip;
 
 public class RedmineServer extends AbstractEmbeddedServer {
 	private static final long serialVersionUID = 9207781259797681188L;
 	private final String version = "1.3.0";
+
+	public List<String> plugins = getDefaultPlugins();
+
+	private void injectPlugins() {
+		for (String plugin : plugins) {
+			injectPlugin(plugin);
+		}
+	}
+
+	private void injectPlugin(final String plugin) {
+		// File dest = new File(Environment.getHudsonHomeDir(), resource);
+
+		String type = plugin.split(";")[0];
+		String url = plugin.split(";")[1];
+		String directory = plugin.split(";")[2];
+
+		if ("zip".equals(type)) {
+			File outputFile = new File(Environment.getTmpDir(), directory
+					+ ".zip");
+			File file = DownloadHelper.downloadFile(url, outputFile);
+			try {
+				Unzip.unzip(file, getRedminePluginDir());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static File getRedminePluginDir() {
+		return new File(Environment.getRedmineHomeDir(), "vendor/plugins");
+	}
 
 	public static void main(final String[] args) throws Exception {
 		new RedmineServer().startServerAndWait();
@@ -47,6 +82,18 @@ public class RedmineServer extends AbstractEmbeddedServer {
 		String url = "http://www.jabox.org/repository/releases/org/redmine/redmine/"
 				+ version + "/redmine-" + version + ".war";
 		war = DownloadHelper.downloadFile(url, war);
+		injectPlugins();
 		return war.getAbsolutePath();
 	}
+
+	/**
+	 * @return
+	 */
+	private List<String> getDefaultPlugins() {
+		List<String> pl = new ArrayList<String>();
+//		pl.add("zip;http://dev.holgerjust.de/attachments/download/41/redmine_opensearch_0.1.zip;redmine_opensearch");
+//		pl.add("zip;https://github.com/thumbtack-technology/redmine-issue-hot-buttons/zipball/0.4.1;issue_hot_buttons_plugin");
+		return pl;
+	}
+
 }

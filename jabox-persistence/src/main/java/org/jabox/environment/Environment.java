@@ -149,4 +149,8 @@ public class Environment {
 		}
 		return dir;
 	}
+
+	public static String getRedmineHomeDir() {
+		return getBaseDir() + "/cargo/Default/webapps/redmine/WEB-INF/";
+	}
 }

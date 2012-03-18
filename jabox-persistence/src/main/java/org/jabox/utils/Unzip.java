@@ -1,4 +1,4 @@
-package org.jabox.sas.sonar;
+package org.jabox.utils;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Unzip {
-	public static void unzip(String zipFile, String baseDir) throws IOException {
+	public static void unzip(File zipFile, File baseDir) throws IOException {
 		InputStream in = new BufferedInputStream(new FileInputStream(zipFile));
 		ZipInputStream zin = new ZipInputStream(in);
 		ZipEntry e;
@@ -23,11 +23,10 @@ public class Unzip {
 		zin.close();
 	}
 
-	public static void unzip(ZipInputStream zin, String baseDir, String s)
+	public static void unzip(ZipInputStream zin, File baseDir, String entry)
 			throws IOException {
-		String filename = baseDir + File.separator + s;
-		System.out.println("unzipping " + filename);
-		File file = new File(filename);
+		File file = new File(baseDir, entry);
+		System.out.println("unzipping " + file.getAbsolutePath());
 		file.getParentFile().mkdirs();
 		file.setExecutable(true);
 		FileOutputStream out = new FileOutputStream(file);

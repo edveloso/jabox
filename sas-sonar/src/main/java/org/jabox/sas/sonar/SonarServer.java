@@ -39,6 +39,7 @@ import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.maven.helper.MavenDownloader;
 import org.jabox.utils.DownloadHelper;
+import org.jabox.utils.Unzip;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,8 +75,7 @@ public class SonarServer extends AbstractEmbeddedServer {
 
 		if (!sonarBaseDir.exists()) {
 			try {
-				Unzip.unzip(zipFile.getAbsolutePath(),
-						downloadsDir.getAbsolutePath());
+				Unzip.unzip(zipFile, downloadsDir);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
