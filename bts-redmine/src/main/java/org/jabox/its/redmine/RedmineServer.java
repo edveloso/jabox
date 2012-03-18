@@ -44,11 +44,9 @@ public class RedmineServer extends AbstractEmbeddedServer {
 
 		// Download the nexus.war
 		File war = new File(downloadsDir, "redmine.war");
-		if (!war.exists()) {
-			String url = "http://www.jabox.org/repository/releases/org/redmine/redmine/"
-					+ version + "/redmine-" + version + ".war";
-			DownloadHelper.downloadFile(url, war);
-		}
+		String url = "http://www.jabox.org/repository/releases/org/redmine/redmine/"
+				+ version + "/redmine-" + version + ".war";
+		war = DownloadHelper.downloadFile(url, war);
 		return war.getAbsolutePath();
 	}
 }

@@ -5,6 +5,7 @@ import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.cis.ejenkins.EJenkinsConnectorConfig;
+import org.jabox.its.eredmine.ERedmineRepositoryConfig;
 import org.jabox.model.Container;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
@@ -26,6 +27,7 @@ public class InitializeDatabase {
 			createAdminUser();
 			createSubversionServer();
 			createJenkinsServer();
+			createRedmineServer();
 			createNexusServer();
 			createSonarServer();
 			createTomcatContainer();
@@ -70,6 +72,17 @@ public class InitializeDatabase {
 		EJenkinsConnectorConfig config = new EJenkinsConnectorConfig();
 		config.setServer(new Server());
 		config.getServer().setName("Jenkins");
+		config.getServer().setDeployerConfig(config);
+		ServerXstreamDao.persist(config);
+		dc.switchDefault(config);
+	}
+
+	private void createRedmineServer() {
+		ERedmineRepositoryConfig config = new ERedmineRepositoryConfig();
+		config.setUsername("admin");
+		config.setPassword("admin");
+		config.setServer(new Server());
+		config.getServer().setName("Redmine");
 		config.getServer().setDeployerConfig(config);
 		ServerXstreamDao.persist(config);
 		dc.switchDefault(config);

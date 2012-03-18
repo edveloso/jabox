@@ -143,9 +143,7 @@ public class JtracServer extends AbstractEmbeddedServer {
 		File downloadsDir = Environment.getDownloadsDir();
 
 		File zipFile = new File(downloadsDir, "jtrac.zip");
-		if (!zipFile.exists()) {
-			DownloadHelper.downloadFile(URL, zipFile);
-		}
+		zipFile = DownloadHelper.downloadFile(URL, zipFile);
 		File jtracWar = retrieveJtracWar(zipFile);
 		return jtracWar.getAbsolutePath();
 	}

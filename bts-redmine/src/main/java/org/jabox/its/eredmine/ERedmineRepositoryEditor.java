@@ -17,34 +17,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.cis.ejenkins;
+package org.jabox.its.eredmine;
 
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.jabox.cis.jenkins.JenkinsLoginValidator;
+import org.apache.wicket.validation.validator.UrlValidator;
+import org.jabox.its.redmine.RedmineLoginValidator;
 import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
-public class EJenkinsConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4821476804096973897L;
+public class ERedmineRepositoryEditor extends Panel {
+	private static final long serialVersionUID = -261442073868306075L;
 
-	public EJenkinsConnectorEditor(final String id, final IModel<Server> model) {
+	public ERedmineRepositoryEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<Server>(model));
 		TextField<String> username = new TextField<String>("username");
 		PasswordTextField password = new PasswordTextField("password");
 
+		// XXX This should be dynamic
+		TextField<String> url = new TextField<String>("url",
+				new Model<String>("http://" + LocalHostName.getLocalHostname()
+						+ ":9090/redmine/"));
+
 		add(username.setRequired(true));
 		add(password.setRequired(true));
-
-		// XXX This should be dynamic
-		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://" + LocalHostName.getLocalHostname() + ":9080/jenkins/"));
-
-		add(password.add(new JenkinsLoginValidator(url, username, password))
+		add(password.add(new RedmineLoginValidator(url, username, password))
 				.setRequired(true));
+		add(new CheckBox("addRepositoryConfiguration"));
 	}
 }

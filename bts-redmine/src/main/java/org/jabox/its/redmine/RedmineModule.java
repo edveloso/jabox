@@ -1,6 +1,7 @@
 package org.jabox.its.redmine;
 
 import org.jabox.apis.its.ITSConnector;
+import org.jabox.its.eredmine.ERedmineRepository;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -13,5 +14,6 @@ public class RedmineModule implements Module {
 		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
 				ITSConnector.class);
 		uriBinder.addBinding().to(RedmineRepository.class);
+		uriBinder.addBinding().to(ERedmineRepository.class);
 	}
 }

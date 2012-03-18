@@ -42,7 +42,7 @@ public class EHudsonConnectorEditor extends Panel {
 
 		// XXX This should be dynamic
 		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://" + LocalHostName.getLocalHostname() + ":9090/hudson/"));
+				"http://" + LocalHostName.getLocalHostname() + ":9080/hudson/"));
 
 		add(password.add(new HudsonLoginValidator(url, username, password))
 				.setRequired(true));

@@ -17,37 +17,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.mrm.artifactory;
+package org.jabox.its.eredmine;
 
-import java.io.File;
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
+import org.jabox.its.redmine.RedmineRepository;
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
 
-import org.jabox.apis.embedded.AbstractEmbeddedServer;
-import org.jabox.environment.Environment;
-import org.jabox.utils.DownloadHelper;
+public class ERedmineRepository extends RedmineRepository {
+	private static final long serialVersionUID = -4562254388314491957L;
+	public static final String ID = "plugin.its.eredmine";
 
-/**
- * 
- */
-public class ArtifactoryServer extends AbstractEmbeddedServer {
+	public String getName() {
+		return "Embedded Redmine";
+	}
 
-	private static final String URL = "http://sourceforge.net/projects/artifactory/files/artifactory/2.1/artifactory-2.1.0.war/download";
-
-	public static void main(final String[] args) throws Exception {
-		new ArtifactoryServer().startServerAndWait();
+	public String getId() {
+		return ID;
 	}
 
 	@Override
-	public String getServerName() {
-		return "artifactory";
+	public String toString() {
+		return getName();
 	}
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
+	public DeployerConfig newConfig() {
+		return new ERedmineRepositoryConfig();
+	}
 
-		// Download the artifactory.war
-		File zipFile = new File(downloadsDir, "artifactory.war");
-		zipFile = DownloadHelper.downloadFile(URL, zipFile);
-		return zipFile.getAbsolutePath();
+	public Component newEditor(final String id, final IModel<Server> model) {
+		return new ERedmineRepositoryEditor(id, model);
 	}
 }

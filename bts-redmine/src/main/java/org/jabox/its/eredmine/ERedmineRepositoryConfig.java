@@ -17,37 +17,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.mrm.artifactory;
+package org.jabox.its.eredmine;
 
-import java.io.File;
+import org.jabox.its.redmine.RedmineRepositoryConfig;
+import org.jabox.model.Server;
+import org.jabox.utils.LocalHostName;
 
-import org.jabox.apis.embedded.AbstractEmbeddedServer;
-import org.jabox.environment.Environment;
-import org.jabox.utils.DownloadHelper;
+public class ERedmineRepositoryConfig extends RedmineRepositoryConfig {
+	private static final long serialVersionUID = 2915937476212772390L;
 
-/**
- * 
- */
-public class ArtifactoryServer extends AbstractEmbeddedServer {
-
-	private static final String URL = "http://sourceforge.net/projects/artifactory/files/artifactory/2.1/artifactory-2.1.0.war/download";
-
-	public static void main(final String[] args) throws Exception {
-		new ArtifactoryServer().startServerAndWait();
+	public ERedmineRepositoryConfig() {
+		pluginId = ERedmineRepository.ID;
 	}
 
-	@Override
-	public String getServerName() {
-		return "artifactory";
+	public String getSystem() {
+		return "Redmine";
 	}
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
-
-		// Download the artifactory.war
-		File zipFile = new File(downloadsDir, "artifactory.war");
-		zipFile = DownloadHelper.downloadFile(URL, zipFile);
-		return zipFile.getAbsolutePath();
-	}
+    @Override
+    public void setServer(final Server server) {
+        super.setServer(server);
+        if (server != null) {
+            server.setUrl("http://" + LocalHostName.getLocalHostname()
+                + ":9080/redmine/");
+        }
+    }
 }

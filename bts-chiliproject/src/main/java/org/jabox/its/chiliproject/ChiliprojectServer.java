@@ -44,11 +44,9 @@ public class ChiliprojectServer extends AbstractEmbeddedServer {
 
 		// Download the nexus.war
 		File war = new File(downloadsDir, "chiliproject.war");
-		if (!war.exists()) {
-			String url = "http://www.jabox.org/repository/releases/org/chiliproject/chiliproject/"
-					+ version + "/chiliproject-" + version + ".war";
-			DownloadHelper.downloadFile(url, war);
-		}
+		String url = "http://www.jabox.org/repository/releases/org/chiliproject/chiliproject/"
+				+ version + "/chiliproject-" + version + ".war";
+		war = DownloadHelper.downloadFile(url, war);
 		return war.getAbsolutePath();
 	}
 }

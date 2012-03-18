@@ -46,11 +46,9 @@ public class NexusServer extends AbstractEmbeddedServer {
 
 		// Download the nexus.war
 		File zipFile = new File(downloadsDir, "nexus.war");
-		if (!zipFile.exists()) {
-			String url = "http://nexus.sonatype.org/downloads/all/nexus-webapp-"
-					+ version + ".war";
-			DownloadHelper.downloadFile(url, zipFile);
-		}
+		String url = "http://nexus.sonatype.org/downloads/all/nexus-webapp-"
+				+ version + ".war";
+		zipFile = DownloadHelper.downloadFile(url, zipFile);
 		return zipFile.getAbsolutePath();
 	}
 }

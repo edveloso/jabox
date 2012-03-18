@@ -28,12 +28,20 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class DownloadHelper {
+
 	/**
+	 * Downloads a remote file locally. If the file already exists then it
+	 * returns directly without downloading.
 	 * 
 	 * @param urlPath
 	 * @return
 	 */
 	public static File downloadFile(final String urlPath, final File outputFile) {
+		if (outputFile.exists()) {
+			System.out.println(urlPath +" already exists at: " + outputFile);
+			return outputFile;
+		}
+
 		System.out.println("Downloading: " + urlPath);
 		InputStream is = null;
 		BufferedInputStream bin = null;

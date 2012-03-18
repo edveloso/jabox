@@ -60,11 +60,9 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 
 		// Download the jenkins.war
 		File war = new File(downloadsDir, "jenkins.war");
-		if (!war.exists()) {
-			String url = "http://mirrors.jenkins-ci.org/war/" + version
-					+ "/jenkins.war";
-			DownloadHelper.downloadFile(url, war);
-		}
+		String url = "http://mirrors.jenkins-ci.org/war/" + version
+				+ "/jenkins.war";
+		war = DownloadHelper.downloadFile(url, war);
 		return war.getAbsolutePath();
 	}
 
@@ -126,12 +124,9 @@ public class JenkinsServer extends AbstractEmbeddedServer {
 		String artifactId = plugin.replaceAll(":.*", "");
 		String version = plugin.replaceAll(".*:", "");
 		File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
-		if (!dest.exists()) {
-			DownloadHelper.downloadFile(
-					"http://updates.jenkins-ci.org/download/plugins/"
-							+ artifactId + "/" + version + "/" + artifactId
-							+ ".hpi", dest);
-		}
+		dest = DownloadHelper.downloadFile(
+				"http://updates.jenkins-ci.org/download/plugins/" + artifactId
+						+ "/" + version + "/" + artifactId + ".hpi", dest);
 	}
 
 	private static File getJenkinsPluginDir() {
