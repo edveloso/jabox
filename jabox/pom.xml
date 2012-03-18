@@ -127,6 +127,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>bts-chiliproject</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>bts-bugzilla</artifactId>
 			<version>${project.version}</version>
 		</dependency>

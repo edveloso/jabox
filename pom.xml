@@ -15,6 +15,7 @@
 		<module>jabox-site</module>
 		<module>scm-subversion</module>
 		<module>bts-redmine</module>
+		<module>bts-chiliproject</module>
 		<module>bts-bugzilla</module>
 		<module>bts-jtrac</module>
 		<module>cis-hudson</module>

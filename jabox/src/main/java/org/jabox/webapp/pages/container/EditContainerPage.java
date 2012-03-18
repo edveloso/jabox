@@ -29,11 +29,10 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.cis.hudson.HudsonServer;
+import org.jabox.its.chiliproject.ChiliprojectServer;
 import org.jabox.its.jtrac.JtracServer;
-import org.jabox.its.redmine.ChiliProjectServer;
 import org.jabox.model.Container;
 import org.jabox.mrm.artifactory.ArtifactoryServer;
-import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.validation.ShinyForm;
 
@@ -63,7 +62,7 @@ public abstract class EditContainerPage extends BasePage {
 		webapps.add(new ArtifactoryServer());
 		webapps.add(new HudsonServer());
 		webapps.add(new JtracServer());
-		webapps.add(new ChiliProjectServer());
+		webapps.add(new ChiliprojectServer());
 		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", webapps));
 	}
 
