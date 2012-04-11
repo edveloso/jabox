@@ -2,7 +2,7 @@ Jabox ALM
 ==========
 Copyright &copy; 2009-, Dimitris Kapanidis. Licensed under [GPL License].
 
-[![Build Status](https://secure.travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](http://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+[![Build Status](https://secure.travis-ci.org/jabox/jabox.png)](http://travis-ci.org/jabox/jabox)
 
 About
 -----
