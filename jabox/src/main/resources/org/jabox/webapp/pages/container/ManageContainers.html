@@ -4,27 +4,37 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
-	<h2>Manage Containers <img wicket:id="containerIcon"
-		align="bottom" wicket:message="title:container.tooltip" alt="info" /></h2>
+	<div class="page-header">
+		<h1>Manage Containers</h1>
+	</div>
+
 	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
-	<form wicket:id="deleteForm">
+	<form  id="myform" wicket:id="deleteForm">
+	
 	<table cellspacing="0" class="dataviewTable" width="90%">
+		<input type="submit" class="btn" wicket:id="createContainer"
+			value="New Container" />
+	</table>
+	
+	<br/>
+	
+	<table class="table table-bordered table-striped">
 		<tr>
-			<th class="dataviewTh" width="200px">Name</th>
-			<th class="dataviewTh" width="200px">Port</th>
-			<th class="dataviewTh" width="40px">Start</th>
-			<th class="dataviewTh" width="40px">Stop</th>
-			<th class="dataviewTh" width="40px">Delete</th>
+			<th>Name</th>
+			<th>Port</th>
+			<th>Start</th>
+			<th>Stop</th>
+			<th>Delete</th>
 		</tr>
 		<tr wicket:id="containers">
-			<td class="dataviewTd"><span wicket:id="name">ContainerName</span></td>
-			<td class="dataviewTd"><span wicket:id="port">ContainerPort</span></td>
-			<td class="dataviewTd"><input type="image" wicket:id="start" /></td>
-			<td class="dataviewTd"><input type="image" wicket:id="stop" /></td>
-			<td class="dataviewTd"><input type="image" wicket:id="delete"
-				title="Delete this task" src="delete.jpg"
-				onclick="return confirm('Are you sure you want to delete this task?');" />
+			<td><span wicket:id="name">ContainerName</span></td>
+			<td><span wicket:id="port">ContainerPort</span></td>
+			<td><input type="image" wicket:id="start" /></td>
+			<td><input type="image" wicket:id="stop" /></td>
+			<td><input type="image" wicket:id="delete"
+				title="Delete this Container" src="delete.jpg"
+				onclick="return confirm('Are you sure you want to delete this container?');" />
 			</td>
 		</tr>
 		<wicket:remove>
@@ -33,11 +43,8 @@
 				<td class="dataviewTd">Description of anotherContainer.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button" wicket:id="createContainer"
-			value="New Container" />
 	</table>
 	</form>
 </span>
 </body>
 </html>
-

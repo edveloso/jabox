@@ -58,23 +58,18 @@ public class ManageServers extends BasePage {
 
 		form.add(createList("SCMs", SCMConnectorConfig.class));
 		form.add(new CreateServerLink("createSCMs", SCMConnector.class));
-		form.add(new InfoImage("scmIcon", ""));
 
 		form.add(createList("RMSs", RMSConnectorConfig.class));
 		form.add(new CreateServerLink("createRMSs", RMSConnector.class));
-		form.add(new InfoImage("rmsIcon", ""));
 
 		form.add(createList("CISs", CISConnectorConfig.class));
 		form.add(new CreateServerLink("createCISs", CISConnector.class));
-		form.add(new InfoImage("cisIcon", ""));
 
 		form.add(createList("ITSs", ITSConnectorConfig.class));
 		form.add(new CreateServerLink("createITSs", ITSConnector.class));
-		form.add(new InfoImage("itsIcon", ""));
 
 		form.add(createList("CQMs", CQMConnectorConfig.class));
 		form.add(new CreateServerLink("createCQMs", CQMConnector.class));
-		form.add(new InfoImage("cqmIcon", ""));
 
 		add(form);
 	}

@@ -43,7 +43,6 @@ public class ManageContainers extends BasePage {
 	public ManageContainers() {
 
 		final List<Container> containers = ContainerXstreamDao.getContainers();
-		add(new InfoImage("containerIcon", ""));
 
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 

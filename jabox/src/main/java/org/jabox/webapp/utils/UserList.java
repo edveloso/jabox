@@ -25,16 +25,15 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.jabox.model.User;
-import org.jabox.webapp.menubuttons.DeleteEntityButton;
-import org.jabox.webapp.pages.EditEntityButton;
-import org.jabox.webapp.pages.project.ManageProjects;
+import org.jabox.webapp.menubuttons.DeleteEntityLink;
+import org.jabox.webapp.pages.user.EditUserLink;
 import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UserList extends PropertyListView<User> {
 	private static final Logger LOGGER = LoggerFactory
-          .getLogger(UserList.class);
+			.getLogger(UserList.class);
 
 	/**
 	 * 
@@ -54,9 +53,8 @@ public class UserList extends PropertyListView<User> {
 		listItem.add(new Label("email", user.getEmail()));
 		listItem.add(new Label("firstName", user.getFirstName()));
 		listItem.add(new Label("lastName", user.getLastName()));
-		listItem.add(new EditEntityButton<User>("edit", listItem
-				.getModelObject()));
-		listItem.add(new DeleteEntityButton<User>("delete", listItem,
+		listItem.add(new EditUserLink("edit", listItem.getModelObject()));
+		listItem.add(new DeleteEntityLink<User>("delete", listItem,
 				ManageUsers.class));
 	}
 }

@@ -8,14 +8,21 @@
 	<h1>Manage Users</h1>
 	</div>
 
-  <div class="row">
+  <div class="row1">
      <div class="">
 
 	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
 	<form  id="myform" wicket:id="deleteForm">
 
-<table class="table table-bordered table-striped">
+	<table cellspacing="0" class="dataviewTable" width="90%">
+		<input type="submit" class="btn" wicket:id="createUser"
+			value="New User" />
+	</table>
+
+	<br/>
+
+	<table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Login</th>
@@ -32,11 +39,8 @@
 			<td><span wicket:id="firstName">First Name</span></td>
 			<td><span wicket:id="lastName">Last Name</span></td>
 			<td><span wicket:id="email">Email</span></td>
-			<td><input type="image" wicket:id="edit" /><a class="btn" href="#"><i class="icon-cog"></i> Edit</a></td>
-			<td><input type="image" wicket:id="delete"
-				title="Delete this task" src="delete.jpg"
-				onclick="return confirm('Are you sure you want to delete this task?');" />
-			<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> Danger</a>
+			<td><a class="btn" href="#" wicket:id="edit"><i class="icon-cog"></i> Edit User</a></td>
+			<td><a class="btn btn-danger" href="#" wicket:id="delete" 				onclick="return confirm('Are you sure you want to delete this user?');"><i class="icon-remove icon-white"></i> Delete User</a>
 			</td>
 		</tr>
 		<wicket:remove>
@@ -47,10 +51,6 @@
 		</wicket:remove>
     </tbody>
   </table>
-	<table cellspacing="0" class="dataviewTable" width="90%">
-		<input type="submit" class="button" wicket:id="createUser"
-			value="New User" />
-	</table>
 	</form>
 	</div>
 	</div>
