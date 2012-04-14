@@ -4,35 +4,61 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
-	<h2><wicket:message key="page.header">Create Project</wicket:message></h2>
-	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
-	<form id="myform" wicket:id="form">
+
+<section id="forms">
+	<div class="page-header">
+	<h1><wicket:message key="page.header">Create Project</wicket:message></h1>
+	</div>
+
+	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
+  
+  <div class="row">
+ 		
+	<form id="myform" wicket:id="form" class="form-horizontal well">
+      
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="name">Project Identifier</wicket:message></label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" wicket:id="name" wicket:message="title:name.tooltip"/>
+              <p class="help-block">Length between 1 and 20 characters. Only lower case letters (a-z), numbers and dashes are allowed. Once saved, the identifier can not be changed.</p>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="description">Project Description</wicket:message></label>
+            <div class="controls">
+            	<input type="text" class="input-xlarge" wicket:id="description" wicket:message="title:description.tooltip"/>
+			  <p class="help-block">A brief description of the project.</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="sourceEncoding">Source Encoding</wicket:message></label>
+            <div class="controls">
+				<input type="text" class="input-xlarge" wicket:id="sourceEncoding" wicket:message="title:sourceEncoding.tooltip" />
+			  <p class="help-block">Configures the character encoding for source files. To leave it undefined, leave empty field (<i>not recommended</i>). (<a href="http://docs.codehaus.org/display/MAVENUSER/POM+Element+for+Source+File+Encoding">More info...</a>)</p>
+            </div>
+          </div>
+
+		<div class="control-group">
+			<label class="control-label" for="signArtifactReleases"><wicket:message key="signArtifactReleases">Sign Artifact Releases</wicket:message>:</label>
+            <div class="controls">
+              <label class="checkbox">
+				<input type="checkbox" id="optionsCheckbox" value="option1" wicket:id="signArtifactReleases" wicket:message="title:signArtifactReleases.tooltip" />
+				Check this if you want to sign artifact releases. You need to prepare a key pair to be able to do this. (<a href="http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/">More info...</a>)</label>
+            </div>
+        </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn">Cancel</button>
+          </div>
+        </fieldset>
+
 	<div class="fields">
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="name">Project Name</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" type="text" wicket:id="name" wicket:message="title:name.tooltip"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="description">Project Description</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" type="text" wicket:id="description" wicket:message="title:description.tooltip"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="sourceEncoding">Source Encoding</wicket:message></label> <small>(optional)</small>
-			</dt>
-			<dd>
-				<input class="formInput" type="text" wicket:id="sourceEncoding" wicket:message="title:sourceEncoding.tooltip" />
-			</dd>
-		</dl>
+	
 		<dl class="form">
 			<dt>
 				<label><wicket:message key="archetype">Maven Archetype</wicket:message></label>
@@ -41,12 +67,6 @@
 				<div wicket:id="treeTable" class="my-tree" wicket:message="title:archetype.tooltip" /> 
 			</dd>
 		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="signArtifactReleases">Sign Artifact Releases</wicket:message>:</label>
-				<input class="formInput" wicket:id="signArtifactReleases" wicket:message="title:signArtifactReleases.tooltip" type="checkbox" />
-			</dt>
-		</dl>
 		<div class="rule"></div>
 		<div class="form-actions">
 			<button type="submit" class="button">
@@ -54,7 +74,10 @@
 			</button>
 		</div>
 	</div>
-	</form>
+
+      </form>
+  </div>
+</section>
 	
 	
 </span>

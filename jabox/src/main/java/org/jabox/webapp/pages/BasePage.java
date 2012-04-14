@@ -32,12 +32,12 @@ public abstract class BasePage extends WebPage {
 	private static final long serialVersionUID = 8165952253551263784L;
 
 	public void renderHead(IHeaderResponse response) {
-		response.renderJavaScriptReference(new JavaScriptResourceReference(
-				BasePage.class, "js/jquery.tools.min.js"));
-		response.renderJavaScriptReference(new JavaScriptResourceReference(
-				BasePage.class, "js/tooltips.js"));
-		response.renderCSSReference(new PackageResourceReference(
-				BasePage.class, "css/wicket.css"));
+//		response.renderJavaScriptReference(new JavaScriptResourceReference(
+//				BasePage.class, "js/jquery.tools.min.js"));
+//		response.renderJavaScriptReference(new JavaScriptResourceReference(
+//				BasePage.class, "js/tooltips.js"));
+//		response.renderCSSReference(new PackageResourceReference(
+//				BasePage.class, "css/wicket.css"));
 	}
 
 	private Border border;

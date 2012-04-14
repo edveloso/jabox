@@ -4,49 +4,50 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
-	<h2>My Account</h2>
-
-	<form id="myform" wicket:id="form">
-
-	<div class="fields">
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="login">login</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="login" wicket:message="title:login.tooltip"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="firstName">firstName</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="firstName" wicket:message="title:firstName.tooltip"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="lastName">lastName</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="lastName" wicket:message="title:lastName.tooltip"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="password">Password</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="password" type="password" wicket:message="title:password.tooltip"/>
-			</dd>
-		</dl>
-		<div class="rule"></div>
-		<div class="form-actions">
-			<button type="submit" class="button"><span>Update Information</span></button>
-		</div>
+	<div class="page-header">
+	<h1><wicket:message key="page.header">My Account</wicket:message></h1>
 	</div>
+
+  <div class="row">
+     <div class="span6 offset1">
+  
+	<form id="myform" wicket:id="form" class="form-horizontal well">
+        <fieldset>
+
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="login">login</wicket:message></label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" wicket:id="login" wicket:message="title:login.tooltip"/>
+              <p class="help-block">The Login that the user will use to be authenticated</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="firstName">firstName</wicket:message></label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" wicket:id="firstName" wicket:message="title:firstName.tooltip"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><wicket:message key="lastName">lastName</wicket:message></label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" wicket:id="lastName" wicket:message="title:lastName.tooltip"/>
+            </div>
+          </div>
+          <div class="control-group">
+			<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
+            <div class="controls">
+              <input type="password" class="input-xlarge" wicket:id="password" wicket:message="title:password.tooltip"/>
+            </div>
+          </div>
+
+		<div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <a class="btn" href="/">Cancel</a>
+          </div>
+		</fieldset>
 	</form>
+	</div>
+</div>
 </span>
 </body>
 </html>

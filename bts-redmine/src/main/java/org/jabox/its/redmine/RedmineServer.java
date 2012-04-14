@@ -49,7 +49,7 @@ public class RedmineServer extends AbstractEmbeddedServer {
 		String directory = plugin.split(";")[2];
 
 		if ("zip".equals(type)) {
-			File outputFile = new File(Environment.getTmpDir(), directory
+			File outputFile = new File(Environment.getDownloadsDir(), directory
 					+ ".zip");
 			File file = DownloadHelper.downloadFile(url, outputFile);
 			try {
@@ -91,8 +91,8 @@ public class RedmineServer extends AbstractEmbeddedServer {
 	 */
 	private List<String> getDefaultPlugins() {
 		List<String> pl = new ArrayList<String>();
-//		pl.add("zip;http://dev.holgerjust.de/attachments/download/41/redmine_opensearch_0.1.zip;redmine_opensearch");
-//		pl.add("zip;https://github.com/thumbtack-technology/redmine-issue-hot-buttons/zipball/0.4.1;issue_hot_buttons_plugin");
+		pl.add("zip;http://dev.holgerjust.de/attachments/download/41/redmine_opensearch_0.1.zip;redmine_opensearch");
+		pl.add("zip;https://github.com/thumbtack-technology/redmine-issue-hot-buttons/zipball/0.4.1;issue_hot_buttons_plugin");
 		return pl;
 	}
 

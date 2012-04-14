@@ -10,7 +10,7 @@ public class ErrorHighlightBehavior extends AbstractBehavior {
 		if (FormComponent.class.isInstance(c)) {
 			FormComponent fc = (FormComponent) c;
 			if (!fc.isValid()) {
-				tag.append("class", " ", " error");
+				tag.append("class", " ", " alert alert-block");
 			}
 		}
 	}
