@@ -30,8 +30,8 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 public class TabPage extends WebPage {
 	private static final long serialVersionUID = -6546217660729170839L;
 	public void renderHead(IHeaderResponse response) {
-		response.renderCSSReference(new PackageResourceReference(
-				BasePage.class, "css/wicket.css"));
+//		response.renderCSSReference(new PackageResourceReference(
+//				BasePage.class, "css/wicket.css"));
 	}
 
 	/**

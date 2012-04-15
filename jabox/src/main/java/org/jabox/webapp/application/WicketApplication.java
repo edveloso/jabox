@@ -77,6 +77,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 
 		guiceInjection();
 		new InitializeDatabase().init();
+		getMarkupSettings().setAutomaticLinking(true);
 	}
 
 	private void guiceInjection() {

@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.IManager;

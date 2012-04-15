@@ -3,6 +3,7 @@
 	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
 	xml:lang="da" lang="da">
 <wicket:border>
+
   <head>
     <meta charset="utf-8">
     <title>Jabox - Application Lifecycle Management</title>
@@ -14,7 +15,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style>
       body {
-        padding-top: 0px; /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
@@ -30,65 +31,37 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
+
 <div class="container">
 
-	<div class="tabpanel2"><span wicket:id=headerLinks>[Header Links]</span></div>
-	
-	<div id="border">
-	
-	<wicket:link>
-	
-    <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container" style="width: auto;">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">Jabox A.L.M.</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li><a href="/org/jabox/webapp/pages/MyAccountPage.html"><span>My Account</span></a></li>
-			<li><a href="/org/jabox/webapp/pages/user/ManageUsers.html"><span>Users</span></a></li>
-			<li><a href="/org/jabox/webapp/pages/container/ManageContainers.html"><span>Containers</span></a></li>
-			<li><a href="/org/jabox/webapp/pages/server/ManageServers.html"><span>Servers</span></a></li>
-			<li><a href="/org/jabox/webapp/pages/project/ManageProjects.html"><span>Projects</span></a></li>
-          </ul>
-          <ul class="nav pull-right">
-			<li><a href="/org/jabox/webapp/pages/Logout.html"><span>Logout</span></a></li>
-          </ul>
-        </div><!-- /.nav-collapse -->
-      </div>
-    </div><!-- /navbar-inner -->
-  </div>
-
-	<div style="padding-top: 0px">
-	<table>
-		<tr>
-			<td><img src="/style/logo.png" align="middle" alt="Jabox A.L.M." /></td>
-			<td>
-			<div id="header" class="header">
-			<h1>Jabox A.L.M.</h1>
-			</div>
-			</td>
-		</tr>
-	</table>
+<div class="row">
+	<span wicket:id=headerLinks>[Header Links]</span>
+	<div class="span2">
+		<img src="/style/logo.png" align="middle" alt="Jabox A.L.M." />
+	      <h3>Jabox A.L.M.</h3>
+	      <ul class="nav nav-pills nav-stacked">
+	            <li><a href="/users/me">My Account</a></li>
+				<li><a href="/users/"><span>Users</span></a></li>
+				<li><a href="/containers/"><span>Containers</span></a></li>
+				<li><a href="/servers/"><span>Servers</span></a></li>
+				<li><a href="/projects/"><span>Projects</span></a></li>
+	      </ul>
 	</div>
 
-	</wicket:link>
-	<div id="contentbody" class="contentbody"><wicket:body/></div>
+	<div class="span10">
+		<wicket:body/>
+	</div>
+</div>
 
+<div>
     <footer class="footer">
         <p class="pull-right">
         <span style="padding-right: 2em; color: gray"> &copy;
 			2009-2012 <a href="http://www.jabox.org/" target="_parent"> Jabox</a>
 			Application</span>
-				<a href="#">Back to top</a></p>
     </footer>
-
 	 <script src="/js/bootstrap.js"></script>
-  </div>	
+</div>
 
 </div>
 </wicket:border>
