@@ -6,34 +6,32 @@
 <div class="fields">
 
 <wicket:panel>
-	<div class="info-box">
+
+	<div class="alert alert-info">
 		<p>Use a remote SSH connection to store your repository.</p>
 		<p>When generating a new project, Jabox will configure project distribution management (releases & snapshots) to upload binaries to this repository.</p>
 	</div>
-	<dl class="form">
-		<dt>
-			<label>Host Name</label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="server.url" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label>Absolute Release Repository Path</label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="absoluteReleaseRepositoryPath" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label>Absolute Snasphot Repository Path</label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="absoluteSnapshotRepositoryPath" type="text"/>
-		</dd>
-	</dl>
+
+	  <div class="control-group">
+		<label class="control-label">Host Name</label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="server.url"/>
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label">Absolute Release Repository Path</label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="absoluteReleaseRepositoryPath" />
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label">Absolute Snasphot Repository Path</label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="absoluteSnapshotRepositoryPath" />
+	    </div>
+	  </div>
 </wicket:panel>
 
 </div>

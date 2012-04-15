@@ -6,45 +6,43 @@
 <div class="fields">
 <wicket:panel>
 
-
-	<div class="info-box">
+	<div class="alert alert-info">
 		<p>Integration with <a href="https://www.chiliproject.org/">ChiliProject</a></p>
 		<p>The URL should point to your ChiliProject instance (e.g. <code>http://myserver/chiliproject/</code> )</p>
 		<p>Provide the credentials that Jabox will use to create new projects.</p>
 		<p>When generating a new project, Jabox will add the project to redmine, add the initial version, and optionally add repository configuration.</p>
 		<p><small><a href="https://github.com/jabox/jabox/wiki/ChiliProject-plugin/">more details</a></small>
 	</div>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="server.url">URL</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="server.url" type="text"  />
-			</dd>
-		</dl>
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="server.url">URL</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge"  wicket:id="server.url"  />
+	    </div>
+	  </div>
 
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="username">Username</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="username" type="text"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="password">Password</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="password" type="password"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label>Add Repository Configuration</label>
-				<input wicket:id="addRepositoryConfiguration" type="checkbox" checked="checked" title="Check this if you want to automatically configure Redmine project to connect to the Repository of the source code." />
-			</dt>
-		</dl>
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="username">Username</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="username" />
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
+	    <div class="controls">
+          <input type="password" class="input-xlarge" wicket:id="password" />
+	    </div>
+	  </div>
+	
+	  <div class="control-group">
+		<label class="control-label">Add Repository Configuration</label>
+	    <div class="controls">
+          <label class="checkbox">
+          		<input type="checkbox" checked="checked" value="option1" wicket:id="addRepositoryConfiguration" />
+				Automatically configure Redmine project to connect to the Repository of the source code.
+          </label>
+	    </div>
+	  </div>
 	</wicket:panel>
 </div>
 </body>

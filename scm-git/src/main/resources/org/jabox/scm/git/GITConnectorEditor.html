@@ -6,37 +6,34 @@
 <div class="fields">
 
 <wicket:panel>
-	<div class="info-box">
+	<div class="alert alert-info">
 		<p>Integration with <a href="http://git-scm.com/">Git</a></p>
 		<p>Make sure you have Git installed and a user configured properly.</p>
 		<p>Provide the URL of you Git repository.</p>
 		<p>Provide the credentials that Jabox will use to do the initial commit of the new projects.</p>
 		<p>The same credentials are also delegated to other services (Continuous Integration for releases, Issue Tracker for repository viewing etc.)</p>
 	</div>
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="server.url">URL</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="server.url" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="username">Username</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="username" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="password">Password</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="password" type="password"/>
-		</dd>
-	</dl>
+	
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="server.url">URL</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="server.url" />
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="username">Username</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="username" />
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
+	    <div class="controls">
+          <input type="password" class="input-xlarge" wicket:id="password" />
+	    </div>
+	  </div>
 </wicket:panel>
 
 </div>

@@ -6,7 +6,7 @@
 <div class="fields">
 
 <wicket:panel>
-	<div class="info-box">
+	<div class="alert alert-info">
 		<p>Integration with <a href="http://nexus.sonatype.org/">Nexus</a></p>
 		<p>The URL should point to your Nexus instance (e.g. <code>http://myserver/nexus/</code> )</p>
 		<p>Provide the credentials that Jabox will use to setup release process (a maven settings.xml under <code>$HOME/.jabox/.m2/settings.xml</code>)</p>
@@ -14,30 +14,26 @@
 		<p>Continuous Integration will be configured by Jabox to use the specific settings.xml during build/release processes.
 	</div>
 
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="server.url">URL</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="server.url" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="username">Username</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="username" type="text"/>
-		</dd>
-	</dl>
-	<dl class="form">
-		<dt>
-			<label><wicket:message key="password">Password</wicket:message></label>
-		</dt>
-		<dd>
-			<input class="formInput" wicket:id="password" type="password"/>
-		</dd>
-	</dl>
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="server.url">URL</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge"  wicket:id="server.url"  />
+	    </div>
+	  </div>
+	
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="username">Username</wicket:message></label>
+	    <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="username" />
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+		<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
+	    <div class="controls">
+          <input type="password" class="input-xlarge" wicket:id="password" />
+	    </div>
+	  </div>
 </wicket:panel>
 
 </div>
