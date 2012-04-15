@@ -16,7 +16,7 @@ public class ValidationMsgBehavior extends AbstractBehavior {
 					error = "Your input is invalid.";
 				}
 				fc.getResponse().write(
-						"<div class=\"validationMsg\">" + error + "</div>");
+						"<span class=\"help-inline \">" + error + "</span>");
 			}
 		}
 	}

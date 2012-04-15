@@ -5,7 +5,6 @@
 <body>
 <span wicket:id="border">
 
-
 <section id="forms">
 	<div class="page-header">
 	<h1><wicket:message key="page.header">Create Project</wicket:message></h1>
@@ -53,7 +52,7 @@
           
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save changes</button>
-            <button type="reset" class="btn">Cancel</button>
+            <a class="btn" href="/projects/">Cancel</a>
           </div>
         </fieldset>
 
@@ -67,12 +66,6 @@
 				<div wicket:id="treeTable" class="my-tree" wicket:message="title:archetype.tooltip" /> 
 			</dd>
 		</dl>
-		<div class="rule"></div>
-		<div class="form-actions">
-			<button type="submit" class="button">
-				<span>Submit</span>
-			</button>
-		</div>
 	</div>
 
       </form>
