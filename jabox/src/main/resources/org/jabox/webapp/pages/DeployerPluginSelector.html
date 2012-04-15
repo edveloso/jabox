@@ -5,13 +5,13 @@
 <body>
 <div class="fields">
 	<wicket:panel>
-	<dl class="form">
-		<dt>
-			<label>Plugin</label>
-			<select id="deployer" wicket:id="picker"></select>
-		</dt>
-	</dl>
-	
+         <div class="control-group">
+            <label class="control-label">Plugin</label>
+            <div class="controls">
+              <select class="input-xlarge" id="deployer" wicket:id="picker"></select>
+            </div>
+          </div>
+
 	<wicket:container wicket:id="editor"></wicket:container>
 	
 	</wicket:panel>

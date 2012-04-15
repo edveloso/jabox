@@ -4,11 +4,20 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
-	<h2>Manage Projects</h2>
+	<div class="page-header">
+		<h1>Manage Projects</h1>
+	</div>
+
 	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
 	<form wicket:id="deleteForm">
-	<table cellspacing="0" class="dataviewTable" width="90%">
+	
+	<input type="submit" class="btn" wicket:id="createProject" value="New Project" />
+
+	<br/>
+	<br/>
+	
+	<table class="table table-bordered table-striped">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
 			<th class="dataviewTh" width="200px">Maven Archetype</th>
@@ -22,7 +31,7 @@
 			goes here.</span></td>
 			<td class="dataviewTd"><input type="image" wicket:id="delete"
 				title="Delete this task" src="delete.jpg"
-				onclick="return confirm('Are you sure you want to delete this task?');" />
+				onclick="return confirm('Are you sure you want to delete this project?');" />
 			</td>
 		</tr>
 		<wicket:remove>
@@ -31,8 +40,6 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button" wicket:id="createProject"
-			value="New Project" />
 	</table>
 	</form>
 </span>

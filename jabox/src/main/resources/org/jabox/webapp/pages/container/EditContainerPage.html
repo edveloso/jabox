@@ -4,74 +4,73 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
-	<h2>Edit Container</h2>
+	<div class="page-header">
+		<h1>Edit Container</h1>
+	</div>
 
-	<form id="myform" wicket:id="form">
-
-	<div class="info-box">
+  <div class="row">
+     <div class="span8 offset2">
+	<div class="alert alert-info">
 		<p>The Container is a cargo installation orchestrated by Jabox.
 		It downloads automatically the Application Server (Tomcat by default), and then consequently downloads and installs Jenkins with some predefined plugins, Nexus and Sonar with some predefined plugins.</p>
 		<p>The configuration of the Containers is located at <code>$HOME/.jabox/config/containers/</code> where the specific versions of the applications and their plugins can be updated.</p>
 		<p>Once the Container is started the deployment is taking place at <code>$HOME/.jabox/cargo/CONTAINER_NAME/</code></p>
 		<p>The logs of the container are located at <code>$HOME/.jabox/cargo/CONTAINER_NAME.log</code></p>
-	</div>
-	<div class="fields">
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="name">name</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="name"/>
-			</dd>
-		</dl>
+	</div>  
 
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="port">port</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="port"/>
-			</dd>
-		</dl>
+	<form id="myform" wicket:id="form" class="form-horizontal well">	
+    <fieldset>
 
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="rmiPort">rmiPort</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="rmiPort"/>
-			</dd>
-		</dl>
+      <div class="control-group">
+		<label class="control-label"><wicket:message key="name">name</wicket:message></label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="name"/>
+        </div>
+      </div>
 
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="ajpPort">ajpPort</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="ajpPort"/>
-			</dd>
-		</dl>
+      <div class="control-group">
+		<label class="control-label"><wicket:message key="port">port</wicket:message></label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="port"/>
+        </div>
+      </div>
 
-		<dl class="form">
-			<dt>
-				<label><wicket:message key="jvmArgs">jvmArgs</wicket:message></label>
-			</dt>
-			<dd>
-				<input class="formInput" wicket:id="jvmArgs"/>
-			</dd>
-		</dl>
-		<dl class="form">
-			<dt>
-				<label>Webapps</label>
-			</dt>
-				<span wicket:id="webapps"/>
-		</dl>
-		<div class="rule"></div>
-		<div class="form-actions">
-			<button type="submit" class="button"><span>Update Information</span></button>
-		</div>
-	</div>
+      <div class="control-group">
+		<label class="control-label"><wicket:message key="rmiPort">rmiPort</wicket:message></label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="rmiPort"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+		<label class="control-label"><wicket:message key="ajpPort">ajpPort</wicket:message></label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="ajpPort"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+		<label class="control-label"><wicket:message key="jvmArgs">jvmArgs</wicket:message></label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" wicket:id="jvmArgs"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+		<label class="control-label">Webapps</label>
+        <div class="controls">
+				<span class="input-xlarge" wicket:id="webapps"/>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+			<a class="btn" href="/containers/">Cancel</a>
+      </div>
+	</fieldset>
 	</form>
+</div>
+</div>
 </span>
 </body>
 </html>
