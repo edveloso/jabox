@@ -2,6 +2,8 @@ Jabox ALM
 ==========
 Copyright &copy; 2009-, Dimitris Kapanidis. Licensed under [GPL License].
 
+[![Build Status](https://secure.travis-ci.org/jabox/jabox.png)](http://travis-ci.org/jabox/jabox)
+
 About
 -----
 Jabox ALM is an open source Application Lifecycle Management platform. It provides a full-blown Java Enterprise Development Factory using your favorite tools, in less than 5 minutes.
@@ -93,3 +95,4 @@ Code Quality Management ([CQM])
 [CIS]: http://redmine.jabox.org/projects/jabox/wiki/Continuous_Integration_System
 [RMS]: http://redmine.jabox.org/projects/jabox/wiki/Repository_Management_System
 [CQM]: http://redmine.jabox.org/projects/jabox/wiki/Code_Quality_Management
+
