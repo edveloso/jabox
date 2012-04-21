@@ -1,4 +1,4 @@
-package org.jabox.webapp.validation;
+package org.jabox.webapp.borders;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AbstractBehavior;

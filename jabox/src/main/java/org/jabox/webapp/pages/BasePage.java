@@ -25,43 +25,51 @@ import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.request.resource.PackageResourceReference;
 import org.jabox.webapp.borders.JaboxBorder;
 
 public abstract class BasePage extends WebPage {
-	private static final long serialVersionUID = 8165952253551263784L;
+    private static final long serialVersionUID = 8165952253551263784L;
 
-	public void renderHead(IHeaderResponse response) {
-//		response.renderJavaScriptReference(new JavaScriptResourceReference(
-//				BasePage.class, "js/jquery.tools.min.js"));
-//		response.renderJavaScriptReference(new JavaScriptResourceReference(
-//				BasePage.class, "js/tooltips.js"));
-//		response.renderCSSReference(new PackageResourceReference(
-//				BasePage.class, "css/wicket.css"));
-	}
+    @Override
+    public void renderHead(final IHeaderResponse response) {
+        // response.renderJavaScriptReference(new JavaScriptResourceReference(
+        // BasePage.class, "js/jquery.tools.min.js"));
+        // response.renderJavaScriptReference(new JavaScriptResourceReference(
+        // BasePage.class, "js/tooltips.js"));
+        // response.renderCSSReference(new PackageResourceReference(
+        // BasePage.class, "css/wicket.css"));
+        response
+            .renderJavaScriptReference(new JavaScriptResourceReference(
+                BasePage.class, "js/widgets.js"));
+        response
+            .renderJavaScriptReference(new JavaScriptResourceReference(
+                BasePage.class, "js/jquery.js"));
+    }
 
-	private Border border;
+    private Border border;
 
-	public BasePage() {
-	}
+    public BasePage() {
+    }
 
-	public BasePage add(final Component child) {
-		// Add children of the page to the page's border component
-		if (border == null) {
-			// Create border and add it to the page
-			border = new JaboxBorder();
-			super.add(border);
-		}
-		border.add(child);
-		return this;
-	}
+    public BasePage add(final Component child) {
+        // Add children of the page to the page's border component
+        if (border == null) {
+            // Create border and add it to the page
+            border = new JaboxBorder();
+            super.add(border);
+        }
+        border.add(child);
+        return this;
+    }
 
-	public MarkupContainer removeAll() {
-		border.removeAll();
-		return this;
-	}
+    @Override
+    public MarkupContainer removeAll() {
+        border.removeAll();
+        return this;
+    }
 
-	public MarkupContainer replace(final Component child) {
-		return border.replace(child);
-	}
+    @Override
+    public MarkupContainer replace(final Component child) {
+        return border.replace(child);
+    }
 }

@@ -52,46 +52,48 @@ import com.google.inject.Module;
  */
 public class WicketApplication extends JaboxAuthenticatedWebApplication {
 
-	/**
-	 * Application logger instance.
-	 */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(WicketApplication.class);
+    /**
+     * Application logger instance.
+     */
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(WicketApplication.class);
 
-	@Override
-	public void init() {
-		super.init();
-		mountPage("/tabs/", HeaderLinksPage.class);
-		mountPage("/users/", ManageUsers.class);
-		mountPage("/users/me", MyAccountPage.class);
-		mountPage("/users/edit", EditUserPage.class);
-		
-		mountPage("/servers/", ManageServers.class);
-		mountPage("/servers/edit", EditServerPage.class);
+    @Override
+    public void init() {
+        super.init();
+        mountPage("/tabs/", HeaderLinksPage.class);
+        mountPage("/users/", ManageUsers.class);
+        mountPage("/users/me", MyAccountPage.class);
+        mountPage("/users/edit", EditUserPage.class);
 
-		mountPage("/projects/", ManageProjects.class);
-		mountPage("/projects/new", CreateProject.class);
+        mountPage("/servers/", ManageServers.class);
+        mountPage("/servers/edit", EditServerPage.class);
 
-		mountPage("/containers/", ManageContainers.class);
-		mountPage("/containers/edit", EditContainerPage.class);
+        mountPage("/projects/", ManageProjects.class);
+        mountPage("/projects/new", CreateProject.class);
 
-		guiceInjection();
-		new InitializeDatabase().init();
-		getMarkupSettings().setAutomaticLinking(true);
-	}
+        mountPage("/containers/", ManageContainers.class);
+        mountPage("/containers/edit", EditContainerPage.class);
 
-	private void guiceInjection() {
-		Injector inj = Guice.createInjector(ServiceLoader.load(Module.class));
-		GuiceComponentInjector listener = new GuiceComponentInjector(this, inj);
-		getComponentInstantiationListeners().add(listener);
-	}
+        guiceInjection();
+        new InitializeDatabase().init();
+        getMarkupSettings().setAutomaticLinking(true);
+    }
 
-	/**
-	 * @see wicket.Application#getHomePage()
-	 */
-	@Override
-	public Class<? extends WebPage> getHomePage() {
-		LOGGER.debug("Locale: " + Locale.getDefault());
-		return HomePage.class;
-	}
+    private void guiceInjection() {
+        Injector inj =
+            Guice.createInjector(ServiceLoader.load(Module.class));
+        GuiceComponentInjector listener =
+            new GuiceComponentInjector(this, inj);
+        getComponentInstantiationListeners().add(listener);
+    }
+
+    /**
+     * @see wicket.Application#getHomePage()
+     */
+    @Override
+    public Class<? extends WebPage> getHomePage() {
+        LOGGER.debug("Locale: " + Locale.getDefault());
+        return HomePage.class;
+    }
 }

@@ -4,6 +4,11 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <span wicket:id="border">
+  <wicket:remove>
+  <head>
+    <link href="../../../../../../webapp/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  </wicket:remove>
 	<div class="page-header">
 		<h1>Manage Servers</h1>
 	</div>
@@ -20,7 +25,22 @@
 	<br/>
 	
 	<input type="submit" class="btn" wicket:id="createSCMs" value="New Server" />
+	<br/>
+	<br/>
 	
+	<div class="btn-group">
+          <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-plus-sign icon-white"></i> New Server <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Local Subversion</a></li>
+			<li><a href="#">Local Git</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Remote Subversion</a></li>
+			<li><a href="#">Remote Git</a></li>
+            <li class="divider"></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Beanstalk</a></li>
+          </ul>
+        </div>
 	<br/>
 	<br/>
 	
@@ -231,5 +251,25 @@
 	<p />
 	</form>
 </span>
+  <wicket:remove>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../../../../../webapp/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../../../webapp/js/widgets.js"></script>
+    <script src="../../../../../../webapp/js/jquery.js"></script>
+    <script src="../../../../../../webapp/js/google-code-prettify/prettify.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-transition.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-alert.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-modal.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-dropdown.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-scrollspy.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-tab.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-tooltip.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-popover.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-button.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-collapse.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-carousel.js"></script>
+    <script src="../../../../../../webapp/js/bootstrap-typeahead.js"></script>
+    <script src="../../../../../../webapp/js/application.js"></script>
+  </wicket:remove>
 </body>
 </html>
