@@ -19,35 +19,22 @@
         <fieldset>
           <div class="control-group">
             <label class="control-label"><wicket:message key="name">Project Identifier</wicket:message></label>
-            <div class="controls">
-              <input type="text" class="input-xlarge" wicket:id="name" wicket:message="title:name.tooltip"/>
-              <p class="help-block">Length between 1 and 20 characters. Only lower case letters (a-z), numbers and dashes are allowed. Once saved, the identifier can not be changed.</p>
-            </div>
+            <input type="text" class="input-xlarge" wicket:id="name" wicket:message="title:name.tooltip"/>
           </div>
           
           <div class="control-group">
             <label class="control-label"><wicket:message key="description">Project Description</wicket:message></label>
-            <div class="controls">
-            	<input type="text" class="input-xlarge" wicket:id="description" wicket:message="title:description.tooltip"/>
-			  <p class="help-block">A brief description of the project.</p>
-            </div>
+          	<input type="text" class="input-xlarge" wicket:id="description" wicket:message="title:description.tooltip"/>
           </div>
 
           <div class="control-group">
             <label class="control-label"><wicket:message key="sourceEncoding">Source Encoding</wicket:message></label>
-            <div class="controls">
-				<input type="text" class="input-xlarge" wicket:id="sourceEncoding" wicket:message="title:sourceEncoding.tooltip" />
-			  <p class="help-block">Configures the character encoding for source files. To leave it undefined, leave empty field (<i>not recommended</i>). (<a href="http://docs.codehaus.org/display/MAVENUSER/POM+Element+for+Source+File+Encoding">More info...</a>)</p>
-            </div>
+			<input type="text" class="input-xlarge" wicket:id="sourceEncoding" wicket:message="title:sourceEncoding.tooltip" />
           </div>
 
 		<div class="control-group">
 			<label class="control-label" for="signArtifactReleases"><wicket:message key="signArtifactReleases">Sign Artifact Releases</wicket:message>:</label>
-            <div class="controls">
-              <label class="checkbox">
-				<input type="checkbox" id="optionsCheckbox" value="option1" wicket:id="signArtifactReleases" wicket:message="title:signArtifactReleases.tooltip" />
-				Check this if you want to sign artifact releases. You need to prepare a key pair to be able to do this. (<a href="http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/">More info...</a>)</label>
-            </div>
+			<input type="checkbox" id="optionsCheckbox" value="option1" wicket:id="signArtifactReleases" wicket:message="title:signArtifactReleases.tooltip" />
         </div>
           
           <div class="form-actions">
@@ -57,7 +44,6 @@
         </fieldset>
 
 	<div class="fields">
-	
 		<dl class="form">
 			<dt>
 				<label><wicket:message key="archetype">Maven Archetype</wicket:message></label>
