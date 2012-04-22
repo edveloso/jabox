@@ -14,27 +14,10 @@
 		<p>The same credentials are also delegated to other services (Continuous Integration for releases, Issue Tracker for repository viewing etc.)</p>
 	</div>
 	
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="server.url">Account URL</wicket:message></label>
-        <input type="text" class="input-xlarge" wicket:id="server.url" wicket:message="title:server.url.tooltip"/>
-        <span>.beanstalkapp.com</span>
-	  </div>
-
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="projectName">Project Name</wicket:message></label>
-        <input type="text" class="input-xlarge" wicket:id="projectName" />
-	  </div>
-	
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="username">Username</wicket:message></label>
-		<input type="text" class="input-xlarge" wicket:id="username" />
-	 </div>
-
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
-		<input  type="password" class="input-xlarge" wicket:id="password" />
-	 </div>
-	
+    <input type="text" class="input-xlarge" wicket:id="server.url" wicket:message="title:server.url.tooltip"/>
+    <input type="text" class="input-xlarge" wicket:id="projectName" />
+	<input type="text" class="input-xlarge" wicket:id="username" />
+	<input  type="password" class="input-xlarge" wicket:id="password" />
 </wicket:panel>
 
 </div>

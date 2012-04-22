@@ -10,20 +10,10 @@
 		<p>Provide the URL (e.g. <code>http://ci.organization:8080/jenkins/</code>) and the credentials that will use Jabox to authenticate itself.</p>
 		<p>When a new project is generated, a Job will be created automatically to the Jenkins instance.</p>
 	</div>
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="server.url">URL</wicket:message></label>
-        <input type="text" class="input-xlarge"  wicket:id="server.url"  />
-	  </div>
-	
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="username">Username</wicket:message></label>
-        <input type="text" class="input-xlarge" wicket:id="username" />
-	  </div>
 
-	  <div class="control-group">
-		<label class="control-label"><wicket:message key="password">Password</wicket:message></label>
-        <input type="password" class="input-xlarge" wicket:id="password" />
-	  </div>
+    <input type="text" class="input-xlarge"  wicket:id="server.url"  />
+    <input type="text" class="input-xlarge" wicket:id="username" />
+    <input type="password" class="input-xlarge" wicket:id="password" />
 </wicket:panel>
 
 </div>
