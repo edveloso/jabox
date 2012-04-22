@@ -33,8 +33,8 @@ import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.rms.RMSConnectorConfig;
+import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
-import org.jabox.scm.svn.SVNConnector;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.utils.SCMConnectorList;
 
@@ -56,7 +56,7 @@ public class ManageServers extends BasePage {
         Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
         form.add(createList("SCMs", SCMConnectorConfig.class));
-        form.add(new CreateServerLink("createSCMs", SVNConnector.class));
+        form.add(new CreateServerLink("createSCMs", SCMConnector.class));
 
         form.add(createList("RMSs", RMSConnectorConfig.class));
         form.add(new CreateServerLink("createRMSs", RMSConnector.class));
