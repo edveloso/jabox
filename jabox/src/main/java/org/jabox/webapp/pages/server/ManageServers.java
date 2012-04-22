@@ -33,9 +33,8 @@ import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.rms.RMSConnectorConfig;
-import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
-import org.jabox.webapp.menubuttons.InfoImage;
+import org.jabox.scm.svn.SVNConnector;
 import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.utils.SCMConnectorList;
 
@@ -45,37 +44,37 @@ import org.jabox.webapp.utils.SCMConnectorList;
 @AuthorizeInstantiation("ADMIN")
 public class ManageServers extends BasePage {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ManageServers() {
-		// Add a FeedbackPanel for displaying form messages
+    public ManageServers() {
+        // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
         final FeedbackPanel feedback = new FeedbackPanel("feedback");
         feedback.setOutputMarkupId(true);
         add(feedback);
 
-		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+        Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
-		form.add(createList("SCMs", SCMConnectorConfig.class));
-		form.add(new CreateServerLink("createSCMs", SCMConnector.class));
+        form.add(createList("SCMs", SCMConnectorConfig.class));
+        form.add(new CreateServerLink("createSCMs", SVNConnector.class));
 
-		form.add(createList("RMSs", RMSConnectorConfig.class));
-		form.add(new CreateServerLink("createRMSs", RMSConnector.class));
+        form.add(createList("RMSs", RMSConnectorConfig.class));
+        form.add(new CreateServerLink("createRMSs", RMSConnector.class));
 
-		form.add(createList("CISs", CISConnectorConfig.class));
-		form.add(new CreateServerLink("createCISs", CISConnector.class));
+        form.add(createList("CISs", CISConnectorConfig.class));
+        form.add(new CreateServerLink("createCISs", CISConnector.class));
 
-		form.add(createList("ITSs", ITSConnectorConfig.class));
-		form.add(new CreateServerLink("createITSs", ITSConnector.class));
+        form.add(createList("ITSs", ITSConnectorConfig.class));
+        form.add(new CreateServerLink("createITSs", ITSConnector.class));
 
-		form.add(createList("CQMs", CQMConnectorConfig.class));
-		form.add(new CreateServerLink("createCQMs", CQMConnector.class));
+        form.add(createList("CQMs", CQMConnectorConfig.class));
+        form.add(new CreateServerLink("createCQMs", CQMConnector.class));
 
-		add(form);
-	}
+        add(form);
+    }
 
-	private SCMConnectorList createList(final String key,
-			final Class<? extends ConnectorConfig> clas) {
-		return new SCMConnectorList(key, ServerXstreamDao.getServers(clas));
-	}
+    private SCMConnectorList createList(final String key,
+            final Class<? extends ConnectorConfig> clas) {
+        return new SCMConnectorList(key, ServerXstreamDao.getServers(clas));
+    }
 }

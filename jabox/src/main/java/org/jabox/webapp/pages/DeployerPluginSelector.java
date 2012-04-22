@@ -31,92 +31,99 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jabox.apis.Connector;
 import org.jabox.apis.IManager;
-import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 import com.google.inject.Inject;
 
 public class DeployerPluginSelector extends Panel {
-	private static final long serialVersionUID = -222526477140616108L;
+    private static final long serialVersionUID = -222526477140616108L;
 
-	@Inject
-	private IManager _manager;
+    @Inject
+    private IManager _manager;
 
-	@SuppressWarnings("unchecked")
-	public DeployerPluginSelector(final String id,
-			final IModel<Server> article,
-			final Class<? extends Connector> connectorClass) {
-		super(id);
-		add(new WebMarkupContainer("editor"));
-		String pluginId = article.getObject().deployerConfig != null ? article
-				.getObject().deployerConfig.pluginId : "-1";
-		if (article.getObject().deployerConfig != null) {
-			Connector plugin = _manager.getEntry(pluginId);
-			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
-					new PropertyModel<Server>(article, "deployerConfig")));
-		}
+    @SuppressWarnings("unchecked")
+    public DeployerPluginSelector(final String id,
+            final IModel<Server> model,
+            final Class<? extends Connector> connectorClass) {
+        super(id);
+        add(new WebMarkupContainer("editor"));
+        String pluginId =
+            model.getObject().deployerConfig != null ? model.getObject().deployerConfig.pluginId
+                    : "-1";
+        if (model.getObject().deployerConfig != null) {
+            Connector plugin = _manager.getEntry(pluginId);
+            DeployerPluginSelector.this.replace(plugin.newEditor("editor",
+                new PropertyModel<Server>(model, "deployerConfig")));
+        }
 
-		PluginPicker pluginPicker = new PluginPicker("picker", new CompoundPropertyModel(pluginId),
-				connectorClass) {
-			private static final long serialVersionUID = -5528219523437017579L;
+        PluginPicker pluginPicker =
+            new PluginPicker("picker",
+                    new CompoundPropertyModel(pluginId), connectorClass) {
+                private static final long serialVersionUID =
+                    -5528219523437017579L;
 
-			@Override
-			protected void onSelectionChanged(final Object pluginId) {
-				Connector plugin = _manager.getEntry((String) pluginId);
-				Server configuration = article.getObject();
-				DeployerConfig newConfig = plugin.newConfig();
-				configuration.setDeployerConfig(newConfig);
+                @Override
+                protected void onSelectionChanged(final Object pluginId) {
+                    Connector plugin =
+                        _manager.getEntry((String) pluginId);
+                    model.getObject()
+                        .setDeployerConfig(plugin.newConfig());
 
-				DeployerPluginSelector.this.replace(plugin.newEditor("editor",
-						new PropertyModel(article, "deployerConfig")));
-			}
-		};
-		pluginPicker.updateModel();
-		add(pluginPicker);
-	}
+                    DeployerPluginSelector.this.replace(plugin.newEditor(
+                        "editor", new PropertyModel(model,
+                            "deployerConfig")));
+                }
+            };
+        pluginPicker.updateModel();
+        add(pluginPicker);
+    }
 
-	private static abstract class PluginPicker<T> extends DropDownChoice<T> {
-		private static final long serialVersionUID = 1346317031364661388L;
+    private static abstract class PluginPicker<T> extends
+            DropDownChoice<T> {
+        private static final long serialVersionUID = 1346317031364661388L;
 
-		@Inject
-		private IManager _manager;
+        @Inject
+        private IManager _manager;
 
-		@SuppressWarnings("unchecked")
-		public PluginPicker(final String id, final IModel<T> model,
-				final Class<? extends Connector> connectorClass) {
-			super(id);
-			setRequired(true);
-			setModel(model);
-			setChoices(new LoadableDetachableModel() {
-				private static final long serialVersionUID = 6694323103247193118L;
+        @SuppressWarnings("unchecked")
+        public PluginPicker(final String id, final IModel<T> model,
+                final Class<? extends Connector> connectorClass) {
+            super(id);
+            setRequired(true);
+            setModel(model);
+            setChoices(new LoadableDetachableModel() {
+                private static final long serialVersionUID =
+                    6694323103247193118L;
 
-				@Override
-				protected List<? extends String> load() {
-					// XXX TESTING
-					return _manager.getIds(connectorClass);
-				}
-			});
+                @Override
+                protected List<? extends String> load() {
+                    // XXX TESTING
+                    return _manager.getIds(connectorClass);
+                }
+            });
 
-			setChoiceRenderer(new IChoiceRenderer() {
-				private static final long serialVersionUID = 7954936699435378919L;
+            setChoiceRenderer(new IChoiceRenderer() {
+                private static final long serialVersionUID =
+                    7954936699435378919L;
 
-				public Object getDisplayValue(final Object object) {
-					return _manager.getEntry((String) object).getName();
-				}
+                public Object getDisplayValue(final Object object) {
+                    return _manager.getEntry((String) object).getName();
+                }
 
-				public String getIdValue(final Object object, final int index) {
-					return (String) object;
-				}
-			});
-		}
+                public String getIdValue(final Object object,
+                        final int index) {
+                    return (String) object;
+                }
+            });
+        }
 
-		@Override
-		protected boolean wantOnSelectionChangedNotifications() {
-			return true;
-		}
+        @Override
+        protected boolean wantOnSelectionChangedNotifications() {
+            return true;
+        }
 
-		@Override
-		protected abstract void onSelectionChanged(Object pluginId);
-	}
+        @Override
+        protected abstract void onSelectionChanged(Object pluginId);
+    }
 
 }
