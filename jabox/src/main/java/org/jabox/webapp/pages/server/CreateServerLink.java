@@ -47,7 +47,8 @@ public class CreateServerLink extends Link<Void> {
 
 	@Override
 	public void onClick() {
-		IModel<Server> model = new Model<Server>(new Server());
+		Server object = new Server();
+        IModel<Server> model = new Model<Server>(object);
 		setResponsePage(new EditServerPage(model, _class1) {
 
 			@Override

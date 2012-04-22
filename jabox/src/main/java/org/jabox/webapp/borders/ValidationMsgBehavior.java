@@ -12,6 +12,10 @@ public class ValidationMsgBehavior extends Behavior {
     public void afterRender(final Component c) {
         if (FormComponent.class.isInstance(c)) {
             FormComponent fc = (FormComponent) c;
+            if ("picker".equals(c.getId())) {
+                return;
+            }
+
             if (!fc.isValid()) {
                 String error;
                 if (fc.hasFeedbackMessage()) {

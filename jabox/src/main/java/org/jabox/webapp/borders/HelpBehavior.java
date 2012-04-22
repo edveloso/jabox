@@ -25,6 +25,10 @@ public class HelpBehavior extends Behavior {
     @Override
     public void afterRender(final Component c) {
         if (FormComponent.class.isInstance(c)) {
+            if ("picker".equals(c.getId())) {
+                return;
+            }
+
             StringResourceModel tooltip =
                 new StringResourceModel(c.getId() + ".tooltip",
                     c.getPage(), null);

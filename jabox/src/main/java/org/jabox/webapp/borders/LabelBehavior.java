@@ -29,6 +29,10 @@ public class LabelBehavior extends BorderBehavior {
     public void beforeRender(final Component c) {
         super.beforeRender(c);
         if (FormComponent.class.isInstance(c)) {
+            if ("picker".equals(c.getId())) {
+                return;
+            }
+
             String name = c.getClass().getName();
             StringResourceModel label =
                 new StringResourceModel(c.getId(), c.getPage(), null);

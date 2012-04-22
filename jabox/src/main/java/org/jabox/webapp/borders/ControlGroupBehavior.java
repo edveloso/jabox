@@ -27,6 +27,9 @@ public class ControlGroupBehavior extends Behavior {
     @Override
     public void beforeRender(final Component c) {
         if (FormComponent.class.isInstance(c)) {
+            if ("picker".equals(c.getId())) {
+                return;
+            }
             c.getResponse().write("<div class=\"control-group\">");
         }
     }
