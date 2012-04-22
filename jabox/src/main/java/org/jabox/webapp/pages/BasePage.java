@@ -44,6 +44,9 @@ public abstract class BasePage extends WebPage {
         response
             .renderJavaScriptReference(new JavaScriptResourceReference(
                 BasePage.class, "js/jquery.js"));
+        response
+            .renderJavaScriptReference(new JavaScriptResourceReference(
+                BasePage.class, "js/bootstrap.js"));
     }
 
     private Border border;
