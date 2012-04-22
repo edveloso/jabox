@@ -30,46 +30,47 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class CreateServerLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+    private static final long serialVersionUID = -6076134805074401259L;
 
-	private Class<? extends Connector> _class1;
+    private Class<? extends Connector> _class1;
 
-	public CreateServerLink(final String id) {
-		super(id);
-		_class1 = Connector.class;
-	}
+    public CreateServerLink(final String id) {
+        super(id);
+        _class1 = Connector.class;
+    }
 
-	public CreateServerLink(final String id,
-			final Class<? extends Connector> class1) {
-		this(id);
-		_class1 = class1;
-	}
+    public CreateServerLink(final String id,
+            final Class<? extends Connector> class1) {
+        this(id);
+        _class1 = class1;
+    }
 
-	@Override
-	public void onClick() {
-		Server object = new Server();
+    @Override
+    public void onClick() {
+        Server object = new Server();
         IModel<Server> model = new Model<Server>(object);
-		setResponsePage(new EditServerPage(model, _class1) {
+        setResponsePage(new EditServerPage(model, _class1) {
 
-			@Override
-			protected void onCancel() {
-				setResponsePage(ManageServers.class);
-			}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageServers.class);
+            }
 
-			@Override
-			protected void onSave(final Server server) {
-				ServerXstreamDao.persist(server.getDeployerConfig());
+            @Override
+            protected void onSave(final Server server) {
+                ServerXstreamDao.persist(server.getDeployerConfig());
 
-				// If this is the first Service of the kind, set it as default
-				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-				DeployerConfig config = server.getDeployerConfig();
-				if (dc.getDefault(config) == null) {
-					dc.switchDefault(config);
-				}
-				ConfigXstreamDao.persist(dc);
-				getSession().info("Server \"" + server.getName() + "\" Created.");
-				setResponsePage(ManageServers.class);
-			}
-		});
-	}
+                // If this is the first Service of the kind, set it as default
+                DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+                DeployerConfig config = server.getDeployerConfig();
+                if (dc.getDefault(config) == null) {
+                    dc.switchDefault(config);
+                }
+                ConfigXstreamDao.persist(dc);
+                getSession().success(
+                    "Server \"" + server.getName() + "\" Created.");
+                setResponsePage(ManageServers.class);
+            }
+        });
+    }
 }

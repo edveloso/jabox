@@ -35,38 +35,42 @@ import org.jabox.webapp.validation.ShinyForm;
 @AuthorizeInstantiation("ADMIN")
 public class MyAccountPage extends BasePage {
 
-	public MyAccountPage() {
-		IModel<User> user = getUser();
-		Form<User> form = new ShinyForm<User>("form",
-				new CompoundPropertyModel<User>(user.getObject())) {
-			private static final long serialVersionUID = -8262391690702864764L;
+    public MyAccountPage() {
+        IModel<User> user = getUser();
+        Form<User> form =
+            new ShinyForm<User>("form", new CompoundPropertyModel<User>(
+                user.getObject())) {
+                private static final long serialVersionUID =
+                    -8262391690702864764L;
 
-			@Override
-			protected void onSubmit() {
-				onSave(getModelObject());
-			}
-		};
+                @Override
+                protected void onSubmit() {
+                    onSave(getModelObject());
+                }
+            };
 
-		add(form);
+        add(form);
 
-		form.add(new RequiredTextField<Project>("login"));
-		form.add(new RequiredTextField<Project>("firstName"));
-		form.add(new RequiredTextField<Project>("lastName"));
-		form.add(new PasswordTextField("password"));
-	}
+        form.add(new RequiredTextField<Project>("login"));
+        form.add(new RequiredTextField<Project>("firstName"));
+        form.add(new RequiredTextField<Project>("lastName"));
+        form.add(new PasswordTextField("password"));
+    }
 
-	private IModel<User> getUser() {
-		JaboxAuthenticatedWebSession session = (JaboxAuthenticatedWebSession) getSession();
-		String username = session.getUsername();
-		return new Model<User>(UserXstreamDao.getUser(username));
-	}
+    private IModel<User> getUser() {
+        JaboxAuthenticatedWebSession session =
+            (JaboxAuthenticatedWebSession) getSession();
+        String username = session.getUsername();
+        return new Model<User>(UserXstreamDao.getUser(username));
+    }
 
-	protected void onSave(User user) {
-		UserXstreamDao.persist(user);
-		setResponsePage(ManageUsers.class);
-	}
+    protected void onSave(final User user) {
+        UserXstreamDao.persist(user);
+        getSession().success("User \"" + user.getLogin() + "\" Saved.");
+        setResponsePage(ManageUsers.class);
+    }
 
-	protected void onCancel() {
-		setResponsePage(ManageUsers.class);
-	}
+    protected void onCancel() {
+        setResponsePage(ManageUsers.class);
+    }
 }

@@ -26,26 +26,29 @@ import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
 
 public class CreateUserLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+    private static final long serialVersionUID = -6076134805074401259L;
 
-	public CreateUserLink(final String id) {
-		super(id);
-	}
+    public CreateUserLink(final String id) {
+        super(id);
+    }
 
-	@Override
-	public void onClick() {
-		IModel<User> model = new Model<User>(new User());
-		setResponsePage(new EditUserPage(model) {
+    @Override
+    public void onClick() {
+        IModel<User> model = new Model<User>(new User());
+        setResponsePage(new EditUserPage(model) {
 
-			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
-			}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageUsers.class);
+            }
 
-			protected void onSave(final User user) {
-				UserXstreamDao.persist(user);
-				getSession().info("User \"" + user.getLogin() + "\" Created.");
-				setResponsePage(ManageUsers.class);
-			}
-		});
-	}
+            @Override
+            protected void onSave(final User user) {
+                UserXstreamDao.persist(user);
+                getSession().success(
+                    "User \"" + user.getLogin() + "\" Created.");
+                setResponsePage(ManageUsers.class);
+            }
+        });
+    }
 }
