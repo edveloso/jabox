@@ -37,46 +37,57 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(DeleteEntityButton.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(DeleteEntityButton.class);
 
-	private static final ResourceReference DELETE_IMG = new SharedResourceReference(
-			DeleteEntityButton.class, "edit-delete.png");
-	private static final long serialVersionUID = 1L;
-	private final T _item;
-	private Class<? extends Page> _responsePage;
+    private static final ResourceReference DELETE_IMG =
+        new SharedResourceReference(DeleteEntityButton.class,
+            "edit-delete.png");
 
-	public DeleteEntityButton(final String id, final T item,
-			final Class<? extends Page> responsePage) {
-		super(id, DELETE_IMG);
-		_item = item;
-		_responsePage = responsePage;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public DeleteEntityButton(final String id, final ListItem<T> item,
-			final Class<? extends Page> responsePage) {
-		this(id, item.getModelObject(), responsePage);
-	}
+    private final T _item;
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
-	@Override
-	public void onSubmit() {
-		LOGGER.info("Deleting entity");
-		if (User.class.isInstance(_item)) {
-			UserXstreamDao.deleteUser((User) _item);
-			getSession().info("User \"" + ((User) _item).getLogin() + "\" deleted.");
-		} else if (Container.class.isInstance(_item)) {
-			ContainerXstreamDao.deleteContainer((Container) _item);
-			getSession().info("Container \"" + ((Container) _item).getName() + "\" deleted.");
-		} else if (Server.class.isInstance(_item)) {
-			ServerXstreamDao.deleteServer((Server) _item);
-			getSession().info("Server \"" + ((Server) _item).getName() + "\" deleted.");
-		} else if (Project.class.isInstance(_item)) {
-			ProjectXstreamDao.deleteProject((Project) _item);
-			getSession().info("Project \"" + ((Project) _item).getName() + "\" deleted.");
-		}
-		setResponsePage(_responsePage);
-	}
+    private Class<? extends Page> _responsePage;
+
+    public DeleteEntityButton(final String id, final T item,
+            final Class<? extends Page> responsePage) {
+        super(id, DELETE_IMG);
+        _item = item;
+        _responsePage = responsePage;
+    }
+
+    public DeleteEntityButton(final String id, final ListItem<T> item,
+            final Class<? extends Page> responsePage) {
+        this(id, item.getModelObject(), responsePage);
+    }
+
+    /**
+     * Delete from persistent storage, commit transaction.
+     */
+    @Override
+    public void onSubmit() {
+        LOGGER.info("Deleting entity");
+        if (User.class.isInstance(_item)) {
+            UserXstreamDao.deleteUser((User) _item);
+            getSession().success(
+                "User \"" + ((User) _item).getLogin() + "\" deleted.");
+        } else if (Container.class.isInstance(_item)) {
+            ContainerXstreamDao.deleteContainer((Container) _item);
+            getSession().success(
+                "Container \"" + ((Container) _item).getName()
+                    + "\" deleted.");
+        } else if (Server.class.isInstance(_item)) {
+            ServerXstreamDao.deleteServer((Server) _item);
+            getSession().success(
+                "Server \"" + ((Server) _item).getName() + "\" deleted.");
+        } else if (Project.class.isInstance(_item)) {
+            ProjectXstreamDao.deleteProject((Project) _item);
+            getSession()
+                .success(
+                    "Project \"" + ((Project) _item).getName()
+                        + "\" deleted.");
+        }
+        setResponsePage(_responsePage);
+    }
 }

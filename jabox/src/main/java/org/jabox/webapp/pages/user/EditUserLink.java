@@ -27,29 +27,33 @@ import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
 
 public class EditUserLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+    private static final long serialVersionUID = -6076134805074401259L;
 
-	private final User _item;
+    private final User _item;
 
-	public EditUserLink(final String id, final User item) {
-		super(id);
-		_item = item;
-	}
+    public EditUserLink(final String id, final User item) {
+        super(id);
+        _item = item;
+    }
 
-	@Override
-	public void onClick() {
-		IModel<User> model = new Model<User>(_item);
-		setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(model)) {
+    @Override
+    public void onClick() {
+        IModel<User> model = new Model<User>(_item);
+        setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(
+            model)) {
 
-			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
-			}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageUsers.class);
+            }
 
-			protected void onSave(final User user) {
-				UserXstreamDao.persist(user);
-				getSession().info("User \"" + user.getLogin() + "\" Created.");
-				setResponsePage(ManageUsers.class);
-			}
-		});
-	}
+            @Override
+            protected void onSave(final User user) {
+                UserXstreamDao.persist(user);
+                getSession().success(
+                    "User \"" + user.getLogin() + "\" Saved.");
+                setResponsePage(ManageUsers.class);
+            }
+        });
+    }
 }

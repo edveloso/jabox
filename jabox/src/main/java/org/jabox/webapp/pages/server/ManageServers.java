@@ -21,7 +21,6 @@ package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.jabox.apis.ConnectorConfig;
@@ -36,6 +35,7 @@ import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.SCMConnectorList;
 
 /**
@@ -49,7 +49,8 @@ public class ManageServers extends BasePage {
     public ManageServers() {
         // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
-        final FeedbackPanel feedback = new FeedbackPanel("feedback");
+        final JaboxFeedbackPanel feedback =
+            new JaboxFeedbackPanel("feedback");
         feedback.setOutputMarkupId(true);
         add(feedback);
 

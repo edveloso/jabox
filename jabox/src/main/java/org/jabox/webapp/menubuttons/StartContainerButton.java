@@ -29,37 +29,40 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class StartContainerButton extends ImageButton {
-	private static final Logger LOGGER = LoggerFactory
-		.getLogger(StartContainerButton.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(StartContainerButton.class);
 
-	private static final ResourceReference START_IMG = new SharedResourceReference(
-			StartContainerButton.class, "play.png");
-	private static final long serialVersionUID = 1L;
-	private final Container _item;
-	private Class<? extends Page> _responsePage;
+    private static final ResourceReference START_IMG =
+        new SharedResourceReference(StartContainerButton.class, "play.png");
 
-	public StartContainerButton(final String id, final Container item,
-			final Class<? extends Page> responsePage) {
-		super(id, START_IMG);
-		_item = item;
-		_responsePage = responsePage;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public StartContainerButton(final String id,
-			final ListItem<Container> item,
-			final Class<? extends Page> responsePage) {
-		this(id, item.getModelObject(), responsePage);
-	}
+    private final Container _item;
 
-	@Override
-	public void onSubmit() {
+    private final Class<? extends Page> _responsePage;
+
+    public StartContainerButton(final String id, final Container item,
+            final Class<? extends Page> responsePage) {
+        super(id, START_IMG);
+        _item = item;
+        _responsePage = responsePage;
+    }
+
+    public StartContainerButton(final String id,
+            final ListItem<Container> item,
+            final Class<? extends Page> responsePage) {
+        this(id, item.getModelObject(), responsePage);
+    }
+
+    @Override
+    public void onSubmit() {
         LOGGER.info("Starting container: " + _item.getName());
-		_item.start();
-		info("Container \"" + _item.getName() + "\" Started.");
-	}
+        _item.start();
+        success("Container \"" + _item.getName() + "\" Started.");
+    }
 
-	@Override
-	public void onError() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void onError() {
+        // TODO Auto-generated method stub
+    }
 }

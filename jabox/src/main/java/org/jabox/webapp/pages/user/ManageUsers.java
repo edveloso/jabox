@@ -23,11 +23,11 @@ import java.util.List;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.UserList;
 
 /**
@@ -36,19 +36,19 @@ import org.jabox.webapp.utils.UserList;
 @AuthorizeInstantiation("ADMIN")
 public class ManageUsers extends BasePage {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ManageUsers() {
-		// Add a FeedbackPanel for displaying form messages
+    public ManageUsers() {
+        // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
-        final FeedbackPanel feedback = new FeedbackPanel("feedback");
-        feedback.setOutputMarkupId(true);
-        add(feedback);
+        final JaboxFeedbackPanel fb = new JaboxFeedbackPanel("feedback");
+        fb.setOutputMarkupId(true);
+        add(fb);
 
-		final List<User> users = UserXstreamDao.getUsers();
-		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
-		form.add(new UserList("users", users));
-		form.add(new CreateUserLink("createUser"));
-		add(form);
-	}
+        final List<User> users = UserXstreamDao.getUsers();
+        Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+        form.add(new UserList("users", users));
+        form.add(new CreateUserLink("createUser"));
+        add(form);
+    }
 }

@@ -22,14 +22,12 @@ package org.jabox.webapp.pages.container;
 import java.util.List;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.jabox.model.Container;
-import org.jabox.webapp.menubuttons.InfoImage;
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.ContainerList;
 
 /**
@@ -38,25 +36,23 @@ import org.jabox.webapp.utils.ContainerList;
 @AuthorizeInstantiation("ADMIN")
 public class ManageContainers extends BasePage {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ManageContainers() {
+    public ManageContainers() {
 
-		final List<Container> containers = ContainerXstreamDao.getContainers();
+        final List<Container> containers =
+            ContainerXstreamDao.getContainers();
 
-		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+        Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
-		// Add a FeedbackPanel for displaying form messages
+        // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
-        final FeedbackPanel feedback = new FeedbackPanel("feedback");
-        feedback.setOutputMarkupId(true);
-        add(feedback);
-        
-//		add(new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter(
-//				form)));
+        final JaboxFeedbackPanel fb = new JaboxFeedbackPanel("feedback");
+        fb.setOutputMarkupId(true);
+        add(fb);
 
-		form.add(new ContainerList("containers", containers));
-		form.add(new CreateContainerLink("createContainer"));
-		add(form);
-	}
+        form.add(new ContainerList("containers", containers));
+        form.add(new CreateContainerLink("createContainer"));
+        add(form);
+    }
 }

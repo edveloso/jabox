@@ -27,26 +27,29 @@ import org.jabox.model.Container;
 import org.jabox.webapp.pages.user.ManageUsers;
 
 public class CreateContainerLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+    private static final long serialVersionUID = -6076134805074401259L;
 
-	public CreateContainerLink(final String id) {
-		super(id);
-	}
+    public CreateContainerLink(final String id) {
+        super(id);
+    }
 
-	@Override
-	public void onClick() {
-		IModel<Container> model = new Model<Container>(new Container());
-		setResponsePage(new EditContainerPage(model) {
+    @Override
+    public void onClick() {
+        IModel<Container> model = new Model<Container>(new Container());
+        setResponsePage(new EditContainerPage(model) {
 
-			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
-			}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageUsers.class);
+            }
 
-			protected void onSave(final Container container) {
-				ContainerXstreamDao.persist(container);
-				getSession().info("Container \"" + container.getName() + "\" Created.");
-				setResponsePage(ManageContainers.class);
-			}
-		});
-	}
+            @Override
+            protected void onSave(final Container container) {
+                ContainerXstreamDao.persist(container);
+                getSession().success(
+                    "Container \"" + container.getName() + "\" Created.");
+                setResponsePage(ManageContainers.class);
+            }
+        });
+    }
 }
