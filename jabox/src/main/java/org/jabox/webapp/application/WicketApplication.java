@@ -27,6 +27,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.jabox.applicationcontext.InitializeDatabase;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
+import org.jabox.webapp.pages.Logout;
 import org.jabox.webapp.pages.MyAccountPage;
 import org.jabox.webapp.pages.container.EditContainerPage;
 import org.jabox.webapp.pages.container.ManageContainers;
@@ -61,6 +62,9 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
     @Override
     public void init() {
         super.init();
+        mountPage("/login", HomePage.class);
+        mountPage("/logout", Logout.class);
+
         mountPage("/tabs/", HeaderLinksPage.class);
         mountPage("/users/", ManageUsers.class);
         mountPage("/users/me", MyAccountPage.class);
@@ -94,6 +98,6 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
     @Override
     public Class<? extends WebPage> getHomePage() {
         LOGGER.debug("Locale: " + Locale.getDefault());
-        return HomePage.class;
+        return ManageServers.class;
     }
 }

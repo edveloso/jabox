@@ -19,16 +19,20 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.authroles.authentication.pages.SignOutPage;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
- * 
  * @author Administrator
- * 
  */
-public class Logout extends SignOutPage {
-	public Logout() {
-		// setRedirect(true);
-		setResponsePage(HomePage.class);
-	}
+public class Logout extends BasePage {
+    public Logout() {
+        this(null);
+    }
+
+    public Logout(final PageParameters parameters) {
+        add(new JaboxSignInPanel("signInPanel"));
+        // setResponsePage(HomePage.class);
+        getSession().invalidate();
+    }
+
 }
