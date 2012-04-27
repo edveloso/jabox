@@ -12,19 +12,20 @@
   <div class="row">
      <div class="span8 offset1">
   
-	<form id="myform" wicket:id="form" class="form-horizontal well">
+	<form id="myform" wicket:id="form" class="form-horizontal">
+	   <div class="well">
         <fieldset>
-
-        <input type="text" class="input-xlarge" wicket:id="login" />
-        <input type="text" class="input-xlarge" wicket:id="firstName" />
-        <input type="text" class="input-xlarge" wicket:id="lastName" />
-        <input type="password" class="input-xlarge" wicket:id="password" />
-
+       	 	<input type="text" class="input-xlarge" wicket:id="login" />
+       	 	<input type="text" class="input-xlarge" wicket:id="firstName" />
+        	<input type="text" class="input-xlarge" wicket:id="lastName" />
+    	    <input type="password" class="input-xlarge" wicket:id="password" />
+		</fieldset>
+	   </div>
+		
 		<div class="form-actions">
             <button type="submit" class="btn btn-primary">Save changes</button>
             <a class="btn" href="/users/">Cancel</a>
         </div>
-		</fieldset>
 	</form>
 	</div>
 </div>
