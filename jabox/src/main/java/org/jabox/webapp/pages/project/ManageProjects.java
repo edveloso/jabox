@@ -27,29 +27,29 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.jabox.model.Project;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseProjectsPage;
 import org.jabox.webapp.utils.ProjectList;
 
 /**
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageProjects extends BasePage {
+public class ManageProjects extends BaseProjectsPage {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ManageProjects() {
-		// Add a FeedbackPanel for displaying form messages
+    public ManageProjects() {
+        // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
         final FeedbackPanel feedback = new FeedbackPanel("feedback");
         feedback.setOutputMarkupId(true);
         add(feedback);
 
-		final List<Project> projects = ProjectXstreamDao.getProjects();
-		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+        final List<Project> projects = ProjectXstreamDao.getProjects();
+        Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
-		form.add(new ProjectList("projects", projects));
-		form.add(new CreateProjectLink("createProject"));
-		add(form);
-	}
+        form.add(new ProjectList("projects", projects));
+        form.add(new CreateProjectLink("createProject"));
+        add(form);
+    }
 }

@@ -27,32 +27,34 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Project;
 import org.jabox.model.User;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseUsersPage;
 import org.jabox.webapp.validation.ShinyForm;
 
 @AuthorizeInstantiation("ADMIN")
-public abstract class EditUserPage extends BasePage {
+public abstract class EditUserPage extends BaseUsersPage {
 
-	public EditUserPage(final IModel<User> user) {
-		Form<User> form = new ShinyForm<User>("form",
-				new CompoundPropertyModel<User>(user.getObject())) {
-			private static final long serialVersionUID = -8262391690702864764L;
+    public EditUserPage(final IModel<User> user) {
+        Form<User> form =
+            new ShinyForm<User>("form", new CompoundPropertyModel<User>(
+                user.getObject())) {
+                private static final long serialVersionUID =
+                    -8262391690702864764L;
 
-			@Override
-			protected void onSubmit() {
-				onSave(getModelObject());
-			}
-		};
+                @Override
+                protected void onSubmit() {
+                    onSave(getModelObject());
+                }
+            };
 
-		add(form);
+        add(form);
 
-		form.add(new RequiredTextField<Project>("login"));
-		form.add(new RequiredTextField<Project>("firstName"));
-		form.add(new RequiredTextField<Project>("lastName"));
-		form.add(new PasswordTextField("password"));
-	}
+        form.add(new RequiredTextField<Project>("login"));
+        form.add(new RequiredTextField<Project>("firstName"));
+        form.add(new RequiredTextField<Project>("lastName"));
+        form.add(new PasswordTextField("password"));
+    }
 
-	protected abstract void onSave(User article);
+    protected abstract void onSave(User article);
 
-	protected abstract void onCancel();
+    protected abstract void onCancel();
 }

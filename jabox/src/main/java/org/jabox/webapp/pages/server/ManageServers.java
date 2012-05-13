@@ -34,7 +34,7 @@ import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseServersPage;
 import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.SCMConnectorList;
 
@@ -42,7 +42,7 @@ import org.jabox.webapp.utils.SCMConnectorList;
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageServers extends BasePage {
+public class ManageServers extends BaseServersPage {
 
     private static final long serialVersionUID = 1L;
 

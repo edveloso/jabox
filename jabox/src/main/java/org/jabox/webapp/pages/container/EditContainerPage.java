@@ -33,40 +33,43 @@ import org.jabox.its.chiliproject.ChiliprojectServer;
 import org.jabox.its.jtrac.JtracServer;
 import org.jabox.model.Container;
 import org.jabox.mrm.artifactory.ArtifactoryServer;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseContainersPage;
 import org.jabox.webapp.validation.ShinyForm;
 
-public abstract class EditContainerPage extends BasePage {
+public abstract class EditContainerPage extends BaseContainersPage {
 
-	public EditContainerPage(final IModel<Container> user) {
-		Form<Container> form = new ShinyForm<Container>("form",
-				new CompoundPropertyModel<Container>(user.getObject())) {
-			private static final long serialVersionUID = -8262391690702864764L;
+    public EditContainerPage(final IModel<Container> user) {
+        Form<Container> form =
+            new ShinyForm<Container>("form",
+                    new CompoundPropertyModel<Container>(user.getObject())) {
+                private static final long serialVersionUID =
+                    -8262391690702864764L;
 
-			@Override
-			protected void onSubmit() {
-				onSave(getModelObject());
-			}
-		};
+                @Override
+                protected void onSubmit() {
+                    onSave(getModelObject());
+                }
+            };
 
-		add(form);
+        add(form);
 
-		form.add(new RequiredTextField<Container>("name"));
-		form.add(new RequiredTextField<Container>("port"));
-		form.add(new RequiredTextField<Container>("rmiPort"));
-		form.add(new RequiredTextField<Container>("ajpPort"));
-		form.add(new RequiredTextField<Container>("jvmArgs"));
+        form.add(new RequiredTextField<Container>("name"));
+        form.add(new RequiredTextField<Container>("port"));
+        form.add(new RequiredTextField<Container>("rmiPort"));
+        form.add(new RequiredTextField<Container>("ajpPort"));
+        form.add(new RequiredTextField<Container>("jvmArgs"));
 
-		List<EmbeddedServer> webapps = new ArrayList<EmbeddedServer>();
-		webapps.addAll(user.getObject().getServers());
-		webapps.add(new ArtifactoryServer());
-		webapps.add(new HudsonServer());
-		webapps.add(new JtracServer());
-		webapps.add(new ChiliprojectServer());
-		form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps", webapps));
-	}
+        List<EmbeddedServer> webapps = new ArrayList<EmbeddedServer>();
+        webapps.addAll(user.getObject().getServers());
+        webapps.add(new ArtifactoryServer());
+        webapps.add(new HudsonServer());
+        webapps.add(new JtracServer());
+        webapps.add(new ChiliprojectServer());
+        form.add(new CheckBoxMultipleChoice<EmbeddedServer>("webapps",
+            webapps));
+    }
 
-	protected abstract void onSave(Container container);
+    protected abstract void onSave(Container container);
 
-	protected abstract void onCancel();
+    protected abstract void onCancel();
 }

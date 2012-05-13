@@ -26,7 +26,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.jabox.model.Container;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseContainersPage;
 import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.ContainerList;
 
@@ -34,7 +34,7 @@ import org.jabox.webapp.utils.ContainerList;
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageContainers extends BasePage {
+public class ManageContainers extends BaseContainersPage {
 
     private static final long serialVersionUID = 1L;
 

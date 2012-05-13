@@ -26,37 +26,39 @@ import org.apache.wicket.model.IModel;
 import org.jabox.apis.Connector;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.BaseServersPage;
 import org.jabox.webapp.pages.DeployerPluginSelector;
 import org.jabox.webapp.validation.ShinyForm;
 
-public abstract class EditServerPage extends BasePage {
-	private static final long serialVersionUID = -5076249191943115296L;
+public abstract class EditServerPage extends BaseServersPage {
+    private static final long serialVersionUID = -5076249191943115296L;
 
-	public EditServerPage(final IModel<Server> server,
-			final Class<? extends Connector> connectorClass) {
-		Form<Server> form = new ShinyForm<Server>("form",
-				new CompoundPropertyModel<Server>(server.getObject())) {
-			private static final long serialVersionUID = -8262391690705860769L;
+    public EditServerPage(final IModel<Server> server,
+            final Class<? extends Connector> connectorClass) {
+        Form<Server> form =
+            new ShinyForm<Server>("form",
+                    new CompoundPropertyModel<Server>(server.getObject())) {
+                private static final long serialVersionUID =
+                    -8262391690705860769L;
 
-			@Override
-			protected void onSubmit() {
-				onSave(getModelObject());
-			}
-		};
+                @Override
+                protected void onSubmit() {
+                    onSave(getModelObject());
+                }
+            };
 
-		add(form);
+        add(form);
 
-		CompoundPropertyModel<Server> model = new CompoundPropertyModel<Server>(
-				server);
+        CompoundPropertyModel<Server> model =
+            new CompoundPropertyModel<Server>(server);
 
-		form.add(new RequiredTextField<Project>("name"));
+        form.add(new RequiredTextField<Project>("name"));
 
-		form.add(new DeployerPluginSelector("configuration", model,
-				connectorClass));
-	}
+        form.add(new DeployerPluginSelector("configuration", model,
+            connectorClass));
+    }
 
-	protected abstract void onSave(Server article);
+    protected abstract void onSave(Server article);
 
-	protected abstract void onCancel();
+    protected abstract void onCancel();
 }
