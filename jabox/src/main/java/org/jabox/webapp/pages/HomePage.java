@@ -27,16 +27,16 @@ import org.jabox.environment.Environment;
  */
 public class HomePage extends BasePage {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
-	 */
-	public HomePage(final PageParameters parameters) {
-		System.out.println("user.home: " + Environment.getBaseDir());
-		add(new JaboxSignInPanel("signInPanel"));
-	}
+    /**
+     * Constructor that is invoked when page is invoked without a session.
+     * 
+     * @param parameters
+     *            Page parameters
+     */
+    public HomePage(final PageParameters parameters) {
+        System.out.println("user.home: " + Environment.getBaseDir());
+        add(new JaboxSignInPanel("signInPanel"));
+    }
 }

@@ -9,6 +9,10 @@ public class JaboxBorder extends Border {
     private final HeaderLinksPanel headers;
 
     public JaboxBorder() {
+        this(1);
+    }
+
+    public JaboxBorder(final int menuIndex) {
         super("border");
         headers = new HeaderLinksPanel();
         addToBorder(headers);

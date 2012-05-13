@@ -13,19 +13,19 @@
 
         <fieldset>
 
-	<form id="myform" wicket:id="signInForm" class="form-horizontal well">
+	<form id="myform" wicket:id="signInForm" class="form-horizontal">
 
 		<legend>Login</legend>
 
 		<div class="alert alert-info">Default username and password are both "admin"</div>
 	
+		<fieldset class="well">
 		<input type="text" class="input-xlarge span3" id="mod_login_username" wicket:id="username" />
 		<input type="password" class="input-xlarge span3" id="mod_login_password" wicket:id="password" />
         <input type="checkbox" class="checkbox" id="mod_login_remember" wicket:id="rememberMe" /> 
 
-	      <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Log in</button>
-          </div>
+	    <button type="submit" class="btn btn-primary">Log in</button>
+		</fieldset>
 	</form>
 		</fieldset>
 	</div>
