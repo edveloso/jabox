@@ -33,7 +33,6 @@ public class LabelBehavior extends BorderBehavior {
                 return;
             }
 
-            String name = c.getClass().getName();
             StringResourceModel label =
                 new StringResourceModel(c.getId(), c.getPage(), null);
             c.getResponse().write(

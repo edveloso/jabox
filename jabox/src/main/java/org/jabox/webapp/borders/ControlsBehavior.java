@@ -27,6 +27,7 @@ public class ControlsBehavior extends BorderBehavior {
     @Override
     public void beforeRender(final Component c) {
         if (FormComponent.class.isInstance(c)) {
+            c.getResponse().write("<div class=\"controls\">");
             if ("picker".equals(c.getId())) {
                 return;
             }
@@ -43,6 +44,7 @@ public class ControlsBehavior extends BorderBehavior {
             if ("picker".equals(c.getId())) {
                 return;
             }
+            c.getResponse().write("</div>");
         }
         super.afterRender(c);
     }
