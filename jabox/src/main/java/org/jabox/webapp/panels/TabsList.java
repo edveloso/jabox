@@ -31,45 +31,45 @@ import org.apache.wicket.model.Model;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 public class TabsList extends PropertyListView<Tab> {
-	String _target;
-	/**
+    String _target;
+
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public TabsList(final String id, final List<Tab> projects) {
-		super(id, projects);
-	}
+    public TabsList(final String id, final List<Tab> projects) {
+        super(id, projects);
+    }
 
-	public TabsList(final String id, final List<Tab> projects,
-			final String target) {
-		super(id, projects);
-		_target = target;
-	}
+    public TabsList(final String id, final List<Tab> projects,
+            final String target) {
+        super(id, projects);
+        _target = target;
+    }
 
-	@Override
-	public void populateItem(final ListItem<Tab> listItem) {
-		final Tab tab = listItem.getModelObject();
+    @Override
+    public void populateItem(final ListItem<Tab> listItem) {
+        final Tab tab = listItem.getModelObject();
 
-		// Select the link
-		if (tab.isSelected()) {
-			listItem.add(new AttributeModifier("class", new Model<String>(
-					"selected")));
-		}
-		
-		
-		listItem.add(new TooltipModifier(tab.getTooltip()));
+        // Select the link
+        if (tab.isSelected()) {
+            listItem.add(new AttributeModifier("class", new Model<String>(
+                "active")));
+        }
 
-		BookmarkablePageLink<WebPage> externalLink = new BookmarkablePageLink<WebPage>(
-				"url", tab.getPageClass());
-		externalLink.add(new Label("title", tab.getTitle()));
+        listItem.add(new TooltipModifier(tab.getTooltip()));
 
-		// Add target to the link
-		if (_target != null) {
-			externalLink.add(new AttributeModifier("target", new Model<String>(
-					_target)));
-		}
+        BookmarkablePageLink<WebPage> externalLink =
+            new BookmarkablePageLink<WebPage>("url", tab.getPageClass());
+        externalLink.add(new Label("title", tab.getTitle()));
 
-		listItem.add(externalLink);
-	}
+        // Add target to the link
+        if (_target != null) {
+            externalLink.add(new AttributeModifier("target",
+                new Model<String>(_target)));
+        }
+
+        listItem.add(externalLink);
+    }
 }
