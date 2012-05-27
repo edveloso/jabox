@@ -26,17 +26,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
-
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation;
-import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation.Alignment;
-import org.apache.wicket.extensions.markup.html.tree.table.ColumnLocation.Unit;
-import org.apache.wicket.extensions.markup.html.tree.table.IColumn;
-import org.apache.wicket.extensions.markup.html.tree.table.PropertyTreeColumn;
-import org.apache.wicket.extensions.markup.html.tree.table.TreeTable;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
@@ -45,11 +36,11 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.jabox.application.ICreateProjectUtil;
-import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.pages.BaseProjectsPage;
 import org.jabox.webapp.validation.ShinyForm;
@@ -63,14 +54,8 @@ public class CreateProject extends BaseProjectsPage {
     @Inject
     private ICreateProjectUtil _createProjectUtil;
 
-    private TreeTable _tree;
-
     public CreateProject() {
         final Project _project = new Project();
-        MavenArchetype ma =
-            new MavenArchetype("org.apache.maven.archetypes",
-                "maven-archetype-webapp", "LATEST");
-        _project.setMavenArchetype(ma);
 
         // Add a form with an onSumbit implementation that sets a message
         Form<Project> form = new ShinyForm<Project>("form") {
@@ -79,16 +64,6 @@ public class CreateProject extends BaseProjectsPage {
 
             @Override
             protected void onSubmit() {
-                if (_tree.getTreeState().getSelectedNodes().size() == 0) {
-                    error("Select an archetype first.");
-                    return;
-                }
-                // Pass the MavenArchetype from TreeMap to Project
-                _project
-                    .setMavenArchetype((MavenArchetype) ((DefaultMutableTreeNode) _tree
-                        .getTreeState().getSelectedNodes().toArray()[0])
-                        .getUserObject());
-
                 // We need to persist twice because the id is necessary for the
                 // creation of the project.
                 ProjectXstreamDao.persist(_project);
@@ -117,66 +92,54 @@ public class CreateProject extends BaseProjectsPage {
             new RequiredTextField<Project>("description");
         form.add(description);
 
-        List<MavenArchetype> connectors = new ArrayList<MavenArchetype>();
-        connectors.add(ma);
-        connectors = fillArchetypes(connectors);
-        System.out.println("connectors: " + ":" + connectors);
+        RequiredTextField<String> archetype =
+            new RequiredTextField<String>("archetype");
+        String dataSource = generateDataSource();
+        archetype.add(new AttributeAppender("data-source",
+            new Model<String>(dataSource), " "));
+        form.add(archetype);
+
+        // Description
+        // RequiredTextField<Project> mavenArchetype =
+        // new RequiredTextField<Project>("mavenArchetype");
+        // form.add(mavenArchetype);
 
         form.add(new TextField<Project>("sourceEncoding"));
         form.add(new CheckBox("signArtifactReleases"));
-
-        IColumn columns[] =
-            new IColumn[] {
-                    new PropertyTreeColumn<String>(new ColumnLocation(
-                        Alignment.LEFT, 30, Unit.EM), "groupId",
-                        "userObject.archetypeGroupId"),
-                    new PropertyTreeColumn<String>(new ColumnLocation(
-                        Alignment.LEFT, 30, Unit.EM), "artifactId",
-                        "userObject.archetypeArtifactId"),
-                    new PropertyTreeColumn<String>(new ColumnLocation(
-                        Alignment.LEFT, 20, Unit.EM), "version",
-                        "userObject.archetypeVersion"), };
-
-        _tree =
-            new TreeTable("treeTable", convertToTreeModel(connectors),
-                columns);
-        _tree.getTreeState().setAllowSelectMultiple(false);
-        _tree.setRootLess(true);
-        form.add(_tree);
-        _tree.getTreeState().expandAll();
     }
 
-    private List<MavenArchetype> fillArchetypes(
-            final List<MavenArchetype> connectors) {
+    private String generateDataSource() {
+        StringBuffer data = new StringBuffer();
+        data.append("[");
+        List<String> archetypes = new ArrayList<String>();
         InputStream is =
-            CreateProject.class.getResourceAsStream("archetypes.csv");
+            CreateProject.class
+                .getResourceAsStream("/org/jabox/webapp/pages/project/archetypes.csv");
         BufferedReader reader =
             new BufferedReader(new InputStreamReader(is));
         String thisLine;
         try {
             while ((thisLine = reader.readLine()) != null) {
-                connectors.add(new MavenArchetype(thisLine));
+                archetypes.add(thisLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return connectors;
-    }
-
-    public static TreeModel convertToTreeModel(
-            final List<MavenArchetype> connectors) {
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
-        addToTreeModel(rootNode, connectors);
-        TreeModel model = new DefaultTreeModel(rootNode);
-        return model;
-    }
-
-    private static void addToTreeModel(
-            final DefaultMutableTreeNode parent,
-            final List<MavenArchetype> connectors) {
-        for (MavenArchetype obj : connectors) {
-            parent.add(new DefaultMutableTreeNode(obj));
+        boolean addComma = false;
+        for (String archetype : archetypes) {
+            if (!addComma) {
+                addComma = true;
+            } else {
+                data.append(",");
+            }
+            data.append("\"");
+            data.append(archetype);
+            data.append("\"");
         }
+
+        data.append("]");
+        return data.toString();
     }
+
 }

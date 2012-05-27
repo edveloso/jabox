@@ -29,94 +29,104 @@ import org.apache.wicket.persistence.domain.BaseEntity;
  * @author dimitris
  */
 public class Project extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private String name;
-	private String description;
-	private String scmUrl;
-	private String sourceEncoding = "UTF-8";
-	private boolean signArtifactReleases = false;
+    private static final long serialVersionUID = 1L;
 
-	private MavenArchetype mavenArchetype;
-	private String scmMavenPrefix;
+    private String name;
 
-	public MavenArchetype getMavenArchetype() {
-		return mavenArchetype;
-	}
+    private String description;
 
-	public void setMavenArchetype(final MavenArchetype mavenArchetype) {
-		this.mavenArchetype = mavenArchetype;
-	}
+    private String scmUrl;
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    private String sourceEncoding = "UTF-8";
 
-	public String getName() {
-		return name;
-	}
+    private boolean signArtifactReleases = false;
 
-	@Override
-	public String toString() {
-		return name;
-	}
+    private String archetype;
 
-	public void setDescription(final String description) {
-		this.description = description;
-	}
+    private String scmMavenPrefix;
 
-	public String getDescription() {
-		return description;
-	}
+    public MavenArchetype getMavenArchetype() {
+        return new MavenArchetype(archetype);
+    }
 
-	public void setScmUrl(final String scmUrl) {
-		this.scmUrl = scmUrl;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public String getScmUrl() {
-		return scmUrl;
-	}
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Returns an encoded url for use in maven's pom.xml. Examples of these
-	 * formats:
-	 * <p>
-	 * scm:svn:file:///svn/root/module
-	 * scm:svn:file://localhost/path_to_repository
-	 * scm:svn:file://my_server/path_to_repository
-	 * scm:svn:http://svn.apache.org/svn/root/module
-	 * scm:svn:https://username@svn.apache.org/svn/root/module
-	 * scm:svn:https://username:password@svn.apache.org/svn/root/module
-	 * <p>
-	 * More information can be found here:
-	 * http://maven.apache.org/scm/scms-overview.html
-	 * 
-	 * @return SCM url encoded for maven's pom.xml
-	 */
-	public String getScmMavenUrl() {
-		return getScmMavenPrefix() + getScmUrl();
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 
-	public void setSourceEncoding(String sourceEncoding) {
-		this.sourceEncoding = sourceEncoding;
-	}
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 
-	public String getSourceEncoding() {
-		return sourceEncoding;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setSignArtifactReleases(boolean signArtifactReleases) {
-		this.signArtifactReleases = signArtifactReleases;
-	}
+    public void setScmUrl(final String scmUrl) {
+        this.scmUrl = scmUrl;
+    }
 
-	public boolean isSignArtifactReleases() {
-		return signArtifactReleases;
-	}
+    public String getScmUrl() {
+        return scmUrl;
+    }
 
-	public void setScmMavenPrefix(final String scmMavenPrefix) {
-		this.scmMavenPrefix = scmMavenPrefix;
-	}
+    /**
+     * Returns an encoded url for use in maven's pom.xml. Examples of these
+     * formats:
+     * <p>
+     * scm:svn:file:///svn/root/module
+     * scm:svn:file://localhost/path_to_repository
+     * scm:svn:file://my_server/path_to_repository
+     * scm:svn:http://svn.apache.org/svn/root/module
+     * scm:svn:https://username@svn.apache.org/svn/root/module
+     * scm:svn:https://username:password@svn.apache.org/svn/root/module
+     * <p>
+     * More information can be found here:
+     * http://maven.apache.org/scm/scms-overview.html
+     * 
+     * @return SCM url encoded for maven's pom.xml
+     */
+    public String getScmMavenUrl() {
+        return getScmMavenPrefix() + getScmUrl();
+    }
 
-	public String getScmMavenPrefix() {
-		return scmMavenPrefix;
-	}
+    public void setSourceEncoding(final String sourceEncoding) {
+        this.sourceEncoding = sourceEncoding;
+    }
+
+    public String getSourceEncoding() {
+        return sourceEncoding;
+    }
+
+    public void setSignArtifactReleases(final boolean signArtifactReleases) {
+        this.signArtifactReleases = signArtifactReleases;
+    }
+
+    public boolean isSignArtifactReleases() {
+        return signArtifactReleases;
+    }
+
+    public void setScmMavenPrefix(final String scmMavenPrefix) {
+        this.scmMavenPrefix = scmMavenPrefix;
+    }
+
+    public String getScmMavenPrefix() {
+        return scmMavenPrefix;
+    }
+
+    public String getArchetype() {
+        return archetype;
+    }
+
+    public void setArchetype(final String archetype) {
+        this.archetype = archetype;
+    }
 }

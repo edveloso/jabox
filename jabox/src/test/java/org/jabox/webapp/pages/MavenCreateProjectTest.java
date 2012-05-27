@@ -26,28 +26,27 @@ import junit.framework.TestCase;
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.jabox.application.MavenCreateProject;
-import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 
 public class MavenCreateProjectTest extends TestCase {
 
-	public void testCreateProject() throws IOException {
+    public void testCreateProject() throws IOException {
 
-		Project project = new Project();
-		project.setName("helloWorld");
+        Project project = new Project();
+        project.setName("helloWorld");
 
-		// MavenCreateProject.createProject(project);
-	}
+        // MavenCreateProject.createProject(project);
+    }
 
-	public void testCreateProjectWithMavenCore() throws IOException,
-			InvalidRepositoryException, MavenExecutionException {
+    public void testCreateProjectWithMavenCore()
+            throws IOException, InvalidRepositoryException,
+            MavenExecutionException {
 
-		Project project = new Project();
-		project.setName("helloWorld");
+        Project project = new Project();
+        project.setName("helloWorld");
 
-		MavenArchetype ma = new MavenArchetype("org.apache.wicket",
-				"wicket-archetype-quickstart", "1.3.3");
-		project.setMavenArchetype(ma);
-		 MavenCreateProject.createProjectWithMavenCore(project, "C:/tmp/");
-	}
+        project
+            .setArchetype("org.apache.wicket:wicket-archetype-quickstart:1.3.3");
+        MavenCreateProject.createProjectWithMavenCore(project, "C:/tmp/");
+    }
 }
