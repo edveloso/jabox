@@ -26,27 +26,25 @@ import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 
 public class ChiliprojectServer extends AbstractEmbeddedServer {
-	private static final long serialVersionUID = 9207781259797681188L;
-	private final String version = "3.0.0";
+    private static final long serialVersionUID = 9207781259797681188L;
 
-	public static void main(final String[] args) throws Exception {
-		new ChiliprojectServer().startServerAndWait();
-	}
+    private final String version = "3.0.0";
 
-	@Override
-	public String getServerName() {
-		return "chiliProject";
-	}
+    @Override
+    public String getServerName() {
+        return "chiliProject";
+    }
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the nexus.war
-		File war = new File(downloadsDir, "chiliproject.war");
-		String url = "http://www.jabox.org/repository/releases/org/chiliproject/chiliproject/"
-				+ version + "/chiliproject-" + version + ".war";
-		war = DownloadHelper.downloadFile(url, war);
-		return war.getAbsolutePath();
-	}
+        // Download the nexus.war
+        File war = new File(downloadsDir, "chiliproject.war");
+        String url =
+            "http://www.jabox.org/repository/releases/org/chiliproject/chiliproject/"
+                + version + "/chiliproject-" + version + ".war";
+        war = DownloadHelper.downloadFile(url, war);
+        return war.getAbsolutePath();
+    }
 }

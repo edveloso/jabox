@@ -33,118 +33,80 @@ import java.util.zip.ZipFile;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JtracServer extends AbstractEmbeddedServer {
-	private static final String URL = "http://sourceforge.net/projects/j-trac/files/jtrac/2.0/jtrac-2.0.zip/download";
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(JtracServer.class);
+    private static final long serialVersionUID = 6420497272615076716L;
 
-	public static void main(final String[] args) {
-		JtracServer jtracServer = new JtracServer();
-		startJtracWar(new File(jtracServer.getWarPath()));
-	}
+    private static final String URL =
+        "http://sourceforge.net/projects/j-trac/files/jtrac/2.0/jtrac-2.0.zip/download";
 
-	@Override
-	protected boolean getParentLoaderPriority() {
-		return true;
-	}
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(JtracServer.class);
 
-	private static void startJtracWar(final File jtracWar) {
-		Server server = new Server();
-		SocketConnector connector = new SocketConnector();
-		// Set some timeout options to make debugging easier.
-		connector.setMaxIdleTime(1000 * 60 * 60);
-		connector.setSoLingerTime(-1);
-		connector.setPort(9091);
-		server.setConnectors(new Connector[] { connector });
+    @Override
+    protected boolean getParentLoaderPriority() {
+        return true;
+    }
 
-		WebAppContext bb = new WebAppContext();
-		bb.setServer(server);
-		bb.setContextPath("/");
-		String absolutePath = jtracWar.getAbsolutePath();
-		bb.setWar(absolutePath);
-		bb.setParentLoaderPriority(true);
+    public static File retrieveJtracWar(final File jtracZip) {
+        try {
+            ZipFile zip = new ZipFile(jtracZip);
+            ZipEntry entry = zip.getEntry("jtrac/jtrac.war");
+            InputStream is = zip.getInputStream(entry);
+            BufferedInputStream bin = null;
+            BufferedOutputStream bout = null;
+            bin = new BufferedInputStream(is);
+            File jtracWar = File.createTempFile("jtrac", ".war");
+            jtracWar.deleteOnExit();
+            bout =
+                new BufferedOutputStream(new FileOutputStream(jtracWar));
+            while (true) {
+                int datum = bin.read();
+                if (datum == -1) {
+                    break;
+                }
+                bout.write(datum);
+            }
+            bout.flush();
+            return jtracWar;
+        } catch (ZipException e) {
+            LOGGER.error("Zip Exception thrown", e);
+        } catch (IOException e) {
+            LOGGER.error("IO Exception thrown", e);
+        }
+        return null;
+    }
 
-		server.addHandler(bb);
-		server.addHandler(bb);
+    public static void copy(final InputStream in, final OutputStream out)
+            throws IOException {
 
-		try {
-			System.out
-					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
-			server.start();
-			while (System.in.available() == 0) {
-				Thread.sleep(5000);
-			}
-			server.stop();
-			server.join();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(100);
-		}
-	}
+        BufferedInputStream bin = new BufferedInputStream(in);
+        BufferedOutputStream bout = new BufferedOutputStream(out);
 
-	public static File retrieveJtracWar(final File jtracZip) {
-		try {
-			ZipFile zip = new ZipFile(jtracZip);
-			ZipEntry entry = zip.getEntry("jtrac/jtrac.war");
-			InputStream is = zip.getInputStream(entry);
-			BufferedInputStream bin = null;
-			BufferedOutputStream bout = null;
-			bin = new BufferedInputStream(is);
-			File jtracWar = File.createTempFile("jtrac", ".war");
-			jtracWar.deleteOnExit();
-			bout = new BufferedOutputStream(new FileOutputStream(jtracWar));
-			while (true) {
-				int datum = bin.read();
-				if (datum == -1) {
-					break;
-				}
-				bout.write(datum);
-			}
-			bout.flush();
-			return jtracWar;
-		} catch (ZipException e) {
-			LOGGER.error("Zip Exception thrown", e);
-		} catch (IOException e) {
-			LOGGER.error("IO Exception thrown", e);
-		}
-		return null;
-	}
+        while (true) {
+            int datum = bin.read();
+            if (datum == -1) {
+                break;
+            }
+            bout.write(datum);
+        }
+        bout.flush();
+    }
 
-	public static void copy(final InputStream in, final OutputStream out)
-			throws IOException {
+    @Override
+    public String getServerName() {
+        return "jtrac";
+    }
 
-		BufferedInputStream bin = new BufferedInputStream(in);
-		BufferedOutputStream bout = new BufferedOutputStream(out);
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-		while (true) {
-			int datum = bin.read();
-			if (datum == -1) {
-				break;
-			}
-			bout.write(datum);
-		}
-		bout.flush();
-	}
-
-	@Override
-	public String getServerName() {
-		return "jtrac";
-	}
-
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
-
-		File zipFile = new File(downloadsDir, "jtrac.zip");
-		zipFile = DownloadHelper.downloadFile(URL, zipFile);
-		File jtracWar = retrieveJtracWar(zipFile);
-		return jtracWar.getAbsolutePath();
-	}
+        File zipFile = new File(downloadsDir, "jtrac.zip");
+        zipFile = DownloadHelper.downloadFile(URL, zipFile);
+        File jtracWar = retrieveJtracWar(zipFile);
+        return jtracWar.getAbsolutePath();
+    }
 }

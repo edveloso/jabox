@@ -92,11 +92,11 @@ public class CreateProject extends BaseProjectsPage {
                     error("Error creating project!");
                     return;
                 } catch (RuntimeException e) {
-                    error("Error creating project!");
+                    error("Error creating project! Maybe the Container is not started yet?");
                     return;
                 }
                 ProjectXstreamDao.persist(_project);
-                info("Project \"" + _project.getName() + "\" Created.");
+                success("Project \"" + _project.getName() + "\" Created.");
             }
         };
 

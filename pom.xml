@@ -85,7 +85,6 @@
 	</distributionManagement>
 	<properties>
 		<wicket.version>1.5.1</wicket.version>
-		<jetty.version>6.1.15</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>

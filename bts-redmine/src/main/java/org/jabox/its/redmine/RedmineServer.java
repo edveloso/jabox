@@ -30,70 +30,68 @@ import org.jabox.utils.DownloadHelper;
 import org.jabox.utils.Unzip;
 
 public class RedmineServer extends AbstractEmbeddedServer {
-	private static final long serialVersionUID = 9207781259797681188L;
-	private final String version = "1.3.0";
+    private static final long serialVersionUID = 9207781259797681188L;
 
-	public List<String> plugins = getDefaultPlugins();
+    private final String version = "1.3.0";
 
-	private void injectPlugins() {
-		for (String plugin : plugins) {
-			injectPlugin(plugin);
-		}
-	}
+    public List<String> plugins = getDefaultPlugins();
 
-	private void injectPlugin(final String plugin) {
-		// File dest = new File(Environment.getHudsonHomeDir(), resource);
+    private void injectPlugins() {
+        for (String plugin : plugins) {
+            injectPlugin(plugin);
+        }
+    }
 
-		String type = plugin.split(";")[0];
-		String url = plugin.split(";")[1];
-		String directory = plugin.split(";")[2];
+    private void injectPlugin(final String plugin) {
+        // File dest = new File(Environment.getHudsonHomeDir(), resource);
 
-		if ("zip".equals(type)) {
-			File outputFile = new File(Environment.getDownloadsDir(), directory
-					+ ".zip");
-			File file = DownloadHelper.downloadFile(url, outputFile);
-			try {
-				Unzip.unzip(file, getRedminePluginDir());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        String type = plugin.split(";")[0];
+        String url = plugin.split(";")[1];
+        String directory = plugin.split(";")[2];
 
-	private static File getRedminePluginDir() {
-		return new File(Environment.getRedmineHomeDir(), "vendor/plugins");
-	}
+        if ("zip".equals(type)) {
+            File outputFile =
+                new File(Environment.getDownloadsDir(), directory + ".zip");
+            File file = DownloadHelper.downloadFile(url, outputFile);
+            try {
+                Unzip.unzip(file, getRedminePluginDir());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public static void main(final String[] args) throws Exception {
-		new RedmineServer().startServerAndWait();
-	}
+    private static File getRedminePluginDir() {
+        return new File(Environment.getRedmineHomeDir(), "vendor/plugins");
+    }
 
-	@Override
-	public String getServerName() {
-		return "redmine";
-	}
+    @Override
+    public String getServerName() {
+        return "redmine";
+    }
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the nexus.war
-		File war = new File(downloadsDir, "redmine.war");
-		String url = "http://www.jabox.org/repository/releases/org/redmine/redmine/"
-				+ version + "/redmine-" + version + ".war";
-		war = DownloadHelper.downloadFile(url, war);
-		injectPlugins();
-		return war.getAbsolutePath();
-	}
+        // Download the nexus.war
+        File war = new File(downloadsDir, "redmine.war");
+        String url =
+            "http://www.jabox.org/repository/releases/org/redmine/redmine/"
+                + version + "/redmine-" + version + ".war";
+        war = DownloadHelper.downloadFile(url, war);
+        injectPlugins();
+        return war.getAbsolutePath();
+    }
 
-	/**
-	 * @return
-	 */
-	private List<String> getDefaultPlugins() {
-		List<String> pl = new ArrayList<String>();
-//		pl.add("zip;http://dev.holgerjust.de/attachments/download/41/redmine_opensearch_0.1.zip;redmine_opensearch");
-//		pl.add("zip;https://github.com/thumbtack-technology/redmine-issue-hot-buttons/zipball/0.4.1;issue_hot_buttons_plugin");
-		return pl;
-	}
+    /**
+     * @return
+     */
+    private List<String> getDefaultPlugins() {
+        List<String> pl = new ArrayList<String>();
+        // pl.add("zip;http://dev.holgerjust.de/attachments/download/41/redmine_opensearch_0.1.zip;redmine_opensearch");
+        // pl.add("zip;https://github.com/thumbtack-technology/redmine-issue-hot-buttons/zipball/0.4.1;issue_hot_buttons_plugin");
+        return pl;
+    }
 
 }

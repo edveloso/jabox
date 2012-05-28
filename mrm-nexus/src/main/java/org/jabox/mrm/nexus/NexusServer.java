@@ -29,26 +29,25 @@ import org.jabox.utils.DownloadHelper;
  * 
  */
 public class NexusServer extends AbstractEmbeddedServer {
-	private final String version = "1.9.2.3";
+    private static final long serialVersionUID = -2159722560362413951L;
 
-	public static void main(final String[] args) throws Exception {
-		new NexusServer().startServerAndWait();
-	}
+    private final String version = "1.9.2.3";
 
-	@Override
-	public String getServerName() {
-		return "nexus";
-	}
+    @Override
+    public String getServerName() {
+        return "nexus";
+    }
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the nexus.war
-		File zipFile = new File(downloadsDir, "nexus.war");
-		String url = "http://nexus.sonatype.org/downloads/all/nexus-webapp-"
-				+ version + ".war";
-		zipFile = DownloadHelper.downloadFile(url, zipFile);
-		return zipFile.getAbsolutePath();
-	}
+        // Download the nexus.war
+        File zipFile = new File(downloadsDir, "nexus.war");
+        String url =
+            "http://nexus.sonatype.org/downloads/all/nexus-webapp-"
+                + version + ".war";
+        zipFile = DownloadHelper.downloadFile(url, zipFile);
+        return zipFile.getAbsolutePath();
+    }
 }

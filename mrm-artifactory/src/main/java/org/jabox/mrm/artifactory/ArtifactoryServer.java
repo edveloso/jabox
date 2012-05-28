@@ -29,25 +29,23 @@ import org.jabox.utils.DownloadHelper;
  * 
  */
 public class ArtifactoryServer extends AbstractEmbeddedServer {
+    private static final long serialVersionUID = -1351339781795542014L;
 
-	private static final String URL = "http://sourceforge.net/projects/artifactory/files/artifactory/2.1/artifactory-2.1.0.war/download";
+    private static final String URL =
+        "http://sourceforge.net/projects/artifactory/files/artifactory/2.1/artifactory-2.1.0.war/download";
 
-	public static void main(final String[] args) throws Exception {
-		new ArtifactoryServer().startServerAndWait();
-	}
+    @Override
+    public String getServerName() {
+        return "artifactory";
+    }
 
-	@Override
-	public String getServerName() {
-		return "artifactory";
-	}
+    @Override
+    public String getWarPath() {
+        File downloadsDir = Environment.getDownloadsDir();
 
-	@Override
-	public String getWarPath() {
-		File downloadsDir = Environment.getDownloadsDir();
-
-		// Download the artifactory.war
-		File zipFile = new File(downloadsDir, "artifactory.war");
-		zipFile = DownloadHelper.downloadFile(URL, zipFile);
-		return zipFile.getAbsolutePath();
-	}
+        // Download the artifactory.war
+        File zipFile = new File(downloadsDir, "artifactory.war");
+        zipFile = DownloadHelper.downloadFile(URL, zipFile);
+        return zipFile.getAbsolutePath();
+    }
 }

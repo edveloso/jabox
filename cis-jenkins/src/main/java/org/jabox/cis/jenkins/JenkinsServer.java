@@ -38,103 +38,107 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JenkinsServer extends AbstractEmbeddedServer {
-	private static final long serialVersionUID = 6774781526963880878L;
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(JenkinsServer.class);
+    private static final long serialVersionUID = 6774781526963880878L;
 
-	private final String version = "1.436";
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(JenkinsServer.class);
 
-	public static void main(final String[] args) throws Exception {
-		new JenkinsServer().startServerAndWait();
-	}
+    private final String version = "1.436";
 
-	public String getServerName() {
-		return "jenkins";
-	}
+    public String getServerName() {
+        return "jenkins";
+    }
 
-	@Override
-	public String getWarPath() {
-		injectPlugins();
-		injectConfigurations();
-		File downloadsDir = Environment.getDownloadsDir();
+    @Override
+    public String getWarPath() {
+        injectPlugins();
+        injectConfigurations();
+        File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the jenkins.war
-		File war = new File(downloadsDir, "jenkins.war");
-		String url = "http://mirrors.jenkins-ci.org/war/" + version
-				+ "/jenkins.war";
-		war = DownloadHelper.downloadFile(url, war);
-		return war.getAbsolutePath();
-	}
+        // Download the jenkins.war
+        File war = new File(downloadsDir, "jenkins.war");
+        String url =
+            "http://mirrors.jenkins-ci.org/war/" + version
+                + "/jenkins.war";
+        war = DownloadHelper.downloadFile(url, war);
+        return war.getAbsolutePath();
+    }
 
-	private void injectConfigurations() {
-		injectConfiguration("hudson.tasks.Maven.xml");
-		injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
-	}
+    private void injectConfigurations() {
+        injectConfiguration("hudson.tasks.Maven.xml");
+        injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
+    }
 
-	public List<String> plugins = getDefaultPlugins();
+    public List<String> plugins = getDefaultPlugins();
 
-	public void injectPlugins() {
-		for (String plugin : plugins) {
-			injectPlugin(plugin);
-		}
-	}
+    public void injectPlugins() {
+        for (String plugin : plugins) {
+            injectPlugin(plugin);
+        }
+    }
 
-	/**
-	 * @return
-	 */
-	private List<String> getDefaultPlugins() {
-		List<String> defaultPlugins = new ArrayList<String>();
+    /**
+     * @return
+     */
+    private List<String> getDefaultPlugins() {
+        List<String> defaultPlugins = new ArrayList<String>();
 
-		defaultPlugins.add("analysis-core:1.14");
-		defaultPlugins.add("dry:1.5");
-		defaultPlugins.add("pmd:3.10");
-		defaultPlugins.add("findbugs:4.14");
-		defaultPlugins.add("checkstyle:3.10");
-		defaultPlugins.add("m2release:0.6.1");
-		defaultPlugins.add("redmine:0.9");
-		defaultPlugins.add("git:1.1.3");
-		defaultPlugins.add("claim:1.7");
-		defaultPlugins.add("ci-game:1.17");
-		defaultPlugins.add("sonar:1.6.1");
-		defaultPlugins.add("android-emulator:1.18");
+        defaultPlugins.add("analysis-core:1.14");
+        defaultPlugins.add("dry:1.5");
+        defaultPlugins.add("pmd:3.10");
+        defaultPlugins.add("findbugs:4.14");
+        defaultPlugins.add("checkstyle:3.10");
+        defaultPlugins.add("m2release:0.6.1");
+        defaultPlugins.add("redmine:0.9");
+        defaultPlugins.add("git:1.1.3");
+        defaultPlugins.add("claim:1.7");
+        defaultPlugins.add("ci-game:1.17");
+        defaultPlugins.add("sonar:1.6.1");
+        defaultPlugins.add("android-emulator:1.18");
 
-		return defaultPlugins;
-	}
+        return defaultPlugins;
+    }
 
-	private static void injectConfiguration(final String resource) {
-		File dest = new File(Environment.getHudsonHomeDir(), resource);
+    private static void injectConfiguration(final String resource) {
+        File dest = new File(Environment.getHudsonHomeDir(), resource);
 
-		if (!dest.exists()) {
-			DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-			InputStream is = JenkinsServer.class.getResourceAsStream(resource);
+        if (!dest.exists()) {
+            DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+            InputStream is =
+                JenkinsServer.class.getResourceAsStream(resource);
 
-			Map<String, String> values = new HashMap<String, String>();
-			values.put("${sonar.host.url}", dc.getCqm().getServer().getUrl());
+            Map<String, String> values = new HashMap<String, String>();
+            values.put("${sonar.host.url}", dc.getCqm().getServer()
+                .getUrl());
 
-			try {
-				String data = SettingsModifier.parseInputStream(is, values);
-				FileUtils.writeStringToFile(dest, data);
-			} catch (IOException e) {
-				LOGGER.error("Error writting: " + dest.getAbsolutePath(), e);
-			}
-		}
-	}
+            try {
+                String data =
+                    SettingsModifier.parseInputStream(is, values);
+                FileUtils.writeStringToFile(dest, data);
+            } catch (IOException e) {
+                LOGGER.error("Error writting: " + dest.getAbsolutePath(),
+                    e);
+            }
+        }
+    }
 
-	private static void injectPlugin(final String plugin) {
-		String artifactId = plugin.replaceAll(":.*", "");
-		String version = plugin.replaceAll(".*:", "");
-		File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
-		dest = DownloadHelper.downloadFile(
-				"http://updates.jenkins-ci.org/download/plugins/" + artifactId
-						+ "/" + version + "/" + artifactId + ".hpi", dest);
-	}
+    private static void injectPlugin(final String plugin) {
+        String artifactId = plugin.replaceAll(":.*", "");
+        String version = plugin.replaceAll(".*:", "");
+        File dest = new File(getJenkinsPluginDir(), artifactId + ".hpi");
+        dest =
+            DownloadHelper.downloadFile(
+                "http://updates.jenkins-ci.org/download/plugins/"
+                    + artifactId + "/" + version + "/" + artifactId
+                    + ".hpi", dest);
+    }
 
-	private static File getJenkinsPluginDir() {
-		return new File(Environment.getHudsonHomeDir(), "plugins");
-	}
+    private static File getJenkinsPluginDir() {
+        return new File(Environment.getHudsonHomeDir(), "plugins");
+    }
 
-	@Override
-	public String toString() {
-		return getServerName();
-	}
+    @Override
+    public String toString() {
+        return getServerName();
+    }
 }

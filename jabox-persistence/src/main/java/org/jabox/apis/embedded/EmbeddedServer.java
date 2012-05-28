@@ -20,15 +20,12 @@
 package org.jabox.apis.embedded;
 
 public interface EmbeddedServer {
-	void startServer();
+    String getWarPath();
 
-	String getWarPath();
-
-	/**
-	 * 
-	 * @return The server Name that will be used as contextPath on the Servlet
-	 *         container.
-	 */
-	String getServerName();
+    /**
+     * @return The server Name that will be used as contextPath on the Servlet
+     *         container.
+     */
+    String getServerName();
 
 }
