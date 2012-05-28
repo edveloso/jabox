@@ -29,35 +29,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class StopContainerButton extends ImageButton {
-	private static final Logger LOGGER = LoggerFactory
-		.getLogger(StopContainerButton.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(StopContainerButton.class);
 
-	private static final ResourceReference STOP_IMG = new SharedResourceReference(
-			StopContainerButton.class, "stop.png");
-	private static final long serialVersionUID = 1L;
-	private final Container _item;
-	private Class<? extends Page> _responsePage;
+    private static final ResourceReference STOP_IMG =
+        new SharedResourceReference(StopContainerButton.class, "stop.png");
 
-	public StopContainerButton(final String id, final Container item,
-			final Class<? extends Page> responsePage) {
-		super(id, STOP_IMG);
-		_item = item;
-		_responsePage = responsePage;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public StopContainerButton(final String id,
-			final ListItem<Container> item,
-			final Class<? extends Page> responsePage) {
-		this(id, item.getModelObject(), responsePage);
-	}
+    private final Container _item;
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
-	@Override
-	public void onSubmit() {
+    private final Class<? extends Page> _responsePage;
+
+    public StopContainerButton(final String id, final Container item,
+            final Class<? extends Page> responsePage) {
+        super(id, STOP_IMG);
+        _item = item;
+        _responsePage = responsePage;
+    }
+
+    public StopContainerButton(final String id,
+            final ListItem<Container> item,
+            final Class<? extends Page> responsePage) {
+        this(id, item.getModelObject(), responsePage);
+    }
+
+    /**
+     * Delete from persistent storage, commit transaction.
+     */
+    @Override
+    public void onSubmit() {
         LOGGER.info("Stopping container: " + _item.getName());
-		_item.stop();
-		info("Container \"" + _item.getName() + "\" Stopped.");
-	}
+        _item.stop();
+        success("Container \"" + _item.getName() + "\" Stopped.");
+    }
 }

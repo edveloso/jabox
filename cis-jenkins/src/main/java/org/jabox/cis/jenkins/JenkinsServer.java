@@ -43,7 +43,7 @@ public class JenkinsServer extends AbstractEmbeddedServer {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(JenkinsServer.class);
 
-    private final String version = "1.436";
+    private final String version = "1.465";
 
     public String getServerName() {
         return "jenkins";
@@ -83,17 +83,17 @@ public class JenkinsServer extends AbstractEmbeddedServer {
     private List<String> getDefaultPlugins() {
         List<String> defaultPlugins = new ArrayList<String>();
 
-        defaultPlugins.add("analysis-core:1.14");
-        defaultPlugins.add("dry:1.5");
-        defaultPlugins.add("pmd:3.10");
-        defaultPlugins.add("findbugs:4.14");
-        defaultPlugins.add("checkstyle:3.10");
-        defaultPlugins.add("m2release:0.6.1");
+        defaultPlugins.add("analysis-core:1.41");
+        defaultPlugins.add("dry:2.27");
+        defaultPlugins.add("pmd:3.28");
+        defaultPlugins.add("findbugs:4.40");
+        defaultPlugins.add("checkstyle:3.27");
+        defaultPlugins.add("m2release:0.9.1");
         defaultPlugins.add("redmine:0.9");
-        defaultPlugins.add("git:1.1.3");
+        defaultPlugins.add("git:1.1.18");
         defaultPlugins.add("claim:1.7");
-        defaultPlugins.add("ci-game:1.17");
-        defaultPlugins.add("sonar:1.6.1");
+        defaultPlugins.add("ci-game:1.18");
+        defaultPlugins.add("sonar:1.8");
         defaultPlugins.add("android-emulator:1.18");
 
         return defaultPlugins;
