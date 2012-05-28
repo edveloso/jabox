@@ -23,11 +23,11 @@ import java.util.List;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.jabox.model.Project;
 import org.jabox.webapp.pages.BaseProjectsPage;
+import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.utils.ProjectList;
 
 /**
@@ -41,9 +41,9 @@ public class ManageProjects extends BaseProjectsPage {
     public ManageProjects() {
         // Add a FeedbackPanel for displaying form messages
         // create feedback panel to show errors
-        final FeedbackPanel feedback = new FeedbackPanel("feedback");
-        feedback.setOutputMarkupId(true);
-        add(feedback);
+        final JaboxFeedbackPanel fb = new JaboxFeedbackPanel("feedback");
+        fb.setOutputMarkupId(true);
+        add(fb);
 
         final List<Project> projects = ProjectXstreamDao.getProjects();
         Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");

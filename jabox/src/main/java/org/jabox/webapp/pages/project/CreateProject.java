@@ -26,24 +26,27 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.maven.MavenExecutionException;
+import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.behavior.AttributeAppender;
-import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.jabox.apis.scm.SCMException;
 import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.Project;
 import org.jabox.webapp.pages.BaseProjectsPage;
+import org.jabox.webapp.panels.JaboxFeedbackPanel;
 import org.jabox.webapp.validation.ShinyForm;
+import org.xml.sax.SAXException;
 
 import com.google.inject.Inject;
 
@@ -66,8 +69,32 @@ public class CreateProject extends BaseProjectsPage {
             protected void onSubmit() {
                 // We need to persist twice because the id is necessary for the
                 // creation of the project.
+                if (_project.getMavenArchetype() == null) {
+                    error("Archetype is invalid");
+                    return;
+                }
                 ProjectXstreamDao.persist(_project);
-                _createProjectUtil.createProject(_project);
+                try {
+                    _createProjectUtil.createProject(_project);
+                } catch (InvalidRepositoryException e) {
+                    error("Error creating project!");
+                    return;
+                } catch (SAXException e) {
+                    error("Error creating project!");
+                    return;
+                } catch (SCMException e) {
+                    error("Error creating project!");
+                    return;
+                } catch (IOException e) {
+                    error("Error creating project!");
+                    return;
+                } catch (MavenExecutionException e) {
+                    error("Error creating project!");
+                    return;
+                } catch (RuntimeException e) {
+                    error("Error creating project!");
+                    return;
+                }
                 ProjectXstreamDao.persist(_project);
                 info("Project \"" + _project.getName() + "\" Created.");
             }
@@ -77,8 +104,10 @@ public class CreateProject extends BaseProjectsPage {
         add(form);
 
         // Add a FeedbackPanel for displaying form messages
-        add(new FeedbackPanel("feedback",
-            new ComponentFeedbackMessageFilter(form)));
+        // create feedback panel to show errors
+        final JaboxFeedbackPanel fb = new JaboxFeedbackPanel("feedback");
+        fb.setOutputMarkupId(true);
+        add(fb);
 
         // Name
         FormComponent<String> name = new RequiredTextField<String>("name");

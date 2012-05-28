@@ -46,6 +46,9 @@ public class Project extends BaseEntity implements Serializable {
     private String scmMavenPrefix;
 
     public MavenArchetype getMavenArchetype() {
+        if (archetype == null || archetype.split(":").length != 3) {
+            return null;
+        }
         return new MavenArchetype(archetype);
     }
 

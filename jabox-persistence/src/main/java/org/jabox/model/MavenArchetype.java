@@ -24,54 +24,55 @@ import java.io.Serializable;
 import org.apache.wicket.persistence.domain.BaseEntity;
 
 public class MavenArchetype extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 1354396598525488609L;
+    private static final long serialVersionUID = 1354396598525488609L;
 
-	private String _groupId;
-	private String _artifactId;
-	private String _version;
+    private String _groupId;
 
-	public MavenArchetype() {
-	}
+    private String _artifactId;
 
-	public MavenArchetype(final String groupId, final String artifactId,
-			final String version) {
-		_groupId = groupId;
-		_artifactId = artifactId;
-		_version = version;
-	}
+    private String _version;
 
-	/**
-	 * Construct a maven archetype with the following format:
-	 * 
-	 * groupId:artifactId:version
-	 * 
-	 * @param line
-	 */
-	public MavenArchetype(String line) {
-		String[] str = line.split(":");
-		if (str.length != 3) {
-			throw new NullPointerException();
-		}
+    public MavenArchetype() {
+    }
 
-		_groupId = str[0];
-		_artifactId = str[1];
-		_version = str[2];
-	}
+    public MavenArchetype(final String groupId, final String artifactId,
+            final String version) {
+        _groupId = groupId;
+        _artifactId = artifactId;
+        _version = version;
+    }
 
-	public String getArchetypeGroupId() {
-		return _groupId;
-	}
+    /**
+     * Construct a maven archetype with the following format:
+     * groupId:artifactId:version
+     * 
+     * @param line
+     */
+    public MavenArchetype(final String line) {
+        String[] str = line.split(":");
+        if (str.length != 3) {
+            throw new NullPointerException();
+        }
 
-	public String getArchetypeArtifactId() {
-		return _artifactId;
-	}
+        _groupId = str[0];
+        _artifactId = str[1];
+        _version = str[2];
+    }
 
-	public String getArchetypeVersion() {
-		return _version;
-	}
+    public String getArchetypeGroupId() {
+        return _groupId;
+    }
 
-	@Override
-	public String toString() {
-		return _groupId + ":" + _artifactId + ":" + _version;
-	}
+    public String getArchetypeArtifactId() {
+        return _artifactId;
+    }
+
+    public String getArchetypeVersion() {
+        return _version;
+    }
+
+    @Override
+    public String toString() {
+        return _groupId + ":" + _artifactId + ":" + _version;
+    }
 }

@@ -31,24 +31,24 @@ import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.pages.project.ManageProjects;
 
 public class ProjectList extends PropertyListView<Project> {
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public ProjectList(final String id, final List<Project> projects) {
-		super(id, projects);
-	}
+    public ProjectList(final String id, final List<Project> projects) {
+        super(id, projects);
+    }
 
-	@Override
-	public void populateItem(final ListItem<Project> listItem) {
-		final Project project = listItem.getModelObject();
-		listItem.add(new Label("name", project.getName()));
-		listItem.add(new Label("mavenArchetype", project.getMavenArchetype()
-				.toString()));
-		listItem
-				.add(new MultiLineLabel("description", project.getDescription()));
-		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<Project>(listItem));
-		listItem.add(attributeModifier);
-		listItem.add(new DeleteEntityButton<Project>("delete", listItem,
-				ManageProjects.class));
-	}
+    @Override
+    public void populateItem(final ListItem<Project> listItem) {
+        final Project project = listItem.getModelObject();
+        listItem.add(new Label("name", project.getName()));
+        listItem.add(new Label("mavenArchetype", project.getArchetype()));
+        listItem.add(new MultiLineLabel("description", project
+            .getDescription()));
+        final AttributeModifier attributeModifier =
+            new AttributeModifier("class", true, new EvenOddRow<Project>(
+                listItem));
+        listItem.add(attributeModifier);
+        listItem.add(new DeleteEntityButton<Project>("delete", listItem,
+            ManageProjects.class));
+    }
 }
