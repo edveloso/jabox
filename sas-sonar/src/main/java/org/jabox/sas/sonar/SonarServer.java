@@ -52,7 +52,7 @@ public class SonarServer extends AbstractEmbeddedServer {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(SonarServer.class);
 
-    private final String version = "3.0.1";
+    private final String version = "3.3.2";
 
     public static void main(final String[] args) throws Exception {
         new SonarServer().injectPlugins();
@@ -123,25 +123,21 @@ public class SonarServer extends AbstractEmbeddedServer {
      */
     private List<String> getDefaultPlugins() {
         List<String> pl = new ArrayList<String>();
-        // "http://repo1.maven.org/maven2/org/codehaus/sonar-plugins/scm-activity/sonar-scm-activity-plugin/1.3/sonar-scm-activity-plugin-1.3.jar";
-        pl.add("org.codehaus.sonar-plugins.scm-activity:sonar-scm-activity-plugin:1.3");
+        pl.add("org.codehaus.sonar-plugins.scm-activity:sonar-scm-activity-plugin:1.5");
         pl.add("org.codehaus.sonar-plugins:sonar-quality-index-plugin:1.1.3");
         pl.add("org.codehaus.sonar-plugins:sonar-fb-contrib-plugin:1.1");
         pl.add("org.codehaus.sonar-plugins:sonar-technicaldebt-plugin:1.2.1");
-        pl.add("org.codehaus.sonar-plugins:sonar-switch-off-violations-plugin:1.1");
-        pl.add("org.codehaus.sonar-plugins:sonar-radiator-plugin:1.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-switch-off-violations-plugin:1.3");
         pl.add("org.codehaus.sonar-plugins:sonar-taglist-plugin:1.0");
-        pl.add("org.codehaus.sonar-plugins:sonar-timeline-plugin:1.2");
+        pl.add("org.codehaus.sonar-plugins:sonar-timeline-plugin:1.3");
         pl.add("org.codehaus.sonar-plugins:sonar-security-rules-plugin:0.3.2");
-        pl.add("org.codehaus.sonar-plugins:sonar-motion-chart-plugin:1.3");
+        pl.add("org.codehaus.sonar-plugins:sonar-motion-chart-plugin:1.4");
         pl.add("org.codehaus.sonar-plugins:sonar-violationdensity-plugin:1.2");
         pl.add("org.codehaus.sonar-plugins:sonar-total-quality-plugin:1.0.2");
-        pl.add("org.codehaus.sonar-plugins:sonar-cutoff-plugin:0.1.1");
+        pl.add("org.codehaus.sonar-plugins:sonar-cutoff-plugin:0.2");
         pl.add("org.codehaus.sonar-plugins:sonar-artifact-size-plugin:0.3");
         pl.add("org.codehaus.sonar-plugins:sonar-build-breaker-plugin:1.0");
-        // pl.add("org.codehaus.sonar-plugins:sonar-jacoco-plugin:0.6");
         pl.add("org.codehaus.sonar-plugins:sonar-useless-code-tracker-plugin:0.5");
-
         return pl;
     }
 
