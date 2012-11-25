@@ -32,7 +32,7 @@ import org.jabox.utils.Unzip;
 public class RedmineServer extends AbstractEmbeddedServer {
     private static final long serialVersionUID = 9207781259797681188L;
 
-    private final String version = "1.3.0";
+    private final String version = "2.1.4";
 
     public List<String> plugins = getDefaultPlugins();
 
