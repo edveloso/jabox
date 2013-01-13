@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.scm.git;
+package org.jabox.scm.gitlab;
 
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -26,18 +26,20 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Server;
 
-public class GITConnectorEditor extends Panel {
+public class GitlabConnectorEditor extends Panel {
     private static final long serialVersionUID = -4137475647749541936L;
 
-    public GITConnectorEditor(final String id, final IModel<Server> model) {
+    public GitlabConnectorEditor(final String id,
+            final IModel<Server> model) {
         super(id, new CompoundPropertyModel<Server>(model));
         TextField<String> username = new TextField<String>("username");
         PasswordTextField password = new PasswordTextField("password");
         TextField<String> url = new TextField<String>("server.url");
 
-        add(username);
-        add(password.setRequired(false));
-        add(url.add(new GITLoginValidator(url, username, password))
+        add(username.setRequired(true));
+        add(password.setRequired(true));
+
+        add(url.add(new GitlabLoginValidator(username, password))
             .setRequired(true));
     }
 }
