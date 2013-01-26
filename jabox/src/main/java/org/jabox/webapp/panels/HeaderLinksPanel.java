@@ -38,70 +38,78 @@ import org.jabox.webapp.pages.tabs.ScmPage;
 import com.google.inject.Inject;
 
 public class HeaderLinksPanel extends Panel {
-	private static final long serialVersionUID = 9038957597332426470L;
+    private static final long serialVersionUID = 9038957597332426470L;
 
-	public static final int ALM = 0;
-	public static final int SCM = 1;
-	public static final int ITS = 2;
-	public static final int CIS = 3;
-	public static final int RMS = 4;
-	public static final int CQM = 5;
+    public static final int ALM = 0;
 
-	@Inject
-	protected IManager _manager;
+    public static final int SCM = 1;
 
-	public HeaderLinksPanel() {
-		this("headerLinks",0);
-	}
+    public static final int ITS = 2;
 
-	public HeaderLinksPanel(final String id, final int selected) {
-		super(id);
-		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+    public static final int CIS = 3;
 
-		List<Tab> tabs = new ArrayList<Tab>();
-		tabs
-				.add(new Tab("A.L.M. (Jabox)", ManageServers.class,
-						selected == ALM));
+    public static final int RMS = 4;
 
-		if (dc.getScm() != null) {
-			tabs.add(new Tab(getTabName("S.C.M.", dc.getScm()), ScmPage.class,
-					dc.getScm().getServer().getUrl(), selected == SCM));
-		}
+    public static final int CQM = 5;
 
-		if (dc.getIts() != null) {
-			tabs.add(new Tab(getTabName("I.T.S.", dc.getIts()), ItsPage.class,
-					dc.getIts().getServer().getUrl(), selected == ITS));
-		}
+    @Inject
+    protected IManager _manager;
 
-		if (dc.getCis() != null) {
-			tabs.add(new Tab(getTabName("C.I.S.", dc.getCis()), CisPage.class,
-					dc.getCis().getServer().getUrl(), selected == CIS));
-		}
+    public HeaderLinksPanel() {
+        this("headerLinks", 0);
+    }
 
-		if (dc.getRms() != null) {
-			tabs.add(new Tab(getTabName("R.M.S.", dc.getRms()), RmsPage.class,
-					dc.getRms().getServer().getUrl(), selected == RMS));
-		}
+    public HeaderLinksPanel(final String id, final int selected) {
+        super(id);
+        final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
-		if (dc.getCqm() != null) {
-			tabs.add(new Tab(getTabName("C.Q.M.", dc.getCqm()), CqmPage.class,
-					dc.getCqm().getServer().getUrl(), selected == CQM));
-		}
+        List<Tab> tabs = new ArrayList<Tab>();
+        tabs.add(new Tab("Jabox", ManageServers.class, selected == ALM));
 
-		add(new TabsList("tabs", tabs));
-	}
+        if (dc.getScm() != null) {
+            tabs.add(new Tab(getTabName("Source Code Management",
+                dc.getScm()), ScmPage.class, dc.getScm().getServer()
+                .getUrl(), selected == SCM));
+        }
 
-	/**
-	 * 
-	 * @param prefix
-	 *            The prefix of the name
-	 * @param cc
-	 *            The ConnectorConfig
-	 * @return
-	 */
-	private String getTabName(final String prefix, final ConnectorConfig cc) {
-		Connector ci = _manager.getConnectorInstance(cc);
-		return prefix + "(" + ci.getName() + ")";
-	}
+        if (dc.getIts() != null) {
+            tabs.add(new Tab(
+                getTabName("Project Management", dc.getIts()),
+                ItsPage.class, dc.getIts().getServer().getUrl(),
+                selected == ITS));
+        }
+
+        if (dc.getCis() != null) {
+            tabs.add(new Tab(getTabName("Continuous Integration",
+                dc.getCis()), CisPage.class, dc.getCis().getServer()
+                .getUrl(), selected == CIS));
+        }
+
+        if (dc.getRms() != null) {
+            tabs.add(new Tab(getTabName("Repository Management",
+                dc.getRms()), RmsPage.class, dc.getRms().getServer()
+                .getUrl(), selected == RMS));
+        }
+
+        if (dc.getCqm() != null) {
+            tabs.add(new Tab(getTabName("Code Metrics", dc.getCqm()),
+                CqmPage.class, dc.getCqm().getServer().getUrl(),
+                selected == CQM));
+        }
+
+        add(new TabsList("tabs", tabs));
+    }
+
+    /**
+     * @param prefix
+     *            The prefix of the name
+     * @param cc
+     *            The ConnectorConfig
+     * @return
+     */
+    private String getTabName(final String prefix, final ConnectorConfig cc) {
+        Connector ci = _manager.getConnectorInstance(cc);
+        return prefix;
+    }
 
 }
