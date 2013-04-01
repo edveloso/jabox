@@ -1,16 +1,40 @@
 package org.jabox.scm.github;
 
-import junit.framework.TestCase;
+import org.jabox.utils.Timestamp;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public abstract class GitHubFacadeTest extends TestCase {
+@Ignore
+public class GitHubFacadeTest {
 
-	// public void testLogin() {
-	// Assert.assertFalse(GitHubFacade.validateLogin("user", "wrong"));
-	// Assert.assertTrue(GitHubFacade.validateLogin("user", "correct"));
-	// }
+    private static final String USER = "user";
 
-	// public void testPush() {
-	// File dir = new File("target/git");
-	// GitHubFacade.pushOriginMaster(dir);
-	// }
+    private static final String PWD = "pwd";
+
+    @Test
+    public void testLoginOK() {
+        Assert.assertTrue(GitHubFacade.validateLogin(USER, PWD));
+    }
+
+    @Test
+    public void testLoginKO() {
+        Assert.assertFalse(GitHubFacade.validateLogin(USER, "wrongPwd"));
+    }
+
+    /**
+     * Test method for
+     * {@link org.jabox.scm.gitlab.GitlabFacade#createRepowithApi(java.lang.String, java.lang.String, java.lang.String)}
+     * .
+     */
+    @Test
+    public void testCreateRepowithApi() {
+        GitHubFacade
+            .createRepowithApi(USER, PWD, "repo" + Timestamp.now());
+    }
+
+    // public void testPush() {
+    // File dir = new File("target/git");
+    // GitHubFacade.pushOriginMaster(dir);
+    // }
 }
