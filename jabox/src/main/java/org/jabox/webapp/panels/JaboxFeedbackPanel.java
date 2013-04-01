@@ -1,13 +1,3 @@
-/**
- * $Id$
- * @author dimitris
- * @date   Apr 22, 2012 9:36:58 PM
- *
- * Copyright (C) 2012 Scytl Secure Electronic Voting SA
- *
- * All rights reserved.
- *
- */
 package org.jabox.webapp.panels;
 
 import java.io.Serializable;
