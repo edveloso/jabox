@@ -68,7 +68,7 @@ public class GitlabConnector extends GITConnector {
     @Override
     public File createProjectDirectories(final Project project,
             final IGITConnectorConfig config) throws SCMException {
-        GitlabFacade.createRepowithApi(config.getUsername(),
+        GitlabFacade.createRepowithApi(config.getServer().getUrl(),
             config.getPassword(), project.getName());
         return super.createProjectDirectories(project, config);
     }

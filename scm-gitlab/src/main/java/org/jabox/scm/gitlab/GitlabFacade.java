@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.jabox.scm.git.Executor;
@@ -23,8 +22,7 @@ public class GitlabFacade {
      * @param token
      * @return true if username & token are valid, false otherwise.
      */
-    public static boolean validateLogin(final String username,
-            final String token) {
+    public boolean validateLogin(final String username, final String token) {
         String uri = String.format(LOGIN_REGEX, username, token);
         try {
             int result =
@@ -52,23 +50,19 @@ public class GitlabFacade {
      *            The repository name
      * @return true if the Repository was created, false otherwise
      */
-    public static boolean createRepowithApi(final String username,
+    public static boolean createRepowithApi(final String scmUrl,
             final String token, final String repository) {
-        return createRepo(username + "/token", token, repository);
+        return createRepo(scmUrl, token, repository);
     }
 
-    private static boolean createRepo(final String username,
+    private static boolean createRepo(final String scmUrl,
             final String password, final String repository) {
         HttpClient client = new HttpClient();
-        client.getState().setCredentials(null, null,
-            new UsernamePasswordCredentials(username, password));
-        client.getState().setAuthenticationPreemptive(true);
-
-        String uri = "http://github.com/api/v2/yaml/" + "repos/create";
+        String uri = scmUrl + "/api/v3/projects";
         PostMethod post = new PostMethod(uri);
-        post.setDoAuthentication(true);
 
         post.setParameter("name", repository);
+        post.setParameter("private_token", password);
         try {
             int result = client.executeMethod(post);
             System.out.println("Return code: " + result);
