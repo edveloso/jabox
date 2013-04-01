@@ -12,8 +12,7 @@ import org.jabox.scm.git.Executor;
 
 public class GitlabFacade {
 
-    private static final String LOGIN_REGEX =
-        "http://github.com/api/v2/yaml/user/show?login=%s&token=%s";
+    private static final String API = "/api/v3";
 
     /**
      * Validates login on Gitlab.
@@ -22,12 +21,12 @@ public class GitlabFacade {
      * @param token
      * @return true if username & token are valid, false otherwise.
      */
-    public boolean validateLogin(final String username, final String token) {
-        String uri = String.format(LOGIN_REGEX, username, token);
+    public static boolean validateLogin(final String url,
+            final String token) {
         try {
+            String string = url + API + "/projects?private_token=" + token;
             int result =
-                new HttpClient().executeMethod(new GetMethod(uri));
-            System.out.println(result);
+                new HttpClient().executeMethod(new GetMethod(string));
             if (result == 200) {
                 return true;
             }
@@ -58,7 +57,7 @@ public class GitlabFacade {
     private static boolean createRepo(final String scmUrl,
             final String password, final String repository) {
         HttpClient client = new HttpClient();
-        String uri = scmUrl + "/api/v3/projects";
+        String uri = scmUrl + API + "/projects";
         PostMethod post = new PostMethod(uri);
 
         post.setParameter("name", repository);

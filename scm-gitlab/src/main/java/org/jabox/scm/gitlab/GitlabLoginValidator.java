@@ -8,27 +8,27 @@ import org.apache.wicket.validation.validator.UrlValidator;
 public class GitlabLoginValidator extends UrlValidator {
     private static final long serialVersionUID = 8702375585446955943L;
 
-    private final TextField<String> _username;
+    private final TextField<String> _url;
 
     private final PasswordTextField _apitoken;
 
-    public GitlabLoginValidator(final TextField<String> username,
+    public GitlabLoginValidator(final TextField<String> url,
             final PasswordTextField password) {
-        _username = username;
+        _url = url;
         _apitoken = password;
     }
 
     @Override
     protected void onValidate(final IValidatable<String> validatable) {
-        if (!_username.isValid() || !_apitoken.isValid()) {
+        if (!_url.isValid() || !_apitoken.isValid()) {
             return;
         }
-        return;
 
-        // boolean login = GitlabFacade.validateLogin(_username.getValue(),
-        // _apitoken.getValue());
-        // if (!login) {
-        // error(_username.newValidatable());
-        // }
+        boolean login =
+            GitlabFacade.validateLogin(_url.getValue(),
+                _apitoken.getValue());
+        if (!login) {
+            error(_url.newValidatable());
+        }
     }
 }

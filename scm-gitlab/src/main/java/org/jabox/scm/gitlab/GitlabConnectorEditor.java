@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class GitlabConnectorEditor extends Panel {
@@ -39,7 +40,8 @@ public class GitlabConnectorEditor extends Panel {
         add(username.setRequired(true));
         add(password.setRequired(true));
 
-        add(url.add(new GitlabLoginValidator(username, password))
+        add(url.add(new UrlValidator())
+            .add(new GitlabLoginValidator(url, password))
             .setRequired(true));
     }
 }
