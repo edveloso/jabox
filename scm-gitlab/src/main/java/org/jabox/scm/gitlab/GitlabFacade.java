@@ -81,13 +81,13 @@ public class GitlabFacade {
         return true;
     }
 
-    public static void remoteAddOrigin(final String username,
-            final String projectName, final File dir) {
-        Executor.exec("git remote add origin git@github.com:" + username
-            + "/" + projectName + ".git", null, dir);
+    public static void remoteAddOrigin(final String scmUrl,
+            final String username, final String projectName, final File dir) {
+        Executor.exec("git remote add origin " + scmUrl + "/"
+            + projectName + ".git", null, dir);
     }
 
     public static void pushOriginMaster(final File dir) {
-        Executor.exec("git push origin master", null, dir);
+        Executor.exec("git push -u origin master", null, dir);
     }
 }

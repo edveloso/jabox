@@ -19,17 +19,19 @@
  */
 package org.jabox.scm.gitlab;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.scm.git.IGITConnectorConfig;
 
 public class GitlabConnectorConfig extends DeployerConfig implements
         IGITConnectorConfig {
+
+    private static final String HTTP = "HTTP://";
+
     private static final long serialVersionUID = -830757629457448866L;
-
-    private static final String GIT_GITLAB_COM = "git://github.com/";
-
-    private static final String HTTPS_GITLAB_COM = "https://github.com/";
 
     private static final String DOT_GIT = ".git";
 
@@ -55,8 +57,25 @@ public class GitlabConnectorConfig extends DeployerConfig implements
     }
 
     public String getScmUrl() {
-        String scmURL = GIT_GITLAB_COM + getUsername() + "/";
+        String domainname = getDomainName(getServer().getUrl());
+        String scmURL = "git@" + domainname + ":" + getUsername();
         return scmURL;
+    }
+
+    /**
+     * Returns the Domain name from the URL.
+     * 
+     * @param url
+     *            the URL
+     * @return the Domain name
+     */
+    private String getDomainName(final String url) {
+        try {
+            URL myUrl = new URL(url);
+            return myUrl.getHost();
+        } catch (MalformedURLException e) {
+        }
+        return null;
     }
 
     public String getProjectScmUrl(final String projectName) {

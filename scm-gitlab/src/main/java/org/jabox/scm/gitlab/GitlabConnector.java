@@ -79,13 +79,13 @@ public class GitlabConnector extends GITConnector {
      */
     @Override
     public void commitProject(final Project project,
-            final IGITConnectorConfig svnc) throws SCMException {
-        super.commitProject(project, svnc);
+            final IGITConnectorConfig config) throws SCMException {
+        super.commitProject(project, config);
         File dir =
             new File(GITRepository.getGitBaseDir(), project.getName());
         dir = new File(dir, project.getName());
-        GitlabFacade.remoteAddOrigin(svnc.getUsername(),
-            project.getName(), dir);
+        GitlabFacade.remoteAddOrigin(config.getScmUrl(),
+            config.getUsername(), project.getName(), dir);
         GitlabFacade.pushOriginMaster(dir);
     }
 }
