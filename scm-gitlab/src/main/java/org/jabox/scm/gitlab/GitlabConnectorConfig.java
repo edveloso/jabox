@@ -29,6 +29,8 @@ import org.jabox.scm.git.IGITConnectorConfig;
 public class GitlabConnectorConfig extends DeployerConfig implements
         IGITConnectorConfig {
 
+    private static final String REPO_PATH = "/home/git/repositories/";
+
     private static final String SEP = "/";
 
     private static final long serialVersionUID = -830757629457448866L;
@@ -79,7 +81,7 @@ public class GitlabConnectorConfig extends DeployerConfig implements
     }
 
     public String getProjectScmUrl(final String projectName) {
-        return getScmUrl() + SEP + projectName + DOT_GIT;
+        return REPO_PATH + getUsername() + SEP + projectName + DOT_GIT;
     }
 
     public String getScmMavenPrefix() {
