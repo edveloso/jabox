@@ -39,136 +39,145 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
 
 public class RedmineRepository implements
-		ITSConnector<RedmineRepositoryConfig>, Serializable {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(RedmineRepository.class);
+        ITSConnector<RedmineRepositoryConfig>, Serializable {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(RedmineRepository.class);
 
-	private static final long serialVersionUID = -692328636804684690L;
-	public static final String ID = "plugin.its.redmine";
+    private static final long serialVersionUID = -692328636804684690L;
 
-	private final WebConversation _wc = new WebConversation();
+    public static final String ID = "plugin.its.redmine";
 
-	private final WebTester _wt = new WebTester();
+    private final WebConversation _wc = new WebConversation();
 
-	public String getName() {
-		return "Redmine";
-	}
+    private final WebTester _wt = new WebTester();
 
-	public String getId() {
-		return ID;
-	}
+    public String getName() {
+        return "Redmine";
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public boolean addModule(final Project project,
-			final RedmineRepositoryConfig itsConnectorConfig,
-			final String module, final String description,
-			final String initialOwner) throws SAXException, IOException {
-		return true;
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public boolean addProject(final Project project,
-			final RedmineRepositoryConfig config) throws IOException,
-			SAXException {
-		LOGGER.info("Redmine add Project: " + project.getName());
+    public boolean addModule(final Project project,
+            final RedmineRepositoryConfig itsConnectorConfig,
+            final String module, final String description,
+            final String initialOwner) throws SAXException, IOException {
+        return true;
+    }
 
-		_wt.gotoPage("/projects/new");
-		_wt.setWorkingForm(1);
-		_wt.setTextField("project[name]", project.getName());
-		_wt.setTextField("project[description]", project.getDescription());
-		_wt.setTextField("project[identifier]", getRedmineId(project));
-		_wt.submit();
-		return true;
-	}
+    public boolean addProject(final Project project,
+            final RedmineRepositoryConfig config)
+            throws IOException, SAXException {
+        LOGGER.info("Redmine add Project: " + project.getName());
 
-	private String getRedmineId(final Project project) {
-		return project.getName();
-	}
+        _wt.gotoPage("/projects/new");
+        _wt.setWorkingForm(1);
+        _wt.setTextField("project[name]", project.getName());
+        _wt.setTextField("project[description]", project.getDescription());
+        _wt.setTextField("project[identifier]", getRedmineId(project));
+        _wt.submit();
+        return true;
+    }
 
-	public boolean addVersion(final Project project,
-			final RedmineRepositoryConfig config, final String version)
-			throws IOException, SAXException {
-		LOGGER.info("Redmine add Version: " + version);
+    private String getRedmineId(final Project project) {
+        return project.getName();
+    }
 
-		_wt.gotoPage("/projects/" + getRedmineId(project) + "/versions/new");
-		_wt.setWorkingForm(1);
-		_wt.setTextField("version[name]", version);
-		_wt.submit();
-		return true;
-	}
+    public boolean addVersion(final Project project,
+            final RedmineRepositoryConfig config, final String version)
+            throws IOException, SAXException {
+        LOGGER.info("Redmine add Version: " + version);
 
-	public boolean login(final RedmineRepositoryConfig config)
-			throws MalformedURLException, IOException, SAXException {
-		LOGGER.info("Redmine Login: " + config.getUsername());
+        _wt.gotoPage("/projects/" + getRedmineId(project)
+            + "/versions/new");
+        _wt.setWorkingForm(1);
+        _wt.setTextField("version[name]", version);
+        _wt.submit();
+        return true;
+    }
 
-		String url = config.getServer().getUrl();
-		return login(url, config.getUsername(), config.getPassword());
-	}
+    public boolean login(final RedmineRepositoryConfig config)
+            throws MalformedURLException, IOException, SAXException {
+        LOGGER.info("Redmine Login: " + config.getUsername());
 
-	protected boolean login(final String url, final String username,
-			final String password) throws MalformedURLException, IOException,
-			SAXException {
-		_wt.setBaseUrl(url);
-		_wt.beginAt("/login");
-		_wt.setTextField("username", username);
-		_wt.setTextField("password", password);
-		_wt.submit();
+        String url = config.getServer().getUrl();
+        return login(url, config.getUsername(), config.getPassword());
+    }
 
-		if (_wt.getDialog().getPageURL().toExternalForm().endsWith("/my/page")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    protected boolean login(final String url, final String username,
+            final String password)
+            throws MalformedURLException, IOException, SAXException {
+        _wt.setBaseUrl(url);
+        _wt.beginAt("/login");
+        _wt.setTextField("username", username);
+        _wt.setTextField("password", password);
+        _wt.submit();
 
-	public DeployerConfig newConfig() {
-		return new RedmineRepositoryConfig();
-	}
+        if (_wt.getDialog().getPageURL().toExternalForm()
+            .endsWith("/my/page")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new RedmineRepositoryEditor(id, model);
-	}
+    public DeployerConfig newConfig() {
+        return new RedmineRepositoryConfig();
+    }
 
-	public void addRepository(final Project project,
-			final RedmineRepositoryConfig config,
-			final SCMConnectorConfig scmConfig, final String username,
-			final String password) throws MalformedURLException, IOException,
-			SAXException {
-		LOGGER.info("Redmine add Repository: " + scmConfig.getScmUrl());
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new RedmineRepositoryEditor(id, model);
+    }
 
-		// Check if Repository should be added
-		if (!config.isAddRepositoryConfiguration()) {
-			return;
-		}
+    public void addRepository(final Project project,
+            final RedmineRepositoryConfig config,
+            final SCMConnectorConfig scmConfig, final String username,
+            final String password)
+            throws MalformedURLException, IOException, SAXException {
+        LOGGER.info("Redmine add Repository: " + scmConfig.getScmUrl());
 
-		List<Cookie> cookies = (List<Cookie>) _wt.getDialog().getCookies();
-		for (Cookie cookie : cookies) {
-			_wc.putCookie(cookie.getName(), cookie.getValue());
-		}
+        // Check if Repository should be added
+        if (!config.isAddRepositoryConfiguration()) {
+            return;
+        }
 
-		PostMethodWebRequest form = new PostMethodWebRequest(config.getServer()
-				.getUrl()
-				+ "/repositories/edit/" + project.getName());
-		form.setParameter("authenticity_token", getAuthenticityToken(_wt
-				.getPageSource()));
-		form.setParameter("repository_scm", "Subversion");
-		form.setParameter("repository[url]", scmConfig.getScmUrl());
-		form.setParameter("repository[login]", username);
-		form.setParameter("repository[password]", password);
-		form.setParameter("commit", "Create");
-		_wc.getResponse(form);
-	}
+        String scm = getScmType(scmConfig);
 
-	private String getAuthenticityToken(String body) {
-		String substr[] = body.split("hidden.* value..");
-		String token = substr[1].substring(0, substr[1].indexOf("\""));
-		return token;
-	}
+        List<Cookie> cookies = (List<Cookie>) _wt.getDialog().getCookies();
+        for (Cookie cookie : cookies) {
+            _wc.putCookie(cookie.getName(), cookie.getValue());
+        }
+        _wt.gotoPage("projects/" + project.getName() + "/repositories/new");
+        _wt.selectOption("repository_scm", scm);
+        _wt.setTextField("repository[url]",
+            scmConfig.getProjectScmUrl(project.getName()));
+        _wt.setTextField("repository[login]", username);
+        // Password field name is 'ignore'
+        _wt.setTextField("ignore", password);
+        _wt.submit();
+    }
+
+    /**
+     * Returns the Redmine SCM value of the dropdown in Repository Settings.
+     * 
+     * @param scmConfig
+     *            the SCM configuration
+     * @return the Redmine SCM value of the dropdown in Repository Settings
+     */
+    private String getScmType(final SCMConnectorConfig scmConfig) {
+        if (scmConfig.getScmUrl().startsWith("git")) {
+            return "Git";
+        } else {
+            return "Subversion";
+        }
+    }
 }
