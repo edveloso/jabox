@@ -56,7 +56,6 @@ public class CreateProjectUtil implements ICreateProjectUtil {
         ((WicketApplication) WicketApplication.get())
             .getMetaData(GuiceInjectorHolder.INJECTOR_KEY).getInjector()
             .injectMembers(this);
-        // // InjectorHolder.getInjector().inject(this);
     }
 
     /*
@@ -92,7 +91,7 @@ public class CreateProjectUtil implements ICreateProjectUtil {
         SCMConnector<SCMConnectorConfig> scm =
             _manager.getScmConnectorInstance(scmc);
 
-        System.out.println("Using SCM: " + scm.toString());
+        LOGGER.info("Using SCM: " + scm.toString());
         File trunkDir = scm.createProjectDirectories(project, scmc);
 
         // Create Project from template.

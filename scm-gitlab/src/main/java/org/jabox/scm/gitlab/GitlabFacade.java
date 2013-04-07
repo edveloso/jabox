@@ -9,8 +9,12 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.jabox.scm.git.Executor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GitlabFacade {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(GitlabFacade.class);
 
     private static final String API = "/api/v3";
 
@@ -64,11 +68,11 @@ public class GitlabFacade {
         post.setParameter("private_token", password);
         try {
             int result = client.executeMethod(post);
-            System.out.println("Return code: " + result);
+            LOGGER.info("Return code: " + result);
             for (Header header : post.getResponseHeaders()) {
-                System.out.println(header.toString().trim());
+                LOGGER.info(header.toString().trim());
             }
-            System.out.println(post.getResponseBodyAsString());
+            LOGGER.info(post.getResponseBodyAsString());
         } catch (HttpException e) {
             e.printStackTrace();
             return false;

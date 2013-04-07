@@ -1,9 +1,10 @@
 package org.jabox.utils;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class LocalHostNameTest extends TestCase {
+public class LocalHostNameTest {
 
+    @Test
     public void testGetLocalHostname() {
         String localHostname = LocalHostName.getLocalHostname();
         System.out.println(localHostname);

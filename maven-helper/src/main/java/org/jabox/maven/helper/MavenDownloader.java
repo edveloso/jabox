@@ -23,11 +23,15 @@ import java.io.File;
 
 import org.jabox.environment.Environment;
 import org.jabox.maven.helper.aether.aether.Aether;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.aether.collection.DependencyCollectionException;
 import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.aether.transfer.ArtifactNotFoundException;
 
 public class MavenDownloader {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(MavenDownloader.class);
 
     private static final String MAVEN_REPO =
         "http://repo1.maven.org/maven2/";
@@ -44,8 +48,8 @@ public class MavenDownloader {
     public static File downloadArtifact(final String groupId,
             final String artifactId, final String version,
             final String extension) {
-        System.out.println("Downloading: " + groupId + ":" + artifactId
-            + ":" + version + ":" + extension);
+        LOGGER.info("Downloading: " + groupId + ":" + artifactId + ":"
+            + version + ":" + extension);
         try {
             return retrieveArtifact(groupId, artifactId, version,
                 extension);

@@ -9,8 +9,14 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Unzip {
-    public static void unzip(File zipFile, File baseDir)
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(Unzip.class);
+
+    public static void unzip(final File zipFile, final File baseDir)
             throws IOException {
         InputStream in =
             new BufferedInputStream(new FileInputStream(zipFile));
@@ -25,10 +31,10 @@ public class Unzip {
         zin.close();
     }
 
-    public static void unzip(ZipInputStream zin, File baseDir, String entry)
-            throws IOException {
+    public static void unzip(final ZipInputStream zin, final File baseDir,
+            final String entry) throws IOException {
         File file = new File(baseDir, entry);
-        System.out.println("unzipping " + file.getAbsolutePath());
+        LOGGER.info("unzipping " + file.getAbsolutePath());
         file.getParentFile().mkdirs();
         file.setExecutable(true);
         FileOutputStream out = new FileOutputStream(file);

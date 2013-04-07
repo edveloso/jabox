@@ -7,12 +7,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeoutException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Executor is a wrapper for system executions.
  * 
  * @author dimitris
  */
 public class Executor {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(Executor.class);
 
     /**
      * Execution wrapper.
@@ -23,7 +28,7 @@ public class Executor {
      */
     public static void exec(final String command, final String[] envp,
             final File dir) {
-        System.out.println("[" + dir.getAbsolutePath() + "] Executing: "
+        LOGGER.info("[" + dir.getAbsolutePath() + "] Executing: "
             + command);
 
         try {
@@ -37,11 +42,11 @@ public class Executor {
                 new BufferedReader(new InputStreamReader(err));
             String line;
             while ((line = bErr.readLine()) != null) {
-                System.out.println(line);
+                LOGGER.info(line);
             }
 
             while ((line = bIn.readLine()) != null) {
-                System.out.println(line);
+                LOGGER.info(line);
             }
             p.waitFor(); /* wait for subprocess to terminate */
         } catch (IOException e) {
@@ -56,7 +61,7 @@ public class Executor {
             final File dir, final boolean printOutput,
             final boolean printError, final long timeout)
             throws IOException, InterruptedException, TimeoutException {
-        System.out.println("[" + dir.getAbsolutePath() + "] Executing: "
+        LOGGER.info("[" + dir.getAbsolutePath() + "] Executing: "
             + command);
 
         Runtime runtime = Runtime.getRuntime();

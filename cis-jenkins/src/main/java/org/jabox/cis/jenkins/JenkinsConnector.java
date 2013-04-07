@@ -37,6 +37,8 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.utils.SettingsModifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 /**
@@ -48,6 +50,9 @@ import org.xml.sax.SAXException;
  */
 public class JenkinsConnector implements CISConnector {
     public static final String ID = "plugin.cis.jenkins";
+
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(JenkinsConnector.class);
 
     public String getName() {
         return "Jenkins";
@@ -96,11 +101,11 @@ public class JenkinsConnector implements CISConnector {
         post.setRequestBody(body);
         try {
             int result = client.executeMethod(post);
-            System.out.println("Return code: " + result);
+            LOGGER.info("Return code: " + result);
             for (Header header : post.getResponseHeaders()) {
-                System.out.println(header.toString().trim());
+                LOGGER.info(header.toString().trim());
             }
-            System.out.println(post.getResponseBodyAsString());
+            LOGGER.info(post.getResponseBodyAsString());
         } finally {
             post.releaseConnection();
         }
@@ -119,7 +124,7 @@ public class JenkinsConnector implements CISConnector {
      * @param project
      * @return
      */
-    private InputStream getConfigXMLStream(Project project) {
+    private InputStream getConfigXMLStream(final Project project) {
         String configXML = "config.xml";
         if ("scm:git:".equals(project.getScmMavenPrefix())) {
             configXML = "config-git.xml";

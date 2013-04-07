@@ -21,7 +21,6 @@ package org.jabox.cis.hudson;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,6 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.environment.Environment;
@@ -39,6 +37,8 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.utils.SettingsModifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 /**
@@ -50,6 +50,9 @@ import org.xml.sax.SAXException;
  */
 public class HudsonConnector implements CISConnector {
     public static final String ID = "plugin.cis.hudson";
+
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(HudsonConnector.class);
 
     public String getName() {
         return "Hudson";
@@ -97,11 +100,11 @@ public class HudsonConnector implements CISConnector {
         post.setRequestBody(body);
         try {
             int result = client.executeMethod(post);
-            System.out.println("Return code: " + result);
+            LOGGER.info("Return code: " + result);
             for (Header header : post.getResponseHeaders()) {
-                System.out.println(header.toString().trim());
+                LOGGER.info(header.toString().trim());
             }
-            System.out.println(post.getResponseBodyAsString());
+            LOGGER.info(post.getResponseBodyAsString());
         } finally {
             post.releaseConnection();
         }
@@ -120,7 +123,7 @@ public class HudsonConnector implements CISConnector {
      * @param project
      * @return
      */
-    private InputStream getConfigXMLStream(Project project) {
+    private InputStream getConfigXMLStream(final Project project) {
         String configXML = "config.xml";
         if ("scm:git:".equals(project.getScmMavenPrefix())) {
             configXML = "config-git.xml";

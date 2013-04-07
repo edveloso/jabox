@@ -27,7 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DownloadHelper {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(DownloadHelper.class);
 
     /**
      * Downloads a remote file locally. If the file already exists then it
@@ -39,12 +44,11 @@ public class DownloadHelper {
     public static File downloadFile(final String urlPath,
             final File outputFile) {
         if (outputFile.exists()) {
-            System.out.println(urlPath + " already exists at: "
-                + outputFile);
+            LOGGER.info(urlPath + " already exists at: " + outputFile);
             return outputFile;
         }
 
-        System.out.println("Downloading: " + urlPath);
+        LOGGER.info("Downloading: " + urlPath);
         InputStream is = null;
         BufferedInputStream bin = null;
         BufferedOutputStream bout = null;

@@ -21,11 +21,15 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jabox.environment.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Homepage
  */
 public class HomePage extends BasePage {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(HomePage.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +40,7 @@ public class HomePage extends BasePage {
      *            Page parameters
      */
     public HomePage(final PageParameters parameters) {
-        System.out.println("user.home: " + Environment.getBaseDir());
+        LOGGER.info("user.home: " + Environment.getBaseDir());
         add(new JaboxSignInPanel("signInPanel"));
     }
 }

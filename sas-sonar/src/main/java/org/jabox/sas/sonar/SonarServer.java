@@ -165,11 +165,11 @@ public class SonarServer extends AbstractEmbeddedServer {
             String line;
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                LOGGER.info(line);
             }
 
             p.waitFor();
-            System.out.println(p.exitValue());
+            LOGGER.info(String.valueOf(p.exitValue()));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -24,14 +24,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ice.tar.TarEntry;
 import com.ice.tar.TarInputStream;
 
 public class UntarEclipse {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(UntarEclipse.class);
+
     public static void untar(final InputStream in, final String untarDir)
             throws IOException {
-
-        System.out.println("Reading TarInputStream... ");
+        LOGGER.info("Reading TarInputStream... ");
         TarInputStream tin = new TarInputStream(in);
         TarEntry tarEntry = tin.getNextEntry();
         if (new File(untarDir).exists()) {
@@ -39,8 +44,7 @@ public class UntarEclipse {
                 File destPath =
                     new File(untarDir + File.separatorChar
                         + tarEntry.getName());
-                System.out.println("Processing "
-                    + destPath.getAbsoluteFile());
+                LOGGER.info("Processing " + destPath.getAbsoluteFile());
                 if (!tarEntry.isDirectory()) {
                     FileOutputStream fout = new FileOutputStream(destPath);
                     tin.copyEntryContents(fout);
@@ -52,9 +56,8 @@ public class UntarEclipse {
             }
             tin.close();
         } else {
-            System.out
-                .println("That destination directory doesn't exist! "
-                    + untarDir);
+            LOGGER.info("That destination directory doesn't exist! "
+                + untarDir);
         }
 
     }
