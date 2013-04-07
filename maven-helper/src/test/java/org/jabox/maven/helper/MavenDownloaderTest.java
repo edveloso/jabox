@@ -23,8 +23,8 @@ import junit.framework.TestCase;
 
 public class MavenDownloaderTest extends TestCase {
 
-	public void testDownloadArtifact() {
-		MavenDownloader.downloadArtifact("org.jvnet.hudson.plugins",
-				"analysis-core", "1.14", "hpi");
-	}
+    public void testDownloadArtifact() {
+        MavenDownloader.downloadArtifact("org.jvnet.hudson.plugins",
+            "analysis-core", "1.14", "hpi");
+    }
 }

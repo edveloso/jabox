@@ -24,30 +24,30 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class JtracRepositoryConfig extends DeployerConfig implements
-		ITSConnectorConfig {
-	private static final long serialVersionUID = -3304041364131581981L;
+        ITSConnectorConfig {
+    private static final long serialVersionUID = -3304041364131581981L;
 
-	public JtracRepositoryConfig() {
-		pluginId = JtracRepository.ID;
-	}
+    public JtracRepositoryConfig() {
+        pluginId = JtracRepository.ID;
+    }
 
-	public String getProjectUrl(Project project) {
-		return getServer().getUrl();
-	}
+    public String getProjectUrl(Project project) {
+        return getServer().getUrl();
+    }
 
-	public String getSystem() {
-		return "Jtrac";
-	}
+    public String getSystem() {
+        return "Jtrac";
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 }

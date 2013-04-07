@@ -28,58 +28,59 @@ import org.apache.wicket.model.Model;
  */
 public class GitlabAccountURLModel implements IModel<String> {
 
-	private final IModel<String> _serverContainingModel;
+    private final IModel<String> _serverContainingModel;
 
-	private static final long serialVersionUID = -7026688595250460986L;
+    private static final long serialVersionUID = -7026688595250460986L;
 
-	private static final String HTTP = "http://";
-	private static final String GIT = "git://";
+    private static final String HTTP = "http://";
 
-	private static final String GITHUB_COM = "github.com/";
+    private static final String GIT = "git://";
 
-	/**
-	 * Receives an addressModel that contains the server URL, and returns the
-	 * Account URL.
-	 * 
-	 * @param serverURLModel
-	 *            a Model that contains the server URL.
-	 */
-	public GitlabAccountURLModel(final IModel<String> serverURLModel) {
-		_serverContainingModel = serverURLModel;
-	}
+    private static final String GITHUB_COM = "github.com/";
 
-	/**
-	 * Receives an address that contains the server URL, and returns the Account
-	 * URL.
-	 * 
-	 * @param serverURL
-	 *            the server URL.
-	 */
-	public GitlabAccountURLModel(final String serverURL) {
-		Model<String> model = new Model<String>(serverURL);
-		_serverContainingModel = model;
-	}
+    /**
+     * Receives an addressModel that contains the server URL, and returns the
+     * Account URL.
+     * 
+     * @param serverURLModel
+     *            a Model that contains the server URL.
+     */
+    public GitlabAccountURLModel(final IModel<String> serverURLModel) {
+        _serverContainingModel = serverURLModel;
+    }
 
-	/**
-	 * Returns a String that represents the Account URL only without the PREFIX
-	 * and SUFFIX.
-	 */
-	public String getObject() {
-		String url = _serverContainingModel.getObject();
-		if (url != null) {
-			if (url.startsWith(HTTP + GITHUB_COM)) {
-				url = url.substring(HTTP.length() + GITHUB_COM.length());
-			}
-		}
-		return url;
-	}
+    /**
+     * Receives an address that contains the server URL, and returns the Account
+     * URL.
+     * 
+     * @param serverURL
+     *            the server URL.
+     */
+    public GitlabAccountURLModel(final String serverURL) {
+        Model<String> model = new Model<String>(serverURL);
+        _serverContainingModel = model;
+    }
 
-	public void setObject(final String object) {
-		_serverContainingModel.setObject(HTTP + GITHUB_COM + object);
-	}
+    /**
+     * Returns a String that represents the Account URL only without the PREFIX
+     * and SUFFIX.
+     */
+    public String getObject() {
+        String url = _serverContainingModel.getObject();
+        if (url != null) {
+            if (url.startsWith(HTTP + GITHUB_COM)) {
+                url = url.substring(HTTP.length() + GITHUB_COM.length());
+            }
+        }
+        return url;
+    }
 
-	public void detach() {
-		_serverContainingModel.detach();
-	}
+    public void setObject(final String object) {
+        _serverContainingModel.setObject(HTTP + GITHUB_COM + object);
+    }
+
+    public void detach() {
+        _serverContainingModel.detach();
+    }
 
 }

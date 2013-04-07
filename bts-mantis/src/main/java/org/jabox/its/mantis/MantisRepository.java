@@ -41,90 +41,93 @@ import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
-public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
-		Serializable {
-	private static final Logger LOGGER = LoggerFactory
-	.getLogger(MantisRepository.class);
+public class MantisRepository implements
+        ITSConnector<MantisRepositoryConfig>, Serializable {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(MantisRepository.class);
 
-	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.its.mantis";
+    private static final long serialVersionUID = 8131183843391948936L;
 
-	private WebConversation _wc;
+    public static final String ID = "plugin.its.mantis";
 
-	public String getName() {
-		return "Mantis";
-	}
+    private WebConversation _wc;
 
-	public String getId() {
-		return ID;
-	}
+    public String getName() {
+        return "Mantis";
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public MantisRepository() {
-		_wc = new WebConversation();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public boolean login(final MantisRepositoryConfig config)
-			throws MalformedURLException, IOException, SAXException {
-		LOGGER.info("mantis Login: " + config.getUsername());
+    public MantisRepository() {
+        _wc = new WebConversation();
+    }
 
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
-		_wc = new WebConversation();
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("username", config.getUsername());
-		form.setParameter("password", config.getPassword());
-		resp = form.submit();
+    public boolean login(final MantisRepositoryConfig config)
+            throws MalformedURLException, IOException, SAXException {
+        LOGGER.info("mantis Login: " + config.getUsername());
 
-		// TODO check if not logged in.
-		return true;
-	}
+        WebRequest req =
+            new GetMethodWebRequest(config.getServer().getUrl());
+        _wc = new WebConversation();
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0]; // select the first form in the page
+        form.setParameter("username", config.getUsername());
+        form.setParameter("password", config.getPassword());
+        resp = form.submit();
 
-	public boolean addProject(final Project project,
-			final MantisRepositoryConfig config) throws IOException,
-			SAXException {
-		LOGGER.info("mantis add Project: " + project.getName());
+        // TODO check if not logged in.
+        return true;
+    }
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/manage_proj_create_page.php");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[2];
+    public boolean addProject(final Project project,
+            final MantisRepositoryConfig config)
+            throws IOException, SAXException {
+        LOGGER.info("mantis add Project: " + project.getName());
 
-		form.setParameter("name", project.getName());
-		form.setParameter("description", project.getDescription());
-		form.submit();
-		return true;
-	}
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url + "/manage_proj_create_page.php");
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[2];
 
-	public boolean addModule(final Project project,
-			final MantisRepositoryConfig config, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException {
-		return true;
-	}
+        form.setParameter("name", project.getName());
+        form.setParameter("description", project.getDescription());
+        form.submit();
+        return true;
+    }
 
-	public boolean addVersion(final Project project,
-			final MantisRepositoryConfig config, final String version)
-			throws IOException, SAXException {
-		return true;
-	}
+    public boolean addModule(final Project project,
+            final MantisRepositoryConfig config, final String module,
+            final String description, final String initialOwner)
+            throws SAXException, IOException {
+        return true;
+    }
 
-	public DeployerConfig newConfig() {
-		return new MantisRepositoryConfig();
-	}
+    public boolean addVersion(final Project project,
+            final MantisRepositoryConfig config, final String version)
+            throws IOException, SAXException {
+        return true;
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new MantisRepositoryEditor(id, model);
-	}
+    public DeployerConfig newConfig() {
+        return new MantisRepositoryConfig();
+    }
 
-	public void addRepository(Project project, MantisRepositoryConfig config,
-			SCMConnectorConfig scmConfig, String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new MantisRepositoryEditor(id, model);
+    }
+
+    public void addRepository(Project project,
+            MantisRepositoryConfig config, SCMConnectorConfig scmConfig,
+            String username, String password)
+            throws MalformedURLException, IOException, SAXException {
+    }
 
 }

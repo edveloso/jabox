@@ -29,71 +29,77 @@ import org.sonatype.aether.transfer.ArtifactNotFoundException;
 
 public class MavenDownloader {
 
-	private static final String MAVEN_REPO = "http://repo1.maven.org/maven2/";
-	private static final String LOCAL_REPO = Environment
-			.getCustomMavenHomeDir().getAbsolutePath()
-			+ "/repository/";
+    private static final String MAVEN_REPO =
+        "http://repo1.maven.org/maven2/";
 
-	/**
-	 * @param groupId
-	 * @param artifactId
-	 * @param version
-	 * @param extension
-	 */
-	public static File downloadArtifact(final String groupId,
-			final String artifactId, final String version,
-			final String extension) {
-		System.out.println("Downloading: " + groupId + ":" + artifactId + ":"
-				+ version + ":" + extension);
-		try {
-			return retrieveArtifact(groupId, artifactId, version, extension);
-		} catch (ArtifactResolutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ArtifactNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DependencyCollectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    private static final String LOCAL_REPO = Environment
+        .getCustomMavenHomeDir().getAbsolutePath() + "/repository/";
 
-		return null;
-	}
+    /**
+     * @param groupId
+     * @param artifactId
+     * @param version
+     * @param extension
+     */
+    public static File downloadArtifact(final String groupId,
+            final String artifactId, final String version,
+            final String extension) {
+        System.out.println("Downloading: " + groupId + ":" + artifactId
+            + ":" + version + ":" + extension);
+        try {
+            return retrieveArtifact(groupId, artifactId, version,
+                extension);
+        } catch (ArtifactResolutionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ArtifactNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DependencyCollectionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	public static File getArtifactFile(final String groupId,
-			final String artifactId, final String version, final String type) {
-		String m2Home = Environment.getCustomMavenHomeDir().getAbsolutePath();
-		assert m2Home != null;
-		StringBuffer sb = new StringBuffer(m2Home);
-		sb.append(File.separator);
-		sb.append("repository");
-		sb.append(File.separator);
-		sb.append(groupId.replace('.', File.separatorChar));
-		sb.append(File.separator);
-		sb.append(artifactId);
-		sb.append(File.separator);
-		sb.append(version);
-		sb.append(File.separator);
-		sb.append(artifactId);
-		sb.append("-");
-		sb.append(version);
-		sb.append(".");
-		sb.append(type);
-		File file = new File(sb.toString());
-		assert file.exists();
-		return file;
-	}
+        return null;
+    }
 
-	private static File retrieveArtifact(final String groupId,
-			final String artifactId, final String version,
-			final String extension) throws ArtifactResolutionException,
-			ArtifactNotFoundException, DependencyCollectionException {
-		Aether aether = new Aether(MAVEN_REPO, LOCAL_REPO);
+    public static File getArtifactFile(final String groupId,
+            final String artifactId, final String version,
+            final String type) {
+        String m2Home =
+            Environment.getCustomMavenHomeDir().getAbsolutePath();
+        assert m2Home != null;
+        StringBuffer sb = new StringBuffer(m2Home);
+        sb.append(File.separator);
+        sb.append("repository");
+        sb.append(File.separator);
+        sb.append(groupId.replace('.', File.separatorChar));
+        sb.append(File.separator);
+        sb.append(artifactId);
+        sb.append(File.separator);
+        sb.append(version);
+        sb.append(File.separator);
+        sb.append(artifactId);
+        sb.append("-");
+        sb.append(version);
+        sb.append(".");
+        sb.append(type);
+        File file = new File(sb.toString());
+        assert file.exists();
+        return file;
+    }
 
-		File result = aether.resolveArtifact(groupId, artifactId, version,
-				extension);
+    private static File retrieveArtifact(final String groupId,
+            final String artifactId, final String version,
+            final String extension)
+            throws ArtifactResolutionException, ArtifactNotFoundException,
+            DependencyCollectionException {
+        Aether aether = new Aether(MAVEN_REPO, LOCAL_REPO);
 
-		return result;
-	}
+        File result =
+            aether
+                .resolveArtifact(groupId, artifactId, version, extension);
+
+        return result;
+    }
 }

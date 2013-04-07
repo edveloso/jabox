@@ -36,42 +36,43 @@ import org.jabox.model.Project;
  * Helper class that injects the &lt;scm&gt; configuration to a pom file.
  */
 public class MavenConfigureSCM {
-	public MavenConfigureSCM() {
-	}
+    public MavenConfigureSCM() {
+    }
 
-	/**
-	 * Injects the &lt;scm&gt; configuration to the pom file.
-	 * 
-	 * @param pomFile
-	 *            the pom file that will be injected with the
-	 *            distributionManager configuration.
-	 * @param scm
-	 * @param project
-	 * @throws IOException
-	 * @throws XmlPullParserException
-	 */
-	public static void injectScm(final File pomFile,
-			final SCMConnectorConfig scm, final Project project)
-			throws IOException, XmlPullParserException {
-		FileReader fileReader = new FileReader(pomFile);
-		Model model = new MavenXpp3Reader().read(fileReader);
+    /**
+     * Injects the &lt;scm&gt; configuration to the pom file.
+     * 
+     * @param pomFile
+     *            the pom file that will be injected with the
+     *            distributionManager configuration.
+     * @param scm
+     * @param project
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void injectScm(final File pomFile,
+            final SCMConnectorConfig scm, final Project project)
+            throws IOException, XmlPullParserException {
+        FileReader fileReader = new FileReader(pomFile);
+        Model model = new MavenXpp3Reader().read(fileReader);
 
-		String scmMavenUrl = project.getScmMavenUrl();
-		Scm sc = getScm(scmMavenUrl, scmMavenUrl, scm.getServer().getUrl());
-		model.setScm(sc);
+        String scmMavenUrl = project.getScmMavenUrl();
+        Scm sc =
+            getScm(scmMavenUrl, scmMavenUrl, scm.getServer().getUrl());
+        model.setScm(sc);
 
-		FileWriter fileWriter = new FileWriter(pomFile);
-		new MavenXpp3Writer().write(fileWriter, model);
-	}
+        FileWriter fileWriter = new FileWriter(pomFile);
+        new MavenXpp3Writer().write(fileWriter, model);
+    }
 
-	private static Scm getScm(final String connection,
-			final String developerConnection, final String url) {
-		Scm scm = new Scm();
+    private static Scm getScm(final String connection,
+            final String developerConnection, final String url) {
+        Scm scm = new Scm();
 
-		scm.setConnection(connection);
-		scm.setDeveloperConnection(developerConnection);
-		scm.setUrl(url);
+        scm.setConnection(connection);
+        scm.setDeveloperConnection(developerConnection);
+        scm.setUrl(url);
 
-		return scm;
-	}
+        return scm;
+    }
 }

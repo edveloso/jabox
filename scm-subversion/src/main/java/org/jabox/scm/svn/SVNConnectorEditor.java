@@ -27,18 +27,18 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.Server;
 
 public class SVNConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4137475647749541936L;
+    private static final long serialVersionUID = -4137475647749541936L;
 
-	public SVNConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
+    public SVNConnectorEditor(final String id, final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
 
-		TextField<String> username = new TextField<String>("username");
-		PasswordTextField password = new PasswordTextField("password");
-		TextField<String> url = new TextField<String>("server.url");
+        TextField<String> username = new TextField<String>("username");
+        PasswordTextField password = new PasswordTextField("password");
+        TextField<String> url = new TextField<String>("server.url");
 
-		add(username);
-		add(password.setRequired(false));
-		add(url.add(new SVNLoginValidator(url, username, password))
-				.setRequired(true));
-	}
+        add(username);
+        add(password.setRequired(false));
+        add(url.add(new SVNLoginValidator(url, username, password))
+            .setRequired(true));
+    }
 }

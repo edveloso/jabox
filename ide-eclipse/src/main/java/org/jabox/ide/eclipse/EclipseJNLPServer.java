@@ -24,14 +24,14 @@ import org.jabox.maven.helper.MavenDownloader;
 
 public class EclipseJNLPServer extends AbstractEmbeddedServer {
 
-	@Override
-	public String getServerName() {
-		return "eclipse";
-	}
+    @Override
+    public String getServerName() {
+        return "eclipse";
+    }
 
-	@Override
-	public String getWarPath() {
-		return MavenDownloader.downloadArtifact("org.jabox", "eclipse-webapp",
-				"1.0.0-SNAPSHOT", "war").getAbsolutePath();
-	}
+    @Override
+    public String getWarPath() {
+        return MavenDownloader.downloadArtifact("org.jabox",
+            "eclipse-webapp", "1.0.0-SNAPSHOT", "war").getAbsolutePath();
+    }
 }

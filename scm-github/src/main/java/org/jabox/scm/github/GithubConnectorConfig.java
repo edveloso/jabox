@@ -24,47 +24,49 @@ import org.jabox.model.Server;
 import org.jabox.scm.git.IGITConnectorConfig;
 
 public class GithubConnectorConfig extends DeployerConfig implements
-		IGITConnectorConfig {
-	private static final long serialVersionUID = -830757629457448866L;
+        IGITConnectorConfig {
+    private static final long serialVersionUID = -830757629457448866L;
 
-	private static final String GIT_GITHUB_COM = "git://github.com/";
-	private static final String HTTPS_GITHUB_COM = "https://github.com/";
-	private static final String DOT_GIT = ".git";
+    private static final String GIT_GITHUB_COM = "git://github.com/";
 
-	public GithubConnectorConfig() {
-		pluginId = GithubConnector.ID;
-	}
+    private static final String HTTPS_GITHUB_COM = "https://github.com/";
 
-	public String username;
+    private static final String DOT_GIT = ".git";
 
-	public String password;
+    public GithubConnectorConfig() {
+        pluginId = GithubConnector.ID;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String username;
 
-	public String getPassword() {
-		return password;
-	}
+    public String password;
 
-	@Override
-	public Server getServer() {
-		if (server != null) {
-			server.setUrl(HTTPS_GITHUB_COM + getUsername() + "/");
-		}
-		return server;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getScmUrl() {
-		String scmURL = GIT_GITHUB_COM + getUsername() + "/";
-		return scmURL;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getProjectScmUrl(String projectName) {
-		return getScmUrl() + projectName + DOT_GIT;
-	}
+    @Override
+    public Server getServer() {
+        if (server != null) {
+            server.setUrl(HTTPS_GITHUB_COM + getUsername() + "/");
+        }
+        return server;
+    }
 
-	public String getScmMavenPrefix() {
-		return "scm:git:";
-	}
+    public String getScmUrl() {
+        String scmURL = GIT_GITHUB_COM + getUsername() + "/";
+        return scmURL;
+    }
+
+    public String getProjectScmUrl(String projectName) {
+        return getScmUrl() + projectName + DOT_GIT;
+    }
+
+    public String getScmMavenPrefix() {
+        return "scm:git:";
+    }
 }

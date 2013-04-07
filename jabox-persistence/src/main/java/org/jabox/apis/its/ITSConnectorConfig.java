@@ -23,20 +23,20 @@ import org.jabox.apis.ConnectorConfig;
 import org.jabox.model.Project;
 
 public interface ITSConnectorConfig extends ConnectorConfig {
-	/**
-	 * @return The name of the issue management system, e.g.
-	 *         <code>Bugzilla</code>.
-	 */
-	String getSystem();
+    /**
+     * @return The name of the issue management system, e.g.
+     *         <code>Bugzilla</code>.
+     */
+    String getSystem();
 
-	/**
-	 * @param project
-	 *            The project
-	 * @return The URL of the Issue Management for the specific Project.
-	 */
-	String getProjectUrl(Project project);
-	
-	String getUsername();
+    /**
+     * @param project
+     *            The project
+     * @return The URL of the Issue Management for the specific Project.
+     */
+    String getProjectUrl(Project project);
 
-	String getPassword();
+    String getUsername();
+
+    String getPassword();
 }

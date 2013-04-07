@@ -29,51 +29,54 @@ import java.net.URL;
 
 public class DownloadHelper {
 
-	/**
-	 * Downloads a remote file locally. If the file already exists then it
-	 * returns directly without downloading.
-	 * 
-	 * @param urlPath
-	 * @return
-	 */
-	public static File downloadFile(final String urlPath, final File outputFile) {
-		if (outputFile.exists()) {
-			System.out.println(urlPath +" already exists at: " + outputFile);
-			return outputFile;
-		}
+    /**
+     * Downloads a remote file locally. If the file already exists then it
+     * returns directly without downloading.
+     * 
+     * @param urlPath
+     * @return
+     */
+    public static File downloadFile(final String urlPath,
+            final File outputFile) {
+        if (outputFile.exists()) {
+            System.out.println(urlPath + " already exists at: "
+                + outputFile);
+            return outputFile;
+        }
 
-		System.out.println("Downloading: " + urlPath);
-		InputStream is = null;
-		BufferedInputStream bin = null;
-		BufferedOutputStream bout = null;
+        System.out.println("Downloading: " + urlPath);
+        InputStream is = null;
+        BufferedInputStream bin = null;
+        BufferedOutputStream bout = null;
 
-		outputFile.getParentFile().mkdirs();
+        outputFile.getParentFile().mkdirs();
 
-		try {
-			URL url = new URL(urlPath);
-			is = url.openStream();
-			bin = new BufferedInputStream(is);
-			bout = new BufferedOutputStream(new FileOutputStream(outputFile));
-			while (true) {
-				int datum = bin.read();
-				if (datum == -1) {
-					break;
-				}
-				bout.write(datum);
-			}
-			bout.flush();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		} finally {
-			try {
-				is.close();
-				bin.close();
-				bout.close();
-			} catch (IOException ioe) {
-				// nothing to see here
-			}
-		}
-		return outputFile;
-	}
+        try {
+            URL url = new URL(urlPath);
+            is = url.openStream();
+            bin = new BufferedInputStream(is);
+            bout =
+                new BufferedOutputStream(new FileOutputStream(outputFile));
+            while (true) {
+                int datum = bin.read();
+                if (datum == -1) {
+                    break;
+                }
+                bout.write(datum);
+            }
+            bout.flush();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            try {
+                is.close();
+                bin.close();
+                bout.close();
+            } catch (IOException ioe) {
+                // nothing to see here
+            }
+        }
+        return outputFile;
+    }
 
 }

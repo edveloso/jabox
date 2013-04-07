@@ -9,12 +9,12 @@ import com.google.inject.multibindings.Multibinder;
 
 public class JenkinsModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<CISConnector> uriBinder = Multibinder.newSetBinder(binder,
-				CISConnector.class);
-		uriBinder.addBinding().to(JenkinsConnector.class);
-		uriBinder.addBinding().to(EJenkinsConnector.class);
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<CISConnector> uriBinder =
+            Multibinder.newSetBinder(binder, CISConnector.class);
+        uriBinder.addBinding().to(JenkinsConnector.class);
+        uriBinder.addBinding().to(EJenkinsConnector.class);
 
-	}
+    }
 }

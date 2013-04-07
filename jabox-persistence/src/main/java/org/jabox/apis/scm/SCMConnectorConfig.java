@@ -23,13 +23,13 @@ import org.jabox.apis.ConnectorConfig;
 
 public interface SCMConnectorConfig extends ConnectorConfig {
 
-	String getScmUrl();
+    String getScmUrl();
 
-	String getProjectScmUrl(String projectName);
-	
-	String getUsername();
+    String getProjectScmUrl(String projectName);
 
-	String getPassword();
+    String getUsername();
 
-	String getScmMavenPrefix();
+    String getPassword();
+
+    String getScmMavenPrefix();
 }

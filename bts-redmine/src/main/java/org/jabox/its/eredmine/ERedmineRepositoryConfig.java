@@ -24,15 +24,15 @@ import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
 public class ERedmineRepositoryConfig extends RedmineRepositoryConfig {
-	private static final long serialVersionUID = 2915937476212772390L;
+    private static final long serialVersionUID = 2915937476212772390L;
 
-	public ERedmineRepositoryConfig() {
-		pluginId = ERedmineRepository.ID;
-	}
+    public ERedmineRepositoryConfig() {
+        pluginId = ERedmineRepository.ID;
+    }
 
-	public String getSystem() {
-		return "Redmine";
-	}
+    public String getSystem() {
+        return "Redmine";
+    }
 
     @Override
     public void setServer(final Server server) {

@@ -31,33 +31,32 @@ import org.jabox.model.Server;
  * :9090/hudson/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
  * 
  * @author Administrator
- * 
  */
 public class EHudsonConnector extends HudsonConnector {
-	public static final String ID = "plugin.cis.ehudson";
+    public static final String ID = "plugin.cis.ehudson";
 
-	@Override
-	public String getName() {
-		return "Embedded Hudson";
-	}
+    @Override
+    public String getName() {
+        return "Embedded Hudson";
+    }
 
-	@Override
-	public String getId() {
-		return ID;
-	}
+    @Override
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	@Override
-	public DeployerConfig newConfig() {
-		return new EHudsonConnectorConfig();
-	}
+    @Override
+    public DeployerConfig newConfig() {
+        return new EHudsonConnectorConfig();
+    }
 
-	@Override
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new EHudsonConnectorEditor(id, model);
-	}
+    @Override
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new EHudsonConnectorEditor(id, model);
+    }
 }

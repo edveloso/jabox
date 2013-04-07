@@ -23,76 +23,77 @@ import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
 public class ScpConnectorConfig extends DeployerConfig implements
-		RMSConnectorConfig {
-	private static final long serialVersionUID = -891223857972401214L;
+        RMSConnectorConfig {
+    private static final long serialVersionUID = -891223857972401214L;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
-	private String repositoryURL;
+    private String repositoryURL;
 
-	private String absoluteReleaseRepositoryPath;
+    private String absoluteReleaseRepositoryPath;
 
-	private String absoluteSnapshotRepositoryPath;
+    private String absoluteSnapshotRepositoryPath;
 
-	public ScpConnectorConfig() {
-		pluginId = ScpConnector.ID;
-	}
+    public ScpConnectorConfig() {
+        pluginId = ScpConnector.ID;
+    }
 
-	@Override
-	public String getRepositoryURL() {
-		return repositoryURL;
-	}
+    @Override
+    public String getRepositoryURL() {
+        return repositoryURL;
+    }
 
-	public void setRepositoryURL(String repositoryURL) {
-		this.repositoryURL = repositoryURL;
-	}
-	
-	public String getReleaseRepositoryURL() {
-		return "scp://" + getServer().getUrl()
-				+ getAbsoluteReleaseRepositoryPath();
-	}
+    public void setRepositoryURL(String repositoryURL) {
+        this.repositoryURL = repositoryURL;
+    }
 
-	public String getSnapshotsRepositoryURL() {
-		return "scp://" + getServer().getUrl()
-				+ getAbsoluteSnapshotRepositoryPath();
-	}
+    public String getReleaseRepositoryURL() {
+        return "scp://" + getServer().getUrl()
+            + getAbsoluteReleaseRepositoryPath();
+    }
 
-	public void setAbsoluteReleaseRepositoryPath(
-			String absoluteReleaseRepositoryPath) {
-		this.absoluteReleaseRepositoryPath = absoluteReleaseRepositoryPath;
-	}
+    public String getSnapshotsRepositoryURL() {
+        return "scp://" + getServer().getUrl()
+            + getAbsoluteSnapshotRepositoryPath();
+    }
 
-	public String getAbsoluteReleaseRepositoryPath() {
-		return absoluteReleaseRepositoryPath;
-	}
+    public void setAbsoluteReleaseRepositoryPath(
+            String absoluteReleaseRepositoryPath) {
+        this.absoluteReleaseRepositoryPath = absoluteReleaseRepositoryPath;
+    }
 
-	public void setAbsoluteSnapshotRepositoryPath(
-			String absoluteSnapshotRepositoryPath) {
-		this.absoluteSnapshotRepositoryPath = absoluteSnapshotRepositoryPath;
-	}
+    public String getAbsoluteReleaseRepositoryPath() {
+        return absoluteReleaseRepositoryPath;
+    }
 
-	public String getAbsoluteSnapshotRepositoryPath() {
-		return absoluteSnapshotRepositoryPath;
-	}
+    public void setAbsoluteSnapshotRepositoryPath(
+            String absoluteSnapshotRepositoryPath) {
+        this.absoluteSnapshotRepositoryPath =
+            absoluteSnapshotRepositoryPath;
+    }
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    public String getAbsoluteSnapshotRepositoryPath() {
+        return absoluteSnapshotRepositoryPath;
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

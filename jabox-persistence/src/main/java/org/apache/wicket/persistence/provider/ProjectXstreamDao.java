@@ -15,64 +15,65 @@ import com.thoughtworks.xstream.XStream;
 
 public class ProjectXstreamDao {
 
-	private static XStream getXStream() {
-		XStream xstream = new XStream();
-		xstream.alias("project", Project.class);
-		return xstream;
-	}
+    private static XStream getXStream() {
+        XStream xstream = new XStream();
+        xstream.alias("project", Project.class);
+        return xstream;
+    }
 
-	public static void persist(Project project) {
-		XStream xstream = getXStream();
-		String xml = xstream.toXML(project);
-		try {
-			File projectsDir = Environment.getProjectsDir();
-			File file = new File(projectsDir, project.getName() + ".xml");
-			FileWriter writer = new FileWriter(file);
-			writer.write(xml);
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void persist(Project project) {
+        XStream xstream = getXStream();
+        String xml = xstream.toXML(project);
+        try {
+            File projectsDir = Environment.getProjectsDir();
+            File file = new File(projectsDir, project.getName() + ".xml");
+            FileWriter writer = new FileWriter(file);
+            writer.write(xml);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static List<Project> getProjects() {
-		ArrayList<Project> projects = new ArrayList<Project>();
-		File dir = Environment.getProjectsDir();
+    public static List<Project> getProjects() {
+        ArrayList<Project> projects = new ArrayList<Project>();
+        File dir = Environment.getProjectsDir();
 
-		String[] children = dir.list();
-		if (children == null) {
-			// Either dir does not exist or is not a directory
-		} else {
-			for (int i = 0; i < children.length; i++) {
-				// Get filename of file or directory
-				String filename = children[i];
-				String name = filename.replaceAll(".xml$", "");
-				projects.add(getProject(name));
-			}
-		}
+        String[] children = dir.list();
+        if (children == null) {
+            // Either dir does not exist or is not a directory
+        } else {
+            for (int i = 0; i < children.length; i++) {
+                // Get filename of file or directory
+                String filename = children[i];
+                String name = filename.replaceAll(".xml$", "");
+                projects.add(getProject(name));
+            }
+        }
 
-		return projects;
-	}
+        return projects;
+    }
 
-	public static Project getProject(String name) {
-		XStream xstream = getXStream();
+    public static Project getProject(String name) {
+        XStream xstream = getXStream();
 
-		File dir = Environment.getProjectsDir();
-		File file = new File(dir, name + ".xml");
+        File dir = Environment.getProjectsDir();
+        File file = new File(dir, name + ".xml");
 
-		try {
-			FileInputStream is = new FileInputStream(file);
-			Project project = (Project) xstream.fromXML(is);
-			return project;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+        try {
+            FileInputStream is = new FileInputStream(file);
+            Project project = (Project) xstream.fromXML(is);
+            return project;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public static void deleteProject(Project project) {
-		File file = new File(Environment.getProjectsDir(), project.getName()
-				+ ".xml");
-		file.delete();
-	}
+    public static void deleteProject(Project project) {
+        File file =
+            new File(Environment.getProjectsDir(), project.getName()
+                + ".xml");
+        file.delete();
+    }
 }

@@ -32,68 +32,68 @@ import org.jabox.model.Server;
 
 //@Service
 public class GITConnector implements SCMConnector<IGITConnectorConfig>,
-		Serializable {
-	public static final String ID = "plugin.scm.git";
+        Serializable {
+    public static final String ID = "plugin.scm.git";
 
-	private static final long serialVersionUID = -3875844507330633672L;
+    private static final long serialVersionUID = -3875844507330633672L;
 
-	private File _tmpDir;
+    private File _tmpDir;
 
-	public String getName() {
-		return "Git";
-	}
+    public String getName() {
+        return "Git";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public File createProjectDirectories(final Project project,
-			final IGITConnectorConfig config) throws SCMException {
-		IGITConnectorConfig svnc = config;
+    public File createProjectDirectories(final Project project,
+            final IGITConnectorConfig config) throws SCMException {
+        IGITConnectorConfig svnc = config;
 
-		GITFacade git = new GITFacade();
-		_tmpDir = GITRepository.getGitBaseDir();
+        GITFacade git = new GITFacade();
+        _tmpDir = GITRepository.getGitBaseDir();
 
-		git.checkoutBaseDir(_tmpDir, svnc);
-		// Create Project directory and its trunk/branches/tags
-		// subdirectories
-		File trunkDir = createProjectDirectories(project, _tmpDir);
-		return trunkDir;
+        git.checkoutBaseDir(_tmpDir, svnc);
+        // Create Project directory and its trunk/branches/tags
+        // subdirectories
+        File trunkDir = createProjectDirectories(project, _tmpDir);
+        return trunkDir;
 
-	}
+    }
 
-	/**
-	 * 
-	 * @param project
-	 * @param tmpDir
-	 * @return the trunk directory.
-	 */
-	private static File createProjectDirectories(final Project project,
-			final File tmpDir) {
-		assert tmpDir.exists();
-		File projectDir = new File(tmpDir, project.getName());
-		projectDir.mkdirs();
-		return projectDir;
-	}
+    /**
+     * @param project
+     * @param tmpDir
+     * @return the trunk directory.
+     */
+    private static File createProjectDirectories(final Project project,
+            final File tmpDir) {
+        assert tmpDir.exists();
+        File projectDir = new File(tmpDir, project.getName());
+        projectDir.mkdirs();
+        return projectDir;
+    }
 
-	public void commitProject(final Project project,
-			final IGITConnectorConfig svnc) throws SCMException {
-		assert _tmpDir != null && _tmpDir.exists();
+    public void commitProject(final Project project,
+            final IGITConnectorConfig svnc) throws SCMException {
+        assert _tmpDir != null && _tmpDir.exists();
 
-		GITFacade git = new GITFacade();
-		git.commitProject(project, new File(_tmpDir, project.getName()), svnc);
-	}
+        GITFacade git = new GITFacade();
+        git.commitProject(project, new File(_tmpDir, project.getName()),
+            svnc);
+    }
 
-	public DeployerConfig newConfig() {
-		return new GITConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new GITConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new GITConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new GITConnectorEditor(id, model);
+    }
 }

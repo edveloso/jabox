@@ -8,12 +8,12 @@ import com.google.inject.multibindings.Multibinder;
 
 public class BugzillaModule implements Module {
 
-	@Override
-	  public void configure(Binder binder) {
-		// binder.bind(ITSConnector.class).to(BugzillaRepository.class);
-		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
-				ITSConnector.class);
-		uriBinder.addBinding().to(BugzillaRepository.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        // binder.bind(ITSConnector.class).to(BugzillaRepository.class);
+        Multibinder<ITSConnector> uriBinder =
+            Multibinder.newSetBinder(binder, ITSConnector.class);
+        uriBinder.addBinding().to(BugzillaRepository.class);
+    }
 
 }

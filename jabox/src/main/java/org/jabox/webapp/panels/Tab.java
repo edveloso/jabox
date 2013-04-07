@@ -25,54 +25,58 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 
 public class Tab implements Serializable {
-	private static final long serialVersionUID = 4781646077887785325L;
+    private static final long serialVersionUID = 4781646077887785325L;
 
-	private String _title;
-	private Class<? extends WebPage> _pageClass;
-	private String _tooltip;
+    private String _title;
 
-	private boolean _selected;
+    private Class<? extends WebPage> _pageClass;
 
-	public Tab(final String title, final Class<? extends WebPage> pageClass,
-			final boolean selected) {
-		_title = title;
-		_pageClass = pageClass;
-		setSelected(selected);
-	}
+    private String _tooltip;
 
-	public Tab(final String title, final Class<? extends WebPage> pageClass,
-			final String tooltip, final boolean selected) {
-		_title = title;
-		_pageClass = pageClass;
-		_tooltip = tooltip;
-		setSelected(selected);
-	}
+    private boolean _selected;
 
-	public void setTitle(final String title) {
-		_title = title;
-	}
+    public Tab(final String title,
+            final Class<? extends WebPage> pageClass,
+            final boolean selected) {
+        _title = title;
+        _pageClass = pageClass;
+        setSelected(selected);
+    }
 
-	public String getTitle() {
-		return _title;
-	}
+    public Tab(final String title,
+            final Class<? extends WebPage> pageClass,
+            final String tooltip, final boolean selected) {
+        _title = title;
+        _pageClass = pageClass;
+        _tooltip = tooltip;
+        setSelected(selected);
+    }
 
-	public void setSelected(final boolean selected) {
-		_selected = selected;
-	}
+    public void setTitle(final String title) {
+        _title = title;
+    }
 
-	public boolean isSelected() {
-		return _selected;
-	}
+    public String getTitle() {
+        return _title;
+    }
 
-	public void setTooltip(final String tooltip) {
-		_tooltip = tooltip;
-	}
+    public void setSelected(final boolean selected) {
+        _selected = selected;
+    }
 
-	public String getTooltip() {
-		return _tooltip;
-	}
+    public boolean isSelected() {
+        return _selected;
+    }
 
-	public Class<? extends WebPage> getPageClass() {
-		return _pageClass;
-	}
+    public void setTooltip(final String tooltip) {
+        _tooltip = tooltip;
+    }
+
+    public String getTooltip() {
+        return _tooltip;
+    }
+
+    public Class<? extends WebPage> getPageClass() {
+        return _pageClass;
+    }
 }

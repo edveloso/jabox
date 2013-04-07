@@ -30,21 +30,24 @@ import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
 public class EJenkinsConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4821476804096973897L;
+    private static final long serialVersionUID = -4821476804096973897L;
 
-	public EJenkinsConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		TextField<String> username = new TextField<String>("username");
-		PasswordTextField password = new PasswordTextField("password");
+    public EJenkinsConnectorEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        TextField<String> username = new TextField<String>("username");
+        PasswordTextField password = new PasswordTextField("password");
 
-		add(username.setRequired(true));
-		add(password.setRequired(true));
+        add(username.setRequired(true));
+        add(password.setRequired(true));
 
-		// XXX This should be dynamic
-		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://" + LocalHostName.getLocalHostname() + ":9080/jenkins/"));
+        // XXX This should be dynamic
+        TextField<String> url =
+            new TextField<String>("url", new Model<String>("http://"
+                + LocalHostName.getLocalHostname() + ":9080/jenkins/"));
 
-		add(password.add(new JenkinsLoginValidator(url, username, password))
-				.setRequired(true));
-	}
+        add(password.add(
+            new JenkinsLoginValidator(url, username, password))
+            .setRequired(true));
+    }
 }

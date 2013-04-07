@@ -35,21 +35,21 @@ import org.jabox.webapp.panels.HeaderLinksPanel;
  */
 public class RmsPage extends TabPage {
 
-	public RmsPage() {
-		// Configure Header URL
-		PageParameters params = new PageParameters();
-		params.add("selected", HeaderLinksPanel.RMS);
-		CharSequence header = urlFor(HeaderLinksPage.class, params);
-		WebMarkupContainer wmc2 = new WebMarkupContainer("header");
-		wmc2.add(new AttributeModifier("src", new Model<String>(header
-				.toString())));
-		add(wmc2);
+    public RmsPage() {
+        // Configure Header URL
+        PageParameters params = new PageParameters();
+        params.add("selected", HeaderLinksPanel.RMS);
+        CharSequence header = urlFor(HeaderLinksPage.class, params);
+        WebMarkupContainer wmc2 = new WebMarkupContainer("header");
+        wmc2.add(new AttributeModifier("src", new Model<String>(header
+            .toString())));
+        add(wmc2);
 
-		// Configure Main body URL
-		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		String url = dc.getRms().getServer().getUrl();
-		WebMarkupContainer wmc = new WebMarkupContainer("frame");
-		wmc.add(new AttributeModifier("src", new Model<String>(url)));
-		add(wmc);
-	}
+        // Configure Main body URL
+        final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+        String url = dc.getRms().getServer().getUrl();
+        WebMarkupContainer wmc = new WebMarkupContainer("frame");
+        wmc.add(new AttributeModifier("src", new Model<String>(url)));
+        add(wmc);
+    }
 }

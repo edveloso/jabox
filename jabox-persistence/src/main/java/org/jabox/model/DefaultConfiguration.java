@@ -30,135 +30,144 @@ import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnectorConfig;
 
-public class DefaultConfiguration extends BaseEntity implements Serializable {
-	public static final String TRUE = "true";
+public class DefaultConfiguration extends BaseEntity implements
+        Serializable {
+    public static final String TRUE = "true";
 
-	public static final String FALSE = "false";
+    public static final String FALSE = "false";
 
-	private static final long serialVersionUID = 970298449487373906L;
+    private static final long serialVersionUID = 970298449487373906L;
 
-	private DeployerConfig _its;
+    private DeployerConfig _its;
 
-	private DeployerConfig _cis;
+    private DeployerConfig _cis;
 
-	private DeployerConfig _rms;
+    private DeployerConfig _rms;
 
-	private DeployerConfig _scm;
+    private DeployerConfig _scm;
 
-	private DeployerConfig _cqm;
+    private DeployerConfig _cqm;
 
-	public String isDefault(final ConnectorConfig item) {
-		if (item == null) {
-			return FALSE;
-		}
+    public String isDefault(final ConnectorConfig item) {
+        if (item == null) {
+            return FALSE;
+        }
 
-		String name = item.getServer().getName();
-		if (_its != null && name.equals(_its.getServer().getName())) {
-			return TRUE;
-		} else if (_cis != null && name.equals(_cis.getServer().getName())) {
-			return TRUE;
-		} else if (_rms != null && name.equals(_rms.getServer().getName())) {
-			return TRUE;
-		} else if (_scm != null && name.equals(_scm.getServer().getName())) {
-			return TRUE;
-		} else if (_cqm != null && name.equals(_cqm.getServer().getName())) {
-			return TRUE;
-		}
+        String name = item.getServer().getName();
+        if (_its != null && name.equals(_its.getServer().getName())) {
+            return TRUE;
+        } else if (_cis != null && name.equals(_cis.getServer().getName())) {
+            return TRUE;
+        } else if (_rms != null && name.equals(_rms.getServer().getName())) {
+            return TRUE;
+        } else if (_scm != null && name.equals(_scm.getServer().getName())) {
+            return TRUE;
+        } else if (_cqm != null && name.equals(_cqm.getServer().getName())) {
+            return TRUE;
+        }
 
-		return FALSE;
-	}
+        return FALSE;
+    }
 
-	public String isDefault(final ListItem<ConnectorConfig> listItem) {
-		if (listItem == null) {
-			return FALSE;
-		}
-		return isDefault(listItem.getModelObject());
-	}
+    public String isDefault(final ListItem<ConnectorConfig> listItem) {
+        if (listItem == null) {
+            return FALSE;
+        }
+        return isDefault(listItem.getModelObject());
+    }
 
-	/**
-	 * If given parameter is already default disable, else set it as default.
-	 * 
-	 * @param config
-	 */
-	public void switchDefault(final ConnectorConfig config) {
-		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			if (TRUE.equals(isDefault(config))) {
-				_its = null;
-			} else {
-				_its = (DeployerConfig) config;
-			}
-		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			if (TRUE.equals(isDefault(config))) {
-				_cis = null;
-			} else {
-				_cis = (DeployerConfig) config;
-			}
-		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			if (TRUE.equals(isDefault(config))) {
-				_rms = null;
-			} else {
-				_rms = (DeployerConfig) config;
-			}
-		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			if (TRUE.equals(isDefault(config))) {
-				_scm = null;
-			} else {
-				_scm = (DeployerConfig) config;
-			}
-		} else if (CQMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			if (TRUE.equals(isDefault(config))) {
-				_cqm = null;
-			} else {
-				_cqm = (DeployerConfig) config;
-			}
-		}
+    /**
+     * If given parameter is already default disable, else set it as default.
+     * 
+     * @param config
+     */
+    public void switchDefault(final ConnectorConfig config) {
+        if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
+            if (TRUE.equals(isDefault(config))) {
+                _its = null;
+            } else {
+                _its = (DeployerConfig) config;
+            }
+        } else if (CISConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            if (TRUE.equals(isDefault(config))) {
+                _cis = null;
+            } else {
+                _cis = (DeployerConfig) config;
+            }
+        } else if (RMSConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            if (TRUE.equals(isDefault(config))) {
+                _rms = null;
+            } else {
+                _rms = (DeployerConfig) config;
+            }
+        } else if (SCMConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            if (TRUE.equals(isDefault(config))) {
+                _scm = null;
+            } else {
+                _scm = (DeployerConfig) config;
+            }
+        } else if (CQMConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            if (TRUE.equals(isDefault(config))) {
+                _cqm = null;
+            } else {
+                _cqm = (DeployerConfig) config;
+            }
+        }
 
-	}
+    }
 
-	public ITSConnectorConfig getIts() {
-		return (ITSConnectorConfig) _its;
-	}
+    public ITSConnectorConfig getIts() {
+        return (ITSConnectorConfig) _its;
+    }
 
-	public CISConnectorConfig getCis() {
-		return (CISConnectorConfig) _cis;
-	}
+    public CISConnectorConfig getCis() {
+        return (CISConnectorConfig) _cis;
+    }
 
-	public SCMConnectorConfig getScm() {
-		return (SCMConnectorConfig) _scm;
-	}
+    public SCMConnectorConfig getScm() {
+        return (SCMConnectorConfig) _scm;
+    }
 
-	public CQMConnectorConfig getCqm() {
-		return (CQMConnectorConfig) _cqm;
-	}
+    public CQMConnectorConfig getCqm() {
+        return (CQMConnectorConfig) _cqm;
+    }
 
-	public RMSConnectorConfig getRms() {
-		return (RMSConnectorConfig) _rms;
-	}
+    public RMSConnectorConfig getRms() {
+        return (RMSConnectorConfig) _rms;
+    }
 
-	/**
-	 * Returns the Default ConnectorConfig for the type of the passed
-	 * ConnectorConfig instance.
-	 * 
-	 * @param config
-	 *            the ConnectorConfig instance to retrieve the type from.
-	 */
-	public ConnectorConfig getDefault(final ConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    /**
+     * Returns the Default ConnectorConfig for the type of the passed
+     * ConnectorConfig instance.
+     * 
+     * @param config
+     *            the ConnectorConfig instance to retrieve the type from.
+     */
+    public ConnectorConfig getDefault(final ConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			return _its;
-		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			return _cis;
-		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			return _rms;
-		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			return _scm;
-		} else if (CQMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			return _cqm;
-		}
+        if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
+            return _its;
+        } else if (CISConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            return _cis;
+        } else if (RMSConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            return _rms;
+        } else if (SCMConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            return _scm;
+        } else if (CQMConnectorConfig.class.isAssignableFrom(config
+            .getClass())) {
+            return _cqm;
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

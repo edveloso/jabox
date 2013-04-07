@@ -37,51 +37,53 @@ import org.jabox.apis.rms.RMSConnectorConfig;
  * pom file.
  */
 public class MavenConfigureDistributionManagement {
-	public MavenConfigureDistributionManagement() {
-	}
+    public MavenConfigureDistributionManagement() {
+    }
 
-	/**
-	 * Injects the &lt;distributionManager&gt; configuration to the pom file.
-	 * 
-	 * @param pomFile
-	 *            the pom file that will be injected with the
-	 *            distributionManager configuration.
-	 * @param rms
-	 * @throws IOException
-	 * @throws XmlPullParserException
-	 */
-	public static void injectDistributionManager(final File pomFile,
-			final RMSConnectorConfig rms) throws IOException,
-			XmlPullParserException {
-		FileReader fileReader = new FileReader(pomFile);
-		Model model = new MavenXpp3Reader().read(fileReader);
+    /**
+     * Injects the &lt;distributionManager&gt; configuration to the pom file.
+     * 
+     * @param pomFile
+     *            the pom file that will be injected with the
+     *            distributionManager configuration.
+     * @param rms
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void injectDistributionManager(final File pomFile,
+            final RMSConnectorConfig rms)
+            throws IOException, XmlPullParserException {
+        FileReader fileReader = new FileReader(pomFile);
+        Model model = new MavenXpp3Reader().read(fileReader);
 
-		DistributionManagement dm = getDistributionManagement(rms
-				.getReleaseRepositoryURL(), rms.getSnapshotsRepositoryURL());
-		model.setDistributionManagement(dm);
+        DistributionManagement dm =
+            getDistributionManagement(rms.getReleaseRepositoryURL(),
+                rms.getSnapshotsRepositoryURL());
+        model.setDistributionManagement(dm);
 
-		FileWriter fileWriter = new FileWriter(pomFile);
-		new MavenXpp3Writer().write(fileWriter, model);
-	}
+        FileWriter fileWriter = new FileWriter(pomFile);
+        new MavenXpp3Writer().write(fileWriter, model);
+    }
 
-	private static DistributionManagement getDistributionManagement(
-			final String releasesRepo, final String snapshotsRepo) {
-		DistributionManagement distManagement = new DistributionManagement();
+    private static DistributionManagement getDistributionManagement(
+            final String releasesRepo, final String snapshotsRepo) {
+        DistributionManagement distManagement =
+            new DistributionManagement();
 
-		DeploymentRepository snap = new DeploymentRepository();
-		snap.setId("snapshots");
-		snap.setName("Snapshots");
-		snap.setUrl(snapshotsRepo);
+        DeploymentRepository snap = new DeploymentRepository();
+        snap.setId("snapshots");
+        snap.setName("Snapshots");
+        snap.setUrl(snapshotsRepo);
 
-		distManagement.setSnapshotRepository(snap);
+        distManagement.setSnapshotRepository(snap);
 
-		DeploymentRepository repo = new DeploymentRepository();
-		repo.setId("releases");
-		repo.setName("Releases");
-		repo.setUrl(releasesRepo);
+        DeploymentRepository repo = new DeploymentRepository();
+        repo.setId("releases");
+        repo.setName("Releases");
+        repo.setUrl(releasesRepo);
 
-		distManagement.setRepository(repo);
+        distManagement.setRepository(repo);
 
-		return distManagement;
-	}
+        return distManagement;
+    }
 }

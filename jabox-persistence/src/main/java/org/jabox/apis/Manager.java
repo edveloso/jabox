@@ -38,167 +38,167 @@ import com.google.inject.Inject;
 
 public class Manager implements IManager {
 
-	private final Set<ITSConnector> _itsConnectors;
-	private final Set<CISConnector> _cisConnectors;
-	private final Set<SCMConnector> _scmConnectors;
-	private final Set<RMSConnector> _rmsConnectors;
-	private final Set<CQMConnector> _cqmConnectors;
+    private final Set<ITSConnector> _itsConnectors;
 
-	@Inject
-	public Manager(Set<ITSConnector> its, Set<CISConnector> cis,
-			Set<SCMConnector> scm, Set<RMSConnector> rms, Set<CQMConnector> cqm) {
-		this._itsConnectors = its;
-		this._cisConnectors = cis;
-		this._scmConnectors = scm;
-		this._rmsConnectors = rms;
-		this._cqmConnectors = cqm;
-	}
+    private final Set<CISConnector> _cisConnectors;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.jabox.apis.IManager#getConnectorInstance(org.jabox.apis.ConnectorConfig
-	 * )
-	 */
-	public Connector getConnectorInstance(final ConnectorConfig connectorConfig) {
-		return getEntry(connectorConfig.getPluginId());
-	}
+    private final Set<SCMConnector> _scmConnectors;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.jabox.apis.IManager#getScmConnectorInstance(org.jabox.apis.scm.
-	 * SCMConnectorConfig)
-	 */
-	public SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
-			SCMConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    private final Set<RMSConnector> _rmsConnectors;
 
-		for (SCMConnector connectorInstance : _scmConnectors) {
-			if (config.getPluginId().equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+    private final Set<CQMConnector> _cqmConnectors;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.jabox.apis.IManager#getItsConnectorInstance(org.jabox.apis.its.
-	 * ITSConnectorConfig)
-	 */
-	public ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
-			ITSConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    @Inject
+    public Manager(Set<ITSConnector> its, Set<CISConnector> cis,
+            Set<SCMConnector> scm, Set<RMSConnector> rms,
+            Set<CQMConnector> cqm) {
+        this._itsConnectors = its;
+        this._cisConnectors = cis;
+        this._scmConnectors = scm;
+        this._rmsConnectors = rms;
+        this._cqmConnectors = cqm;
+    }
 
-		for (ITSConnector connectorInstance : _itsConnectors) {
-			if (config.getPluginId().equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.jabox.apis.IManager#getConnectorInstance(org.jabox.apis.ConnectorConfig
+     * )
+     */
+    public Connector getConnectorInstance(
+            final ConnectorConfig connectorConfig) {
+        return getEntry(connectorConfig.getPluginId());
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.jabox.apis.IManager#getRmsConnectorInstance(org.jabox.apis.rms.
-	 * RMSConnectorConfig)
-	 */
-	public RMSConnector getRmsConnectorInstance(RMSConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    /*
+     * (non-Javadoc)
+     * @seeorg.jabox.apis.IManager#getScmConnectorInstance(org.jabox.apis.scm.
+     * SCMConnectorConfig)
+     */
+    public SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
+            SCMConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-		for (RMSConnector connectorInstance : _rmsConnectors) {
-			if (config.getPluginId().equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+        for (SCMConnector connectorInstance : _scmConnectors) {
+            if (config.getPluginId().equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.jabox.apis.IManager#getCisConnectorInstance(org.jabox.apis.cis.
-	 * CISConnectorConfig)
-	 */
-	public CISConnector getCisConnectorInstance(CISConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    /*
+     * (non-Javadoc)
+     * @seeorg.jabox.apis.IManager#getItsConnectorInstance(org.jabox.apis.its.
+     * ITSConnectorConfig)
+     */
+    public ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
+            ITSConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-		for (CISConnector connectorInstance : _cisConnectors) {
-			if (config.getPluginId().equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+        for (ITSConnector connectorInstance : _itsConnectors) {
+            if (config.getPluginId().equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.jabox.apis.IManager#getCqmConnectorInstance(org.jabox.apis.cqm.
-	 * CQMConnectorConfig)
-	 */
-	public CQMConnector getCqmConnectorInstance(CQMConnectorConfig config) {
-		if (config == null) {
-			return null;
-		}
+    /*
+     * (non-Javadoc)
+     * @seeorg.jabox.apis.IManager#getRmsConnectorInstance(org.jabox.apis.rms.
+     * RMSConnectorConfig)
+     */
+    public RMSConnector getRmsConnectorInstance(RMSConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-		for (CQMConnector connectorInstance : _cqmConnectors) {
-			if (config.getPluginId().equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+        for (RMSConnector connectorInstance : _rmsConnectors) {
+            if (config.getPluginId().equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
 
-	@Override
-	public Connector getEntry(String pluginId) {
-		List<Connector> connectors = getAllConnectors();
+    /*
+     * (non-Javadoc)
+     * @seeorg.jabox.apis.IManager#getCisConnectorInstance(org.jabox.apis.cis.
+     * CISConnectorConfig)
+     */
+    public CISConnector getCisConnectorInstance(CISConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-		if (pluginId == null) {
-			return null;
-		}
+        for (CISConnector connectorInstance : _cisConnectors) {
+            if (config.getPluginId().equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
 
-		for (Connector connectorInstance : connectors) {
-			if (pluginId.equals(connectorInstance.getId())) {
-				return connectorInstance;
-			}
-		}
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     * @seeorg.jabox.apis.IManager#getCqmConnectorInstance(org.jabox.apis.cqm.
+     * CQMConnectorConfig)
+     */
+    public CQMConnector getCqmConnectorInstance(CQMConnectorConfig config) {
+        if (config == null) {
+            return null;
+        }
 
-	private List<Connector> getAllConnectors() {
-		List<Connector> connectors = new ArrayList<Connector>();
-		connectors.addAll(_itsConnectors);
-		connectors.addAll(_scmConnectors);
-		connectors.addAll(_rmsConnectors);
-		connectors.addAll(_cisConnectors);
-		connectors.addAll(_cqmConnectors);
-		return connectors;
-	}
+        for (CQMConnector connectorInstance : _cqmConnectors) {
+            if (config.getPluginId().equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
 
-	@Override
-	public List<? extends String> getIds(
-			Class<? extends Connector> connectorClass) {
-		List<Connector> connectors = getAllConnectors();
-		List<String> ids = new ArrayList<String>();
-		for (Connector connector : connectors) {
-			if (connectorClass.isAssignableFrom(connector.getClass())) {
-				ids.add(connector.getId());
-			}
-		}
-		return ids;
-	}
+    @Override
+    public Connector getEntry(String pluginId) {
+        List<Connector> connectors = getAllConnectors();
+
+        if (pluginId == null) {
+            return null;
+        }
+
+        for (Connector connectorInstance : connectors) {
+            if (pluginId.equals(connectorInstance.getId())) {
+                return connectorInstance;
+            }
+        }
+        return null;
+    }
+
+    private List<Connector> getAllConnectors() {
+        List<Connector> connectors = new ArrayList<Connector>();
+        connectors.addAll(_itsConnectors);
+        connectors.addAll(_scmConnectors);
+        connectors.addAll(_rmsConnectors);
+        connectors.addAll(_cisConnectors);
+        connectors.addAll(_cqmConnectors);
+        return connectors;
+    }
+
+    @Override
+    public List<? extends String> getIds(
+            Class<? extends Connector> connectorClass) {
+        List<Connector> connectors = getAllConnectors();
+        List<String> ids = new ArrayList<String>();
+        for (Connector connector : connectors) {
+            if (connectorClass.isAssignableFrom(connector.getClass())) {
+                ids.add(connector.getId());
+            }
+        }
+        return ids;
+    }
 
 }

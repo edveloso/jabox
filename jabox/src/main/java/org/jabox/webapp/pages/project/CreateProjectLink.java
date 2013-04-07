@@ -26,24 +26,24 @@ import org.jabox.apis.Connector;
 import org.jabox.model.Server;
 
 public class CreateProjectLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+    private static final long serialVersionUID = -6076134805074401259L;
 
-	private Class<? extends Connector> _class1;
+    private Class<? extends Connector> _class1;
 
-	public CreateProjectLink(final String id) {
-		super(id);
-		_class1 = Connector.class;
-	}
+    public CreateProjectLink(final String id) {
+        super(id);
+        _class1 = Connector.class;
+    }
 
-	public CreateProjectLink(final String id,
-			final Class<? extends Connector> class1) {
-		this(id);
-		_class1 = class1;
-	}
+    public CreateProjectLink(final String id,
+            final Class<? extends Connector> class1) {
+        this(id);
+        _class1 = class1;
+    }
 
-	@Override
-	public void onClick() {
-		IModel<Server> model = new Model<Server>(new Server());
-		setResponsePage(new CreateProject());
-	}
+    @Override
+    public void onClick() {
+        IModel<Server> model = new Model<Server>(new Server());
+        setResponsePage(new CreateProject());
+    }
 }

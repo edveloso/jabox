@@ -37,51 +37,56 @@ import com.google.inject.Inject;
 
 public final class EditServerButton<T extends Server> extends ImageButton {
 
-	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
-			"Edit Connector");
+    private static final TooltipModifier TOOLTIP_MODIFIER =
+        new TooltipModifier("Edit Connector");
 
-	private static final ResourceReference EDIT_IMG = new SharedResourceReference(
-			EditEntityButton.class, "preferences-system.png");
+    private static final ResourceReference EDIT_IMG =
+        new SharedResourceReference(EditEntityButton.class,
+            "preferences-system.png");
 
-	private static final long serialVersionUID = 1L;
-	private final T _item;
+    private static final long serialVersionUID = 1L;
 
-	public EditServerButton(final String id, final T item) {
-		super(id, EDIT_IMG);
-		_item = item;
-		add(TOOLTIP_MODIFIER);
-	}
+    private final T _item;
 
-	public EditServerButton(final String id, final ListItem<T> item) {
-		this(id, item.getModelObject());
-	}
+    public EditServerButton(final String id, final T item) {
+        super(id, EDIT_IMG);
+        _item = item;
+        add(TOOLTIP_MODIFIER);
+    }
 
-	@Inject
-	private IManager _manager;
+    public EditServerButton(final String id, final ListItem<T> item) {
+        this(id, item.getModelObject());
+    }
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
-	@Override
-	public void onSubmit() {
-		IModel<Server> model = new Model<Server>(_item);
+    @Inject
+    private IManager _manager;
 
-		Connector connector = _manager.getEntry(model.getObject()
-				.getDeployerConfig().pluginId);
-		setResponsePage(new EditServerPage(new CompoundPropertyModel<Server>(
-				model), connector.getClass()) {
+    /**
+     * Delete from persistent storage, commit transaction.
+     */
+    @Override
+    public void onSubmit() {
+        IModel<Server> model = new Model<Server>(_item);
 
-			@Override
-			protected void onCancel() {
-				setResponsePage(ManageServers.class);
-			}
+        Connector connector =
+            _manager
+                .getEntry(model.getObject().getDeployerConfig().pluginId);
+        setResponsePage(new EditServerPage(
+                new CompoundPropertyModel<Server>(model),
+                connector.getClass()) {
 
-			@Override
-			protected void onSave(final Server server) {
-				ServerXstreamDao.persist(server.getDeployerConfig());
-				getSession().info("Server \"" + server.getName() + "\" Updated.");
-				setResponsePage(ManageServers.class);
-			}
-		});
-	}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageServers.class);
+            }
+
+            @Override
+            protected void onSave(final Server server) {
+                ServerXstreamDao.persist(server.getDeployerConfig());
+                getSession().info(
+                    "Server \"" + server.getName() + "\" Updated.");
+                setResponsePage(ManageServers.class);
+            }
+        });
+    }
 }

@@ -24,5 +24,5 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 
 public interface ISVNConnectorConfig extends SCMConnectorConfig {
-	SVNURL getSvnDir() throws SVNException;
+    SVNURL getSvnDir() throws SVNException;
 }

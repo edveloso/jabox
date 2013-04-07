@@ -23,51 +23,51 @@ import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
 public class ArtifactoryConnectorConfig extends DeployerConfig implements
-		RMSConnectorConfig {
-	private static final long serialVersionUID = 6050853799588453919L;
+        RMSConnectorConfig {
+    private static final long serialVersionUID = 6050853799588453919L;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
-	private String repositoryURL;
+    private String repositoryURL;
 
-	public ArtifactoryConnectorConfig() {
-		pluginId = ArtifactoryConnector.ID;
-	}
+    public ArtifactoryConnectorConfig() {
+        pluginId = ArtifactoryConnector.ID;
+    }
 
-	public String getReleaseRepositoryURL() {
-		return getServer().getUrl() + "libs-releases-local";
-	}
+    public String getReleaseRepositoryURL() {
+        return getServer().getUrl() + "libs-releases-local";
+    }
 
-	public String getSnapshotsRepositoryURL() {
-		return getServer().getUrl() + "libs-snapshots-local";
-	}
+    public String getSnapshotsRepositoryURL() {
+        return getServer().getUrl() + "libs-snapshots-local";
+    }
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Override
-	public String getRepositoryURL() {
-		return repositoryURL;
-	}
+    @Override
+    public String getRepositoryURL() {
+        return repositoryURL;
+    }
 
-	public void setRepositoryURL(String repositoryURL) {
-		this.repositoryURL = repositoryURL;
-	}
+    public void setRepositoryURL(String repositoryURL) {
+        this.repositoryURL = repositoryURL;
+    }
 }

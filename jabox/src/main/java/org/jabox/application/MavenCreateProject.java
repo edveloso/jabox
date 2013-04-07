@@ -30,31 +30,34 @@ import org.jabox.model.Project;
 
 public class MavenCreateProject {
 
-	/**
-	 * 
-	 * @param project
-	 * @param baseDir
-	 *            the base directory where to add the project files.
-	 * @return
-	 * @throws IOException
-	 * @throws InvalidRepositoryException
-	 * @throws MavenExecutionException
-	 */
-	public static String createProjectWithMavenCore(final Project project,
-			final String baseDir) throws IOException,
-			InvalidRepositoryException, MavenExecutionException {
+    /**
+     * @param project
+     * @param baseDir
+     *            the base directory where to add the project files.
+     * @return
+     * @throws IOException
+     * @throws InvalidRepositoryException
+     * @throws MavenExecutionException
+     */
+    public static String createProjectWithMavenCore(final Project project,
+            final String baseDir)
+            throws IOException, InvalidRepositoryException,
+            MavenExecutionException {
 
-		MavenArchetype ma = project.getMavenArchetype();
-		String[] args = new String[] { "archetype:generate",
-				"-DarchetypeGroupId=" + ma.getArchetypeGroupId(),
-				"-DarchetypeArtifactId=" + ma.getArchetypeArtifactId(),
-				"-DarchetypeVersion=" + ma.getArchetypeVersion(),
-				"-DgroupId=org.jabox", "-Dversion=1.0.0-SNAPSHOT",
-				"-Dpackage=org.jabox", "-DartifactId=" + project.getName(),
-				"-DinteractiveMode=false" };
-		MavenCli cli = new MavenCli();
-		cli.doMain(args, baseDir, System.out, System.err);
+        MavenArchetype ma = project.getMavenArchetype();
+        String[] args =
+            new String[] {
+                    "archetype:generate",
+                    "-DarchetypeGroupId=" + ma.getArchetypeGroupId(),
+                    "-DarchetypeArtifactId=" + ma.getArchetypeArtifactId(),
+                    "-DarchetypeVersion=" + ma.getArchetypeVersion(),
+                    "-DgroupId=org.jabox", "-Dversion=1.0.0-SNAPSHOT",
+                    "-Dpackage=org.jabox",
+                    "-DartifactId=" + project.getName(),
+                    "-DinteractiveMode=false" };
+        MavenCli cli = new MavenCli();
+        cli.doMain(args, baseDir, System.out, System.err);
 
-		return baseDir + File.separatorChar + project.getName();
-	}
+        return baseDir + File.separatorChar + project.getName();
+    }
 }

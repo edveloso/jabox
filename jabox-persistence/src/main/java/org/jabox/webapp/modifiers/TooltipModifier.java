@@ -24,19 +24,19 @@ import org.apache.wicket.model.Model;
 
 public class TooltipModifier extends AttributeModifier {
 
-	private static final String TITLE = "title";
+    private static final String TITLE = "title";
 
-	public TooltipModifier(final String tooltip) {
-		super(TITLE, new Model<String>(tooltip));
-	}
+    public TooltipModifier(final String tooltip) {
+        super(TITLE, new Model<String>(tooltip));
+    }
 
-	public TooltipModifier(final Model<String> tooltipModel) {
-		super(TITLE, tooltipModel);
-	}
+    public TooltipModifier(final Model<String> tooltipModel) {
+        super(TITLE, tooltipModel);
+    }
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2577746456955106108L;
+    private static final long serialVersionUID = -2577746456955106108L;
 
 }

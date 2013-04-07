@@ -26,27 +26,28 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class ERedmineRepository extends RedmineRepository {
-	private static final long serialVersionUID = -4562254388314491957L;
-	public static final String ID = "plugin.its.eredmine";
+    private static final long serialVersionUID = -4562254388314491957L;
 
-	public String getName() {
-		return "Embedded Redmine";
-	}
+    public static final String ID = "plugin.its.eredmine";
 
-	public String getId() {
-		return ID;
-	}
+    public String getName() {
+        return "Embedded Redmine";
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public DeployerConfig newConfig() {
-		return new ERedmineRepositoryConfig();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new ERedmineRepositoryEditor(id, model);
-	}
+    public DeployerConfig newConfig() {
+        return new ERedmineRepositoryConfig();
+    }
+
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new ERedmineRepositoryEditor(id, model);
+    }
 }

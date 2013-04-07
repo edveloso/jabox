@@ -24,14 +24,14 @@ import org.jabox.webapp.pages.BasePage;
 
 public class PluginTab extends Tab {
 
-	private static final long serialVersionUID = 2961421967975301502L;
+    private static final long serialVersionUID = 2961421967975301502L;
 
-	public PluginTab(final Connector ci,
-			final Class<? extends BasePage> pageClass, final boolean b) {
-		super(getTitle(ci), pageClass, b);
-	}
+    public PluginTab(final Connector ci,
+            final Class<? extends BasePage> pageClass, final boolean b) {
+        super(getTitle(ci), pageClass, b);
+    }
 
-	private static String getTitle(final Connector ci) {
-		return ci.getName();
-	}
+    private static String getTitle(final Connector ci) {
+        return ci.getName();
+    }
 }

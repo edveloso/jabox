@@ -25,11 +25,11 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.Server;
 
 public class EArtifactoryConnectorEditor extends Panel {
-	private static final long serialVersionUID = 8151822895020720306L;
+    private static final long serialVersionUID = 8151822895020720306L;
 
-	public EArtifactoryConnectorEditor(final String id,
-			final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-	}
+    public EArtifactoryConnectorEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+    }
 
 }

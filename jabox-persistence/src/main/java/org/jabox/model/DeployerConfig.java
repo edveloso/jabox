@@ -25,22 +25,22 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 import org.jabox.apis.ConnectorConfig;
 
 public abstract class DeployerConfig extends BaseEntity implements
-		ConnectorConfig, Serializable {
-	private static final long serialVersionUID = -1502838460606670036L;
+        ConnectorConfig, Serializable {
+    private static final long serialVersionUID = -1502838460606670036L;
 
-	public String pluginId;
+    public String pluginId;
 
-	public Server server;
+    public Server server;
 
-	public String getPluginId() {
-		return pluginId;
-	}
+    public String getPluginId() {
+        return pluginId;
+    }
 
-	public Server getServer() {
-		return server;
-	}
+    public Server getServer() {
+        return server;
+    }
 
-	public void setServer(final Server server) {
-		this.server = server;
-	}
+    public void setServer(final Server server) {
+        this.server = server;
+    }
 }

@@ -24,40 +24,40 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class JenkinsConnectorConfig extends DeployerConfig implements
-		CISConnectorConfig {
-	private static final String SLASH = "/";
+        CISConnectorConfig {
+    private static final String SLASH = "/";
 
-	private static final long serialVersionUID = -6696934779273872749L;
+    private static final long serialVersionUID = -6696934779273872749L;
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public JenkinsConnectorConfig() {
-		pluginId = JenkinsConnector.ID;
-	}
+    public JenkinsConnectorConfig() {
+        pluginId = JenkinsConnector.ID;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getSystem() {
-		return "jenkins";
-	}
+    public String getSystem() {
+        return "jenkins";
+    }
 
-	public String getJobUrl(Project project) {
-		StringBuffer sb = new StringBuffer();
-		sb.append(getServer().getUrl());
-		if (!getServer().getUrl().endsWith(SLASH)) {
-			sb.append(SLASH);
-		}
-		sb.append("job/");
-		sb.append(project.getName());
-		sb.append(SLASH);
-		return sb.toString();
-	}
+    public String getJobUrl(Project project) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getServer().getUrl());
+        if (!getServer().getUrl().endsWith(SLASH)) {
+            sb.append(SLASH);
+        }
+        sb.append("job/");
+        sb.append(project.getName());
+        sb.append(SLASH);
+        return sb.toString();
+    }
 }

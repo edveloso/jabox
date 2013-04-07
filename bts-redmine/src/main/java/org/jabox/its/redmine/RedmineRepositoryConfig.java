@@ -24,59 +24,59 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class RedmineRepositoryConfig extends DeployerConfig implements
-		ITSConnectorConfig {
-	private static final long serialVersionUID = -7682753903184815514L;
+        ITSConnectorConfig {
+    private static final long serialVersionUID = -7682753903184815514L;
 
-	private static final String SLASH = "/";
+    private static final String SLASH = "/";
 
-	private boolean addRepositoryConfiguration;
+    private boolean addRepositoryConfiguration;
 
-	public RedmineRepositoryConfig() {
-		pluginId = RedmineRepository.ID;
-	}
+    public RedmineRepositoryConfig() {
+        pluginId = RedmineRepository.ID;
+    }
 
-	public boolean isAddRepositoryConfiguration() {
-		return addRepositoryConfiguration;
-	}
+    public boolean isAddRepositoryConfiguration() {
+        return addRepositoryConfiguration;
+    }
 
-	public void setAddRepositoryConfiguration(boolean addRepositoryConfiguration) {
-		this.addRepositoryConfiguration = addRepositoryConfiguration;
-	}
+    public void setAddRepositoryConfiguration(
+            boolean addRepositoryConfiguration) {
+        this.addRepositoryConfiguration = addRepositoryConfiguration;
+    }
 
-	public String getProjectUrl(Project project) {
-		StringBuffer sb = new StringBuffer();
-		sb.append(getServer().getUrl());
-		if (!getServer().getUrl().endsWith(SLASH)) {
-			sb.append(SLASH);
-		}
-		sb.append("projects/show/");
-		sb.append(project.getName());
-		sb.append(SLASH);
-		return sb.toString();
-	}
+    public String getProjectUrl(Project project) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getServer().getUrl());
+        if (!getServer().getUrl().endsWith(SLASH)) {
+            sb.append(SLASH);
+        }
+        sb.append("projects/show/");
+        sb.append(project.getName());
+        sb.append(SLASH);
+        return sb.toString();
+    }
 
-	public String getSystem() {
-		return "Redmine";
-	}
+    public String getSystem() {
+        return "Redmine";
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
+    public String getUsername() {
+        return username;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

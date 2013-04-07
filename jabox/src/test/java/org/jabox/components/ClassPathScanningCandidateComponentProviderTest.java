@@ -26,43 +26,44 @@ import org.junit.Test;
 
 public class ClassPathScanningCandidateComponentProviderTest {
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void testAllWicketPanels() throws Exception {
-		WicketTester wicketTester = new WicketTester();
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testAllWicketPanels() throws Exception {
+        WicketTester wicketTester = new WicketTester();
 
-//		ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(
-//				true);
-//		provider.addIncludeFilter(new AssignableTypeFilter(Panel.class));
-//
-//		Set<BeanDefinition> components = provider
-//				.findCandidateComponents("org/jabox");
-//		for (BeanDefinition component : components) {
-//			Class clazz = Class.forName(component.getBeanClassName());
-//			if (hasDefaultConstructor(clazz)) {
-//				testWicketPanel(wicketTester, clazz);
-//			}
-//		}
-	}
+        // ClassPathScanningCandidateComponentProvider provider = new
+        // ClassPathScanningCandidateComponentProvider(
+        // true);
+        // provider.addIncludeFilter(new AssignableTypeFilter(Panel.class));
+        //
+        // Set<BeanDefinition> components = provider
+        // .findCandidateComponents("org/jabox");
+        // for (BeanDefinition component : components) {
+        // Class clazz = Class.forName(component.getBeanClassName());
+        // if (hasDefaultConstructor(clazz)) {
+        // testWicketPanel(wicketTester, clazz);
+        // }
+        // }
+    }
 
-	@SuppressWarnings("unchecked")
-	private void testWicketPanel(final WicketTester wicketTester,
-			final Class clazz) {
-		wicketTester.startPanel(clazz);
-		wicketTester.assertNoErrorMessage();
-		wicketTester.assertNoInfoMessage();
-	}
+    @SuppressWarnings("unchecked")
+    private void testWicketPanel(final WicketTester wicketTester,
+            final Class clazz) {
+        wicketTester.startPanel(clazz);
+        wicketTester.assertNoErrorMessage();
+        wicketTester.assertNoInfoMessage();
+    }
 
-	@SuppressWarnings("unchecked")
-	private boolean hasDefaultConstructor(final Class clazz) {
-		for (Constructor constructor : clazz.getConstructors()) {
-			if (constructor.getParameterTypes().length == 1
-					&& constructor.getParameterTypes()[0].getSimpleName()
-							.equals("String")) {
-				return true;
-			}
-		}
+    @SuppressWarnings("unchecked")
+    private boolean hasDefaultConstructor(final Class clazz) {
+        for (Constructor constructor : clazz.getConstructors()) {
+            if (constructor.getParameterTypes().length == 1
+                && constructor.getParameterTypes()[0].getSimpleName()
+                    .equals("String")) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

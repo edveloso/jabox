@@ -28,11 +28,11 @@ public class EArtifactoryConnectorConfig extends DeployerConfig implements
         RMSConnectorConfig {
     private static final long serialVersionUID = 6050853799588453919L;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
-	private String repositoryURL;
+    private String repositoryURL;
 
     public EArtifactoryConnectorConfig() {
         pluginId = EArtifactoryConnector.ID;
@@ -56,30 +56,30 @@ public class EArtifactoryConnectorConfig extends DeployerConfig implements
         return getServer().getUrl() + "libs-snapshots-local";
     }
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Override
-	public String getRepositoryURL() {
-		return repositoryURL;
-	}
+    @Override
+    public String getRepositoryURL() {
+        return repositoryURL;
+    }
 
-	public void setRepositoryURL(String repositoryURL) {
-		this.repositoryURL = repositoryURL;
-	}
+    public void setRepositoryURL(String repositoryURL) {
+        this.repositoryURL = repositoryURL;
+    }
 }

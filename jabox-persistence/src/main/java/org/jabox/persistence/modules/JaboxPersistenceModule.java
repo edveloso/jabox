@@ -8,9 +8,9 @@ import com.google.inject.Module;
 
 public class JaboxPersistenceModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		binder.bind(IManager.class).to(Manager.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        binder.bind(IManager.class).to(Manager.class);
+    }
 
 }

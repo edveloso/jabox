@@ -26,28 +26,28 @@ import org.jabox.model.Server;
 import org.jabox.scm.git.GITConnector;
 
 public class EGITConnector extends GITConnector {
-	private static final long serialVersionUID = 2605311375240167074L;
+    private static final long serialVersionUID = 2605311375240167074L;
 
-	public static final String ID = "plugin.scm.egit";
+    public static final String ID = "plugin.scm.egit";
 
-	public String getName() {
-		return "Embedded Git";
-	}
+    public String getName() {
+        return "Embedded Git";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public DeployerConfig newConfig() {
-		return new EGITConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new EGITConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new EGITConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new EGITConnectorEditor(id, model);
+    }
 }

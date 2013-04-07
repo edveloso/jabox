@@ -23,134 +23,140 @@ import java.io.File;
 
 public class Environment {
 
+    // Used to identify the windows platform.
+    private static final String WIN_ID = "Windows";
 
+    private static final String JABOX_ENV = "JABOX_HOME";
 
-	// Used to identify the windows platform.
-	private static final String WIN_ID = "Windows";
+    private static final String JABOX_PROPERTY = "JABOX_HOME";
 
-	private static final String JABOX_ENV = "JABOX_HOME";
-	private static final String JABOX_PROPERTY = "JABOX_HOME";
+    public static final String ARTIFACTORY_ENV = "ARTIFACTORY_HOME";
 
-	public static final String ARTIFACTORY_ENV = "ARTIFACTORY_HOME";
-	public static final String ARTIFACTORY_PROPERTY = "artifactory.home";
+    public static final String ARTIFACTORY_PROPERTY = "artifactory.home";
 
-	public static final String NEXUS_ENV = "NEXUS_HOME";
-	public static final String NEXUS_PROPERTY = "plexus.nexus-work";
+    public static final String NEXUS_ENV = "NEXUS_HOME";
 
-	public static final String HUDSON_ENV = "HUDSON_HOME";
-	public static final String HUDSON_PROPERTY = "HUDSON_HOME";
-	private static final String HUDSON_DIR = ".hudson";
-	
-	private static final String CUSTOM_MAVEN_DIR = ".m2";
+    public static final String NEXUS_PROPERTY = "plexus.nexus-work";
 
-	public static File getCustomMavenHomeDir() {
-		return createAndReturnDir(new File(getBaseDirFile(), CUSTOM_MAVEN_DIR));
-	}
+    public static final String HUDSON_ENV = "HUDSON_HOME";
 
-	/**
-	 * Try to determine whether this application is running under Windows or
-	 * some other platform by examing the "os.name" property.
-	 * 
-	 * @return true if this application is running under a Windows OS
-	 */
-	public static boolean isWindowsPlatform() {
-		String os = System.getProperty("os.name");
-		if (os != null && os.startsWith(WIN_ID)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public static final String HUDSON_PROPERTY = "HUDSON_HOME";
 
-	public static String getHudsonHomeDir() {
-		String env = System.getenv(HUDSON_ENV);
-		String property = System.getProperty(HUDSON_PROPERTY);
-		if (env != null) {
-			return env;
-		} else if (property != null) {
-			return property;
-		} else {
-			return Environment.getDataDir() + HUDSON_DIR;
-		}
-	}
+    private static final String HUDSON_DIR = ".hudson";
 
-	private static String getHomeDir() {
-		String env = System.getenv(JABOX_ENV);
-		String property = System.getProperty(JABOX_PROPERTY);
-		if (env != null) {
-			return new File(env).getAbsolutePath() + File.separator;
-		} else if (property != null) {
-			return new File(property).getAbsolutePath() + File.separator;
-		}
-		String homeDir = new File(System.getProperty("user.home"), ".jabox")
-				.getAbsolutePath()
-				+ File.separator;
-		System.setProperty(JABOX_PROPERTY, homeDir);
-		return homeDir;
-	}
+    private static final String CUSTOM_MAVEN_DIR = ".m2";
 
-	public static void configureEnvironmentVariables() {
-		configBaseDir(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
-		configBaseDir(ARTIFACTORY_ENV, ARTIFACTORY_PROPERTY, ".artifactory/");
-		configBaseDir(NEXUS_ENV, NEXUS_PROPERTY, ".nexus/");
-	}
+    public static File getCustomMavenHomeDir() {
+        return createAndReturnDir(new File(getBaseDirFile(),
+            CUSTOM_MAVEN_DIR));
+    }
 
-	private static void configBaseDir(final String env, final String property,
-			final String subdir) {
-		if (System.getenv(env) == null && System.getProperty(property) == null) {
-			System.setProperty(property, Environment.getDataDir()
-					+ File.separator + subdir);
-		}
-	}
+    /**
+     * Try to determine whether this application is running under Windows or
+     * some other platform by examing the "os.name" property.
+     * 
+     * @return true if this application is running under a Windows OS
+     */
+    public static boolean isWindowsPlatform() {
+        String os = System.getProperty("os.name");
+        if (os != null && os.startsWith(WIN_ID)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public static String getBaseDir() {
-		return getBaseDirFile().getAbsolutePath() + File.separator;
-	}
+    public static String getHudsonHomeDir() {
+        String env = System.getenv(HUDSON_ENV);
+        String property = System.getProperty(HUDSON_PROPERTY);
+        if (env != null) {
+            return env;
+        } else if (property != null) {
+            return property;
+        } else {
+            return Environment.getDataDir() + HUDSON_DIR;
+        }
+    }
 
-	public static File getBaseDirFile() {
-		return createAndReturnDir(new File(getHomeDir()));
-	}
+    private static String getHomeDir() {
+        String env = System.getenv(JABOX_ENV);
+        String property = System.getProperty(JABOX_PROPERTY);
+        if (env != null) {
+            return new File(env).getAbsolutePath() + File.separator;
+        } else if (property != null) {
+            return new File(property).getAbsolutePath() + File.separator;
+        }
+        String homeDir =
+            new File(System.getProperty("user.home"), ".jabox")
+                .getAbsolutePath() + File.separator;
+        System.setProperty(JABOX_PROPERTY, homeDir);
+        return homeDir;
+    }
 
-	public static File getUsersDir() {
-		return createAndReturnDir(new File(getConfigDir(), "users"));
-	}
+    public static void configureEnvironmentVariables() {
+        configBaseDir(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
+        configBaseDir(ARTIFACTORY_ENV, ARTIFACTORY_PROPERTY,
+            ".artifactory/");
+        configBaseDir(NEXUS_ENV, NEXUS_PROPERTY, ".nexus/");
+    }
 
-	public static File getContainersDir() {
-		return createAndReturnDir(new File(getConfigDir(), "containers"));
-	}
+    private static void configBaseDir(final String env,
+            final String property, final String subdir) {
+        if (System.getenv(env) == null
+            && System.getProperty(property) == null) {
+            System.setProperty(property, Environment.getDataDir()
+                + File.separator + subdir);
+        }
+    }
 
-	public static File getProjectsDir() {
-		return createAndReturnDir(new File(getConfigDir(), "projects"));
-	}
+    public static String getBaseDir() {
+        return getBaseDirFile().getAbsolutePath() + File.separator;
+    }
 
-	public static File getServersDir() {
-		return createAndReturnDir(new File(getConfigDir(), "servers"));
-	}
+    public static File getBaseDirFile() {
+        return createAndReturnDir(new File(getHomeDir()));
+    }
 
-	public static File getConfigDir() {
-		return createAndReturnDir(new File(getBaseDir(), "config"));
-	}
+    public static File getUsersDir() {
+        return createAndReturnDir(new File(getConfigDir(), "users"));
+    }
 
-	public static File getTmpDir() {
-		return createAndReturnDir(new File(getBaseDirFile(), "tmp"));
-	}
+    public static File getContainersDir() {
+        return createAndReturnDir(new File(getConfigDir(), "containers"));
+    }
 
-	public static File getDownloadsDir() {
-		return createAndReturnDir(new File(getBaseDirFile(), "downloads"));
-	}
+    public static File getProjectsDir() {
+        return createAndReturnDir(new File(getConfigDir(), "projects"));
+    }
 
-	public static File getDataDir() {
-		return createAndReturnDir(new File(getBaseDirFile(), "data"));
-	}
+    public static File getServersDir() {
+        return createAndReturnDir(new File(getConfigDir(), "servers"));
+    }
 
-	private static File createAndReturnDir(File dir) {
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		return dir;
-	}
+    public static File getConfigDir() {
+        return createAndReturnDir(new File(getBaseDir(), "config"));
+    }
 
-	public static String getRedmineHomeDir() {
-		return getBaseDir() + "/cargo/Default/webapps/redmine/WEB-INF/";
-	}
+    public static File getTmpDir() {
+        return createAndReturnDir(new File(getBaseDirFile(), "tmp"));
+    }
+
+    public static File getDownloadsDir() {
+        return createAndReturnDir(new File(getBaseDirFile(), "downloads"));
+    }
+
+    public static File getDataDir() {
+        return createAndReturnDir(new File(getBaseDirFile(), "data"));
+    }
+
+    private static File createAndReturnDir(File dir) {
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return dir;
+    }
+
+    public static String getRedmineHomeDir() {
+        return getBaseDir() + "/cargo/Default/webapps/redmine/WEB-INF/";
+    }
 }

@@ -41,109 +41,116 @@ import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 public class BugzillaRepository implements
-		ITSConnector<BugzillaRepositoryConfig>, Serializable {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(BugzillaRepository.class);
+        ITSConnector<BugzillaRepositoryConfig>, Serializable {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(BugzillaRepository.class);
 
-	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.its.bugzilla";
+    private static final long serialVersionUID = 8131183843391948936L;
 
-	private final WebConversation _wc;
+    public static final String ID = "plugin.its.bugzilla";
 
-	public String getName() {
-		return "Bugzilla";
-	}
+    private final WebConversation _wc;
 
-	public String getId() {
-		return ID;
-	}
+    public String getName() {
+        return "Bugzilla";
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public BugzillaRepository() {
-		_wc = new WebConversation();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public boolean login(final BugzillaRepositoryConfig config)
-			throws MalformedURLException, IOException, SAXException {
-		LOGGER.info("Bugzilla Login: " + config.getUsername());
+    public BugzillaRepository() {
+        _wc = new WebConversation();
+    }
 
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("Bugzilla_login", config.getUsername());
-		form.setParameter("Bugzilla_password", config.getPassword());
-		resp = form.submit();
+    public boolean login(final BugzillaRepositoryConfig config)
+            throws MalformedURLException, IOException, SAXException {
+        LOGGER.info("Bugzilla Login: " + config.getUsername());
 
-		// TODO check if not logged in.
-		return true;
-	}
+        WebRequest req =
+            new GetMethodWebRequest(config.getServer().getUrl());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0]; // select the first form in the page
+        form.setParameter("Bugzilla_login", config.getUsername());
+        form.setParameter("Bugzilla_password", config.getPassword());
+        resp = form.submit();
 
-	public boolean addProject(final Project project,
-			final BugzillaRepositoryConfig config) throws IOException,
-			SAXException {
-		LOGGER.info("Bugzilla add Project: " + project.getName());
+        // TODO check if not logged in.
+        return true;
+    }
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editproducts.cgi?action=add");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+    public boolean addProject(final Project project,
+            final BugzillaRepositoryConfig config)
+            throws IOException, SAXException {
+        LOGGER.info("Bugzilla add Project: " + project.getName());
 
-		form.setParameter("product", project.getName());
-		form.setParameter("description", project.getDescription());
-		form.submit();
-		return true;
-	}
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url + "/editproducts.cgi?action=add");
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-	public boolean addModule(final Project project,
-			final BugzillaRepositoryConfig config, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException {
-		LOGGER.info("Bugzilla add Module: " + project.getName());
+        form.setParameter("product", project.getName());
+        form.setParameter("description", project.getDescription());
+        form.submit();
+        return true;
+    }
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editcomponents.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+    public boolean addModule(final Project project,
+            final BugzillaRepositoryConfig config, final String module,
+            final String description, final String initialOwner)
+            throws SAXException, IOException {
+        LOGGER.info("Bugzilla add Module: " + project.getName());
 
-		form.setParameter("component", module);
-		form.setParameter("description", description);
-		form.setParameter("initialowner", initialOwner);
-		form.submit();
-		return true;
-	}
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url
+                + "/editcomponents.cgi?action=add&product="
+                + project.getName());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-	public boolean addVersion(final Project project,
-			final BugzillaRepositoryConfig config, final String version)
-			throws IOException, SAXException {
-		LOGGER.info("Bugzilla add Version: " + version);
+        form.setParameter("component", module);
+        form.setParameter("description", description);
+        form.setParameter("initialowner", initialOwner);
+        form.submit();
+        return true;
+    }
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editversions.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+    public boolean addVersion(final Project project,
+            final BugzillaRepositoryConfig config, final String version)
+            throws IOException, SAXException {
+        LOGGER.info("Bugzilla add Version: " + version);
 
-		form.setParameter("version", version);
-		form.submit();
-		return true;
-	}
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url
+                + "/editversions.cgi?action=add&product="
+                + project.getName());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-	public DeployerConfig newConfig() {
-		return new BugzillaRepositoryConfig();
-	}
+        form.setParameter("version", version);
+        form.submit();
+        return true;
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new BugzillaRepositoryEditor(id, model);
-	}
+    public DeployerConfig newConfig() {
+        return new BugzillaRepositoryConfig();
+    }
 
-	public void addRepository(Project project, BugzillaRepositoryConfig config,
-			SCMConnectorConfig scmConfig, String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new BugzillaRepositoryEditor(id, model);
+    }
+
+    public void addRepository(Project project,
+            BugzillaRepositoryConfig config, SCMConnectorConfig scmConfig,
+            String username, String password)
+            throws MalformedURLException, IOException, SAXException {
+    }
 }

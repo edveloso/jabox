@@ -33,29 +33,29 @@ import org.jabox.apis.ConnectorConfig;
  * If the Icon does not exist, a default icon is returned.
  * 
  * @author Administrator
- * 
  */
 public final class IconButton extends ImageButton {
 
-	private static final String ICON_PNG = "icon.png";
+    private static final String ICON_PNG = "icon.png";
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final ResourceReference PLUGIN = new SharedResourceReference(
-			IconButton.class, "plugin.png");
+    private static final ResourceReference PLUGIN =
+        new SharedResourceReference(IconButton.class, "plugin.png");
 
-	public IconButton(final String id, final ConnectorConfig item) {
-		super(id, PLUGIN);
-		ResourceReference rr = new SharedResourceReference(item.getClass(), ICON_PNG);
+    public IconButton(final String id, final ConnectorConfig item) {
+        super(id, PLUGIN);
+        ResourceReference rr =
+            new SharedResourceReference(item.getClass(), ICON_PNG);
 
-		if (existImage(rr)) {
-			setImageResourceReference(rr);
-		} else {
-			setImageResourceReference(PLUGIN);
-		}
-	}
+        if (existImage(rr)) {
+            setImageResourceReference(rr);
+        } else {
+            setImageResourceReference(PLUGIN);
+        }
+    }
 
-	private boolean existImage(final ResourceReference rr) {
-		return rr.getScope().getResource(ICON_PNG) != null;
-	}
+    private boolean existImage(final ResourceReference rr) {
+        return rr.getScope().getResource(ICON_PNG) != null;
+    }
 }

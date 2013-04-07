@@ -54,261 +54,270 @@ import org.slf4j.LoggerFactory;
  * @author dimitris
  */
 public class Container extends BaseEntity implements Serializable {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(Container.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(Container.class);
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String name;
+    private String name;
 
-	private String port;
+    private String port;
 
-	private String rmiPort;
+    private String rmiPort;
 
-	private String ajpPort;
+    private String ajpPort;
 
-	private String jvmArgs = "-Xms256m -Xmx1024m -XX:PermSize=256m";
+    private String jvmArgs = "-Xms256m -Xmx1024m -XX:PermSize=256m";
 
-	private String type = "tomcat6x";
+    private String type = "tomcat6x";
 
-	private String version = "6.0.35";
+    private String version = "6.0.35";
 
-	private static String[] DEFAULT_WEBAPPS = {
-			"org.jabox.cis.jenkins.JenkinsServer",
-			"org.jabox.mrm.nexus.NexusServer",
-			"org.jabox.sas.sonar.SonarServer",
-			"org.jabox.its.redmine.RedmineServer" };
+    private static String[] DEFAULT_WEBAPPS = {
+            "org.jabox.cis.jenkins.JenkinsServer",
+            "org.jabox.mrm.nexus.NexusServer",
+            "org.jabox.sas.sonar.SonarServer",
+            "org.jabox.its.redmine.RedmineServer" };
 
-	private List<EmbeddedServer> webapps = getDefaultServers();
+    private List<EmbeddedServer> webapps = getDefaultServers();
 
-	@Override
-	public String toString() {
-		return "Container: " + name;
-	}
+    @Override
+    public String toString() {
+        return "Container: " + name;
+    }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setPort(final String port) {
-		this.port = port;
-	}
+    public void setPort(final String port) {
+        this.port = port;
+    }
 
-	public String getPort() {
-		return port;
-	}
+    public String getPort() {
+        return port;
+    }
 
-	public void setJvmargs(final String jvmargs) {
-		jvmArgs = jvmargs;
-	}
+    public void setJvmargs(final String jvmargs) {
+        jvmArgs = jvmargs;
+    }
 
-	public String getJvmargs() {
-		return jvmArgs;
-	}
+    public String getJvmargs() {
+        return jvmArgs;
+    }
 
-	public void start() {
-		LOGGER.info("Starting Servlet Container");
-		Environment.configureEnvironmentVariables();
+    public void start() {
+        LOGGER.info("Starting Servlet Container");
+        Environment.configureEnvironmentVariables();
 
-		// (1) Optional step to install the container from a URL pointing to its
-		// distribution
-		Installer installer = getInstaller();
+        // (1) Optional step to install the container from a URL pointing to its
+        // distribution
+        Installer installer = getInstaller();
 
-		// (2) Create the Cargo Container instance wrapping our physical
-		// container
-		LocalConfiguration configuration = getConfiguration();
-		InstalledLocalContainer container = getContainer(installer,
-				configuration);
+        // (2) Create the Cargo Container instance wrapping our physical
+        // container
+        LocalConfiguration configuration = getConfiguration();
+        InstalledLocalContainer container =
+            getContainer(installer, configuration);
 
-		// Pass the system properties to the container
-		// Map<String, String> props = new HashMap<String, String>();
-		// Properties properties = System.getProperties();
-		// properties.entrySet();
-		// for (Entry<Object, Object> entry : properties.entrySet()) {
-		// entry.getKey();
-		// LOGGER.debug("Adding key: " + entry.getKey() + ":"
-		// + entry.getValue());
-		// props.put((String) entry.getKey(), (String) entry.getValue());
-		// }
-		// container.setSystemProperties(props);
+        // Pass the system properties to the container
+        // Map<String, String> props = new HashMap<String, String>();
+        // Properties properties = System.getProperties();
+        // properties.entrySet();
+        // for (Entry<Object, Object> entry : properties.entrySet()) {
+        // entry.getKey();
+        // LOGGER.debug("Adding key: " + entry.getKey() + ":"
+        // + entry.getValue());
+        // props.put((String) entry.getKey(), (String) entry.getValue());
+        // }
+        // container.setSystemProperties(props);
 
-		MavenSettingsManager.writeCustomSettings();
-		try {
-			for (EmbeddedServer es : getServers()) {
-				addEmbeddedServer(configuration, es);
-			}
+        MavenSettingsManager.writeCustomSettings();
+        try {
+            for (EmbeddedServer es : getServers()) {
+                addEmbeddedServer(configuration, es);
+            }
 
-			// (4) Start the container
-			container.setTimeout(1200000);
-			container.start();
-			LOGGER.info("Servlet Container Started");
+            // (4) Start the container
+            container.setTimeout(1200000);
+            container.start();
+            LOGGER.info("Servlet Container Started");
 
-		} catch (Exception e) {
-			LOGGER.error("Servlet Container Error!", e);
-		}
-	}
+        } catch (Exception e) {
+            LOGGER.error("Servlet Container Error!", e);
+        }
+    }
 
-	private Installer getInstaller() {
-		Installer installer;
-		try {
-			installer = new ZipURLInstaller(getUrl(), Environment
-					.getDownloadsDir().getAbsolutePath(), Environment
-					.getDownloadsDir().getAbsolutePath());
-		} catch (MalformedURLException e1) {
-			LOGGER.error("MalformedURLException", e1);
-			return null;
-		}
-		installer.install();
-		return installer;
-	}
+    private Installer getInstaller() {
+        Installer installer;
+        try {
+            installer =
+                new ZipURLInstaller(getUrl(), Environment
+                    .getDownloadsDir().getAbsolutePath(), Environment
+                    .getDownloadsDir().getAbsolutePath());
+        } catch (MalformedURLException e1) {
+            LOGGER.error("MalformedURLException", e1);
+            return null;
+        }
+        installer.install();
+        return installer;
+    }
 
-	private InstalledLocalContainer getContainer(Installer installer,
-			LocalConfiguration configuration) {
-		InstalledLocalContainer container = (InstalledLocalContainer) new DefaultContainerFactory()
-				.createContainer(type, ContainerType.INSTALLED, configuration);
-		container.setHome(installer.getHome());
-		container.setOutput(new File(Environment.getBaseDir(), "cargo/"
-				+ getName() + ".log").getAbsolutePath());
+    private InstalledLocalContainer getContainer(Installer installer,
+            LocalConfiguration configuration) {
+        InstalledLocalContainer container =
+            (InstalledLocalContainer) new DefaultContainerFactory()
+                .createContainer(type, ContainerType.INSTALLED,
+                    configuration);
+        container.setHome(installer.getHome());
+        container.setOutput(new File(Environment.getBaseDir(), "cargo/"
+            + getName() + ".log").getAbsolutePath());
 
-		passSystemProperties(container);
+        passSystemProperties(container);
 
-		return container;
-	}
+        return container;
+    }
 
-	private LocalConfiguration getConfiguration() {
-		File path = new File(Environment.getBaseDir(), "cargo/" + getName());
+    private LocalConfiguration getConfiguration() {
+        File path =
+            new File(Environment.getBaseDir(), "cargo/" + getName());
 
-		ConfigurationType configurationType = ConfigurationType.STANDALONE;
-		if (path.exists()) {
-			// If the WARs are already deployed don't redeploy
-			configurationType = ConfigurationType.EXISTING;
-		}
+        ConfigurationType configurationType = ConfigurationType.STANDALONE;
+        if (path.exists()) {
+            // If the WARs are already deployed don't redeploy
+            configurationType = ConfigurationType.EXISTING;
+        }
 
-		LocalConfiguration configuration = (LocalConfiguration) new DefaultConfigurationFactory()
-				.createConfiguration(type, ContainerType.INSTALLED,
-						configurationType, path.getAbsolutePath());
+        LocalConfiguration configuration =
+            (LocalConfiguration) new DefaultConfigurationFactory()
+                .createConfiguration(type, ContainerType.INSTALLED,
+                    configurationType, path.getAbsolutePath());
 
-		configuration.setProperty(ServletPropertySet.PORT, port);
-		configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
-		configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
-		configuration.setProperty(GeneralPropertySet.RMI_PORT, getRmiPort());
+        configuration.setProperty(ServletPropertySet.PORT, port);
+        configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
+        configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
+        configuration.setProperty(GeneralPropertySet.RMI_PORT,
+            getRmiPort());
 
-		return configuration;
-	}
+        return configuration;
+    }
 
-	private URL getUrl() throws MalformedURLException {
-		String url = null;
-		if ("tomcat6x".equals(type)) {
-			url = "http://archive.apache.org/dist/tomcat/tomcat-6/v" + version
-					+ "/bin/" + getTomcatFilename();
-		} else if ("glassfish3x".equals(type)) {
-			url = "http://dlc.sun.com.edgesuite.net/glassfish/3.1.1/release/glassfish-3.1.1-ml.zip";
-		}
+    private URL getUrl() throws MalformedURLException {
+        String url = null;
+        if ("tomcat6x".equals(type)) {
+            url =
+                "http://archive.apache.org/dist/tomcat/tomcat-6/v"
+                    + version + "/bin/" + getTomcatFilename();
+        } else if ("glassfish3x".equals(type)) {
+            url =
+                "http://dlc.sun.com.edgesuite.net/glassfish/3.1.1/release/glassfish-3.1.1-ml.zip";
+        }
 
-		return new URL(url);
-	}
+        return new URL(url);
+    }
 
-	private void passSystemProperties(final InstalledLocalContainer container) {
-		Map<String, String> props = new HashMap<String, String>();
+    private void passSystemProperties(
+            final InstalledLocalContainer container) {
+        Map<String, String> props = new HashMap<String, String>();
 
-		// Hudson
-		props.put(Environment.HUDSON_PROPERTY,
-				System.getProperty(Environment.HUDSON_PROPERTY));
+        // Hudson
+        props.put(Environment.HUDSON_PROPERTY,
+            System.getProperty(Environment.HUDSON_PROPERTY));
 
-		// Artifactory
-		props.put(Environment.ARTIFACTORY_PROPERTY,
-				System.getProperty(Environment.ARTIFACTORY_PROPERTY));
+        // Artifactory
+        props.put(Environment.ARTIFACTORY_PROPERTY,
+            System.getProperty(Environment.ARTIFACTORY_PROPERTY));
 
-		// Nexus
-		props.put(Environment.NEXUS_PROPERTY,
-				System.getProperty(Environment.NEXUS_PROPERTY));
+        // Nexus
+        props.put(Environment.NEXUS_PROPERTY,
+            System.getProperty(Environment.NEXUS_PROPERTY));
 
-		container.setSystemProperties(props);
-	}
+        container.setSystemProperties(props);
+    }
 
-	/**
-	 * @return the filename of apache tomcat. Depends on the OS.
-	 */
-	private String getTomcatFilename() {
-		if (Environment.isWindowsPlatform()) {
-			return "apache-tomcat-" + version + ".zip";
-		}
-		return "apache-tomcat-" + version + ".tar.gz";
-	}
+    /**
+     * @return the filename of apache tomcat. Depends on the OS.
+     */
+    private String getTomcatFilename() {
+        if (Environment.isWindowsPlatform()) {
+            return "apache-tomcat-" + version + ".zip";
+        }
+        return "apache-tomcat-" + version + ".tar.gz";
+    }
 
-	/**
-	 * Helper function to add an embedded Server using the className to the
-	 * running Jetty Server.
-	 * 
-	 * @param configuration
-	 *            The Jetty server.
-	 * @param className
-	 *            The className of the EmbeddedServer.
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws ClassNotFoundException
-	 */
-	private static void addEmbeddedServer(
-			final LocalConfiguration configuration, final EmbeddedServer es)
-			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
-		WAR war = new WAR(es.getWarPath());
-		war.setContext(es.getServerName());
-		configuration.addDeployable(war);
-	}
+    /**
+     * Helper function to add an embedded Server using the className to the
+     * running Jetty Server.
+     * 
+     * @param configuration
+     *            The Jetty server.
+     * @param className
+     *            The className of the EmbeddedServer.
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     */
+    private static void addEmbeddedServer(
+            final LocalConfiguration configuration, final EmbeddedServer es)
+            throws InstantiationException, IllegalAccessException,
+            ClassNotFoundException {
+        WAR war = new WAR(es.getWarPath());
+        war.setContext(es.getServerName());
+        configuration.addDeployable(war);
+    }
 
-	public void setAjpPort(final String ajpPort) {
-		this.ajpPort = ajpPort;
-	}
+    public void setAjpPort(final String ajpPort) {
+        this.ajpPort = ajpPort;
+    }
 
-	public String getAjpPort() {
-		return ajpPort;
-	}
+    public String getAjpPort() {
+        return ajpPort;
+    }
 
-	public void setWebapps(final List<EmbeddedServer> webapps) {
-		this.webapps = webapps;
-	}
+    public void setWebapps(final List<EmbeddedServer> webapps) {
+        this.webapps = webapps;
+    }
 
-	public List<EmbeddedServer> getServers() {
-		return webapps;
-	}
+    public List<EmbeddedServer> getServers() {
+        return webapps;
+    }
 
-	public static List<EmbeddedServer> getDefaultServers() {
-		List<EmbeddedServer> servers = new ArrayList<EmbeddedServer>();
-		for (String server : Arrays.asList(DEFAULT_WEBAPPS)) {
-			try {
-				EmbeddedServer es = (EmbeddedServer) Class.forName(server)
-						.newInstance();
-				servers.add(es);
-			} catch (InstantiationException e) {
-				LOGGER.error("InstantiationException", e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error("IllegalAccessException", e);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error("ClassNotFoundException", e);
-			}
-		}
-		return servers;
-	}
+    public static List<EmbeddedServer> getDefaultServers() {
+        List<EmbeddedServer> servers = new ArrayList<EmbeddedServer>();
+        for (String server : Arrays.asList(DEFAULT_WEBAPPS)) {
+            try {
+                EmbeddedServer es =
+                    (EmbeddedServer) Class.forName(server).newInstance();
+                servers.add(es);
+            } catch (InstantiationException e) {
+                LOGGER.error("InstantiationException", e);
+            } catch (IllegalAccessException e) {
+                LOGGER.error("IllegalAccessException", e);
+            } catch (ClassNotFoundException e) {
+                LOGGER.error("ClassNotFoundException", e);
+            }
+        }
+        return servers;
+    }
 
-	public void stop() {
-		Installer installer = getInstaller();
-		LocalConfiguration configuration = getConfiguration();
-		InstalledLocalContainer container = getContainer(installer,
-				configuration);
+    public void stop() {
+        Installer installer = getInstaller();
+        LocalConfiguration configuration = getConfiguration();
+        InstalledLocalContainer container =
+            getContainer(installer, configuration);
 
-		container.stop();
-	}
+        container.stop();
+    }
 
-	public String getRmiPort() {
-		return rmiPort;
-	}
+    public String getRmiPort() {
+        return rmiPort;
+    }
 
-	public void setRmiPort(String rmiPort) {
-		this.rmiPort = rmiPort;
-	}
+    public void setRmiPort(String rmiPort) {
+        this.rmiPort = rmiPort;
+    }
 }

@@ -35,49 +35,54 @@ import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
-	private static final Logger LOGGER = LoggerFactory
-		.getLogger(EditEntityButton.class);
+public final class EditEntityButton<T extends BaseEntity> extends
+        ImageButton {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(EditEntityButton.class);
 
-	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
-			"Edit Connector");
+    private static final TooltipModifier TOOLTIP_MODIFIER =
+        new TooltipModifier("Edit Connector");
 
-	private static final ResourceReference EDIT_IMG = new SharedResourceReference(
-			EditEntityButton.class, "preferences-system.png");
+    private static final ResourceReference EDIT_IMG =
+        new SharedResourceReference(EditEntityButton.class,
+            "preferences-system.png");
 
-	private static final long serialVersionUID = 1L;
-	private final User _item;
+    private static final long serialVersionUID = 1L;
 
-	public EditEntityButton(final String id, final User item) {
-		super(id, EDIT_IMG);
-		_item = item;
-		add(TOOLTIP_MODIFIER);
-	}
+    private final User _item;
 
-	public EditEntityButton(final String id, final ListItem<User> item) {
-		this(id, item.getModelObject());
-	}
+    public EditEntityButton(final String id, final User item) {
+        super(id, EDIT_IMG);
+        _item = item;
+        add(TOOLTIP_MODIFIER);
+    }
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
-	@Override
-	public void onSubmit() {
-		IModel<User> model = new Model<User>(_item);
-		setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(model)) {
+    public EditEntityButton(final String id, final ListItem<User> item) {
+        this(id, item.getModelObject());
+    }
 
-			@Override
-			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
-			}
+    /**
+     * Delete from persistent storage, commit transaction.
+     */
+    @Override
+    public void onSubmit() {
+        IModel<User> model = new Model<User>(_item);
+        setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(
+            model)) {
 
-			@Override
-			protected void onSave(final User user) {
-				LOGGER.info("Updated User: " + user.getLogin());
-				UserXstreamDao.persist(user);
-				getSession().info("User \"" + user.getLogin() + "\" Updated.");
-				setResponsePage(ManageUsers.class);
-			}
-		});
-	}
+            @Override
+            protected void onCancel() {
+                setResponsePage(ManageUsers.class);
+            }
+
+            @Override
+            protected void onSave(final User user) {
+                LOGGER.info("Updated User: " + user.getLogin());
+                UserXstreamDao.persist(user);
+                getSession().info(
+                    "User \"" + user.getLogin() + "\" Updated.");
+                setResponsePage(ManageUsers.class);
+            }
+        });
+    }
 }

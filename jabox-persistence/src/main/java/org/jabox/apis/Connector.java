@@ -26,9 +26,9 @@ import org.jabox.model.Identifiable;
 import org.jabox.model.Server;
 
 public interface Connector extends Identifiable<String> {
-	String getName();
+    String getName();
 
-	DeployerConfig newConfig();
+    DeployerConfig newConfig();
 
-	Component newEditor(String id, IModel<Server> model);
+    Component newEditor(String id, IModel<Server> model);
 }

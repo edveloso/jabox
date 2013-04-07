@@ -25,10 +25,10 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.Server;
 
 public class ESVNConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4137475647749541936L;
+    private static final long serialVersionUID = -4137475647749541936L;
 
-	public ESVNConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-	}
+    public ESVNConnectorEditor(final String id, final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+    }
 
 }

@@ -37,40 +37,41 @@ import org.jabox.model.Project;
  * file.
  */
 public class MavenConfigureIssueManagement {
-	public MavenConfigureIssueManagement() {
-	}
+    public MavenConfigureIssueManagement() {
+    }
 
-	/**
-	 * Injects the &lt;issueManagement&gt; configuration to the pom file.
-	 * 
-	 * @param pomFile
-	 *            the pom file that will be injected with the issueManagement
-	 *            configuration.
-	 * @param its
-	 * @param project
-	 * @throws IOException
-	 * @throws XmlPullParserException
-	 */
-	public static void injectIssueManagement(final File pomFile,
-			final ITSConnectorConfig its, Project project) throws IOException,
-			XmlPullParserException {
-		FileReader fileReader = new FileReader(pomFile);
-		Model model = new MavenXpp3Reader().read(fileReader);
+    /**
+     * Injects the &lt;issueManagement&gt; configuration to the pom file.
+     * 
+     * @param pomFile
+     *            the pom file that will be injected with the issueManagement
+     *            configuration.
+     * @param its
+     * @param project
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void injectIssueManagement(final File pomFile,
+            final ITSConnectorConfig its, Project project)
+            throws IOException, XmlPullParserException {
+        FileReader fileReader = new FileReader(pomFile);
+        Model model = new MavenXpp3Reader().read(fileReader);
 
-		if (its != null) {
-			IssueManagement issueManagement = getIssueManagement(its, project);
-			model.setIssueManagement(issueManagement);
-		}
+        if (its != null) {
+            IssueManagement issueManagement =
+                getIssueManagement(its, project);
+            model.setIssueManagement(issueManagement);
+        }
 
-		FileWriter fileWriter = new FileWriter(pomFile);
-		new MavenXpp3Writer().write(fileWriter, model);
-	}
+        FileWriter fileWriter = new FileWriter(pomFile);
+        new MavenXpp3Writer().write(fileWriter, model);
+    }
 
-	private static IssueManagement getIssueManagement(ITSConnectorConfig its,
-			Project project) {
-		IssueManagement issueManagement = new IssueManagement();
-		issueManagement.setUrl(its.getProjectUrl(project));
-		issueManagement.setSystem(its.getSystem());
-		return issueManagement;
-	}
+    private static IssueManagement getIssueManagement(
+            ITSConnectorConfig its, Project project) {
+        IssueManagement issueManagement = new IssueManagement();
+        issueManagement.setUrl(its.getProjectUrl(project));
+        issueManagement.setSystem(its.getSystem());
+        return issueManagement;
+    }
 }

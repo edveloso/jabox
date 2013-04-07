@@ -27,24 +27,25 @@ import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 
 public class SubversionRepository {
 
-	public static boolean isInitialized() {
-		return getSubversionBaseDir().exists();
-	}
+    public static boolean isInitialized() {
+        return getSubversionBaseDir().exists();
+    }
 
-	public static void initialize() {
-		try {
-			File tgtPath = getSubversionBaseDir();
-			SVNRepositoryFactory.createLocalRepository(tgtPath, true, false);
-		} catch (SVNException e) {
-		}
-	}
+    public static void initialize() {
+        try {
+            File tgtPath = getSubversionBaseDir();
+            SVNRepositoryFactory.createLocalRepository(tgtPath, true,
+                false);
+        } catch (SVNException e) {
+        }
+    }
 
-	public static File getSubversionBaseDir() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(Environment.getDataDir());
-		sb.append(File.separatorChar);
-		sb.append("subversion");
-		sb.append(File.separatorChar);
-		return new File(sb.toString());
-	}
+    public static File getSubversionBaseDir() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(Environment.getDataDir());
+        sb.append(File.separatorChar);
+        sb.append("subversion");
+        sb.append(File.separatorChar);
+        return new File(sb.toString());
+    }
 }

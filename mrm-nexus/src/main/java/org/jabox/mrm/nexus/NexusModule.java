@@ -8,10 +8,10 @@ import com.google.inject.multibindings.Multibinder;
 
 public class NexusModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<RMSConnector> uriBinder = Multibinder.newSetBinder(binder,
-				RMSConnector.class);
-		uriBinder.addBinding().to(NexusConnector.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<RMSConnector> uriBinder =
+            Multibinder.newSetBinder(binder, RMSConnector.class);
+        uriBinder.addBinding().to(NexusConnector.class);
+    }
 }

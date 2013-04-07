@@ -35,23 +35,23 @@ import org.jabox.webapp.panels.HeaderLinksPanel;
  */
 public class CisPage extends TabPage {
 
-	public CisPage() {
-		// Configure Header URL
-		PageParameters params = new PageParameters();
-		params.add("selected", HeaderLinksPanel.CIS);
-		CharSequence header = urlFor(HeaderLinksPage.class, params);
-		WebMarkupContainer wmc2 = new WebMarkupContainer("header");
-		wmc2.add(new AttributeModifier("src", new Model<String>(header
-				.toString())));
-		add(wmc2);
+    public CisPage() {
+        // Configure Header URL
+        PageParameters params = new PageParameters();
+        params.add("selected", HeaderLinksPanel.CIS);
+        CharSequence header = urlFor(HeaderLinksPage.class, params);
+        WebMarkupContainer wmc2 = new WebMarkupContainer("header");
+        wmc2.add(new AttributeModifier("src", new Model<String>(header
+            .toString())));
+        add(wmc2);
 
-		// Configure Main body URL
-		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		String url = dc.getCis().getServer().getUrl();
-		WebMarkupContainer wmc = new WebMarkupContainer("frame");
-		wmc.add(new AttributeModifier("src", new Model<String>(url)));
-		add(wmc);
+        // Configure Main body URL
+        final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+        String url = dc.getCis().getServer().getUrl();
+        WebMarkupContainer wmc = new WebMarkupContainer("frame");
+        wmc.add(new AttributeModifier("src", new Model<String>(url)));
+        add(wmc);
 
-		// add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.CIS));
-	}
+        // add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.CIS));
+    }
 }

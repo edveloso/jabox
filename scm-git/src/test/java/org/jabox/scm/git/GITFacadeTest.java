@@ -9,28 +9,28 @@ import org.jabox.model.Project;
 
 public class GITFacadeTest extends TestCase {
 
-	public void testValidate() throws IOException {
-		// Should always return true
-		assertTrue(new GITFacade().validate("", "", ""));
-	}
+    public void testValidate() throws IOException {
+        // Should always return true
+        assertTrue(new GITFacade().validate("", "", ""));
+    }
 
-	public void testCheckoutBaseDir() {
-		IGITConnectorConfig gitc = new GITConnectorConfig();
+    public void testCheckoutBaseDir() {
+        IGITConnectorConfig gitc = new GITConnectorConfig();
 
-		File storePath = new File("target/foo");
-		storePath.mkdirs();
-		new GITFacade().checkoutBaseDir(storePath, gitc);
-	}
+        File storePath = new File("target/foo");
+        storePath.mkdirs();
+        new GITFacade().checkoutBaseDir(storePath, gitc);
+    }
 
-	public void testCommitProject() {
-		GITFacade facade = new GITFacade();
-		Project project = new Project();
-		project.setName("test7");
-		File tmpDir = new File("target/foo2");
-		File projectDir = new File(tmpDir, "foo");
-		projectDir.mkdirs();
-		IGITConnectorConfig svnc = new GITConnectorConfig();
-		facade.commitProject(project, tmpDir, svnc);
-	}
+    public void testCommitProject() {
+        GITFacade facade = new GITFacade();
+        Project project = new Project();
+        project.setName("test7");
+        File tmpDir = new File("target/foo2");
+        File projectDir = new File(tmpDir, "foo");
+        projectDir.mkdirs();
+        IGITConnectorConfig svnc = new GITConnectorConfig();
+        facade.commitProject(project, tmpDir, svnc);
+    }
 
 }

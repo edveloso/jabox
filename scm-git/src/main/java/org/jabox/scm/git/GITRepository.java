@@ -25,21 +25,21 @@ import org.jabox.environment.Environment;
 
 public class GITRepository {
 
-	/**
-	 * It will initialize the local GIT repo. In case it already exists, it will
-	 * leave it as is.
-	 */
-	public static void initialize() {
-		File tgtPath = getGitBaseDir();
-		tgtPath.mkdirs();
-		Executor.exec("git init", null, tgtPath);
-	}
+    /**
+     * It will initialize the local GIT repo. In case it already exists, it will
+     * leave it as is.
+     */
+    public static void initialize() {
+        File tgtPath = getGitBaseDir();
+        tgtPath.mkdirs();
+        Executor.exec("git init", null, tgtPath);
+    }
 
-	public static File getGitBaseDir() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(Environment.getBaseDir());
-		sb.append("gitRepo");
-		sb.append(File.separatorChar);
-		return new File(sb.toString());
-	}
+    public static File getGitBaseDir() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(Environment.getBaseDir());
+        sb.append("gitRepo");
+        sb.append(File.separatorChar);
+        return new File(sb.toString());
+    }
 }

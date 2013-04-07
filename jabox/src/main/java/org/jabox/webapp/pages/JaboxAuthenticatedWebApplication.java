@@ -29,22 +29,22 @@ import org.apache.wicket.markup.html.WebPage;
  * @author Jonathan Locke
  */
 public class JaboxAuthenticatedWebApplication extends
-		AuthenticatedWebApplication {
-	@Override
-	protected Class<? extends AuthenticatedWebSession> getWebSessionClass() {
-		return JaboxAuthenticatedWebSession.class;
-	}
+        AuthenticatedWebApplication {
+    @Override
+    protected Class<? extends AuthenticatedWebSession> getWebSessionClass() {
+        return JaboxAuthenticatedWebSession.class;
+    }
 
-	@Override
-	protected Class<? extends WebPage> getSignInPageClass() {
-		return HomePage.class;
-	}
+    @Override
+    protected Class<? extends WebPage> getSignInPageClass() {
+        return HomePage.class;
+    }
 
-	/**
-	 * @see org.apache.wicket.Application#getHomePage()
-	 */
-	@Override
-	public Class<? extends WebPage> getHomePage() {
-		return HomePage.class;
-	}
+    /**
+     * @see org.apache.wicket.Application#getHomePage()
+     */
+    @Override
+    public Class<? extends WebPage> getHomePage() {
+        return HomePage.class;
+    }
 }

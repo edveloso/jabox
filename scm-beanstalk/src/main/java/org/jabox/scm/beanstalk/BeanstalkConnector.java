@@ -26,32 +26,32 @@ import org.jabox.model.Server;
 import org.jabox.scm.svn.SVNConnector;
 
 public class BeanstalkConnector extends SVNConnector {
-	public static final String ID = "plugin.scm.beanstalk";
+    public static final String ID = "plugin.scm.beanstalk";
 
-	private static final long serialVersionUID = -3875844507330633672L;
+    private static final long serialVersionUID = -3875844507330633672L;
 
-	@Override
-	public String getName() {
-		return "Beanstalk";
-	}
+    @Override
+    public String getName() {
+        return "Beanstalk";
+    }
 
-	@Override
-	public String getId() {
-		return ID;
-	}
+    @Override
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	@Override
-	public DeployerConfig newConfig() {
-		return new BeanstalkConnectorConfig();
-	}
+    @Override
+    public DeployerConfig newConfig() {
+        return new BeanstalkConnectorConfig();
+    }
 
-	@Override
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new BeanstalkConnectorEditor(id, model);
-	}
+    @Override
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new BeanstalkConnectorEditor(id, model);
+    }
 }

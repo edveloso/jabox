@@ -31,14 +31,14 @@ import org.jabox.webapp.modifiers.TooltipModifier;
  */
 public final class InfoImage extends Image {
 
-	private static final ResourceReference DEFAULT_IMG = new SharedResourceReference(
-			InfoImage.class, "info.png");
+    private static final ResourceReference DEFAULT_IMG =
+        new SharedResourceReference(InfoImage.class, "info.png");
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public InfoImage(final String id, final String tooltip) {
-		super(id);
-		add(new TooltipModifier(tooltip));
-		setImageResourceReference(DEFAULT_IMG);
-	}
+    public InfoImage(final String id, final String tooltip) {
+        super(id);
+        add(new TooltipModifier(tooltip));
+        setImageResourceReference(DEFAULT_IMG);
+    }
 }

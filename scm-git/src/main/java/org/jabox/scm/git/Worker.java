@@ -1,18 +1,19 @@
 package org.jabox.scm.git;
 
 public class Worker extends Thread {
-	protected final Process process;
-	protected Integer exit;
+    protected final Process process;
 
-	protected Worker(Process process) {
-		this.process = process;
-	}
+    protected Integer exit;
 
-	public void run() {
-		try {
-			exit = process.waitFor();
-		} catch (InterruptedException ignore) {
-			return;
-		}
-	}
+    protected Worker(Process process) {
+        this.process = process;
+    }
+
+    public void run() {
+        try {
+            exit = process.waitFor();
+        } catch (InterruptedException ignore) {
+            return;
+        }
+    }
 }

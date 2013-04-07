@@ -24,38 +24,39 @@ import java.io.Serializable;
 import org.apache.wicket.persistence.domain.BaseEntity;
 
 /**
- * 
  * @author dimitris
  */
 public class Server extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 4845825512187976712L;
-	private String _name;
-	private String _url;
+    private static final long serialVersionUID = 4845825512187976712L;
 
-	public DeployerConfig deployerConfig;
+    private String _name;
 
-	public DeployerConfig getDeployerConfig() {
-		return deployerConfig;
-	}
+    private String _url;
 
-	public void setDeployerConfig(final DeployerConfig newConfig) {
-		deployerConfig = newConfig;
-		newConfig.setServer(this);
-	}
+    public DeployerConfig deployerConfig;
 
-	public void setName(final String name) {
-		_name = name;
-	}
+    public DeployerConfig getDeployerConfig() {
+        return deployerConfig;
+    }
 
-	public String getName() {
-		return _name;
-	}
+    public void setDeployerConfig(final DeployerConfig newConfig) {
+        deployerConfig = newConfig;
+        newConfig.setServer(this);
+    }
 
-	public void setUrl(final String url) {
-		_url = url;
-	}
+    public void setName(final String name) {
+        _name = name;
+    }
 
-	public String getUrl() {
-		return _url;
-	}
+    public String getName() {
+        return _name;
+    }
+
+    public void setUrl(final String url) {
+        _url = url;
+    }
+
+    public String getUrl() {
+        return _url;
+    }
 }

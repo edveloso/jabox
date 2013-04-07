@@ -9,11 +9,11 @@ import com.google.inject.multibindings.Multibinder;
 
 public class RedmineModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
-				ITSConnector.class);
-		uriBinder.addBinding().to(RedmineRepository.class);
-		uriBinder.addBinding().to(ERedmineRepository.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<ITSConnector> uriBinder =
+            Multibinder.newSetBinder(binder, ITSConnector.class);
+        uriBinder.addBinding().to(RedmineRepository.class);
+        uriBinder.addBinding().to(ERedmineRepository.class);
+    }
 }

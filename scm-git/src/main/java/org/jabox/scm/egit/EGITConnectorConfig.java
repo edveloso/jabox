@@ -23,21 +23,22 @@ import org.jabox.scm.git.GITConnectorConfig;
 import org.jabox.scm.git.GITRepository;
 
 public class EGITConnectorConfig extends GITConnectorConfig {
-	private static final long serialVersionUID = 6542402958304063770L;
+    private static final long serialVersionUID = 6542402958304063770L;
 
-	public EGITConnectorConfig() {
-		pluginId = EGITConnector.ID;
-	}
+    public EGITConnectorConfig() {
+        pluginId = EGITConnector.ID;
+    }
 
-	public String getScmUrl() {
-		return "file:///" + GITRepository.getGitBaseDir().getAbsolutePath();
-	}
+    public String getScmUrl() {
+        return "file:///"
+            + GITRepository.getGitBaseDir().getAbsolutePath();
+    }
 
-	public String getProjectScmUrl(String projectName) {
-		return getScmUrl() + "/" + projectName + "/" + projectName;
-	}
+    public String getProjectScmUrl(String projectName) {
+        return getScmUrl() + "/" + projectName + "/" + projectName;
+    }
 
-	public String getScmMavenPrefix() {
-		return "scm:git:";
-	}
+    public String getScmMavenPrefix() {
+        return "scm:git:";
+    }
 }

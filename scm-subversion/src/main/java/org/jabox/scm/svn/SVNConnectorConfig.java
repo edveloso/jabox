@@ -24,39 +24,39 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 
 public class SVNConnectorConfig extends DeployerConfig implements
-		ISVNConnectorConfig {
-	private static final long serialVersionUID = 6542402958304063770L;
+        ISVNConnectorConfig {
+    private static final long serialVersionUID = 6542402958304063770L;
 
-	public SVNConnectorConfig() {
-		pluginId = SVNConnector.ID;
-	}
+    public SVNConnectorConfig() {
+        pluginId = SVNConnector.ID;
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public SVNURL getSvnDir() throws SVNException {
-		return SVNURL.parseURIEncoded(getScmUrl());
-	}
+    public SVNURL getSvnDir() throws SVNException {
+        return SVNURL.parseURIEncoded(getScmUrl());
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getScmUrl() {
-		return getServer().getUrl();
-	}
+    public String getScmUrl() {
+        return getServer().getUrl();
+    }
 
-	public String getProjectScmUrl(String projectName) {
-		return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
-	}
+    public String getProjectScmUrl(String projectName) {
+        return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
+    }
 
-	@Override
-	public String getScmMavenPrefix() {
-		return "scm:svn:";
-	}
+    @Override
+    public String getScmMavenPrefix() {
+        return "scm:svn:";
+    }
 }

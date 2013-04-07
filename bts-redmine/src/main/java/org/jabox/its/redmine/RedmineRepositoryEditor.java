@@ -29,19 +29,20 @@ import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class RedmineRepositoryEditor extends Panel {
-	private static final long serialVersionUID = 3000405193458816252L;
+    private static final long serialVersionUID = 3000405193458816252L;
 
-	public RedmineRepositoryEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		TextField<String> username = new TextField<String>("username");
-		PasswordTextField password = new PasswordTextField("password");
-		TextField<String> url = new TextField<String>("server.url");
+    public RedmineRepositoryEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        TextField<String> username = new TextField<String>("username");
+        PasswordTextField password = new PasswordTextField("password");
+        TextField<String> url = new TextField<String>("server.url");
 
-		add(username.setRequired(true));
-		add(password.setRequired(true));
-		add(url.add(new UrlValidator()).add(
-				new RedmineLoginValidator(url, username, password))
-				.setRequired(true));
-		add(new CheckBox("addRepositoryConfiguration"));
-	}
+        add(username.setRequired(true));
+        add(password.setRequired(true));
+        add(url.add(new UrlValidator())
+            .add(new RedmineLoginValidator(url, username, password))
+            .setRequired(true));
+        add(new CheckBox("addRepositoryConfiguration"));
+    }
 }

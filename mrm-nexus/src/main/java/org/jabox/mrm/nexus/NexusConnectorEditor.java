@@ -28,12 +28,12 @@ import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class NexusConnectorEditor extends Panel {
-	private static final long serialVersionUID = 7851270123746015638L;
+    private static final long serialVersionUID = 7851270123746015638L;
 
-	public NexusConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		add(new TextField<String>("server.url").add(new UrlValidator()));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
-	}
+    public NexusConnectorEditor(final String id, final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        add(new TextField<String>("server.url").add(new UrlValidator()));
+        add(new TextField<String>("username").setRequired(true));
+        add(new PasswordTextField("password").setRequired(true));
+    }
 }

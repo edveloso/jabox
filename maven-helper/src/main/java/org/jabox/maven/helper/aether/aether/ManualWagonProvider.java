@@ -7,17 +7,17 @@ import org.sonatype.aether.connector.wagon.WagonProvider;
 
 public class ManualWagonProvider implements WagonProvider {
 
-	public Wagon lookup(String roleHint) throws Exception {
-		if ("file".equals(roleHint)) {
-			return new FileWagon();
-		} else if ("http".equals(roleHint)) {
-			return new LightweightHttpWagon();
-		}
-		return null;
-	}
+    public Wagon lookup(String roleHint) throws Exception {
+        if ("file".equals(roleHint)) {
+            return new FileWagon();
+        } else if ("http".equals(roleHint)) {
+            return new LightweightHttpWagon();
+        }
+        return null;
+    }
 
-	public void release(Wagon wagon) {
+    public void release(Wagon wagon) {
 
-	}
+    }
 
 }

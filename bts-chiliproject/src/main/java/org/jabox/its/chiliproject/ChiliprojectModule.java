@@ -8,10 +8,10 @@ import com.google.inject.multibindings.Multibinder;
 
 public class ChiliprojectModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
-				ITSConnector.class);
-		uriBinder.addBinding().to(ChiliprojectRepository.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<ITSConnector> uriBinder =
+            Multibinder.newSetBinder(binder, ITSConnector.class);
+        uriBinder.addBinding().to(ChiliprojectRepository.class);
+    }
 }

@@ -32,29 +32,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UserList extends PropertyListView<User> {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(UserList.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(UserList.class);
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public UserList(final String id, final List<User> projects) {
-		super(id, projects);
-	}
+    public UserList(final String id, final List<User> projects) {
+        super(id, projects);
+    }
 
-	@Override
-	public void populateItem(final ListItem<User> listItem) {
-		final User user = listItem.getModelObject();
-		LOGGER.debug("Populate User: " + user.getLogin());
+    @Override
+    public void populateItem(final ListItem<User> listItem) {
+        final User user = listItem.getModelObject();
+        LOGGER.debug("Populate User: " + user.getLogin());
 
-		listItem.add(new Label("login", user.getLogin()));
-		listItem.add(new Label("email", user.getEmail()));
-		listItem.add(new Label("firstName", user.getFirstName()));
-		listItem.add(new Label("lastName", user.getLastName()));
-		listItem.add(new EditUserLink("edit", listItem.getModelObject()));
-		listItem.add(new DeleteEntityLink<User>("delete", listItem,
-				ManageUsers.class));
-	}
+        listItem.add(new Label("login", user.getLogin()));
+        listItem.add(new Label("email", user.getEmail()));
+        listItem.add(new Label("firstName", user.getFirstName()));
+        listItem.add(new Label("lastName", user.getLastName()));
+        listItem.add(new EditUserLink("edit", listItem.getModelObject()));
+        listItem.add(new DeleteEntityLink<User>("delete", listItem,
+            ManageUsers.class));
+    }
 }

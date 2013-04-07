@@ -23,45 +23,45 @@ import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
 public class NexusConnectorConfig extends DeployerConfig implements
-		RMSConnectorConfig {
-	private static final long serialVersionUID = 7792258345940117969L;
+        RMSConnectorConfig {
+    private static final long serialVersionUID = 7792258345940117969L;
 
-	private String username;
+    private String username;
 
-	private String password;
+    private String password;
 
-	public NexusConnectorConfig() {
-		pluginId = NexusConnector.ID;
-	}
+    public NexusConnectorConfig() {
+        pluginId = NexusConnector.ID;
+    }
 
-	public String getReleaseRepositoryURL() {
-		return getServer().getUrl() + "content/repositories/releases/";
-	}
+    public String getReleaseRepositoryURL() {
+        return getServer().getUrl() + "content/repositories/releases/";
+    }
 
-	public String getSnapshotsRepositoryURL() {
-		return getServer().getUrl() + "content/repositories/snapshots/";
-	}
+    public String getSnapshotsRepositoryURL() {
+        return getServer().getUrl() + "content/repositories/snapshots/";
+    }
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-	@Override
-	public String getRepositoryURL() {
-		return getServer().getUrl() + "content/groups/public/";
-	}
+    @Override
+    public String getRepositoryURL() {
+        return getServer().getUrl() + "content/groups/public/";
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

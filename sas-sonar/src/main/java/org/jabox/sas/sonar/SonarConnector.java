@@ -34,36 +34,38 @@ import org.jabox.model.Server;
 import org.xml.sax.SAXException;
 
 public class SonarConnector implements CQMConnector<SonarConnectorConfig>,
-		Serializable {
-	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.cqm.sonar";
+        Serializable {
+    private static final long serialVersionUID = 8131183843391948936L;
 
-	public String getName() {
-		return "Sonar";
-	}
+    public static final String ID = "plugin.cqm.sonar";
 
-	public String getId() {
-		return ID;
-	}
+    public String getName() {
+        return "Sonar";
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public SonarConnector() {
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public DeployerConfig newConfig() {
-		return new SonarConnectorConfig();
-	}
+    public SonarConnector() {
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new SonarConnectorEditor(id, model);
-	}
+    public DeployerConfig newConfig() {
+        return new SonarConnectorConfig();
+    }
 
-	public void addRepository(Project project, SonarConnectorConfig config,
-			SCMConnectorConfig scmConfig, String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new SonarConnectorEditor(id, model);
+    }
+
+    public void addRepository(Project project,
+            SonarConnectorConfig config, SCMConnectorConfig scmConfig,
+            String username, String password)
+            throws MalformedURLException, IOException, SAXException {
+    }
 }

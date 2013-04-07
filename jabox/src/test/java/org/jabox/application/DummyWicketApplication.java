@@ -23,10 +23,9 @@ import org.jabox.apis.Manager;
 import org.jabox.webapp.application.WicketApplication;
 
 public class DummyWicketApplication extends WicketApplication {
-//	private AnnotApplicationContextMock mockContext;
+    // private AnnotApplicationContextMock mockContext;
 
-
-//	public AnnotApplicationContextMock getMockContext() {
-//		return mockContext;
-//	}
+    // public AnnotApplicationContextMock getMockContext() {
+    // return mockContext;
+    // }
 }

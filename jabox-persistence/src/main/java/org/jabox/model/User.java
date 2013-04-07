@@ -24,55 +24,60 @@ import java.io.Serializable;
 import org.apache.wicket.persistence.domain.BaseEntity;
 
 public class User extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 840333278259987092L;
-	private String login;
-	private String firstName;
-	private String lastName;
-	private String password;
-	private String email;
+    private static final long serialVersionUID = 840333278259987092L;
 
-	public String getLogin() {
-		return login;
-	}
+    private String login;
 
-	public void setLogin(final String login) {
-		this.login = login;
-	}
+    private String firstName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    private String lastName;
 
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
-	}
+    private String password;
 
-	public String getLastName() {
-		return lastName;
-	}
+    private String email;
 
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setLogin(final String login) {
+        this.login = login;
+    }
 
-	public void setPassword(final String password) {
-		this.password = password;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	@Override
-	public String toString() {
-		return login;
-	}
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return login;
+    }
 }

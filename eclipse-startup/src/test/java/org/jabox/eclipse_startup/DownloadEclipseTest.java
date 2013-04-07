@@ -31,10 +31,11 @@ import org.xml.sax.SAXException;
 
 public abstract class DownloadEclipseTest extends TestCase {
 
-	public void testDownloadFile() throws MalformedURLException,
-			FileNotFoundException, IOException, SAXException {
-		EclipseRunner er = EclipseRunner.getInstance();
-		DownloadHelper.downloadFile(er.getDownloadURL(), new File(
-				"target/eclipse"));
-	}
+    public void testDownloadFile()
+            throws MalformedURLException, FileNotFoundException,
+            IOException, SAXException {
+        EclipseRunner er = EclipseRunner.getInstance();
+        DownloadHelper.downloadFile(er.getDownloadURL(), new File(
+            "target/eclipse"));
+    }
 }

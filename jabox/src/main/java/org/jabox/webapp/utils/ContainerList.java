@@ -33,25 +33,26 @@ import org.jabox.webapp.pages.container.ManageContainers;
 
 public class ContainerList extends PropertyListView<Container> {
 
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public ContainerList(final String id, final List<Container> containers) {
-		super(id, containers);
-	}
+    public ContainerList(final String id, final List<Container> containers) {
+        super(id, containers);
+    }
 
-	@Override
-	public void populateItem(final ListItem<Container> listItem) {
-		final Container container = listItem.getModelObject();
-		listItem.add(new Label("name", container.getName()));
-		listItem.add(new Label("port", container.getPort().toString()));
-		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<Container>(listItem));
-		listItem.add(attributeModifier);
-		listItem.add(new StartContainerButton("start", listItem,
-				ManageContainers.class));
-		listItem.add(new StopContainerButton("stop", listItem,
-				ManageContainers.class));
-		listItem.add(new DeleteEntityButton<Container>("delete", listItem,
-				ManageContainers.class));
-	}
+    @Override
+    public void populateItem(final ListItem<Container> listItem) {
+        final Container container = listItem.getModelObject();
+        listItem.add(new Label("name", container.getName()));
+        listItem.add(new Label("port", container.getPort().toString()));
+        final AttributeModifier attributeModifier =
+            new AttributeModifier("class", true,
+                new EvenOddRow<Container>(listItem));
+        listItem.add(attributeModifier);
+        listItem.add(new StartContainerButton("start", listItem,
+            ManageContainers.class));
+        listItem.add(new StopContainerButton("stop", listItem,
+            ManageContainers.class));
+        listItem.add(new DeleteEntityButton<Container>("delete", listItem,
+            ManageContainers.class));
+    }
 }

@@ -14,10 +14,10 @@ import com.google.inject.Module;
 
 public class JaboxWebappModule implements Module {
 
-	public void configure(Binder binder) {
-		binder.bind(Panel.class).to(HeaderLinksPanel.class);
-		binder.bind(Border.class).to(JaboxBorder.class);
-		binder.bind(ICreateProjectUtil.class).to(CreateProjectUtil.class);
-		binder.bind(IManager.class).to(Manager.class);
-	}
+    public void configure(Binder binder) {
+        binder.bind(Panel.class).to(HeaderLinksPanel.class);
+        binder.bind(Border.class).to(JaboxBorder.class);
+        binder.bind(ICreateProjectUtil.class).to(CreateProjectUtil.class);
+        binder.bind(IManager.class).to(Manager.class);
+    }
 }

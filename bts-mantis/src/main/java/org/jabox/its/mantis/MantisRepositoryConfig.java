@@ -24,30 +24,30 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class MantisRepositoryConfig extends DeployerConfig implements
-		ITSConnectorConfig {
-	private static final long serialVersionUID = -3304041364131581981L;
+        ITSConnectorConfig {
+    private static final long serialVersionUID = -3304041364131581981L;
 
-	public MantisRepositoryConfig() {
-		pluginId = MantisRepository.ID;
-	}
+    public MantisRepositoryConfig() {
+        pluginId = MantisRepository.ID;
+    }
 
-	public String getProjectUrl(Project project) {
-		return getServer().getUrl();
-	}
+    public String getProjectUrl(Project project) {
+        return getServer().getUrl();
+    }
 
-	public String getSystem() {
-		return "Mantis";
-	}
+    public String getSystem() {
+        return "Mantis";
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 }

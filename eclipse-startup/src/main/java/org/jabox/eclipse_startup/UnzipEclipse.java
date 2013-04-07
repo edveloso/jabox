@@ -31,54 +31,54 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 public class UnzipEclipse {
-	public static void unzip(final File file, final File eclipseHome)
-			throws ZipException, IOException {
-		eclipseHome.mkdirs();
+    public static void unzip(final File file, final File eclipseHome)
+            throws ZipException, IOException {
+        eclipseHome.mkdirs();
 
-		try {
-			ZipFile zipFile = new ZipFile(file);
+        try {
+            ZipFile zipFile = new ZipFile(file);
 
-			Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
-			entries = zipFile.entries();
+            entries = zipFile.entries();
 
-			while (entries.hasMoreElements()) {
-				ZipEntry entry = entries.nextElement();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
 
-				if (entry.isDirectory()) {
-					// Assume directories are stored parents first then
-					// children.
-					System.err.println("Extracting directory: "
-							+ entry.getName());
-					// This is not robust, just for demonstration purposes.
-					new File(eclipseHome, entry.getName()).mkdir();
-					continue;
-				}
+                if (entry.isDirectory()) {
+                    // Assume directories are stored parents first then
+                    // children.
+                    System.err.println("Extracting directory: "
+                        + entry.getName());
+                    // This is not robust, just for demonstration purposes.
+                    new File(eclipseHome, entry.getName()).mkdir();
+                    continue;
+                }
 
-				System.err.println("Extracting file: " + entry.getName());
-				copyInputStream(zipFile.getInputStream(entry),
-						new BufferedOutputStream(new FileOutputStream(new File(
-								eclipseHome, entry.getName()))));
-			}
+                System.err.println("Extracting file: " + entry.getName());
+                copyInputStream(zipFile.getInputStream(entry),
+                    new BufferedOutputStream(new FileOutputStream(
+                        new File(eclipseHome, entry.getName()))));
+            }
 
-			zipFile.close();
-		} catch (IOException ioe) {
-			System.err.println("Unhandled exception:");
-			ioe.printStackTrace();
-			return;
-		}
-	}
+            zipFile.close();
+        } catch (IOException ioe) {
+            System.err.println("Unhandled exception:");
+            ioe.printStackTrace();
+            return;
+        }
+    }
 
-	public static final void copyInputStream(final InputStream in,
-			final OutputStream out) throws IOException {
-		byte[] buffer = new byte[1024];
-		int len;
+    public static final void copyInputStream(final InputStream in,
+            final OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int len;
 
-		while ((len = in.read(buffer)) >= 0) {
-			out.write(buffer, 0, len);
-		}
+        while ((len = in.read(buffer)) >= 0) {
+            out.write(buffer, 0, len);
+        }
 
-		in.close();
-		out.close();
-	}
+        in.close();
+        out.close();
+    }
 }

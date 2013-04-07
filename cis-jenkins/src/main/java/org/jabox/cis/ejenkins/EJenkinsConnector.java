@@ -31,33 +31,32 @@ import org.jabox.model.Server;
  * :9090/jenkins/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
  * 
  * @author Administrator
- * 
  */
 public class EJenkinsConnector extends JenkinsConnector {
-	public static final String ID = "plugin.cis.ejenkins";
+    public static final String ID = "plugin.cis.ejenkins";
 
-	@Override
-	public String getName() {
-		return "Embedded Jenkins";
-	}
+    @Override
+    public String getName() {
+        return "Embedded Jenkins";
+    }
 
-	@Override
-	public String getId() {
-		return ID;
-	}
+    @Override
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	@Override
-	public DeployerConfig newConfig() {
-		return new EJenkinsConnectorConfig();
-	}
+    @Override
+    public DeployerConfig newConfig() {
+        return new EJenkinsConnectorConfig();
+    }
 
-	@Override
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new EJenkinsConnectorEditor(id, model);
-	}
+    @Override
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new EJenkinsConnectorEditor(id, model);
+    }
 }

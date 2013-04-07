@@ -41,70 +41,69 @@ import org.jabox.model.Project;
  */
 public class MavenConfigureSignArtifacts {
 
-	public MavenConfigureSignArtifacts() {
-	}
+    public MavenConfigureSignArtifacts() {
+    }
 
-	/**
-	 * 
-	 * @param pomFile
-	 * @param project
-	 * @throws IOException
-	 * @throws XmlPullParserException
-	 */
-	public static void injectSignArtifact(final File pomFile, Project project)
-			throws IOException, XmlPullParserException {
-		FileReader fileReader = new FileReader(pomFile);
-		Model model = new MavenXpp3Reader().read(fileReader);
+    /**
+     * @param pomFile
+     * @param project
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void injectSignArtifact(final File pomFile,
+            Project project) throws IOException, XmlPullParserException {
+        FileReader fileReader = new FileReader(pomFile);
+        Model model = new MavenXpp3Reader().read(fileReader);
 
-		if (project.isSignArtifactReleases()) {
-			model.addProfile(createReleaseSignArtifactsProfile());
-		}
+        if (project.isSignArtifactReleases()) {
+            model.addProfile(createReleaseSignArtifactsProfile());
+        }
 
-		FileWriter fileWriter = new FileWriter(pomFile);
-		new MavenXpp3Writer().write(fileWriter, model);
-	}
+        FileWriter fileWriter = new FileWriter(pomFile);
+        new MavenXpp3Writer().write(fileWriter, model);
+    }
 
-	private static Profile createReleaseSignArtifactsProfile() {
-		Profile profile = new Profile();
-		profile.setId("release-sign-artifacts");
-		profile.setActivation(createActivation());
-		profile.setBuild(createBaseBuild());
-		return profile;
-	}
+    private static Profile createReleaseSignArtifactsProfile() {
+        Profile profile = new Profile();
+        profile.setId("release-sign-artifacts");
+        profile.setActivation(createActivation());
+        profile.setBuild(createBaseBuild());
+        return profile;
+    }
 
-	private static Activation createActivation() {
-		Activation activation = new Activation();
-		activation.setProperty(createActivationProperty());
-		return activation;
-	}
+    private static Activation createActivation() {
+        Activation activation = new Activation();
+        activation.setProperty(createActivationProperty());
+        return activation;
+    }
 
-	private static ActivationProperty createActivationProperty() {
-		ActivationProperty property = new ActivationProperty();
-		property.setName("performRelease");
-		property.setValue("true");
-		return property;
-	}
+    private static ActivationProperty createActivationProperty() {
+        ActivationProperty property = new ActivationProperty();
+        property.setName("performRelease");
+        property.setValue("true");
+        return property;
+    }
 
-	private static BuildBase createBaseBuild() {
-		BuildBase buildBase = new BuildBase();
-		buildBase.addPlugin(createPlugin());
-		return buildBase;
-	}
+    private static BuildBase createBaseBuild() {
+        BuildBase buildBase = new BuildBase();
+        buildBase.addPlugin(createPlugin());
+        return buildBase;
+    }
 
-	private static Plugin createPlugin() {
-		Plugin plugin = new Plugin();
-		plugin.setGroupId("org.apache.maven.plugins");
-		plugin.setArtifactId("maven-gpg-plugin");
-		plugin.setVersion("1.0");
-		plugin.addExecution(createPluginExecution());
-		return plugin;
-	}
+    private static Plugin createPlugin() {
+        Plugin plugin = new Plugin();
+        plugin.setGroupId("org.apache.maven.plugins");
+        plugin.setArtifactId("maven-gpg-plugin");
+        plugin.setVersion("1.0");
+        plugin.addExecution(createPluginExecution());
+        return plugin;
+    }
 
-	private static PluginExecution createPluginExecution() {
-		PluginExecution pluginExecution = new PluginExecution();
-		pluginExecution.setId("sign-artifacts");
-		pluginExecution.setPhase("verify");
-		pluginExecution.addGoal("sign");
-		return pluginExecution;
-	}
+    private static PluginExecution createPluginExecution() {
+        PluginExecution pluginExecution = new PluginExecution();
+        pluginExecution.setId("sign-artifacts");
+        pluginExecution.setPhase("verify");
+        pluginExecution.addGoal("sign");
+        return pluginExecution;
+    }
 }

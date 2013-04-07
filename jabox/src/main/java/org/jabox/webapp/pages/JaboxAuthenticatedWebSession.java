@@ -31,66 +31,67 @@ import org.jabox.webapp.application.WicketApplication;
  * Authenticated session subclass
  */
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String _username;
+    private String _username;
 
-	/**
-	 * Construct.
-	 * 
-	 * @param request
-	 *            The current request object
-	 */
-	public JaboxAuthenticatedWebSession(final Request request) {
-		super(request);
-		((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
-				.getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
-				.injectMembers(this);
-		// InjectorHolder.getInjector().inject(this);
-	}
+    /**
+     * Construct.
+     * 
+     * @param request
+     *            The current request object
+     */
+    public JaboxAuthenticatedWebSession(final Request request) {
+        super(request);
+        ((GuiceInjectorHolder) ((WicketApplication) WicketApplication
+            .get()).getMetaData(GuiceInjectorHolder.INJECTOR_KEY))
+            .getInjector().injectMembers(this);
+        // InjectorHolder.getInjector().inject(this);
+    }
 
-	/**
-	 * @see org.apache.wicket.authentication.AuthenticatedWebSession#authenticate(java.lang.String,
-	 *      java.lang.String)
-	 */
-	@Override
-	public boolean authenticate(final String username, final String password) {
-		if (username == null || password == null) {
-			return false;
-		}
+    /**
+     * @see org.apache.wicket.authentication.AuthenticatedWebSession#authenticate(java.lang.String,
+     *      java.lang.String)
+     */
+    @Override
+    public boolean authenticate(final String username,
+            final String password) {
+        if (username == null || password == null) {
+            return false;
+        }
 
-		User user = UserXstreamDao.getUser(username);
+        User user = UserXstreamDao.getUser(username);
 
-		if (user == null) {
-			return false;
-		}
+        if (user == null) {
+            return false;
+        }
 
-		if (username.equals(user.getLogin())
-				&& password.equals(user.getPassword())) {
-			_username = user.getLogin();
-			return true;
-		} else {
-			return false;
-		}
+        if (username.equals(user.getLogin())
+            && password.equals(user.getPassword())) {
+            _username = user.getLogin();
+            return true;
+        } else {
+            return false;
+        }
 
-	}
+    }
 
-	/**
-	 * @see org.apache.wicket.authentication.AuthenticatedWebSession#getRoles()
-	 */
-	@Override
-	public Roles getRoles() {
-		if (isSignedIn()) {
-			// If the user is signed in, they have these roles
-			return new Roles(Roles.ADMIN);
-		}
-		return null;
-	}
+    /**
+     * @see org.apache.wicket.authentication.AuthenticatedWebSession#getRoles()
+     */
+    @Override
+    public Roles getRoles() {
+        if (isSignedIn()) {
+            // If the user is signed in, they have these roles
+            return new Roles(Roles.ADMIN);
+        }
+        return null;
+    }
 
-	/**
-	 * @return the username of the authenticated user.
-	 */
-	public String getUsername() {
-		return _username;
-	}
+    /**
+     * @return the username of the authenticated user.
+     */
+    public String getUsername() {
+        return _username;
+    }
 }

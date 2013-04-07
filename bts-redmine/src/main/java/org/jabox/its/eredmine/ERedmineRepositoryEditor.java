@@ -32,22 +32,24 @@ import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
 public class ERedmineRepositoryEditor extends Panel {
-	private static final long serialVersionUID = -261442073868306075L;
+    private static final long serialVersionUID = -261442073868306075L;
 
-	public ERedmineRepositoryEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		TextField<String> username = new TextField<String>("username");
-		PasswordTextField password = new PasswordTextField("password");
+    public ERedmineRepositoryEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        TextField<String> username = new TextField<String>("username");
+        PasswordTextField password = new PasswordTextField("password");
 
-		// XXX This should be dynamic
-		TextField<String> url = new TextField<String>("url",
-				new Model<String>("http://" + LocalHostName.getLocalHostname()
-						+ ":9090/redmine/"));
+        // XXX This should be dynamic
+        TextField<String> url =
+            new TextField<String>("url", new Model<String>("http://"
+                + LocalHostName.getLocalHostname() + ":9090/redmine/"));
 
-		add(username.setRequired(true));
-		add(password.setRequired(true));
-		add(password.add(new RedmineLoginValidator(url, username, password))
-				.setRequired(true));
-		add(new CheckBox("addRepositoryConfiguration"));
-	}
+        add(username.setRequired(true));
+        add(password.setRequired(true));
+        add(password.add(
+            new RedmineLoginValidator(url, username, password))
+            .setRequired(true));
+        add(new CheckBox("addRepositoryConfiguration"));
+    }
 }

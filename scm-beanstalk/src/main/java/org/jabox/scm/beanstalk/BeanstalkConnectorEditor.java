@@ -29,22 +29,25 @@ import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.InfoImage;
 
 public class BeanstalkConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4137475647749541936L;
+    private static final long serialVersionUID = -4137475647749541936L;
 
-	public BeanstalkConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		TextField<String> url = new TextField<String>("server.url",
-				new BeanstalkAccountURLModel(new PropertyModel<String>(model,
-						"server.url")));
-		TextField<String> username = new TextField<String>("username");
-		TextField<String> projectName = new TextField<String>("projectName");
-		PasswordTextField password = new PasswordTextField("password");
+    public BeanstalkConnectorEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        TextField<String> url =
+            new TextField<String>("server.url",
+                new BeanstalkAccountURLModel(new PropertyModel<String>(
+                    model, "server.url")));
+        TextField<String> username = new TextField<String>("username");
+        TextField<String> projectName =
+            new TextField<String>("projectName");
+        PasswordTextField password = new PasswordTextField("password");
 
-		add(username.setRequired(true));
-		add(projectName.setRequired(true));
-		add(password.setRequired(true));
-		add(url.add(
-				new BeanstalkLoginValidator(url, username, projectName,
-						password)).setRequired(true));
-	}
+        add(username.setRequired(true));
+        add(projectName.setRequired(true));
+        add(password.setRequired(true));
+        add(url.add(
+            new BeanstalkLoginValidator(url, username, projectName,
+                password)).setRequired(true));
+    }
 }

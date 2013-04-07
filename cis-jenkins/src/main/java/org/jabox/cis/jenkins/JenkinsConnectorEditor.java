@@ -28,13 +28,14 @@ import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class JenkinsConnectorEditor extends Panel {
-	private static final long serialVersionUID = -4821476804096973897L;
+    private static final long serialVersionUID = -4821476804096973897L;
 
-	public JenkinsConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		add(new TextField<String>("server.url").add(new UrlValidator()));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
-	}
+    public JenkinsConnectorEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        add(new TextField<String>("server.url").add(new UrlValidator()));
+        add(new TextField<String>("username").setRequired(true));
+        add(new PasswordTextField("password").setRequired(true));
+    }
 
 }

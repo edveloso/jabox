@@ -41,120 +41,126 @@ import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCClient;
 
 public class SubversionFacade {
-	private final SVNClientManager _clientManager;
+    private final SVNClientManager _clientManager;
 
-	public SubversionFacade() {
-		_clientManager = SVNClientManager.newInstance();
+    public SubversionFacade() {
+        _clientManager = SVNClientManager.newInstance();
 
-		if (!SubversionRepository.isInitialized()) {
-			SubversionRepository.initialize();
-		}
+        if (!SubversionRepository.isInitialized()) {
+            SubversionRepository.initialize();
+        }
 
-		FSRepositoryFactory.setup();
-		SVNRepositoryFactoryImpl.setup();
-		DAVRepositoryFactory.setup();
-	}
+        FSRepositoryFactory.setup();
+        SVNRepositoryFactoryImpl.setup();
+        DAVRepositoryFactory.setup();
+    }
 
-	public boolean validate(String url, String username, String password)
-			throws IOException {
-		SVNConnectorConfig svnc = new SVNConnectorConfig();
-		svnc.username = username;
-		svnc.password = password;
-		svnc.server = new Server();
-		svnc.server.setUrl(url);
-		try {
-			// Authenticate
-			ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
-					svnc.getUsername(), svnc.getPassword());
-			SVNRepository repo = SVNRepositoryFactory.create(svnc.getSvnDir());
-			repo.setAuthenticationManager(authManager);
-			repo.testConnection();
-			return true;
-		} catch (SVNException e) {
-			return false;
-		}
-	}
+    public boolean validate(String url, String username, String password)
+            throws IOException {
+        SVNConnectorConfig svnc = new SVNConnectorConfig();
+        svnc.username = username;
+        svnc.password = password;
+        svnc.server = new Server();
+        svnc.server.setUrl(url);
+        try {
+            // Authenticate
+            ISVNAuthenticationManager authManager =
+                new BasicAuthenticationManager(svnc.getUsername(),
+                    svnc.getPassword());
+            SVNRepository repo =
+                SVNRepositoryFactory.create(svnc.getSvnDir());
+            repo.setAuthenticationManager(authManager);
+            repo.testConnection();
+            return true;
+        } catch (SVNException e) {
+            return false;
+        }
+    }
 
-	/**
-	 * Checks out the base-dir of the subversion
-	 * 
-	 * @param storePath
-	 *            the path where to store the subversion base-dir.
-	 * @throws SVNException
-	 */
-	public void checkoutBaseDir(final File storePath,
-			final ISVNConnectorConfig svnc) throws SVNException {
+    /**
+     * Checks out the base-dir of the subversion
+     * 
+     * @param storePath
+     *            the path where to store the subversion base-dir.
+     * @throws SVNException
+     */
+    public void checkoutBaseDir(final File storePath,
+            final ISVNConnectorConfig svnc) throws SVNException {
 
-		_clientManager.createRepository(svnc.getSvnDir(), true);
+        _clientManager.createRepository(svnc.getSvnDir(), true);
 
-		// Authenticate
-		ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
-				svnc.getUsername(), svnc.getPassword());
-		_clientManager.setAuthenticationManager(authManager);
+        // Authenticate
+        ISVNAuthenticationManager authManager =
+            new BasicAuthenticationManager(svnc.getUsername(),
+                svnc.getPassword());
+        _clientManager.setAuthenticationManager(authManager);
 
-		_clientManager.getUpdateClient().doCheckout(svnc.getSvnDir(),
-				storePath, SVNRevision.UNDEFINED, SVNRevision.HEAD,
-				SVNDepth.INFINITY, false);
-	}
+        _clientManager.getUpdateClient().doCheckout(svnc.getSvnDir(),
+            storePath, SVNRevision.UNDEFINED, SVNRevision.HEAD,
+            SVNDepth.INFINITY, false);
+    }
 
-	public void commitProject(final Project project, final File tmpDir,
-			final ISVNConnectorConfig svnc) throws SVNException {
-		// Add files (svn add)
-		SVNWCClient wcClient = _clientManager.getWCClient();
-		wcClient.doAdd(new File(tmpDir, project.getName()), false, false,
-				false, SVNDepth.INFINITY, false, true);
+    public void commitProject(final Project project, final File tmpDir,
+            final ISVNConnectorConfig svnc) throws SVNException {
+        // Add files (svn add)
+        SVNWCClient wcClient = _clientManager.getWCClient();
+        wcClient.doAdd(new File(tmpDir, project.getName()), false, false,
+            false, SVNDepth.INFINITY, false, true);
 
-		// Commit files (svn commit)
-		SVNCommitClient commitClient = _clientManager.getCommitClient();
-		ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
-				svnc.getUsername(), svnc.getPassword());
-		_clientManager.setAuthenticationManager(authManager);
-		File[] paths = new File[1];
-		paths[0] = new File(tmpDir, project.getName());
-		// paths[1] = new File("tags");
-		// paths[2] = new File("branches");
+        // Commit files (svn commit)
+        SVNCommitClient commitClient = _clientManager.getCommitClient();
+        ISVNAuthenticationManager authManager =
+            new BasicAuthenticationManager(svnc.getUsername(),
+                svnc.getPassword());
+        _clientManager.setAuthenticationManager(authManager);
+        File[] paths = new File[1];
+        paths[0] = new File(tmpDir, project.getName());
+        // paths[1] = new File("tags");
+        // paths[2] = new File("branches");
 
-		setProjectProperties(project, tmpDir);
+        setProjectProperties(project, tmpDir);
 
-		commitClient.doCommit(paths, false, "[JABOX] Initial Commit", null,
-				null, false, true, SVNDepth.INFINITY);
-	}
+        commitClient.doCommit(paths, false, "[JABOX] Initial Commit",
+            null, null, false, true, SVNDepth.INFINITY);
+    }
 
-	/**
-	 * Set the bugtraq and svn:ignore properties to the project.
-	 * 
-	 * @param project
-	 * @param rootDir
-	 * @throws SVNException
-	 */
-	private void setProjectProperties(final Project project, final File rootDir)
-			throws SVNException {
-		File moduleFile = new File(rootDir, File.separator + project.getName()
-				+ File.separator + "trunk" + File.separator + project.getName());
-		setModuleProperties(moduleFile);
-	}
+    /**
+     * Set the bugtraq and svn:ignore properties to the project.
+     * 
+     * @param project
+     * @param rootDir
+     * @throws SVNException
+     */
+    private void setProjectProperties(final Project project,
+            final File rootDir) throws SVNException {
+        File moduleFile =
+            new File(rootDir, File.separator + project.getName()
+                + File.separator + "trunk" + File.separator
+                + project.getName());
+        setModuleProperties(moduleFile);
+    }
 
-	/**
-	 * Set the bugtraq and snv:ignore properties to the module directory.
-	 * 
-	 * @param dir
-	 * @throws SVNException
-	 */
-	private void setModuleProperties(final File dir) throws SVNException {
-		SVNWCClient wc = _clientManager.getWCClient();
-		// setSVNProperty(wc, dir, "bugtraq:number", "true");
-		// setSVNProperty(wc, dir, "bugtraq:append", "false");
-		// setSVNProperty(wc, dir, "bugtraq:message", "refs %BUGID%");
-		// setSVNProperty(wc, dir, "bugtraq:label", "Issue:");
-		// setSVNProperty(wc, dir, "bugtraq:url",
-		// "http://localhost/redmine/issues/show/%BUGID%");
-		// setSVNProperty(wc, dir, "bugtraq:warnifnoissue", "true");
-		setSVNProperty(wc, dir, "svn:ignore", "target");
-	}
+    /**
+     * Set the bugtraq and snv:ignore properties to the module directory.
+     * 
+     * @param dir
+     * @throws SVNException
+     */
+    private void setModuleProperties(final File dir) throws SVNException {
+        SVNWCClient wc = _clientManager.getWCClient();
+        // setSVNProperty(wc, dir, "bugtraq:number", "true");
+        // setSVNProperty(wc, dir, "bugtraq:append", "false");
+        // setSVNProperty(wc, dir, "bugtraq:message", "refs %BUGID%");
+        // setSVNProperty(wc, dir, "bugtraq:label", "Issue:");
+        // setSVNProperty(wc, dir, "bugtraq:url",
+        // "http://localhost/redmine/issues/show/%BUGID%");
+        // setSVNProperty(wc, dir, "bugtraq:warnifnoissue", "true");
+        setSVNProperty(wc, dir, "svn:ignore", "target");
+    }
 
-	private void setSVNProperty(final SVNWCClient wc, final File dir,
-			final String key, final String value) throws SVNException {
-		wc.doSetProperty(dir, key, SVNPropertyValue.create(value), false,
-				SVNDepth.EMPTY, ISVNPropertyHandler.NULL, null);
-	}
+    private void setSVNProperty(final SVNWCClient wc, final File dir,
+            final String key, final String value) throws SVNException {
+        wc.doSetProperty(dir, key, SVNPropertyValue.create(value), false,
+            SVNDepth.EMPTY, ISVNPropertyHandler.NULL, null);
+    }
 }

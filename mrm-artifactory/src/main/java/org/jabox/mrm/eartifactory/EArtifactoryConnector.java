@@ -26,30 +26,30 @@ import org.jabox.model.Server;
 import org.jabox.mrm.artifactory.ArtifactoryConnector;
 
 public class EArtifactoryConnector extends ArtifactoryConnector {
-	public static final String ID = "plugin.rms.eartifactory";
+    public static final String ID = "plugin.rms.eartifactory";
 
-	@Override
-	public String getName() {
-		return "Embedded Artifactory";
-	}
+    @Override
+    public String getName() {
+        return "Embedded Artifactory";
+    }
 
-	@Override
-	public String getId() {
-		return ID;
-	}
+    @Override
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	@Override
-	public DeployerConfig newConfig() {
-		return new EArtifactoryConnectorConfig();
-	}
+    @Override
+    public DeployerConfig newConfig() {
+        return new EArtifactoryConnectorConfig();
+    }
 
-	@Override
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new EArtifactoryConnectorEditor(id, model);
-	}
+    @Override
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new EArtifactoryConnectorEditor(id, model);
+    }
 }

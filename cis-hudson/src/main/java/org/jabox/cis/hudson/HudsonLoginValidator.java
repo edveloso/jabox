@@ -13,46 +13,52 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.validator.UrlValidator;
 
 public class HudsonLoginValidator extends UrlValidator {
-	private static final long serialVersionUID = 2635593287132542621L;
-	private final TextField<String> _url;
-	private final TextField<String> _username;
-	private final PasswordTextField _password;
+    private static final long serialVersionUID = 2635593287132542621L;
 
-	public HudsonLoginValidator(final TextField<String> url,
-			final TextField<String> username, final PasswordTextField password) {
-		_url = url;
-		_username = username;
-		_password = password;
-	}
+    private final TextField<String> _url;
 
-	@Override
-	protected void onValidate(final IValidatable<String> validatable) {
-		if (!_url.isValid() || !_username.isValid() || !_password.isValid()) {
-			return;
-		}
+    private final TextField<String> _username;
 
-		HttpClient client = new HttpClient();
-		Credentials creds = new UsernamePasswordCredentials(_username
-				.getValue(), _password.getValue());
-		client.getState().setCredentials(null, null, creds);
+    private final PasswordTextField _password;
 
-		client.getState().setAuthenticationPreemptive(true);
+    public HudsonLoginValidator(final TextField<String> url,
+            final TextField<String> username,
+            final PasswordTextField password) {
+        _url = url;
+        _username = username;
+        _password = password;
+    }
 
-		GetMethod get = new GetMethod(_url.getValue());
+    @Override
+    protected void onValidate(final IValidatable<String> validatable) {
+        if (!_url.isValid() || !_username.isValid()
+            || !_password.isValid()) {
+            return;
+        }
 
-		try {
-			int result = client.executeMethod(get);
-			if (result == 401) {
-				error(validatable);
-			}
-		} catch (HttpException e) {
-			error(validatable);
-			e.printStackTrace();
-		} catch (IOException e) {
-			error(validatable);
-			e.printStackTrace();
-		} finally {
-			get.releaseConnection();
-		}
-	}
+        HttpClient client = new HttpClient();
+        Credentials creds =
+            new UsernamePasswordCredentials(_username.getValue(),
+                _password.getValue());
+        client.getState().setCredentials(null, null, creds);
+
+        client.getState().setAuthenticationPreemptive(true);
+
+        GetMethod get = new GetMethod(_url.getValue());
+
+        try {
+            int result = client.executeMethod(get);
+            if (result == 401) {
+                error(validatable);
+            }
+        } catch (HttpException e) {
+            error(validatable);
+            e.printStackTrace();
+        } catch (IOException e) {
+            error(validatable);
+            e.printStackTrace();
+        } finally {
+            get.releaseConnection();
+        }
+    }
 }

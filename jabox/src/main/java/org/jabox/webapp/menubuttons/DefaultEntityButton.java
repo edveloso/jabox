@@ -30,52 +30,55 @@ import org.jabox.model.DefaultConfiguration;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 public final class DefaultEntityButton<T extends ConnectorConfig> extends
-		ImageButton {
+        ImageButton {
 
-	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
-			"Set as Default");
+    private static final TooltipModifier TOOLTIP_MODIFIER =
+        new TooltipModifier("Set as Default");
 
-	private static final ResourceReference DEFAULT_IMG = new SharedResourceReference(
-			DefaultEntityButton.class, "favorite.png");
+    private static final ResourceReference DEFAULT_IMG =
+        new SharedResourceReference(DefaultEntityButton.class,
+            "favorite.png");
 
-	private static final ResourceReference NO_DEFAULT_IMG = new SharedResourceReference(
-			DefaultEntityButton.class, "favorite-bw.png");
+    private static final ResourceReference NO_DEFAULT_IMG =
+        new SharedResourceReference(DefaultEntityButton.class,
+            "favorite-bw.png");
 
-	private static final long serialVersionUID = 1L;
-	private final T _item;
+    private static final long serialVersionUID = 1L;
 
-	public DefaultEntityButton(final String id, final T item,
-			final Class<? extends Page> responsePage) {
-		super(id, DEFAULT_IMG);
-		_item = item;
-		add(TOOLTIP_MODIFIER);
-		if (isDefault(item)) {
-			setImageResourceReference(DEFAULT_IMG);
-		} else {
-			setImageResourceReference(NO_DEFAULT_IMG);
-		}
-	}
+    private final T _item;
 
-	private boolean isDefault(final ConnectorConfig item) {
-		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		if (DefaultConfiguration.TRUE.equals(dc.isDefault(item))) {
-			return true;
-		}
-		return false;
-	}
+    public DefaultEntityButton(final String id, final T item,
+            final Class<? extends Page> responsePage) {
+        super(id, DEFAULT_IMG);
+        _item = item;
+        add(TOOLTIP_MODIFIER);
+        if (isDefault(item)) {
+            setImageResourceReference(DEFAULT_IMG);
+        } else {
+            setImageResourceReference(NO_DEFAULT_IMG);
+        }
+    }
 
-	public DefaultEntityButton(final String id, final ListItem<T> item,
-			final Class<? extends Page> responsePage) {
-		this(id, item.getModelObject(), responsePage);
-	}
+    private boolean isDefault(final ConnectorConfig item) {
+        DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+        if (DefaultConfiguration.TRUE.equals(dc.isDefault(item))) {
+            return true;
+        }
+        return false;
+    }
 
-	/**
-	 * Delete from persistent storage, commit transaction.
-	 */
-	@Override
-	public void onSubmit() {
-		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		dc.switchDefault(_item);
-		ConfigXstreamDao.persist(dc);
-	}
+    public DefaultEntityButton(final String id, final ListItem<T> item,
+            final Class<? extends Page> responsePage) {
+        this(id, item.getModelObject(), responsePage);
+    }
+
+    /**
+     * Delete from persistent storage, commit transaction.
+     */
+    @Override
+    public void onSubmit() {
+        DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+        dc.switchDefault(_item);
+        ConfigXstreamDao.persist(dc);
+    }
 }

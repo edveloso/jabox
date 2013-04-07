@@ -22,50 +22,59 @@ import org.sonatype.aether.spi.connector.RepositoryConnectorFactory;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
 
 public class Aether {
-	private String remoteRepository;
-	private RepositorySystem repositorySystem;
-	private LocalRepository localRepository;
+    private String remoteRepository;
 
-	public Aether(String remoteRepository, String localRepository) {
-		this.remoteRepository = remoteRepository;
-		this.repositorySystem = newSystem();
-		this.localRepository = new LocalRepository(localRepository);
-	}
+    private RepositorySystem repositorySystem;
 
-	private RepositorySystem newSystem() {
-		DefaultServiceLocator locator = new DefaultServiceLocator();
-		locator.setServices(WagonProvider.class, new ManualWagonProvider());
-		locator.addService(RepositoryConnectorFactory.class,
-				WagonRepositoryConnectorFactory.class);
-		return locator.getService(RepositorySystem.class);
-	}
+    private LocalRepository localRepository;
 
-	private RepositorySystemSession newSession() {
-		MavenRepositorySystemSession session = new MavenRepositorySystemSession();
-		session.setLocalRepositoryManager(repositorySystem
-				.newLocalRepositoryManager(localRepository));
-		return session;
-	}
+    public Aether(String remoteRepository, String localRepository) {
+        this.remoteRepository = remoteRepository;
+        this.repositorySystem = newSystem();
+        this.localRepository = new LocalRepository(localRepository);
+    }
 
-	public File resolveArtifact(String groupId, String artifactId,
-			String version, String extension)
-			throws DependencyCollectionException, ArtifactResolutionException {
-		RepositorySystemSession session = newSession();
-		DefaultArtifact artifact = new DefaultArtifact(groupId, artifactId, "",
-				extension, version);
-		Dependency dependency = new Dependency(artifact, "runtime");
-		RemoteRepository central = new RemoteRepository("central", "default",
-				remoteRepository);
+    private RepositorySystem newSystem() {
+        DefaultServiceLocator locator = new DefaultServiceLocator();
+        locator
+            .setServices(WagonProvider.class, new ManualWagonProvider());
+        locator.addService(RepositoryConnectorFactory.class,
+            WagonRepositoryConnectorFactory.class);
+        return locator.getService(RepositorySystem.class);
+    }
 
-		CollectRequest collectRequest = new CollectRequest();
-		collectRequest.setRoot(dependency);
-		collectRequest.addRepository(central);
+    private RepositorySystemSession newSession() {
+        MavenRepositorySystemSession session =
+            new MavenRepositorySystemSession();
+        session.setLocalRepositoryManager(repositorySystem
+            .newLocalRepositoryManager(localRepository));
+        return session;
+    }
 
-		List<RemoteRepository> repositories = new Vector<RemoteRepository>();
-		repositories.add(central);
-		ArtifactRequest ar = new ArtifactRequest(artifact, repositories, null);
-		ArtifactResult result = repositorySystem.resolveArtifact(session, ar);
+    public File resolveArtifact(String groupId, String artifactId,
+            String version, String extension)
+            throws DependencyCollectionException,
+            ArtifactResolutionException {
+        RepositorySystemSession session = newSession();
+        DefaultArtifact artifact =
+            new DefaultArtifact(groupId, artifactId, "", extension,
+                version);
+        Dependency dependency = new Dependency(artifact, "runtime");
+        RemoteRepository central =
+            new RemoteRepository("central", "default", remoteRepository);
 
-		return result.getArtifact().getFile();
-	}
+        CollectRequest collectRequest = new CollectRequest();
+        collectRequest.setRoot(dependency);
+        collectRequest.addRepository(central);
+
+        List<RemoteRepository> repositories =
+            new Vector<RemoteRepository>();
+        repositories.add(central);
+        ArtifactRequest ar =
+            new ArtifactRequest(artifact, repositories, null);
+        ArtifactResult result =
+            repositorySystem.resolveArtifact(session, ar);
+
+        return result.getArtifact().getFile();
+    }
 }

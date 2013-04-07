@@ -26,26 +26,26 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class ArtifactoryConnector implements RMSConnector {
-	public static final String ID = "plugin.rms.artifactory";
+    public static final String ID = "plugin.rms.artifactory";
 
-	public String getName() {
-		return "Artifactory";
-	}
+    public String getName() {
+        return "Artifactory";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public DeployerConfig newConfig() {
-		return new ArtifactoryConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new ArtifactoryConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new ArtifactoryConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new ArtifactoryConnectorEditor(id, model);
+    }
 }

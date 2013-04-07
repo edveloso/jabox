@@ -17,90 +17,90 @@ import org.jabox.utils.LocalHostName;
 
 public class InitializeDatabase {
 
-	private DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+    private DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
-	/**
-	 * check if database is already populated, if not, populate
-	 */
-	public void init() {
-		if (UserXstreamDao.getUsers().size() == 0) {
-			createAdminUser();
-			createSubversionServer();
-			createJenkinsServer();
-			createRedmineServer();
-			createNexusServer();
-			createSonarServer();
-			createTomcatContainer();
-			ConfigXstreamDao.persist(dc);
-		}
-	}
+    /**
+     * check if database is already populated, if not, populate
+     */
+    public void init() {
+        if (UserXstreamDao.getUsers().size() == 0) {
+            createAdminUser();
+            createSubversionServer();
+            createJenkinsServer();
+            createRedmineServer();
+            createNexusServer();
+            createSonarServer();
+            createTomcatContainer();
+            ConfigXstreamDao.persist(dc);
+        }
+    }
 
-	private void createTomcatContainer() {
-		Container container = new Container();
-		container.setName("Default");
-		container.setPort("9080");
-		container.setRmiPort("9081");
-		container.setAjpPort("9082");
-		ContainerXstreamDao.persist(container);
-	}
+    private void createTomcatContainer() {
+        Container container = new Container();
+        container.setName("Default");
+        container.setPort("9080");
+        container.setRmiPort("9081");
+        container.setAjpPort("9082");
+        ContainerXstreamDao.persist(container);
+    }
 
-	private void createSonarServer() {
-		SonarConnectorConfig config = new SonarConnectorConfig();
-		config.setServer(new Server());
-		config.getServer().setName("Sonar");
-		config.getServer().setDeployerConfig(config);
-		config.getServer().setUrl(
-				"http://" + LocalHostName.getLocalHostname() + ":9080/sonar/");
-		ServerXstreamDao.persist(config);
-		dc.switchDefault(config);
-	}
+    private void createSonarServer() {
+        SonarConnectorConfig config = new SonarConnectorConfig();
+        config.setServer(new Server());
+        config.getServer().setName("Sonar");
+        config.getServer().setDeployerConfig(config);
+        config.getServer().setUrl(
+            "http://" + LocalHostName.getLocalHostname() + ":9080/sonar/");
+        ServerXstreamDao.persist(config);
+        dc.switchDefault(config);
+    }
 
-	private void createNexusServer() {
-		NexusConnectorConfig config = new NexusConnectorConfig();
-		config.setServer(new Server());
-		config.getServer().setName("Nexus");
-		config.setUsername("admin");
-		config.setPassword("admin123");
-		config.getServer().setDeployerConfig(config);
-		config.getServer().setUrl(
-				"http://" + LocalHostName.getLocalHostname() + ":9080/nexus/");
-		ServerXstreamDao.persist(config);
-		dc.switchDefault(config);
-	}
+    private void createNexusServer() {
+        NexusConnectorConfig config = new NexusConnectorConfig();
+        config.setServer(new Server());
+        config.getServer().setName("Nexus");
+        config.setUsername("admin");
+        config.setPassword("admin123");
+        config.getServer().setDeployerConfig(config);
+        config.getServer().setUrl(
+            "http://" + LocalHostName.getLocalHostname() + ":9080/nexus/");
+        ServerXstreamDao.persist(config);
+        dc.switchDefault(config);
+    }
 
-	private void createJenkinsServer() {
-		EJenkinsConnectorConfig config = new EJenkinsConnectorConfig();
-		config.setServer(new Server());
-		config.getServer().setName("Jenkins");
-		config.getServer().setDeployerConfig(config);
-		ServerXstreamDao.persist(config);
-		dc.switchDefault(config);
-	}
+    private void createJenkinsServer() {
+        EJenkinsConnectorConfig config = new EJenkinsConnectorConfig();
+        config.setServer(new Server());
+        config.getServer().setName("Jenkins");
+        config.getServer().setDeployerConfig(config);
+        ServerXstreamDao.persist(config);
+        dc.switchDefault(config);
+    }
 
-	private void createRedmineServer() {
-		ERedmineRepositoryConfig config = new ERedmineRepositoryConfig();
-		config.setUsername("admin");
-		config.setPassword("admin");
-		config.setServer(new Server());
-		config.getServer().setName("Redmine");
-		config.getServer().setDeployerConfig(config);
-		ServerXstreamDao.persist(config);
-		dc.switchDefault(config);
-	}
+    private void createRedmineServer() {
+        ERedmineRepositoryConfig config = new ERedmineRepositoryConfig();
+        config.setUsername("admin");
+        config.setPassword("admin");
+        config.setServer(new Server());
+        config.getServer().setName("Redmine");
+        config.getServer().setDeployerConfig(config);
+        ServerXstreamDao.persist(config);
+        dc.switchDefault(config);
+    }
 
-	private void createSubversionServer() {
-		ESVNConnectorConfig config = new ESVNConnectorConfig();
-		config.setServer(new Server());
-		config.getServer().setName("Subversion");
-		config.getServer().setDeployerConfig(config);
-		ServerXstreamDao.persist(config);
-		dc.switchDefault(config);
-	}
+    private void createSubversionServer() {
+        ESVNConnectorConfig config = new ESVNConnectorConfig();
+        config.setServer(new Server());
+        config.getServer().setName("Subversion");
+        config.getServer().setDeployerConfig(config);
+        ServerXstreamDao.persist(config);
+        dc.switchDefault(config);
+    }
 
-	private void createAdminUser() {
-		User user = new User();
-		user.setLogin("admin");
-		user.setPassword("admin");
-		UserXstreamDao.persist(user);
-	}
+    private void createAdminUser() {
+        User user = new User();
+        user.setLogin("admin");
+        user.setPassword("admin");
+        UserXstreamDao.persist(user);
+    }
 }

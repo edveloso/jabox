@@ -45,115 +45,113 @@ import org.xml.sax.SAXException;
  * :9090/jenkins/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
  * 
  * @author Administrator
- * 
  */
 public class JenkinsConnector implements CISConnector {
-	public static final String ID = "plugin.cis.jenkins";
+    public static final String ID = "plugin.cis.jenkins";
 
-	public String getName() {
-		return "Jenkins";
-	}
+    public String getName() {
+        return "Jenkins";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	/**
-	 * Implementation inspired by groovy code here:
-	 * http://wiki.jenkins-ci.org/display
-	 * /JENKINS/Authenticating+scripted+clients
-	 * 
-	 */
-	public boolean addProject(final Project project, final CISConnectorConfig dc)
-			throws IOException, SAXException {
-		JenkinsConnectorConfig hcc = (JenkinsConnectorConfig) dc;
-		String url = dc.getServer().getUrl();
+    /**
+     * Implementation inspired by groovy code here:
+     * http://wiki.jenkins-ci.org/display
+     * /JENKINS/Authenticating+scripted+clients
+     */
+    public boolean addProject(final Project project,
+            final CISConnectorConfig dc) throws IOException, SAXException {
+        JenkinsConnectorConfig hcc = (JenkinsConnectorConfig) dc;
+        String url = dc.getServer().getUrl();
 
-		HttpClient client = new HttpClient();
-		client.getState().setCredentials(
-				null,
-				null,
-				new UsernamePasswordCredentials(hcc.getUsername(), hcc
-						.getPassword()));
+        HttpClient client = new HttpClient();
+        client.getState().setCredentials(
+            null,
+            null,
+            new UsernamePasswordCredentials(hcc.getUsername(), hcc
+                .getPassword()));
 
-		// Jenkins does not do any authentication negotiation,
-		// ie. it does not return a 401 (Unauthorized)
-		// but immediately a 403 (Forbidden)
-		client.getState().setAuthenticationPreemptive(true);
+        // Jenkins does not do any authentication negotiation,
+        // ie. it does not return a 401 (Unauthorized)
+        // but immediately a 403 (Forbidden)
+        client.getState().setAuthenticationPreemptive(true);
 
-		String uri = url + "createItem?name=" + project.getName();
-		PostMethod post = new PostMethod(uri);
-		post.setDoAuthentication(true);
+        String uri = url + "createItem?name=" + project.getName();
+        PostMethod post = new PostMethod(uri);
+        post.setDoAuthentication(true);
 
-		post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
+        post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 
-		InputStream is = getConfigXMLStream(project);
+        InputStream is = getConfigXMLStream(project);
 
-		String body = parseInputStream(is, project);
-		post.setRequestBody(body);
-		try {
-			int result = client.executeMethod(post);
-			System.out.println("Return code: " + result);
-			for (Header header : post.getResponseHeaders()) {
-				System.out.println(header.toString().trim());
-			}
-			System.out.println(post.getResponseBodyAsString());
-		} finally {
-			post.releaseConnection();
-		}
+        String body = parseInputStream(is, project);
+        post.setRequestBody(body);
+        try {
+            int result = client.executeMethod(post);
+            System.out.println("Return code: " + result);
+            for (Header header : post.getResponseHeaders()) {
+                System.out.println(header.toString().trim());
+            }
+            System.out.println(post.getResponseBodyAsString());
+        } finally {
+            post.releaseConnection();
+        }
 
-		// Trigger the Jenkins build
-		PostMethod triggerBuild = new PostMethod(url + "/job/"
-				+ project.getName() + "/build");
-		client.executeMethod(triggerBuild);
-		return true;
-	}
+        // Trigger the Jenkins build
+        PostMethod triggerBuild =
+            new PostMethod(url + "/job/" + project.getName() + "/build");
+        client.executeMethod(triggerBuild);
+        return true;
+    }
 
-	/**
-	 * Returns the config.xml that should be used as template for the specific
-	 * project. This depends on the SCM implementation used.
-	 * 
-	 * @param project
-	 * @return
-	 */
-	private InputStream getConfigXMLStream(Project project) {
-		String configXML = "config.xml";
-		if ("scm:git:".equals(project.getScmMavenPrefix())) {
-			configXML = "config-git.xml";
-		}
-		return JenkinsConnector.class.getResourceAsStream(configXML);
-	}
+    /**
+     * Returns the config.xml that should be used as template for the specific
+     * project. This depends on the SCM implementation used.
+     * 
+     * @param project
+     * @return
+     */
+    private InputStream getConfigXMLStream(Project project) {
+        String configXML = "config.xml";
+        if ("scm:git:".equals(project.getScmMavenPrefix())) {
+            configXML = "config-git.xml";
+        }
+        return JenkinsConnector.class.getResourceAsStream(configXML);
+    }
 
-	private String parseInputStream(final InputStream is, final Project project)
-			throws IOException {
-		Map<String, String> values = new HashMap<String, String>();
+    private String parseInputStream(final InputStream is,
+            final Project project) throws IOException {
+        Map<String, String> values = new HashMap<String, String>();
 
-		values.put("${project.scmURL}", project.getScmUrl());
-		values.put("${project.issueURL}", "http://localhost/redmine/");
-		values.put("${goals}",
-				"clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
-						+ passCustomSettingsXml());
-		values.put("${customSettingsXml}", passCustomSettingsXml());
-		values.put("${project.name}", project.getName());
+        values.put("${project.scmURL}", project.getScmUrl());
+        values.put("${project.issueURL}", "http://localhost/redmine/");
+        values.put("${goals}",
+            "clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
+                + passCustomSettingsXml());
+        values.put("${customSettingsXml}", passCustomSettingsXml());
+        values.put("${project.name}", project.getName());
 
-		return SettingsModifier.parseInputStream(is, values);
-	}
+        return SettingsModifier.parseInputStream(is, values);
+    }
 
-	private String passCustomSettingsXml() {
-		return " -s \"" + Environment.getCustomMavenHomeDir()
-				+ "/settings.xml\"";
-	}
+    private String passCustomSettingsXml() {
+        return " -s \"" + Environment.getCustomMavenHomeDir()
+            + "/settings.xml\"";
+    }
 
-	public DeployerConfig newConfig() {
-		return new JenkinsConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new JenkinsConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new JenkinsConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new JenkinsConnectorEditor(id, model);
+    }
 }

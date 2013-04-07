@@ -29,23 +29,24 @@ import org.junit.Ignore;
 @Ignore
 public class CisPageTest extends TestCase {
 
-	private WicketTester _tester;
-//	private AnnotApplicationContextMock _mockContext;
+    private WicketTester _tester;
 
-	@Override
-	public void setUp() {
-		_tester = new WicketTester(new DummyWicketApplication());
-//		_mockContext = ((DummyWicketApplication) _tester.getApplication())
-//				.getMockContext();
-	}
+    // private AnnotApplicationContextMock _mockContext;
 
-	public void testMyPageBasicRender0() {
-		_tester.startPage(CisPage.class);
-		_tester.assertRenderedPage(CisPage.class);
-	}
+    @Override
+    public void setUp() {
+        _tester = new WicketTester(new DummyWicketApplication());
+        // _mockContext = ((DummyWicketApplication) _tester.getApplication())
+        // .getMockContext();
+    }
 
-//	public AnnotApplicationContextMock getMockContext() {
-//		return _mockContext;
-//	}
+    public void testMyPageBasicRender0() {
+        _tester.startPage(CisPage.class);
+        _tester.assertRenderedPage(CisPage.class);
+    }
+
+    // public AnnotApplicationContextMock getMockContext() {
+    // return _mockContext;
+    // }
 
 }

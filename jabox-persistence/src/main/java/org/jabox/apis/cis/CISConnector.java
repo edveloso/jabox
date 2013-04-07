@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public interface CISConnector extends Connector {
 
-	public boolean addProject(final Project project,
-			CISConnectorConfig cisConnectorConfig) throws IOException,
-			SAXException;
+    public boolean addProject(final Project project,
+            CISConnectorConfig cisConnectorConfig)
+            throws IOException, SAXException;
 }

@@ -28,12 +28,13 @@ import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class BugzillaRepositoryEditor extends Panel {
-	private static final long serialVersionUID = 7983760045396158217L;
+    private static final long serialVersionUID = 7983760045396158217L;
 
-	public BugzillaRepositoryEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		add(new TextField<String>("server.url").add(new UrlValidator()));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
-	}
+    public BugzillaRepositoryEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        add(new TextField<String>("server.url").add(new UrlValidator()));
+        add(new TextField<String>("username").setRequired(true));
+        add(new PasswordTextField("password").setRequired(true));
+    }
 }

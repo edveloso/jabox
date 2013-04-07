@@ -26,18 +26,18 @@ import org.jabox.apis.ConnectorConfig;
 import org.jabox.model.DefaultConfiguration;
 
 public class SetDefaultServerLink extends Link<ConnectorConfig> {
-	private static final long serialVersionUID = -2146843131170907255L;
+    private static final long serialVersionUID = -2146843131170907255L;
 
-	public SetDefaultServerLink(final String id,
-			final IModel<ConnectorConfig> model) {
-		super(id, model);
-	}
+    public SetDefaultServerLink(final String id,
+            final IModel<ConnectorConfig> model) {
+        super(id, model);
+    }
 
-	@Override
-	public void onClick() {
-		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		dc.switchDefault(getModelObject());
-		ConfigXstreamDao.persist(dc);
-	}
+    @Override
+    public void onClick() {
+        DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+        dc.switchDefault(getModelObject());
+        ConfigXstreamDao.persist(dc);
+    }
 
 }

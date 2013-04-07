@@ -41,115 +41,123 @@ import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
-public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
-		Serializable {
-	private static final Logger LOGGER = LoggerFactory
-	.getLogger(JtracRepository.class);
+public class JtracRepository implements
+        ITSConnector<JtracRepositoryConfig>, Serializable {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(JtracRepository.class);
 
-	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.its.jtrac";
+    private static final long serialVersionUID = 8131183843391948936L;
 
-	private String _url;
-	private final WebConversation _wc;
+    public static final String ID = "plugin.its.jtrac";
 
-	public String getName() {
-		return "Jtrac";
-	}
+    private String _url;
 
-	public String getId() {
-		return ID;
-	}
+    private final WebConversation _wc;
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    public String getName() {
+        return "Jtrac";
+    }
 
-	public JtracRepository() {
-		_wc = new WebConversation();
-	}
+    public String getId() {
+        return ID;
+    }
 
-	public void setUrl(final String url) {
-		_url = url;
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public boolean login(final JtracRepositoryConfig config)
-			throws MalformedURLException, IOException, SAXException {
-		LOGGER.info("jtrac Login: " + config.getUsername());
+    public JtracRepository() {
+        _wc = new WebConversation();
+    }
 
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("j_username", config.getUsername());
-		form.setParameter("j_password", config.getPassword());
-		resp = form.submit();
+    public void setUrl(final String url) {
+        _url = url;
+    }
 
-		// TODO check if not logged in.
-		return true;
-	}
+    public boolean login(final JtracRepositoryConfig config)
+            throws MalformedURLException, IOException, SAXException {
+        LOGGER.info("jtrac Login: " + config.getUsername());
 
-	public boolean addProject(final Project project,
-			final JtracRepositoryConfig config) throws IOException,
-			SAXException {
-		LOGGER.info("jtrac add Project: " + project.getName());
+        WebRequest req =
+            new GetMethodWebRequest(config.getServer().getUrl());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0]; // select the first form in the page
+        form.setParameter("j_username", config.getUsername());
+        form.setParameter("j_password", config.getPassword());
+        resp = form.submit();
 
-		WebRequest req = new GetMethodWebRequest(_url
-				+ "/editproducts.cgi?action=add");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+        // TODO check if not logged in.
+        return true;
+    }
 
-		form.setParameter("product", project.getName());
-		form.setParameter("description", project.getDescription());
-		form.submit();
-		return true;
-	}
+    public boolean addProject(final Project project,
+            final JtracRepositoryConfig config)
+            throws IOException, SAXException {
+        LOGGER.info("jtrac add Project: " + project.getName());
 
-	public boolean addModule(final Project project,
-			final JtracRepositoryConfig config, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException {
-		LOGGER.info("jtrac add Module: " + project.getName());
+        WebRequest req =
+            new GetMethodWebRequest(_url + "/editproducts.cgi?action=add");
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editcomponents.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+        form.setParameter("product", project.getName());
+        form.setParameter("description", project.getDescription());
+        form.submit();
+        return true;
+    }
 
-		form.setParameter("component", module);
-		form.setParameter("description", description);
-		form.setParameter("initialowner", initialOwner);
-		form.submit();
-		return true;
-	}
+    public boolean addModule(final Project project,
+            final JtracRepositoryConfig config, final String module,
+            final String description, final String initialOwner)
+            throws SAXException, IOException {
+        LOGGER.info("jtrac add Module: " + project.getName());
 
-	public boolean addVersion(final Project project,
-			final JtracRepositoryConfig config, final String version)
-			throws IOException, SAXException {
-		LOGGER.info("jtrac add Version: " + version);
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url
+                + "/editcomponents.cgi?action=add&product="
+                + project.getName());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editversions.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+        form.setParameter("component", module);
+        form.setParameter("description", description);
+        form.setParameter("initialowner", initialOwner);
+        form.submit();
+        return true;
+    }
 
-		form.setParameter("version", version);
-		form.submit();
-		return true;
-	}
+    public boolean addVersion(final Project project,
+            final JtracRepositoryConfig config, final String version)
+            throws IOException, SAXException {
+        LOGGER.info("jtrac add Version: " + version);
 
-	public DeployerConfig newConfig() {
-		return new JtracRepositoryConfig();
-	}
+        String url = config.getServer().getUrl();
+        WebRequest req =
+            new GetMethodWebRequest(url
+                + "/editversions.cgi?action=add&product="
+                + project.getName());
+        WebResponse resp = _wc.getResponse(req);
+        WebForm form = resp.getForms()[0];
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new JtracRepositoryEditor(id, model);
-	}
+        form.setParameter("version", version);
+        form.submit();
+        return true;
+    }
 
-	public void addRepository(Project project, JtracRepositoryConfig config,
-			SCMConnectorConfig scmConfig, String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-	}
+    public DeployerConfig newConfig() {
+        return new JtracRepositoryConfig();
+    }
+
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new JtracRepositoryEditor(id, model);
+    }
+
+    public void addRepository(Project project,
+            JtracRepositoryConfig config, SCMConnectorConfig scmConfig,
+            String username, String password)
+            throws MalformedURLException, IOException, SAXException {
+    }
 
 }

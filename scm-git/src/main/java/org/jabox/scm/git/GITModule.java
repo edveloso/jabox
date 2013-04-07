@@ -9,11 +9,11 @@ import com.google.inject.multibindings.Multibinder;
 
 public class GITModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<SCMConnector> uriBinder = Multibinder.newSetBinder(binder,
-				SCMConnector.class);
-		uriBinder.addBinding().to(GITConnector.class);
-		uriBinder.addBinding().to(EGITConnector.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<SCMConnector> uriBinder =
+            Multibinder.newSetBinder(binder, SCMConnector.class);
+        uriBinder.addBinding().to(GITConnector.class);
+        uriBinder.addBinding().to(EGITConnector.class);
+    }
 }

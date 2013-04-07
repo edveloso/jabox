@@ -18,26 +18,26 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(Manager.class)
 public interface IManager {
 
-	public abstract Connector getConnectorInstance(
-			final ConnectorConfig connectorConfig);
+    public abstract Connector getConnectorInstance(
+            final ConnectorConfig connectorConfig);
 
-	public abstract SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
-			SCMConnectorConfig config);
+    public abstract SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
+            SCMConnectorConfig config);
 
-	public abstract ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
-			ITSConnectorConfig config);
+    public abstract ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
+            ITSConnectorConfig config);
 
-	public abstract RMSConnector getRmsConnectorInstance(
-			RMSConnectorConfig config);
+    public abstract RMSConnector getRmsConnectorInstance(
+            RMSConnectorConfig config);
 
-	public abstract CISConnector getCisConnectorInstance(
-			CISConnectorConfig config);
+    public abstract CISConnector getCisConnectorInstance(
+            CISConnectorConfig config);
 
-	public abstract CQMConnector getCqmConnectorInstance(
-			CQMConnectorConfig config);
+    public abstract CQMConnector getCqmConnectorInstance(
+            CQMConnectorConfig config);
 
-	public abstract Connector getEntry(String pluginId);
+    public abstract Connector getEntry(String pluginId);
 
-	public abstract List<? extends String> getIds(
-			Class<? extends Connector> connectorClass);
+    public abstract List<? extends String> getIds(
+            Class<? extends Connector> connectorClass);
 }

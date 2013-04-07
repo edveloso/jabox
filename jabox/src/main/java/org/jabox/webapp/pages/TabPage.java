@@ -23,23 +23,23 @@ import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
-
 /**
  * Homepage
  */
 public class TabPage extends WebPage {
-	private static final long serialVersionUID = -6546217660729170839L;
-	public void renderHead(IHeaderResponse response) {
-//		response.renderCSSReference(new PackageResourceReference(
-//				BasePage.class, "css/wicket.css"));
-	}
+    private static final long serialVersionUID = -6546217660729170839L;
 
-	/**
-	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
-	 */
-	public TabPage() {
-	}
+    public void renderHead(IHeaderResponse response) {
+        // response.renderCSSReference(new PackageResourceReference(
+        // BasePage.class, "css/wicket.css"));
+    }
+
+    /**
+     * Constructor that is invoked when page is invoked without a session.
+     * 
+     * @param parameters
+     *            Page parameters
+     */
+    public TabPage() {
+    }
 }

@@ -5,13 +5,13 @@ import java.net.UnknownHostException;
 
 public class LocalHostName {
 
-	public static String getLocalHostname() {
-		try {
-			return InetAddress.getLocalHost().getHostName();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		return "localhost";
-	}
+    public static String getLocalHostname() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return "localhost";
+    }
 
 }

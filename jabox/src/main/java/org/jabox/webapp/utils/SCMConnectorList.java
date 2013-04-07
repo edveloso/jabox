@@ -40,51 +40,54 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
-        private static final Logger LOGGER = LoggerFactory
-          .getLogger(SCMConnectorList.class);
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(SCMConnectorList.class);
 
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public SCMConnectorList(final String id,
-			final List<? extends ConnectorConfig> projects) {
-		super(id, projects);
-		add(new CreateServerLink("create" + id));
-	}
+    public SCMConnectorList(final String id,
+            final List<? extends ConnectorConfig> projects) {
+        super(id, projects);
+        add(new CreateServerLink("create" + id));
+    }
 
-	@Override
-	public void populateItem(final ListItem<ConnectorConfig> item) {
-		final ConnectorConfig deployerConfig = item.getModelObject();
-                LOGGER.debug("Populate SCM Connector: " + deployerConfig.getServer().getName());
-                
-		item.add(new Label("clazz", deployerConfig.getServer().getName()));
-		item.add(new ExternalLink("server.url", deployerConfig.getServer()
-				.getUrl(), deployerConfig.getServer().getUrl()));
-		item.add(new DefaultEntityButton<ConnectorConfig>("default", item,
-				ManageServers.class));
-		item.add(new IconButton("connectorImage", deployerConfig));
+    @Override
+    public void populateItem(final ListItem<ConnectorConfig> item) {
+        final ConnectorConfig deployerConfig = item.getModelObject();
+        LOGGER.debug("Populate SCM Connector: "
+            + deployerConfig.getServer().getName());
 
-		// Connector ci = _manager.getConnectorInstance(deployerConfig);
-		// item.add(new Label("scmUrl", ci.getName()));
-		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<ConnectorConfig>(item));
-		item.add(attributeModifier);
-		item.add(new EditServerButton<Server>("edit", item.getModelObject()
-				.getServer()));
-		item.add(new DeleteEntityButton<Server>("delete", item.getModelObject()
-				.getServer(), ManageServers.class) {
-			private static final long serialVersionUID = -8085737767377869654L;
+        item.add(new Label("clazz", deployerConfig.getServer().getName()));
+        item.add(new ExternalLink("server.url", deployerConfig.getServer()
+            .getUrl(), deployerConfig.getServer().getUrl()));
+        item.add(new DefaultEntityButton<ConnectorConfig>("default", item,
+            ManageServers.class));
+        item.add(new IconButton("connectorImage", deployerConfig));
 
-			@Override
-			public void onSubmit() {
-				// If item is default, disable it first.
-				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-				if (DefaultConfiguration.TRUE.equals(dc.isDefault(item
-						.getModelObject()))) {
-					dc.switchDefault(item.getModelObject());
-					ConfigXstreamDao.persist(dc);
-				}
-				super.onSubmit();
-			}
-		});
-	}
+        // Connector ci = _manager.getConnectorInstance(deployerConfig);
+        // item.add(new Label("scmUrl", ci.getName()));
+        final AttributeModifier attributeModifier =
+            new AttributeModifier("class", true,
+                new EvenOddRow<ConnectorConfig>(item));
+        item.add(attributeModifier);
+        item.add(new EditServerButton<Server>("edit", item
+            .getModelObject().getServer()));
+        item.add(new DeleteEntityButton<Server>("delete", item
+            .getModelObject().getServer(), ManageServers.class) {
+            private static final long serialVersionUID =
+                -8085737767377869654L;
+
+            @Override
+            public void onSubmit() {
+                // If item is default, disable it first.
+                DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+                if (DefaultConfiguration.TRUE.equals(dc.isDefault(item
+                    .getModelObject()))) {
+                    dc.switchDefault(item.getModelObject());
+                    ConfigXstreamDao.persist(dc);
+                }
+                super.onSubmit();
+            }
+        });
+    }
 }

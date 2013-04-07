@@ -26,9 +26,9 @@ import junit.framework.TestCase;
 
 public class TemporalDirectoryTest extends TestCase {
 
-	public void testCreateTempDir() throws IOException {
-		File tempDir = TemporalDirectory.createTempDir();
-		assertTrue(tempDir.exists());
-	}
+    public void testCreateTempDir() throws IOException {
+        File tempDir = TemporalDirectory.createTempDir();
+        assertTrue(tempDir.exists());
+    }
 
 }

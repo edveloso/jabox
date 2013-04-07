@@ -35,35 +35,36 @@ import org.jabox.model.Project;
  * to a pom file.
  */
 public class MavenConfigureSourceEncoding {
-	private static final String SOURCE_ENCODING = "project.build.sourceEncoding";
+    private static final String SOURCE_ENCODING =
+        "project.build.sourceEncoding";
 
-	public MavenConfigureSourceEncoding() {
-	}
+    public MavenConfigureSourceEncoding() {
+    }
 
-	/**
-	 * Injects the &lt;project.build.sourceEncoding&gt; property to the pom
-	 * file.
-	 * <p>
-	 * If the SourceEncoding is empty then nothing is injected.
-	 * 
-	 * @param pomFile
-	 *            The pom file that will be injected with the encoding
-	 *            configuration.
-	 * @param project
-	 *            The project. It reads the sourceEncoding from this entity.
-	 * @throws IOException
-	 * @throws XmlPullParserException
-	 */
-	public static void injectSourceEncoding(final File pomFile, Project project)
-			throws IOException, XmlPullParserException {
-		FileReader fileReader = new FileReader(pomFile);
-		Model model = new MavenXpp3Reader().read(fileReader);
+    /**
+     * Injects the &lt;project.build.sourceEncoding&gt; property to the pom
+     * file.
+     * <p>
+     * If the SourceEncoding is empty then nothing is injected.
+     * 
+     * @param pomFile
+     *            The pom file that will be injected with the encoding
+     *            configuration.
+     * @param project
+     *            The project. It reads the sourceEncoding from this entity.
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void injectSourceEncoding(final File pomFile,
+            Project project) throws IOException, XmlPullParserException {
+        FileReader fileReader = new FileReader(pomFile);
+        Model model = new MavenXpp3Reader().read(fileReader);
 
-		String sourceEncoding = project.getSourceEncoding();
-		if (sourceEncoding != null && sourceEncoding.length() > 0) {
-			model.addProperty(SOURCE_ENCODING, sourceEncoding);
-		}
-		FileWriter fileWriter = new FileWriter(pomFile);
-		new MavenXpp3Writer().write(fileWriter, model);
-	}
+        String sourceEncoding = project.getSourceEncoding();
+        if (sourceEncoding != null && sourceEncoding.length() > 0) {
+            model.addProperty(SOURCE_ENCODING, sourceEncoding);
+        }
+        FileWriter fileWriter = new FileWriter(pomFile);
+        new MavenXpp3Writer().write(fileWriter, model);
+    }
 }

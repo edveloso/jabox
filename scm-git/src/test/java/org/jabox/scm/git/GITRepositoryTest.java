@@ -6,13 +6,13 @@ import junit.framework.TestCase;
 
 public class GITRepositoryTest extends TestCase {
 
-	public void testInitialize() {
-		GITRepository.initialize();
-	}
+    public void testInitialize() {
+        GITRepository.initialize();
+    }
 
-	public void testGetGitBaseDir() {
-		File gitBaseDir = GITRepository.getGitBaseDir();
-		assertTrue(gitBaseDir.exists());
-	}
+    public void testGetGitBaseDir() {
+        File gitBaseDir = GITRepository.getGitBaseDir();
+        assertTrue(gitBaseDir.exists());
+    }
 
 }

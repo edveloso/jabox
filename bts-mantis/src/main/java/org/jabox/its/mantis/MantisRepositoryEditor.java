@@ -28,12 +28,13 @@ import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class MantisRepositoryEditor extends Panel {
-	private static final long serialVersionUID = 7888186230733277184L;
+    private static final long serialVersionUID = 7888186230733277184L;
 
-	public MantisRepositoryEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<Server>(model));
-		add(new TextField<String>("server.url").add(new UrlValidator()));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
-	}
+    public MantisRepositoryEditor(final String id,
+            final IModel<Server> model) {
+        super(id, new CompoundPropertyModel<Server>(model));
+        add(new TextField<String>("server.url").add(new UrlValidator()));
+        add(new TextField<String>("username").setRequired(true));
+        add(new PasswordTextField("password").setRequired(true));
+    }
 }

@@ -23,23 +23,23 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class EclipseRunner {
-	abstract String getFileName();
+    abstract String getFileName();
 
-	public static EclipseRunner getInstance() {
-		if (OSHelper.isWindowsPlatform()) {
-			return new EclipseRunnerWindows();
-		} else {
-			return new EclipseRunnerLinux();
-		}
-	}
+    public static EclipseRunner getInstance() {
+        if (OSHelper.isWindowsPlatform()) {
+            return new EclipseRunnerWindows();
+        } else {
+            return new EclipseRunnerLinux();
+        }
+    }
 
-	abstract String getDownloadURL();
+    abstract String getDownloadURL();
 
-	abstract File getEclipseExecutable(final File eclipseHome);
+    abstract File getEclipseExecutable(final File eclipseHome);
 
-	public void executeEclipse(final File eclipseHome) throws IOException {
-		Runtime.getRuntime().exec(
-				new String[] { getEclipseExecutable(eclipseHome)
-						.getAbsolutePath() });
-	}
+    public void executeEclipse(final File eclipseHome) throws IOException {
+        Runtime.getRuntime().exec(
+            new String[] {getEclipseExecutable(eclipseHome)
+                .getAbsolutePath() });
+    }
 }

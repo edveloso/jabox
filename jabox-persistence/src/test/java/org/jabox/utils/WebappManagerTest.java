@@ -26,8 +26,8 @@ import junit.framework.TestCase;
 
 public abstract class WebappManagerTest extends TestCase {
 
-	public void testGetWebapps() throws IOException {
-		List<String> servers = WebappManager.getWebapps();
-		assertEquals("Servers size", 3, servers.size());
-	}
+    public void testGetWebapps() throws IOException {
+        List<String> servers = WebappManager.getWebapps();
+        assertEquals("Servers size", 3, servers.size());
+    }
 }

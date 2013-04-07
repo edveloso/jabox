@@ -24,30 +24,30 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class SonarConnectorConfig extends DeployerConfig implements
-		CQMConnectorConfig {
-	private static final long serialVersionUID = -3304041364131581981L;
+        CQMConnectorConfig {
+    private static final long serialVersionUID = -3304041364131581981L;
 
-	public SonarConnectorConfig() {
-		pluginId = SonarConnector.ID;
-	}
+    public SonarConnectorConfig() {
+        pluginId = SonarConnector.ID;
+    }
 
-	public String getProjectUrl(Project project) {
-		return getServer().getUrl();
-	}
+    public String getProjectUrl(Project project) {
+        return getServer().getUrl();
+    }
 
-	public String getSystem() {
-		return "Sonar";
-	}
+    public String getSystem() {
+        return "Sonar";
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 }

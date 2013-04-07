@@ -10,44 +10,50 @@ import org.jabox.model.Server;
 import org.jabox.scm.svn.SubversionFacade;
 
 public class BeanstalkLoginValidator extends UrlValidator {
-	private static final long serialVersionUID = 2635593287132542621L;
-	private final TextField<String> _url;
-	private final TextField<String> _username;
-	private final TextField<String> _projectName;
-	private final PasswordTextField _password;
+    private static final long serialVersionUID = 2635593287132542621L;
 
-	public BeanstalkLoginValidator(final TextField<String> url,
-			final TextField<String> username, TextField<String> projectName,
-			final PasswordTextField password) {
-		_url = url;
-		_username = username;
-		_projectName = projectName;
-		_password = password;
-	}
+    private final TextField<String> _url;
 
-	@Override
-	protected void onValidate(final IValidatable<String> validatable) {
-		if (!_url.isValid() || !_username.isValid() || !_projectName.isValid()
-				|| !_password.isValid()) {
-			return;
-		}
+    private final TextField<String> _username;
 
-		BeanstalkConnectorConfig beanstalkcc = new BeanstalkConnectorConfig();
-		beanstalkcc.server = new Server();
-		beanstalkcc.server.setUrl(_url.getValue());
-		beanstalkcc.username = _username.getValue();
-		beanstalkcc.projectName = _projectName.getValue();
-		beanstalkcc.password = _password.getValue();
+    private final TextField<String> _projectName;
 
-		try {
-			boolean login = new SubversionFacade().validate(beanstalkcc
-					.getScmUrl(), _username.getValue(), _password.getValue());
+    private final PasswordTextField _password;
 
-			if (!login) {
-				error(_url.newValidatable());
-			}
-		} catch (IOException e) {
-			error(_url.newValidatable());
-		}
-	}
+    public BeanstalkLoginValidator(final TextField<String> url,
+            final TextField<String> username,
+            TextField<String> projectName, final PasswordTextField password) {
+        _url = url;
+        _username = username;
+        _projectName = projectName;
+        _password = password;
+    }
+
+    @Override
+    protected void onValidate(final IValidatable<String> validatable) {
+        if (!_url.isValid() || !_username.isValid()
+            || !_projectName.isValid() || !_password.isValid()) {
+            return;
+        }
+
+        BeanstalkConnectorConfig beanstalkcc =
+            new BeanstalkConnectorConfig();
+        beanstalkcc.server = new Server();
+        beanstalkcc.server.setUrl(_url.getValue());
+        beanstalkcc.username = _username.getValue();
+        beanstalkcc.projectName = _projectName.getValue();
+        beanstalkcc.password = _password.getValue();
+
+        try {
+            boolean login =
+                new SubversionFacade().validate(beanstalkcc.getScmUrl(),
+                    _username.getValue(), _password.getValue());
+
+            if (!login) {
+                error(_url.newValidatable());
+            }
+        } catch (IOException e) {
+            error(_url.newValidatable());
+        }
+    }
 }

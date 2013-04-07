@@ -8,10 +8,10 @@ import com.google.inject.multibindings.Multibinder;
 
 public class GitHubModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<SCMConnector> uriBinder = Multibinder.newSetBinder(binder,
-				SCMConnector.class);
-		uriBinder.addBinding().to(GithubConnector.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<SCMConnector> uriBinder =
+            Multibinder.newSetBinder(binder, SCMConnector.class);
+        uriBinder.addBinding().to(GithubConnector.class);
+    }
 }

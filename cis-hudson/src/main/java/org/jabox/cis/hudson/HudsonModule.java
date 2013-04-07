@@ -9,12 +9,12 @@ import com.google.inject.multibindings.Multibinder;
 
 public class HudsonModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<CISConnector> uriBinder = Multibinder.newSetBinder(binder,
-				CISConnector.class);
-		uriBinder.addBinding().to(HudsonConnector.class);
-		uriBinder.addBinding().to(EHudsonConnector.class);
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<CISConnector> uriBinder =
+            Multibinder.newSetBinder(binder, CISConnector.class);
+        uriBinder.addBinding().to(HudsonConnector.class);
+        uriBinder.addBinding().to(EHudsonConnector.class);
 
-	}
+    }
 }

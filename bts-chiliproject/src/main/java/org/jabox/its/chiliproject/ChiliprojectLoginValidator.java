@@ -13,38 +13,44 @@ import com.meterware.httpunit.HttpNotFoundException;
 
 public class ChiliprojectLoginValidator extends UrlValidator {
 
-	private static final long serialVersionUID = 2635593287132542621L;
-	private final TextField<String> _url;
-	private final TextField<String> _username;
-	private final PasswordTextField _password;
+    private static final long serialVersionUID = 2635593287132542621L;
 
-	public ChiliprojectLoginValidator(final TextField<String> url,
-			final TextField<String> username, final PasswordTextField password) {
-		_url = url;
-		_username = username;
-		_password = password;
-	}
+    private final TextField<String> _url;
 
-	@Override
-	protected void onValidate(final IValidatable<String> validatable) {
-		if (!_url.isValid() || !_username.isValid() || !_password.isValid()) {
-			return;
-		}
+    private final TextField<String> _username;
 
-		try {
-			boolean login = new ChiliprojectRepository().login(_url.getValue(),
-					_username.getValue(), _password.getValue());
-			if (!login) {
-				error(_url.newValidatable());
-			}
-		} catch (MalformedURLException e) {
-			error(_url.newValidatable());
-		} catch (IOException e) {
-			error(_url.newValidatable());
-		} catch (SAXException e) {
-			error(_url.newValidatable());
-		} catch (HttpNotFoundException e) {
-			error(_url.newValidatable());
-		}
-	}
+    private final PasswordTextField _password;
+
+    public ChiliprojectLoginValidator(final TextField<String> url,
+            final TextField<String> username,
+            final PasswordTextField password) {
+        _url = url;
+        _username = username;
+        _password = password;
+    }
+
+    @Override
+    protected void onValidate(final IValidatable<String> validatable) {
+        if (!_url.isValid() || !_username.isValid()
+            || !_password.isValid()) {
+            return;
+        }
+
+        try {
+            boolean login =
+                new ChiliprojectRepository().login(_url.getValue(),
+                    _username.getValue(), _password.getValue());
+            if (!login) {
+                error(_url.newValidatable());
+            }
+        } catch (MalformedURLException e) {
+            error(_url.newValidatable());
+        } catch (IOException e) {
+            error(_url.newValidatable());
+        } catch (SAXException e) {
+            error(_url.newValidatable());
+        } catch (HttpNotFoundException e) {
+            error(_url.newValidatable());
+        }
+    }
 }

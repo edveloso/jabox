@@ -24,7 +24,7 @@ import org.jabox.model.Server;
 
 public interface ConnectorConfig extends Identifiable<Long>, IBaseEntity {
 
-	public String getPluginId();
+    public String getPluginId();
 
-	public Server getServer();
+    public Server getServer();
 }

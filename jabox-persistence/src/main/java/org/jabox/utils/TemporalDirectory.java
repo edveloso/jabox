@@ -26,17 +26,16 @@ import org.jabox.environment.Environment;
 
 public class TemporalDirectory {
 
-	/**
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
-	public static File createTempDir() throws IOException {
-		File tmpDir = Environment.getTmpDir();
+    /**
+     * @return
+     * @throws IOException
+     */
+    public static File createTempDir() throws IOException {
+        File tmpDir = Environment.getTmpDir();
 
-		File tempDirectory = File.createTempFile("temp", "", tmpDir);
-		tempDirectory.delete();
-		tempDirectory.mkdir();
-		return tempDirectory;
-	}
+        File tempDirectory = File.createTempFile("temp", "", tmpDir);
+        tempDirectory.delete();
+        tempDirectory.mkdir();
+        return tempDirectory;
+    }
 }

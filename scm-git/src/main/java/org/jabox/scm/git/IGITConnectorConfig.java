@@ -22,5 +22,5 @@ package org.jabox.scm.git;
 import org.jabox.apis.scm.SCMConnectorConfig;
 
 public interface IGITConnectorConfig extends SCMConnectorConfig {
-	// SVNURL getSvnDir() throws SVNException;
+    // SVNURL getSvnDir() throws SVNException;
 }

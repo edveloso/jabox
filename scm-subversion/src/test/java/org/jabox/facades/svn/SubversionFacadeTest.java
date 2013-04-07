@@ -35,53 +35,54 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 
 public abstract class SubversionFacadeTest extends TestCase {
-	private SVNClientManager _clientManager;
+    private SVNClientManager _clientManager;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		_clientManager = SVNClientManager.newInstance();
-	}
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        _clientManager = SVNClientManager.newInstance();
+    }
 
-	public void testValidate() throws Exception {
-		SVNConnectorConfig svnc = new SVNConnectorConfig();
-		svnc.server = new Server();
+    public void testValidate() throws Exception {
+        SVNConnectorConfig svnc = new SVNConnectorConfig();
+        svnc.server = new Server();
 
-		// boolean validate = new SubversionFacade().validate(
-		// "url", "login",
-		// "password");
-		// assertTrue(validate);
-	}
+        // boolean validate = new SubversionFacade().validate(
+        // "url", "login",
+        // "password");
+        // assertTrue(validate);
+    }
 
-	public void test1() throws SVNException {
-		// SVNCommitClient commitClient = _clientManager.getCommitClient();
-		FSRepositoryFactory.setup();
+    public void test1() throws SVNException {
+        // SVNCommitClient commitClient = _clientManager.getCommitClient();
+        FSRepositoryFactory.setup();
 
-		// SVNURL svnurl = SVNURL
-		// .parseURIEncoded("file:///home/dimitris/svn/repos/helloworld");
-		// SVNURL[] svnurls = new SVNURL[] { svnurl };
+        // SVNURL svnurl = SVNURL
+        // .parseURIEncoded("file:///home/dimitris/svn/repos/helloworld");
+        // SVNURL[] svnurls = new SVNURL[] { svnurl };
 
-		// commitClient.doMkDir(svnurls, "[JABOX] Added Project Directory");
-	}
+        // commitClient.doMkDir(svnurls, "[JABOX] Added Project Directory");
+    }
 
-	public void test2() throws SVNException {
-		String tgtPath = "target/svnRepoTest/";
-		SVNRepositoryFactory.createLocalRepository(new File(tgtPath), true,
-				false);
-	}
+    public void test2() throws SVNException {
+        String tgtPath = "target/svnRepoTest/";
+        SVNRepositoryFactory.createLocalRepository(new File(tgtPath),
+            true, false);
+    }
 
-	public void testAddFiles() throws SVNException {
-		// SVNCommitClient commitClient = _clientManager.getCommitClient();
-		// SVNWCClient wcClient = _clientManager.getWCClient();
+    public void testAddFiles() throws SVNException {
+        // SVNCommitClient commitClient = _clientManager.getCommitClient();
+        // SVNWCClient wcClient = _clientManager.getWCClient();
 
-		SVNURL svnTestingDir = SVNURL.fromFile(SubversionRepository
-				.getSubversionBaseDir());
+        SVNURL svnTestingDir =
+            SVNURL.fromFile(SubversionRepository.getSubversionBaseDir());
 
-		_clientManager.createRepository(svnTestingDir, true);
-		svnTestingDir = svnTestingDir.appendPath("/foobar2/", true);
-		File dstPath = new File("c:/home/dimitris/tmp/foobar/");
-		dstPath.mkdirs();
-		_clientManager.getUpdateClient().doCheckout(svnTestingDir, dstPath,
-				SVNRevision.HEAD, SVNRevision.HEAD, SVNDepth.INFINITY, false);
-	}
+        _clientManager.createRepository(svnTestingDir, true);
+        svnTestingDir = svnTestingDir.appendPath("/foobar2/", true);
+        File dstPath = new File("c:/home/dimitris/tmp/foobar/");
+        dstPath.mkdirs();
+        _clientManager.getUpdateClient().doCheckout(svnTestingDir,
+            dstPath, SVNRevision.HEAD, SVNRevision.HEAD,
+            SVNDepth.INFINITY, false);
+    }
 }

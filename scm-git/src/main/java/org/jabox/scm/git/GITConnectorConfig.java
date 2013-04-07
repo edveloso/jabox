@@ -22,38 +22,38 @@ package org.jabox.scm.git;
 import org.jabox.model.DeployerConfig;
 
 public class GITConnectorConfig extends DeployerConfig implements
-		IGITConnectorConfig {
-	private static final long serialVersionUID = 6542402958304063770L;
+        IGITConnectorConfig {
+    private static final long serialVersionUID = 6542402958304063770L;
 
-	public GITConnectorConfig() {
-		pluginId = GITConnector.ID;
-	}
+    public GITConnectorConfig() {
+        pluginId = GITConnector.ID;
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	// public SVNURL getSvnDir() throws SVNException {
-	// return SVNURL.parseURIEncoded(getScmUrl());
-	// }
+    // public SVNURL getSvnDir() throws SVNException {
+    // return SVNURL.parseURIEncoded(getScmUrl());
+    // }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getScmUrl() {
-		return getServer().getUrl();
-	}
+    public String getScmUrl() {
+        return getServer().getUrl();
+    }
 
-	public String getProjectScmUrl(String projectName) {
-		return getScmUrl() + "/" + projectName + "/" + projectName;
-	}
+    public String getProjectScmUrl(String projectName) {
+        return getScmUrl() + "/" + projectName + "/" + projectName;
+    }
 
-	public String getScmMavenPrefix() {
-		return "scm:git:";
-	}
+    public String getScmMavenPrefix() {
+        return "scm:git:";
+    }
 }

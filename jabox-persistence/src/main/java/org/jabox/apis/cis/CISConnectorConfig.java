@@ -24,17 +24,17 @@ import org.jabox.model.Project;
 
 public interface CISConnectorConfig extends ConnectorConfig {
 
-	/**
-	 * @return The name of the continuous integration system, e.g.
-	 *         <code>continuum</code>.
-	 */
-	public String getSystem();
+    /**
+     * @return The name of the continuous integration system, e.g.
+     *         <code>continuum</code>.
+     */
+    public String getSystem();
 
-	/**
-	 * @param project
-	 *            The project
-	 * @return The URL of the Job that builds the project inside the continuous
-	 *         integration system.
-	 */
-	public String getJobUrl(Project project);
+    /**
+     * @param project
+     *            The project
+     * @return The URL of the Job that builds the project inside the continuous
+     *         integration system.
+     */
+    public String getJobUrl(Project project);
 }

@@ -26,26 +26,26 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class ScpConnector implements RMSConnector {
-	public static final String ID = "plugin.rms.scp";
+    public static final String ID = "plugin.rms.scp";
 
-	public String getName() {
-		return "SCP";
-	}
+    public String getName() {
+        return "SCP";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public DeployerConfig newConfig() {
-		return new ScpConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new ScpConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new ScpConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new ScpConnectorEditor(id, model);
+    }
 }

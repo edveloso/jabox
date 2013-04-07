@@ -8,10 +8,10 @@ import com.google.inject.multibindings.Multibinder;
 
 public class MantisModule implements Module {
 
-	@Override
-	public void configure(Binder binder) {
-		Multibinder<ITSConnector> uriBinder = Multibinder.newSetBinder(binder,
-				ITSConnector.class);
-		uriBinder.addBinding().to(MantisRepository.class);
-	}
+    @Override
+    public void configure(Binder binder) {
+        Multibinder<ITSConnector> uriBinder =
+            Multibinder.newSetBinder(binder, ITSConnector.class);
+        uriBinder.addBinding().to(MantisRepository.class);
+    }
 }

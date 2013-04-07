@@ -24,31 +24,31 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
 public class BugzillaRepositoryConfig extends DeployerConfig implements
-		ITSConnectorConfig {
-	private static final long serialVersionUID = -4830931405902901630L;
+        ITSConnectorConfig {
+    private static final long serialVersionUID = -4830931405902901630L;
 
-	public BugzillaRepositoryConfig() {
-		pluginId = BugzillaRepository.ID;
-	}
+    public BugzillaRepositoryConfig() {
+        pluginId = BugzillaRepository.ID;
+    }
 
-	public String getProjectUrl(Project project) {
-		return getServer().getUrl();
-	}
+    public String getProjectUrl(Project project) {
+        return getServer().getUrl();
+    }
 
-	public String getSystem() {
-		return "Bugzilla";
-	}
-	
-	public String username;
+    public String getSystem() {
+        return "Bugzilla";
+    }
 
-	public String password;
+    public String username;
 
-	public String getUsername() {
-		return username;
-	}
+    public String password;
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 }

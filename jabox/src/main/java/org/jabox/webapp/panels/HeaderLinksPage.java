@@ -29,10 +29,10 @@ import org.jabox.webapp.pages.TabPage;
  * to another easily.
  */
 public class HeaderLinksPage extends TabPage {
-	private static final long serialVersionUID = 1152914881732787560L;
+    private static final long serialVersionUID = 1152914881732787560L;
 
-	public HeaderLinksPage(PageParameters params) {
-		StringValue selected = params.get("selected");
-		add(new FrameHeaderLinksPanel("headerLinks", selected.toInt()));
-	}
+    public HeaderLinksPage(PageParameters params) {
+        StringValue selected = params.get("selected");
+        add(new FrameHeaderLinksPanel("headerLinks", selected.toInt()));
+    }
 }

@@ -27,16 +27,16 @@ import org.jabox.apis.Connector;
 
 public class ConnectorList extends PropertyListView<Connector> {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2877438240039632971L;
+    private static final long serialVersionUID = -2877438240039632971L;
 
-	public ConnectorList(final String id, final List<Connector> projects) {
-		super(id, projects);
-	}
+    public ConnectorList(final String id, final List<Connector> projects) {
+        super(id, projects);
+    }
 
-	@Override
-	public void populateItem(final ListItem<Connector> listItem) {
-	}
+    @Override
+    public void populateItem(final ListItem<Connector> listItem) {
+    }
 }

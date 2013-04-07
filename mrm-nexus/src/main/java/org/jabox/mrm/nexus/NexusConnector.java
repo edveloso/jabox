@@ -26,26 +26,26 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class NexusConnector implements RMSConnector {
-	public static final String ID = "plugin.rms.nexus";
+    public static final String ID = "plugin.rms.nexus";
 
-	public String getName() {
-		return "Nexus";
-	}
+    public String getName() {
+        return "Nexus";
+    }
 
-	public String getId() {
-		return ID;
-	}
+    public String getId() {
+        return ID;
+    }
 
-	@Override
-	public String toString() {
-		return getName();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-	public DeployerConfig newConfig() {
-		return new NexusConnectorConfig();
-	}
+    public DeployerConfig newConfig() {
+        return new NexusConnectorConfig();
+    }
 
-	public Component newEditor(final String id, final IModel<Server> model) {
-		return new NexusConnectorEditor(id, model);
-	}
+    public Component newEditor(final String id, final IModel<Server> model) {
+        return new NexusConnectorEditor(id, model);
+    }
 }
