@@ -136,6 +136,7 @@ public class JenkinsConnector implements CISConnector {
             final Project project) throws IOException {
         Map<String, String> values = new HashMap<String, String>();
 
+        LOGGER.debug("Project SCM URL: {}", project.getScmUrl());
         values.put("${project.scmURL}", project.getScmUrl());
         values.put("${project.issueURL}", "http://localhost/redmine/");
         values.put("${goals}",

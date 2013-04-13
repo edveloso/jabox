@@ -104,8 +104,14 @@ public class CreateProjectUtil implements ICreateProjectUtil {
 
         // Set ScmUrl
         project.setScmMavenPrefix(scmc.getScmMavenPrefix());
-        project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
-            + "/trunk/" + project.getName());
+        // SVN/Git switch
+        if (scmc.getScmUrl().startsWith("git")) {
+            project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
+                + ".git");
+        } else {
+            project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
+                + "/trunk/" + project.getName());
+        }
 
         // Inject SCM, CIS, ITS, RMS & UTF8 Encoding configuration
         try {
