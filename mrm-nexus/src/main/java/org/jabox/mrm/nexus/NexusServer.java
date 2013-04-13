@@ -31,7 +31,7 @@ import org.jabox.utils.DownloadHelper;
 public class NexusServer extends AbstractEmbeddedServer {
     private static final long serialVersionUID = -2159722560362413951L;
 
-    private final String version = "2.2-01";
+    private final String version = "2.3";
 
     @Override
     public String getServerName() {
@@ -45,7 +45,8 @@ public class NexusServer extends AbstractEmbeddedServer {
         // Download the nexus.war
         File zipFile = new File(downloadsDir, "nexus.war");
         String url =
-            "http://www.sonatype.org/downloads/nexus-" + version + ".war";
+            "http://download.sonatype.com/nexus/oss/nexus-" + version
+                + ".war";
         zipFile = DownloadHelper.downloadFile(url, zipFile);
         return zipFile.getAbsolutePath();
     }
