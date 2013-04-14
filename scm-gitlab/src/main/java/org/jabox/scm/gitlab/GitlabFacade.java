@@ -62,6 +62,7 @@ public class GitlabFacade {
             final String password, final String repository) {
         HttpClient client = new HttpClient();
         String uri = scmUrl + API + "/projects";
+        LOGGER.debug("Create Repo: {}", uri);
         PostMethod post = new PostMethod(uri);
 
         post.setParameter("name", repository);

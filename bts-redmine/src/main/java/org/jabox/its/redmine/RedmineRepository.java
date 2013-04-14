@@ -39,7 +39,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
+import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
+import com.taskadapter.redmineapi.RedmineException;
+import com.taskadapter.redmineapi.RedmineManager;
+import com.taskadapter.redmineapi.bean.Version;
 
 public class RedmineRepository implements
         ITSConnector<RedmineRepositoryConfig>, Serializable {
@@ -53,6 +57,10 @@ public class RedmineRepository implements
     private final WebConversation _wc = new WebConversation();
 
     private final WebTester _wt = new WebTester();
+
+    private RedmineManager _mgr;
+
+    private com.taskadapter.redmineapi.bean.Project _redmineProject;
 
     public String getName() {
         return "Redmine";
@@ -78,14 +86,18 @@ public class RedmineRepository implements
             final RedmineRepositoryConfig config)
             throws IOException, SAXException {
         LOGGER.info("Redmine add Project: " + project.getName());
+        _redmineProject = new com.taskadapter.redmineapi.bean.Project();
+        _redmineProject.setName(project.getName());
+        _redmineProject.setIdentifier(getRedmineId(project));
+        _redmineProject.setDescription(project.getDescription());
 
-        _wt.gotoPage("/projects/new");
-        _wt.setWorkingForm(1);
-        _wt.setTextField("project[name]", project.getName());
-        _wt.setTextField("project[description]", project.getDescription());
-        _wt.setTextField("project[identifier]", getRedmineId(project));
-        _wt.submit();
-        return true;
+        try {
+            _redmineProject = _mgr.createProject(_redmineProject);
+            return true;
+        } catch (RedmineException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private String getRedmineId(final Project project) {
@@ -96,18 +108,22 @@ public class RedmineRepository implements
             final RedmineRepositoryConfig config, final String version)
             throws IOException, SAXException {
         LOGGER.info("Redmine add Version: " + version);
-
-        _wt.gotoPage("/projects/" + getRedmineId(project)
-            + "/versions/new");
-        _wt.setWorkingForm(1);
-        _wt.setTextField("version[name]", version);
-        _wt.submit();
-        return true;
+        Version ver = new Version(_redmineProject, version);
+        try {
+            _mgr.createVersion(ver);
+            return true;
+        } catch (RedmineException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean login(final RedmineRepositoryConfig config)
             throws MalformedURLException, IOException, SAXException {
         LOGGER.info("Redmine Login: " + config.getUsername());
+        _mgr = new RedmineManager(config.getServer().getUrl());
+        _mgr.setLogin(config.getUsername());
+        _mgr.setPassword(config.getPassword());
 
         String url = config.getServer().getUrl();
         return login(url, config.getUsername(), config.getPassword());
@@ -143,27 +159,75 @@ public class RedmineRepository implements
             final SCMConnectorConfig scmConfig, final String username,
             final String password)
             throws MalformedURLException, IOException, SAXException {
+        login(config);
         LOGGER.info("Redmine add Repository: " + scmConfig.getScmUrl());
 
         // Check if Repository should be added
         if (!config.isAddRepositoryConfiguration()) {
+            LOGGER.debug("Redmine Repository config is disabled.");
             return;
         }
-
-        String scm = getScmType(scmConfig);
 
         List<Cookie> cookies = (List<Cookie>) _wt.getDialog().getCookies();
         for (Cookie cookie : cookies) {
             _wc.putCookie(cookie.getName(), cookie.getValue());
         }
-        _wt.gotoPage("projects/" + project.getName() + "/repositories/new");
-        _wt.selectOption("repository_scm", scm);
-        _wt.setTextField("repository[url]",
+        String token = getAuthenticityToken(_wt.getPageSource());
+        LOGGER.debug("Token: {}", token);
+
+        String scm = getScmType(scmConfig);
+        LOGGER.debug("SCM CONFIG: {}", scm);
+
+        postData(config, project, scmConfig, username, password, scm);
+    }
+
+    /**
+     * @throws SAXException
+     * @throws IOException
+     * @throws MalformedURLException
+     */
+    private void postData(final RedmineRepositoryConfig config,
+            final Project project, final SCMConnectorConfig scmConfig,
+            final String username, final String password, final String scm) {
+        LOGGER.info("Redmine add Repository: " + scmConfig.getScmUrl());
+
+        // Check if Repository should be added
+        if (!config.isAddRepositoryConfiguration()) {
+            LOGGER.debug("Repository config is disabled");
+            return;
+        }
+
+        List<Cookie> cookies = (List<Cookie>) _wt.getDialog().getCookies();
+        for (Cookie cookie : cookies) {
+            LOGGER.debug("Cookie: {}", cookie);
+            _wc.putCookie(cookie.getName(), cookie.getValue());
+        }
+
+        PostMethodWebRequest form =
+            new PostMethodWebRequest(config.getServer().getUrl()
+                + "/projects/" + project.getName() + "/repositories");
+        form.setParameter("authenticity_token",
+            getAuthenticityToken(_wt.getPageSource()));
+        form.setParameter("repository_scm", scm);
+        form.setParameter("repository[url]",
             scmConfig.getProjectScmUrl(project.getName()));
-        _wt.setTextField("repository[login]", username);
-        // Password field name is 'ignore'
-        _wt.setTextField("ignore", password);
-        _wt.submit();
+        form.setParameter("repository[login]", username);
+        form.setParameter("repository[password]", password);
+        form.setParameter("commit", "Create");
+        try {
+            LOGGER.debug("Posting: {}", form);
+            _wc.getResponse(form);
+            LOGGER.debug("Posted");
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -180,4 +244,12 @@ public class RedmineRepository implements
             return "Subversion";
         }
     }
+
+    protected static String getAuthenticityToken(final String body) {
+        String sub[] = body.split("meta content=\"");
+        String token = sub[2].split("\"")[0];
+        LOGGER.debug("Token: {}", token);
+        return token;
+    }
+
 }
