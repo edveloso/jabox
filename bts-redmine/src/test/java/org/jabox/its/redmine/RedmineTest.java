@@ -3,6 +3,7 @@ package org.jabox.its.redmine;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.jabox.utils.Timestamp;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,17 +14,23 @@ import org.junit.Test;
 @Ignore
 public class RedmineTest {
 
+    private static final String REDMINE_URL = "http://redmine.jabox.org/";
+
+    private static final String LOGIN = "mylogin";
+
+    private static final String PWD = "mypassword";
+
     @Test
     public void testLoginValidCredentials() throws Exception {
         RedmineRepository redmineRepository = new RedmineRepository();
         Project project = new Project();
-        project.setName("example");
+        project.setName("example" + Timestamp.now());
         project.setDescription("example description");
         RedmineRepositoryConfig config = new RedmineRepositoryConfig();
-        config.username = "myuser";
-        config.password = "mypassword";
+        config.username = LOGIN;
+        config.password = PWD;
         Server server = new Server();
-        server.setUrl("http://redmine.jabox.org/");
+        server.setUrl(REDMINE_URL);
         config.setServer(server);
         boolean login = redmineRepository.login(config);
         Assert.assertTrue(login);
@@ -72,6 +79,7 @@ public class RedmineTest {
                 return null;
             }
         };
+        redmineRepository.addVersion(project, config, "0.0.1");
         config.setAddRepositoryConfiguration(true);
         redmineRepository.addRepository(project, config, scmConfig,
             config.username, config.password);
@@ -82,10 +90,10 @@ public class RedmineTest {
         Project project = new Project();
         project.setName("example");
         RedmineRepositoryConfig config = new RedmineRepositoryConfig();
-        config.username = "myuser";
+        config.username = LOGIN;
         config.password = "invalidpassword";
         Server server = new Server();
-        server.setUrl("http://redmine.jabox.org/");
+        server.setUrl(REDMINE_URL);
         config.setServer(server);
         boolean login = redmineRepository.login(config);
         Assert.assertFalse(login);
