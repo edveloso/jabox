@@ -3,6 +3,7 @@ package org.jabox.model;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -38,10 +39,12 @@ public class UserTest {
     }
 
     @Test
-    public void testPassword() {
+    public void testPasswordHash() {
         String password = "Password Example";
-        _user.setPassword(password);
-        Assert.assertEquals(password, _user.getPassword());
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        _user.setPasswordHash(hashed);
+        boolean result = BCrypt.checkpw(password, _user.getPasswordHash());
+        Assert.assertTrue(result);
     }
 
     @Test

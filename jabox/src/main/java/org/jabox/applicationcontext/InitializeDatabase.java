@@ -14,10 +14,11 @@ import org.jabox.mrm.nexus.NexusConnectorConfig;
 import org.jabox.sas.sonar.SonarConnectorConfig;
 import org.jabox.scm.esvn.ESVNConnectorConfig;
 import org.jabox.utils.LocalHostName;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class InitializeDatabase {
 
-    private DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+    private final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
     /**
      * check if database is already populated, if not, populate
@@ -100,7 +101,8 @@ public class InitializeDatabase {
     private void createAdminUser() {
         User user = new User();
         user.setLogin("admin");
-        user.setPassword("admin");
+        String hashed = BCrypt.hashpw("admin", BCrypt.gensalt());
+        user.setPasswordHash(hashed);
         UserXstreamDao.persist(user);
     }
 }

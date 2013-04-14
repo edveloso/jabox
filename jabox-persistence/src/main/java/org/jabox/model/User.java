@@ -22,6 +22,7 @@ package org.jabox.model;
 import java.io.Serializable;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class User extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 840333278259987092L;
@@ -32,7 +33,7 @@ public class User extends BaseEntity implements Serializable {
 
     private String lastName;
 
-    private String password;
+    private String passwordHash;
 
     private String email;
 
@@ -42,6 +43,25 @@ public class User extends BaseEntity implements Serializable {
 
     public void setLogin(final String login) {
         this.login = login;
+    }
+
+    /**
+     * Always return empty password, used for Forms.
+     * 
+     * @return
+     */
+    public String getPassword() {
+        return "";
+    }
+
+    /**
+     * Hashes the password and stores it to passwordHash
+     * 
+     * @param password
+     *            the password
+     */
+    public void setPassword(final String password) {
+        passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public String getFirstName() {
@@ -60,14 +80,6 @@ public class User extends BaseEntity implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -79,5 +91,20 @@ public class User extends BaseEntity implements Serializable {
     @Override
     public String toString() {
         return login;
+    }
+
+    /**
+     * @return Returns the passwordHash.
+     */
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    /**
+     * @param passwordHash
+     *            The passwordHash to set.
+     */
+    public void setPasswordHash(final String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }

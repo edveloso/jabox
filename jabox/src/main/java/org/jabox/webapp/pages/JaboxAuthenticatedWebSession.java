@@ -26,6 +26,7 @@ import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.request.Request;
 import org.jabox.model.User;
 import org.jabox.webapp.application.WicketApplication;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * Authenticated session subclass
@@ -43,9 +44,9 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
      */
     public JaboxAuthenticatedWebSession(final Request request) {
         super(request);
-        ((GuiceInjectorHolder) ((WicketApplication) WicketApplication
-            .get()).getMetaData(GuiceInjectorHolder.INJECTOR_KEY))
-            .getInjector().injectMembers(this);
+        ((WicketApplication) WicketApplication.get())
+            .getMetaData(GuiceInjectorHolder.INJECTOR_KEY).getInjector()
+            .injectMembers(this);
         // InjectorHolder.getInjector().inject(this);
     }
 
@@ -66,14 +67,16 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
             return false;
         }
 
-        if (username.equals(user.getLogin())
-            && password.equals(user.getPassword())) {
+        if (!username.equals(user.getLogin())) {
+            return false;
+        }
+
+        if (BCrypt.checkpw(password, user.getPasswordHash())) {
             _username = user.getLogin();
             return true;
         } else {
             return false;
         }
-
     }
 
     /**
