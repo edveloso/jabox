@@ -1,0 +1,200 @@
+ INFO [org.apache.wicket.util.file.WebXmlFile] web.xml: url mapping found for filter with name wicket.jabox: [/*]
+ INFO [org.apache.wicket.Application] [wicket.jabox] init: Wicket core library initializer
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IBehaviorListener, method=public abstract void org.apache.wicket.behavior.IBehaviorListener.onRequest()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IBehaviorListener, method=public abstract void org.apache.wicket.behavior.IBehaviorListener.onRequest()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IFormSubmitListener, method=public abstract void org.apache.wicket.markup.html.form.IFormSubmitListener.onFormSubmitted()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IFormSubmitListener, method=public abstract void org.apache.wicket.markup.html.form.IFormSubmitListener.onFormSubmitted()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=ILinkListener, method=public abstract void org.apache.wicket.markup.html.link.ILinkListener.onLinkClicked()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=ILinkListener, method=public abstract void org.apache.wicket.markup.html.link.ILinkListener.onLinkClicked()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IOnChangeListener, method=public abstract void org.apache.wicket.markup.html.form.IOnChangeListener.onSelectionChanged()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IOnChangeListener, method=public abstract void org.apache.wicket.markup.html.form.IOnChangeListener.onSelectionChanged()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IRedirectListener, method=public abstract void org.apache.wicket.IRedirectListener.onRedirect()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IRedirectListener, method=public abstract void org.apache.wicket.IRedirectListener.onRedirect()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IResourceListener, method=public abstract void org.apache.wicket.IResourceListener.onResourceRequested()]
+ INFO [org.apache.wicket.RequestListenerInterface] registered listener interface [RequestListenerInterface name=IResourceListener, method=public abstract void org.apache.wicket.IResourceListener.onResourceRequested()]
+ INFO [org.apache.wicket.Application] [wicket.jabox] init: Wicket extensions initializer
+ INFO [org.apache.wicket.protocol.http.WebApplication] [wicket.jabox] Started Wicket version 1.5.1 in DEVELOPMENT mode
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+ INFO [org.jabox.webapp.pages.HomePage] user.home: /home/dimitris/.jabox/
+ INFO [org.apache.wicket.util.crypt.ClassCryptFactory] using encryption/decryption object org.apache.wicket.util.crypt.SunJceCrypt@2209db
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: GitLab
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Subversion
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Nexus
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins TEST
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine GovSource
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Sonar
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+ WARN [org.apache.wicket.request.resource.ResourceReferenceRegistry] org.apache.wicket.request.resource.SharedResourceReference cannot be added to the registry.
+ WARN [org.apache.wicket.request.resource.ResourceReferenceRegistry] org.apache.wicket.request.resource.SharedResourceReference cannot be added to the registry.
+ WARN [org.apache.wicket.request.resource.ResourceReferenceRegistry] org.apache.wicket.request.resource.SharedResourceReference cannot be added to the registry.
+ WARN [org.apache.wicket.request.resource.ResourceReferenceRegistry] org.apache.wicket.request.resource.SharedResourceReference cannot be added to the registry.
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+ INFO [org.jabox.webapp.pages.HomePage] user.home: /home/dimitris/.jabox/
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: GitLab
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Subversion
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Nexus
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins TEST
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine GovSource
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Sonar
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: GitLab
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Subversion
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Nexus
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Jenkins TEST
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Redmine GovSource
+DEBUG [org.jabox.webapp.utils.SCMConnectorList] Populate SCM Connector: Sonar
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+ INFO [org.apache.wicket.resource.PropertiesFactory] Loading properties files from file:/tmp/jetty-0.0.0.0-8081-jabox-0.5.1-SNAPSHOT-jetty-console.war-_-any-/webapp/WEB-INF/classes/org/jabox/webapp/pages/project/CreateProject.properties with loader org.apache.wicket.resource.IsoPropertiesFilePropertiesLoader@1beb7ec
+ INFO [org.jabox.application.CreateProjectUtil] Using SCM: GitLab
+DEBUG [org.jabox.scm.gitlab.GitlabFacade] Create Repo: http://gitlab.test.govsource.com.au/api/v3/projects
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Return code: 201
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Date: Sun, 28 Apr 2013 15:19:34 GMT
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Server: Apache/2.2.23 (Amazon)
+ INFO [org.jabox.scm.gitlab.GitlabFacade] X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.19
+ INFO [org.jabox.scm.gitlab.GitlabFacade] X-UA-Compatible: IE=Edge,chrome=1
+ INFO [org.jabox.scm.gitlab.GitlabFacade] ETag: "249eafaf3a7dd22bf3633fd242114d5a"
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Cache-Control: max-age=0, private, must-revalidate
+ INFO [org.jabox.scm.gitlab.GitlabFacade] X-Request-Id: d2b18d42042c9ff6d58475ad7003570d
+ INFO [org.jabox.scm.gitlab.GitlabFacade] X-Runtime: 0.161091
+ INFO [org.jabox.scm.gitlab.GitlabFacade] X-Rack-Cache: invalidate, pass
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Content-Length: 520
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Status: 201
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Connection: close
+ INFO [org.jabox.scm.gitlab.GitlabFacade] Content-Type: application/json
+ INFO [org.jabox.scm.gitlab.GitlabFacade] {"id":87,"name":"p28a3","description":null,"default_branch":null,"owner":{"id":2,"username":"spiddy","email":"d.kapanidis@gmail.com","name":"spiddy","blocked":false,"created_at":"2013-01-03T03:51:05Z"},"path":"p28a3","path_with_namespace":"spiddy/p28a3","issues_enabled":true,"merge_requests_enabled":true,"wall_enabled":true,"wiki_enabled":true,"created_at":"2013-04-28T15:19:34Z","namespace":{"created_at":"2013-01-03T03:51:05Z","id":2,"name":"spiddy","owner_id":2,"path":"spiddy","updated_at":"2013-01-03T03:51:05Z"}}
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo] Executing: git init
+ INFO [org.jabox.scm.git.Executor] Reinitialized existing Git repository in /home/dimitris/.jabox/gitRepo/.git/
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo/p28a3/p28a3] Executing: git init
+ INFO [org.jabox.scm.git.Executor] Initialized empty Git repository in /home/dimitris/.jabox/gitRepo/p28a3/p28a3/.git/
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo/p28a3/p28a3] Executing: git  add -A
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo/p28a3/p28a3] Executing: git commit -m Initial
+ INFO [org.jabox.scm.git.Executor] [master (root-commit) 3f1b7e5] Initial
+ INFO [org.jabox.scm.git.Executor]  3 files changed, 85 insertions(+)
+ INFO [org.jabox.scm.git.Executor]  create mode 100644 pom.xml
+ INFO [org.jabox.scm.git.Executor]  create mode 100644 src/main/java/org/jabox/App.java
+ INFO [org.jabox.scm.git.Executor]  create mode 100644 src/test/java/org/jabox/AppTest.java
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo/p28a3/p28a3] Executing: git remote add origin git@gitlab.test.govsource.com.au:spiddy/p28a3.git
+ INFO [org.jabox.scm.git.Executor] [/home/dimitris/.jabox/gitRepo/p28a3/p28a3] Executing: git push -u origin master
+ INFO [org.jabox.scm.git.Executor] To git@gitlab.test.govsource.com.au:spiddy/p28a3.git
+ INFO [org.jabox.scm.git.Executor]  * [new branch]      master -> master
+ INFO [org.jabox.scm.git.Executor] Branch master set up to track remote branch master from origin.
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine Login: d.kapanidis@gmail.com
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [19:115] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [19:119] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [19:119] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [82:145] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [82:150] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [82:150] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [83:133] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [83:138] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [83:138] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [286:145] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [286:150] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [286:150] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [287:173] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [287:178] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [287:178] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [425:18] Error in pseudo class or element. Invalid token ":". Was expecting one of: <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [425:18] Ignoring the whole rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [548:18] Error in expression. Invalid token ")". Was expecting one of: <S>, <PLUS>, "-", <HASH>, <STRING>, <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [548:20] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [548:20] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine add Project: p28a3
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine add Version: 0.0.1
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine Login: d.kapanidis@gmail.com
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [19:115] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [19:119] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [19:119] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [82:145] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [82:150] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [82:150] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [83:133] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [83:138] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [83:138] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [286:145] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [286:150] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [286:150] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [287:173] Error in expression. Invalid token "=". Was expecting one of: <S>, <COMMA>, "/", <PLUS>, "-", <HASH>, <STRING>, ")", <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [287:178] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [287:178] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [425:18] Error in pseudo class or element. Invalid token ":". Was expecting one of: <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [425:18] Ignoring the whole rule.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [548:18] Error in expression. Invalid token ")". Was expecting one of: <S>, <PLUS>, "-", <HASH>, <STRING>, <URI>, "inherit", <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <DIMENSION>, <PERCENTAGE>, <NUMBER>, <FUNCTION>, <IDENT>.
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS error: null [548:20] Error in style rule. Invalid token " ". Was expecting one of: "}", ";".
+ WARN [com.gargoylesoftware.htmlunit.DefaultCssErrorHandler] CSS warning: null [548:20] Ignoring the following declarations in this rule.
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ WARN [com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl] Obsolete content type encountered: 'text/javascript'.
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine add Repository: git@gitlab.test.govsource.com.au:spiddy
+DEBUG [org.jabox.its.redmine.RedmineRepository] Token: N2MSHfIJ8cwbIlH2irzRHQciays4LouPi5t5hVL4dvc=
+DEBUG [org.jabox.its.redmine.RedmineRepository] Token: N2MSHfIJ8cwbIlH2irzRHQciays4LouPi5t5hVL4dvc=
+DEBUG [org.jabox.its.redmine.RedmineRepository] SCM CONFIG: Git
+ INFO [org.jabox.its.redmine.RedmineRepository] Redmine add Repository: git@gitlab.test.govsource.com.au:spiddy
+DEBUG [org.jabox.its.redmine.RedmineRepository] Cookie: javax.servlet.http.Cookie@bad094
+DEBUG [org.jabox.its.redmine.RedmineRepository] Token: N2MSHfIJ8cwbIlH2irzRHQciays4LouPi5t5hVL4dvc=
+DEBUG [org.jabox.its.redmine.RedmineRepository] Posting: POST request for (null) http://redmine.test.govsource.com.au//projects/p28a3/repositories
+DEBUG [org.jabox.its.redmine.RedmineRepository] Posted
+DEBUG [org.jabox.cis.jenkins.JenkinsConnector] Project SCM URL: git@gitlab.test.govsource.com.au:spiddy/p28a3.git
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] Return code: 200
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] Date: Sun, 28 Apr 2013 15:20:46 GMT
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] Content-Length: 0
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] Connection: close
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] Content-Type: text/plain; charset=UTF-8
+ INFO [org.jabox.cis.jenkins.JenkinsConnector] 
+ INFO [org.apache.commons.httpclient.HttpMethodBase] Redirect requested but followRedirects is disabled
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+DEBUG [org.jabox.webapp.application.WicketApplication] Locale: en_US
+ INFO [org.apache.wicket.Application] [wicket.jabox] destroy: Wicket core library initializer
+ INFO [org.apache.wicket.Application] [wicket.jabox] destroy: Wicket extensions initializer

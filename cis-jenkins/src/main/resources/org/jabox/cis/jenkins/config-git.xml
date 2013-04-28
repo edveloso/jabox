@@ -6,7 +6,7 @@
 		<hudson.plugins.redmine.RedmineProjectProperty>
 			<redmineWebsite>${project.issueURL}</redmineWebsite>
 			<projectName>${project.name}</projectName>
-			<redmineVersion>true</redmineVersion>
+			<redmineVersionNumber />
 		</hudson.plugins.redmine.RedmineProjectProperty>
 	</properties>
 	<scm class="hudson.plugins.git.GitSCM" plugin="git@1.2.0">
@@ -48,7 +48,6 @@
 		<scmName />
 	</scm>
 	<canRoam>true</canRoam>
-
 	<disabled>false</disabled>
 	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
 	<triggers class="vector">
@@ -90,14 +89,21 @@
 		</hudson.plugins.dry.DryReporter>
 	</reporters>
 	<publishers>
+		<hudson.plugins.sonar.SonarPublisher>
+			<jdk>(Inherit From Job)</jdk>
+			<branch />
+			<language />
+			<mavenOpts />
+			<jobAdditionalProperties />
+		</hudson.plugins.sonar.SonarPublisher>
 		<hudson.plugins.cigame.GamePublisher />
 		<hudson.plugins.claim.ClaimPublisher />
 	</publishers>
 	<buildWrappers>
 		<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
 			<releaseGoals>-Dresume=false release:prepare release:perform
-			</releaseGoals>
-			<defaultVersioningMode>auto</defaultVersioningMode>
+				${customSettingsXml}</releaseGoals>
+			<defaultVersioningMode>specify_version</defaultVersioningMode>
 			<selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix>
 			<selectAppendHudsonUsername>false</selectAppendHudsonUsername>
 		</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
