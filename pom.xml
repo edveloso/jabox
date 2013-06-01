@@ -6,7 +6,12 @@
 	<artifactId>jabox-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.6.1-SNAPSHOT</version>
-	<name>Jabox Parent</name>
+    <repositories>
+        <repository>
+            <id>SVNKit</id>
+            <url>http://maven.tmatesoft.com/content/repositories/releases/</url>
+        </repository></repositories>
+    <name>Jabox Parent</name>
 	<description />
 
 	<modules>
