@@ -83,17 +83,17 @@ public class JenkinsServer extends AbstractEmbeddedServer {
     private List<String> getDefaultPlugins() {
         List<String> defaultPlugins = new ArrayList<String>();
 
-        defaultPlugins.add("analysis-core:1.48");
-        defaultPlugins.add("dry:2.33");
-        defaultPlugins.add("pmd:3.33");
-        defaultPlugins.add("findbugs:4.45");
-        defaultPlugins.add("checkstyle:3.32");
-        defaultPlugins.add("m2release:0.9.1");
-        defaultPlugins.add("redmine:0.11");
+        defaultPlugins.add("analysis-core:1.49");
+        defaultPlugins.add("dry:2.34");
+        defaultPlugins.add("pmd:3.34");
+        defaultPlugins.add("findbugs:4.48");
+        defaultPlugins.add("checkstyle:3.35");
+        defaultPlugins.add("m2release:0.10.0");
+        defaultPlugins.add("redmine:0.13");
         defaultPlugins.add("git:1.1.26");
         defaultPlugins.add("claim:1.7");
         defaultPlugins.add("ci-game:1.19");
-        defaultPlugins.add("sonar:2.0");
+        defaultPlugins.add("sonar:2.1");
         defaultPlugins.add("android-emulator:1.18");
 
         return defaultPlugins;
