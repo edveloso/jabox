@@ -43,7 +43,7 @@ public class JenkinsServer extends AbstractEmbeddedServer {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(JenkinsServer.class);
 
-    private final String version = "1.491";
+    private final String version = "1.517";
 
     public String getServerName() {
         return "jenkins";

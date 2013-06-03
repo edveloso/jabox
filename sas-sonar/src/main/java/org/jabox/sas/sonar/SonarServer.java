@@ -52,7 +52,7 @@ public class SonarServer extends AbstractEmbeddedServer {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(SonarServer.class);
 
-    private final String version = "3.3.2";
+    private final String version = "3.5.1";
 
     public static void main(final String[] args) throws Exception {
         new SonarServer().injectPlugins();

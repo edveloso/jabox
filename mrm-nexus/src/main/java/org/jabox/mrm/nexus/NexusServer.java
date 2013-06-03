@@ -31,7 +31,7 @@ import org.jabox.utils.DownloadHelper;
 public class NexusServer extends AbstractEmbeddedServer {
     private static final long serialVersionUID = -2159722560362413951L;
 
-    private final String version = "2.3";
+    private final String version = "2.5.0-04";
 
     @Override
     public String getServerName() {
