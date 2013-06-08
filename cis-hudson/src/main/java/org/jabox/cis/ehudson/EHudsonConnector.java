@@ -28,7 +28,7 @@ import org.jabox.model.Server;
 /**
  * TODO: Find a way to pass credentials to Hudson: by doing a post here:
  * http://localhost
- * :9090/hudson/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
+ * :9080/hudson/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
  * 
  * @author Administrator
  */

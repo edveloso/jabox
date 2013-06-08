@@ -26,7 +26,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.its.redmine.RedmineLoginValidator;
 import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
@@ -43,7 +42,7 @@ public class ERedmineRepositoryEditor extends Panel {
         // XXX This should be dynamic
         TextField<String> url =
             new TextField<String>("url", new Model<String>("http://"
-                + LocalHostName.getLocalHostname() + ":9090/redmine/"));
+                + LocalHostName.getLocalHostname() + ":9080/redmine/"));
 
         add(username.setRequired(true));
         add(password.setRequired(true));
