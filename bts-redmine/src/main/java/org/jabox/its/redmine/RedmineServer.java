@@ -32,7 +32,7 @@ import org.jabox.utils.Unzip;
 public class RedmineServer extends AbstractEmbeddedServer {
     private static final long serialVersionUID = 9207781259797681188L;
 
-    private final String version = "2.1.4";
+    private final String version = "2.3.1";
 
     public List<String> plugins = getDefaultPlugins();
 
@@ -74,7 +74,7 @@ public class RedmineServer extends AbstractEmbeddedServer {
     public String getWarPath() {
         File downloadsDir = Environment.getDownloadsDir();
 
-        // Download the nexus.war
+        // Download the war
         File war = new File(downloadsDir, "redmine.war");
         String url =
             "http://www.jabox.org/repository/releases/org/redmine/redmine/"
