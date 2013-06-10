@@ -28,7 +28,7 @@ import org.jabox.model.Server;
 /**
  * TODO: Find a way to pass credentials to Jenkins: by doing a post here:
  * http://localhost
- * :9090/jenkins/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
+ * :9080/jenkins/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
  * 
  * @author Administrator
  */

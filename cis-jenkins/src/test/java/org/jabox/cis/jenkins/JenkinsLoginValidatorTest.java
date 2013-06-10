@@ -16,7 +16,7 @@ public abstract class JenkinsLoginValidatorTest extends TestCase {
         new WicketTester();
         TextField<String> url =
             new TextField<String>("url", new Model<String>("http://"
-                + LocalHostName.getLocalHostname() + ":9090/jenkins/"));
+                + LocalHostName.getLocalHostname() + ":9080/jenkins/"));
         TextField<String> username =
             new TextField<String>("admin", new Model<String>("admin"));
         PasswordTextField password =
@@ -32,7 +32,7 @@ public abstract class JenkinsLoginValidatorTest extends TestCase {
         new WicketTester();
         TextField<String> url =
             new TextField<String>("url", new Model<String>("http://"
-                + LocalHostName.getLocalHostname() + ":9090/jenkins/"));
+                + LocalHostName.getLocalHostname() + ":9080/jenkins/"));
         TextField<String> username =
             new TextField<String>("admin", new Model<String>("admin"));
         PasswordTextField password =

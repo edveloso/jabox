@@ -85,6 +85,7 @@ public class InitializeDatabase {
         config.setServer(new Server());
         config.getServer().setName("Redmine");
         config.getServer().setDeployerConfig(config);
+        config.setAddRepositoryConfiguration(true);
         ServerXstreamDao.persist(config);
         dc.switchDefault(config);
     }
