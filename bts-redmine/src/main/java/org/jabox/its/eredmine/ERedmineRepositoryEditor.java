@@ -43,7 +43,7 @@ public class ERedmineRepositoryEditor extends Panel {
         // XXX This should be dynamic
         TextField<String> url =
             new TextField<String>("url", new Model<String>("http://"
-                + LocalHostName.getLocalHostname() + ":9090/redmine/"));
+                + LocalHostName.getLocalHostname() + ":9080/redmine/"));
 
         add(username.setRequired(true));
         add(password.setRequired(true));
