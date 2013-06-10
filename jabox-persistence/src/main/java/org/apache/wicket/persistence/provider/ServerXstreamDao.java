@@ -1,13 +1,10 @@
 package org.apache.wicket.persistence.provider;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.environment.Environment;
 import org.jabox.model.Server;
@@ -30,8 +27,11 @@ public class ServerXstreamDao {
             File file =
                 new File(dir, config.getServer().getName() + ".xml");
             FileWriter writer = new FileWriter(file);
-            writer.write(xml);
-            writer.close();
+            try{
+                writer.write(xml);
+            } finally {
+                writer.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,20 +69,24 @@ public class ServerXstreamDao {
         File dir = Environment.getServersDir();
         File file = new File(dir, name + ".xml");
 
+        FileInputStream is = null;
         try {
-            FileInputStream is = new FileInputStream(file);
+            is = new FileInputStream(file);
             ConnectorConfig server = (ConnectorConfig) xstream.fromXML(is);
             return server;
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (is != null)
+              IOUtils.closeQuietly(is);
         }
         return null;
     }
 
-    public static void deleteServer(Server server) {
+    public static boolean deleteServer(Server server) {
         File file =
             new File(Environment.getServersDir(), server.getName()
                 + ".xml");
-        file.delete();
+        return file.delete();
     }
 }

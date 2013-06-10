@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.environment.Environment;
 import org.jabox.model.Project;
 
@@ -59,13 +60,16 @@ public class ProjectXstreamDao {
 
         File dir = Environment.getProjectsDir();
         File file = new File(dir, name + ".xml");
-
+        FileInputStream is = null;
         try {
-            FileInputStream is = new FileInputStream(file);
+            is = new FileInputStream(file);
             Project project = (Project) xstream.fromXML(is);
             return project;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            if (is != null)
+              IOUtils.closeQuietly(is);
         }
         return null;
     }

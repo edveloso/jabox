@@ -78,9 +78,12 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
                 "Container \"" + ((Container) _item).getName()
                     + "\" deleted.");
         } else if (Server.class.isInstance(_item)) {
-            ServerXstreamDao.deleteServer((Server) _item);
-            getSession().success(
-                "Server \"" + ((Server) _item).getName() + "\" deleted.");
+            if (ServerXstreamDao.deleteServer((Server) _item)){;
+                getSession().success(
+                        "Server \"" + ((Server) _item).getName() + "\" deleted.");
+            }else{
+                getSession().error("Server \"" + ((Server) _item).getName() + "\" could not be deleted");
+            }
         } else if (Project.class.isInstance(_item)) {
             ProjectXstreamDao.deleteProject((Project) _item);
             getSession()
