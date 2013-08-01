@@ -18,17 +18,25 @@ public class Unzip {
 
     public static void unzip(final File zipFile, final File baseDir)
             throws IOException {
-        InputStream in =
-            new BufferedInputStream(new FileInputStream(zipFile));
-        ZipInputStream zin = new ZipInputStream(in);
-        ZipEntry e;
+        InputStream in = null;
+        ZipInputStream zin = null;
+        try {
+            in = new BufferedInputStream(new FileInputStream(zipFile));
+            zin = new ZipInputStream(in);
+            ZipEntry e;
 
-        while ((e = zin.getNextEntry()) != null) {
-            if (!e.isDirectory()) {
-                unzip(zin, baseDir, e.getName());
+            while ((e = zin.getNextEntry()) != null) {
+                if (!e.isDirectory()) {
+                    unzip(zin, baseDir, e.getName());
+                }
             }
+        } finally {
+            if (zin != null)
+              zin.close();
+            if (in != null)
+              in.close();
         }
-        zin.close();
+
     }
 
     public static void unzip(final ZipInputStream zin, final File baseDir,

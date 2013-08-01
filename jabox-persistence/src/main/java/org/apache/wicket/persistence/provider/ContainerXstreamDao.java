@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.environment.Environment;
 import org.jabox.model.Container;
 
@@ -60,13 +61,16 @@ public class ContainerXstreamDao {
 
         File containersDir = Environment.getContainersDir();
         File file = new File(containersDir, name + ".xml");
-
+        FileInputStream is = null;
         try {
-            FileInputStream is = new FileInputStream(file);
+            is = new FileInputStream(file);
             Container container = (Container) xstream.fromXML(is);
             return container;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            if (is != null)
+                IOUtils.closeQuietly(is);
         }
         return null;
     }

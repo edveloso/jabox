@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.environment.Environment;
 import org.jabox.model.DefaultConfiguration;
 
@@ -39,8 +41,9 @@ public class ConfigXstreamDao {
         File dir = Environment.getBaseDirFile();
         File file = new File(dir, "config.xml");
 
+        FileInputStream is = null;
         try {
-            FileInputStream is = new FileInputStream(file);
+            is = new FileInputStream(file);
             DefaultConfiguration config =
                 (DefaultConfiguration) xstream.fromXML(is);
             return config;
@@ -48,6 +51,10 @@ public class ConfigXstreamDao {
             DefaultConfiguration config = new DefaultConfiguration();
             ConfigXstreamDao.persist(config);
             return config;
+        }finally {
+            if (is != null)
+              IOUtils.closeQuietly(is);
         }
+
     }
 }

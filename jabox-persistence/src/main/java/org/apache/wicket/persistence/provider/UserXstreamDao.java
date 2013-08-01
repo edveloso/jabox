@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.environment.Environment;
 import org.jabox.model.User;
 import org.slf4j.Logger;
@@ -63,13 +64,16 @@ public class UserXstreamDao {
 
         File usersDir = Environment.getUsersDir();
         File file = new File(usersDir, login + ".xml");
-
+        FileInputStream is = null;
         try {
-            FileInputStream is = new FileInputStream(file);
+            is = new FileInputStream(file);
             User user = (User) xstream.fromXML(is);
             return user;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }finally {
+            if (is!= null)
+              IOUtils.closeQuietly(is);
         }
         return null;
     }
